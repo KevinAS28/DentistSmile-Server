@@ -20,14 +20,14 @@
 <div class="container-fluid">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Profil</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Profil</li>
         </ol>
     </nav>
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                @foreach (Auth::user()->dokter as $dokter)
-                <form action="{{route('dokter.profilEdit', $dokter->id)}}" class="forms-horizontal" id="" method="post" nctype="multipart/form-data" files=true>   
+
+                <form action="{{ route('dokter.profilUpdate', $dokter -> id) }}" class="forms-horizontal" id="" method="post" nctype="multipart/form-data" files=true>   
                     @csrf
                     <div class="form-group">
 
@@ -44,7 +44,7 @@
                                 </div>
                                 <div>
                                     <button class="btn btn-primary btn-icon-text" type="submit">
-                                        <i data-feather="edit" class="btn-icon-prepend"></i> Edit Profil
+                                        <i data-feather="edit" class="btn-icon-prepend"></i> Simpan Perubahan
                                     </button>
                                 </div>
                             </div>
@@ -63,14 +63,14 @@
                                 <div class="row mb-3">
                                     <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="nama"
-                                            value="{{ $dokter -> nama }}" readonly>
+                                        <input type="text" class="form-control" id="nama" name="nama"
+                                            value="{{ $dokter -> nama }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="tempatlahir" class="col-sm-3 col-form-label">Tempat Lahir</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="tempattanggallahir" readonly
+                                        <input type="text" class="form-control" id="tempattanggallahir" name="tempat_lahir"
                                             autocomplete="off" value="{{ $dokter -> tempat_lahir }}" placeholder="Tempat Tanggal Lahir">
                                     </div>
                                 </div>
@@ -78,14 +78,14 @@
                                     <label for="tanggallahir" class="col-sm-3 col-form-label">Tanggal
                                         Lahir</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="tempattanggallahir" readonly
+                                        <input type="date" class="form-control" id="tempattanggallahir" name="tanggal_lahir"
                                             autocomplete="off" value="{{ $dokter -> tanggal_lahir }} " placeholder="Tempat Tanggal Lahir">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="nik" class="col-sm-3 col-form-label">NIK</label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="nik" readonly
+                                        <input type="number" class="form-control" id="nik" name="nik"
                                             placeholder="Nomor Induk Kependudukan" value="{{ $dokter -> nik }}">
                                     </div>
                                 </div>
@@ -93,29 +93,29 @@
                                     <label for="jenis-kelamin" class="col-sm-3 col-form-label">Jenis
                                         Kelamin</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="jeniskelamin"
-                                            placeholder="Jenis Kelamin" value="{{ $dokter -> jenis_kelamin}}" readonly>
+                                        <input type="text" class="form-control" id="jeniskelamin" name="jenis_kelamin"
+                                            placeholder="Jenis Kelamin" value="{{ $dokter -> jenis_kelamin}}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="nohp" class="col-sm-3 col-form-label">No Hp</label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="nohp"
-                                            placeholder="Nomor Handphone" value="{{ $dokter -> no_telp}}" readonly>
+                                        <input type="number" class="form-control" id="nohp" name="no_telp"
+                                            placeholder="Nomor Handphone" value="{{ $dokter -> no_telp}}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="email" class="col-sm-3 col-form-label">Email</label>
                                     <div class="col-sm-9">
-                                        <input type="email" class="form-control" id="email"
+                                        <input type="email" class="form-control" id="email" name="email"
                                             placeholder="Email" value="{{ Auth::user() -> email }}" readonly>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="nostr" class="col-sm-3 col-form-label">No STR</label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="nostr"
-                                            placeholder="No STR" value="{{ $dokter -> no_str }}" readonly>
+                                        <input type="number" class="form-control" id="nostr" name="no_str"
+                                            placeholder="No STR" value="{{ $dokter -> no_str }}">
                                     </div>
                                 </div>
                             </form>
@@ -123,7 +123,7 @@
                     </div>
 
                 </form>
-                @endforeach
+ 
             </div>
         </div>
     </div>

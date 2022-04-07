@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Dokter;
 use App\Models\Kecamatan;
 use Illuminate\Validation\Rule;
+use Auth;
 
 
 
@@ -173,12 +174,38 @@ class DokterController extends Controller
 
 
     }
+    public function viewDashboard()
+    {
+        return view('dokter.dashboard');
+    }
 
     public function profil()
     {
         return view('dokter.profil');
     }
+    public function profil_edit($id)
+    {   
+        $logdokter = Auth::user()->dokter;
+        $dokter = $logdokter->find($id);
+        return view('dokter.profil-edit',compact('dokter'));
+    }
+    public function profil_update(Request $request, $id)
+    {
+ 
+        $logdokter = Auth::user()->dokter;
+        $dokter = $logdokter->find($id);
+        $dokter->nik = $request->nik;
+        $dokter->nama =$request->nama;
+        $dokter->jenis_kelamin = $request->jenis_kelamin;
+        $dokter->tempat_lahir=  $request->tempat_lahir;
+        $dokter->tanggal_lahir= $request->tanggal_lahir;
+        $dokter->no_telp = $request->no_telp;
+        $dokter->no_str= $request->no_str;
 
+        $dokter->save();
+        return redirect()->route('dokter.profil');
+
+    }
     public function pemeriksaan_ukgs(){
         return view('dokter.pemeriksaanData.ukgs');
     }
