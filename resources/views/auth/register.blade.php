@@ -66,6 +66,12 @@
                                                 <input type="password" class="form-control" id="userPassword" name="password"
                                                     autocomplete="current-password" placeholder="Password" required>
                                             </div>
+                                            <div class="form-check mb-3">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">
+                                                  Show Password
+                                                </label>
+                                              </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputUsername1" class="form-label">Name</label>
                                                 <input type="text" class="form-control" id="exampleInputUsername1"
@@ -101,6 +107,18 @@
         </div>
     </div>
 
+ <script src="{{asset('assets/vendors/core/core.js')}}"></script>
+ <script type="text/javascript"> 
+    $(document).ready(function(){		
+      $('#exampleCheck1').click(function(){
+          if($(this).is(':checked')){
+              $('#userPassword').attr('type','text');
+          }else{
+              $('#userPassword').attr('type','password');
+          }
+      });
+  });
+</script>
 
 </body>
 </html>

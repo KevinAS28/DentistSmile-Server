@@ -9,6 +9,7 @@ use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\PemeriksaanFisikController;
+use App\Http\Controllers\PemeriksaanGigiController;
 
 
 /*
@@ -21,21 +22,21 @@ use App\Http\Controllers\PemeriksaanFisikController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::group(['middleware' => 'guest'], function () {
 Route::get('/', function () {
     return view('auth.login');
 });
-
+});
 Auth::routes();
-Route::resources([
-  'login' => App\Http\Controllers\Auth\LoginController::class
-  ]);
+
+
 
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Route::post('/dokter',[DokterController::class,'store']);
-
+Route::get('/home',function(){
+    return view('home');
+})->name('home');
 
 Route::group(['prefix' => 'admin'], function () {
   Route::group(['middleware' => ['auth','ceklevel:admin']], function () {
@@ -61,6 +62,7 @@ Route::group(['prefix' => 'orangtua'], function () {
     Route::get('/anak',[OrangtuaController::class,'viewAnak'])->name('viewanak');
     Route::get('/anak/create',[OrangtuaController::class,'viewTambahAnak'])->name('view-anak.create');
     Route::post('/anak/store',[OrangtuaController::class,'tambahAnak'])->name('tambahanak.store');
+    Route::resource('pemeriksaangigi', PemeriksaanGigiController::class)->except('destroy');
     });
   });
 

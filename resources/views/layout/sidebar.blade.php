@@ -80,7 +80,13 @@
             <li class="nav-item">
                 <a href="{{route('pemeriksaanfisik.create')}}" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
-                    <span class="link-title">Pemeriksaan</span>
+                    <span class="link-title">Pemeriksaan Fisik</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('pemeriksaangigi.create')}}" class="nav-link">
+                    <i class="link-icon" data-feather="box"></i>
+                    <span class="link-title"> Periksa gigi</span>
                 </a>
             </li>
 

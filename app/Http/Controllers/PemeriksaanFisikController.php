@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PemeriksaanFisik;
+use App\Models\PemeriksaanMata;
+use App\Models\PemeriksaanTelinga;
 use App\Models\User;
 use App\Models\Orangtua;
 use App\Models\Anak;
@@ -47,14 +49,38 @@ class PemeriksaanFisikController extends Controller
         $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
         $anak = Anak::Where('id_orangtua',$orangtua)->get();
 
+        
+
         $pFisik = new PemeriksaanFisik();
         $pFisik->id_anak =  $request->anak;
         $pFisik->tinggi_badan = $request->tinggi_badan;
         $pFisik->berat_badan = $request->berat_badan;
-        $pFisik->imt = $request->imt;
+        if($request->tinggi_badan > 0 && $request->berat_badan > 0){
+            $pFisik->imt = $request->berat_badan/((($request->tinggi_badan)/100)*(($request->tinggi_badan)/100));
+        }
         $pFisik->sistole = $request->sistole;
         $pFisik->diastole = $request->diastole;
         $pFisik->save();
+        $pMata = new PemeriksaanMata();
+        $pMata->id_anak =  $request->anak;
+        $pMata->soal1=$request->soal1;
+        $pMata->soal2=$request->soal2;
+        $pMata->soal3=$request->soal3;
+        $pMata->soal4=$request->soal4;
+        $pMata->soal5=$request->soal5;
+        $pMata->soal6=$request->soal6;
+        $pMata->save();
+        $pTelinga = new PemeriksaanTelinga();
+        $pTelinga->id_anak =  $request->anak;
+        $pTelinga->soal1=$request->soal1;
+        $pTelinga->soal2=$request->soal2;
+        $pTelinga->soal3=$request->soal3;
+        $pTelinga->soal4=$request->soal4;
+        $pTelinga->soal5=$request->soal5;
+        $pTelinga->soal6=$request->soal6;
+        $pTelinga->soal7=$request->soal7;
+        $pTelinga->save();
+
 
         return redirect()->route('viewDashboard.orangtua');
 

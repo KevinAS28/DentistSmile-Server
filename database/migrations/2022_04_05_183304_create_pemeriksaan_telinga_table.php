@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePemeriksaanFisikTable extends Migration
+class CreatePemeriksaanTelingaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreatePemeriksaanFisikTable extends Migration
      */
     public function up()
     {
-        Schema::create('pemeriksaan_fisik', function (Blueprint $table) {
+        Schema::create('pemeriksaan_telinga', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_anak')->nullable();
-            $table->integer('tinggi_badan')->nullable();
-            $table->integer('berat_badan')->nullable();
-            $table->float('imt',10,1)->nullable();
-            $table->integer('sistole')->nullable();
-            $table->integer('diastole')->nullable();
-            $table->softDeletes();
+            $table->string('soal1')->nullable();
+            $table->string('soal2')->nullable();
+            $table->string('soal3')->nullable();
+            $table->string('soal4')->nullable();
+            $table->string('soal5')->nullable();
+            $table->string('soal6')->nullable();
+            $table->string('soal7')->nullable();
             $table->timestamps();
 
             $table->foreign('id_anak')->references('id')->on('anak')->onDelete('cascade');
@@ -35,6 +36,6 @@ class CreatePemeriksaanFisikTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pemeriksaan_fisik');
+        Schema::dropIfExists('pemeriksaan_telinga');
     }
 }

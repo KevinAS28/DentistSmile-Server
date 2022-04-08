@@ -215,6 +215,7 @@ class DokterController extends Controller
      */
     public function destroy($id)
     {
+        
         $dokter = Dokter::find($id);
         $dokter ->delete();
         return response()->json(['data'=>'success delete data']);
