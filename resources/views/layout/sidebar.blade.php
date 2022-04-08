@@ -100,7 +100,7 @@
             </li>
             <li class="nav-item nav-category">Fitur</li>
             <li class="nav-item">
-                <a href="/dokter/dashboard" class="nav-link">
+                <a href="/dokter/profil" class="nav-link">
                     <i class="link-icon" data-feather="user"></i>
                     <span class="link-title">Profil</span>
                 </a>

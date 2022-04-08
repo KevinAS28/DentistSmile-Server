@@ -95,8 +95,8 @@ Route::group(['prefix' => 'dokter'], function () {
   Route::group(['middleware' => ['auth','ceklevel:dokter']], function () {
     Route::get('/dashboard',[DokterController::class,'viewDashboard'])->name('dokter.dashboard');
     Route::get('/profil',[DokterController::class, 'profil'])->name('dokter.profil');
-    Route::get('/profil/edit',[DokterController::class, 'profil_edit'])->name('dokter.profilEdit');
-    Route::post('/profil',[DokterController::class, 'profil_simpan'])->name('dokter.profilSimpan');
+    Route::post('/profil/edit/{id}',[DokterController::class, 'profil_edit'])->name('dokter.profilEdit');
+    Route::post('/profil/{id}',[DokterController::class, 'profil_update'])->name('dokter.profilUpdate');
     Route::get('/pemeriksaan-ukgs',[DokterController::class, 'pemeriksaan_ukgs'])->name('dokter.periksaUKGS');
     Route::get('/pemeriksaan-ukgm',[DokterController::class, 'pemeriksaan_ukgm'])->name('dokter.periksaUKGM');
     Route::get('/pemeriksaan-ukgs/pemeriksaan-data',[DokterController::class, 'pemeriksaan_data_ukgs'])->name('dokter.pemeriksaanDataUKGS');
