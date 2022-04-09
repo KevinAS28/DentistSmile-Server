@@ -23,6 +23,7 @@
                         <th style="width: 1px;">no</th>
                         <th>Kecamatan</th>
                         <th>Kelurahan</th>
+                        <th>tipe</th>
                         <th>nama</th>
                         <th>alamat</th>
                         <th>action</th>
@@ -45,8 +46,8 @@ var tableData;
 $(document).ready(function () {
     $("#btn-create").on('click', function(){
           $('.fileinput-remove-button').click();
-          $('input[name=kecamatan]').val('');
           $('input[name=kelurahan]').val('');
+          $('input[name=type]').val('');
           $('input[name=nama]').val('');
           $('input[name=alamat]').val('');
           $('#modal-create').modal('show');
@@ -86,6 +87,11 @@ $(document).ready(function () {
                 {
                     data: 'kelurahan',
                     name: 'kelurahan',
+                    visible: true
+                },
+                {
+                    data: 'type',
+                    name: 'type',
                     visible: true
                 },
                 {

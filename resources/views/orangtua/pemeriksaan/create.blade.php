@@ -13,7 +13,7 @@
 
 
                     <div class="mb-3">
-                        <label class="form-label">Nama Orangtua</label>
+                        <label class="form-label">Nama Anak</label>
                         <select class=" form-select" name="anak" data-width="100%">
                             @foreach($anak as $anak)
 

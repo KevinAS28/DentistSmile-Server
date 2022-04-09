@@ -77,6 +77,38 @@
                                                 <input type="text" class="form-control" id="exampleInputUsername1"
                                                     autocomplete="Name" placeholder="masukkan nama" name="nama" required>
                                             </div>
+                                            <div class="row col-md-10">
+                                                <div class="col-md-3">
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">Tempat Lahir</label>
+                                                        <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
+                                                            autocomplete="off" placeholder="Tempat Lahir">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">Tanggal Lahir</label>
+                                                        <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
+                                                            autocomplete="off" placeholder="masukkan tanggal lahir">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Kecamatan</label>
+                                                <select class="form-select" name="id_kecamatan"  id="id_kecamatan" data-width="100%">
+                                                    <option class="mb-2" value=" ">---Pilih Kecamatan---</option>
+                                                    @foreach(\App\Models\Kecamatan::get() as $value => $key)
+                                              
+                                                    <option value="{{$key->id}}">{{$key->nama}}</option>
+                                                @endforeach
+                                                </select>
+                                            </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Kelurahan</label>
+                                            <select class="form-select" name="id_kelurahan" data-width="100%" id="id_desa">
+                            
+                                            </select>
+                                        </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputUsername2" class="form-label">alamat</label>
                                                 <input type="text" class="form-control" id="exampleInputUsername1"
@@ -117,6 +149,27 @@
               $('#userPassword').attr('type','password');
           }
       });
+
+      $('#id_kecamatan').change(function(){
+        let kecamatan = $("#id_kecamatan").val()
+        $("#id_desa").children().remove();
+        $("#id_desa").val('');
+        $("#id_desa").append('<option value="">---Pilih Kelurahan---</option>');
+        $("#id_desa").prop('disabled', true)
+        if (kecamatan != '' && kecamatan != null) {
+            $.ajax({
+                url: "{{url('')}}/list-desa/" + kecamatan,
+                success: function (res) {
+                    $("#id_desa").prop('disabled', false)
+                    let tampilan_option = '';
+                    $.each(res, function (index, desa) {
+                        tampilan_option += `<option value="${desa.id}">${desa.nama}</option>`
+                    })
+                    $("#id_desa").append(tampilan_option);
+                },
+            });
+        }
+    });
   });
 </script>
 

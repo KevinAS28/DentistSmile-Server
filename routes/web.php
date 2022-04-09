@@ -31,9 +31,11 @@ Auth::routes();
 
 Route::get('/list-desa/{id_kecamatan}', [App\Http\Controllers\KelurahanController::class, 'listDesa'])
     ->name('list-desa');
-Route::get('/getdesa', [KelurahanController::class, 'getDesa']);
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
-
+Route::get('/list-sekolah/{id_kelurahan}', [App\Http\Controllers\SekolahController::class, 'listSekolah'])
+    ->name('list-sekolah');
+    Route::get('/list-posyandu/{id_kelurahan}', [App\Http\Controllers\SekolahController::class, 'listPosyandu'])
+    ->name('list-posyandu');
 // Route::post('/dokter',[DokterController::class,'store']);
 Route::get('/home',function(){
     return view('home');

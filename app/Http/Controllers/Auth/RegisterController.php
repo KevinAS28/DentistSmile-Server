@@ -99,7 +99,7 @@ class RegisterController extends Controller
         Orangtua::create([
             'id_user' =>$data['id_user'],
             'nama' => $data['nama'],
-            'alamat' => $data['alamat'],
+            'alamat' => $data['id_kecamatan'],
             'pendidikan' => $data['pendidikan']
         ]);
     }

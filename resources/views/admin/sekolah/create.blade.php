@@ -25,8 +25,17 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label class="form-label">Tipe</label>
+                <select class="form-select" name="type"  data-width="100%">
+                    <option class="mb-2" value=" ">---Pilih Tipe---</option>
+                    <option class="mb-2" value="sekolah">Sekolah</option>
+                    <option class="mb-2" value="posyandu">Posyandu</option>
+
+                </select>
+            </div>
+            <div class="mb-3">
                 <div class="form-group">
-                    <label>Sekolah</label>
+                    <label>Nama</label>
                     <input type="text"  name="nama" class="form-control"
                         placeholder="">
                 </div>
@@ -88,7 +97,6 @@
 
         $('#id_kecamatan').change(function(){
         let kecamatan = $("#id_kecamatan").val()
-        console.log(kecamatan)
         $("#id_desa").children().remove();
         $("#id_desa").val('');
         $("#id_desa").append('<option value="">---Pilih Kelurahan---</option>');
@@ -108,35 +116,7 @@
         }
     });
 
-//     $('#kecamatan').change(function(){
-//     var id_kecamatan = $(this).val();    
-//     if(id_kecamatan){
-//         $.ajax({
-//            type:"GET",
-//            url:"/getdesa?id_kecamatan="+id_kecamatan,
-//            dataType: 'JSON',
-//            success:function(res){               
-//             if(res){
-                
-//                 $("#desa").empty();
-                
-//                 $("#desa").append('<option>---Pilih Kelurahan---</option>');
-//                 $.each(res,function(id,desa){
-//                     $("#desa").append(`<option value="${desa.id}">${desa.nama}</option>`);
-//                     console.log(id);
-//                     console.log(desa);
-                    
-//                 });
-//             }else{
-//                $("#desa").empty();
-//             }
-//            }
-//         });
-//     }else{
-        
-//         $("#desa").empty();
-//     }      
-//    });
+
 
     });
 

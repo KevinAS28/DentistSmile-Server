@@ -15,10 +15,10 @@ class CreateSekolahTable extends Migration
     {
         Schema::create('sekolah', function (Blueprint $table) {
             $table->id();
-            
             $table->unsignedBigInteger('id_kelurahan')->nullable();
-            $table->string('nama');
-            $table->string('alamat');
+            $table->string('type')->nullable();
+            $table->string('nama')->nullable();
+            $table->string('alamat')->nullable();
             $table->timestamps();
 
             
