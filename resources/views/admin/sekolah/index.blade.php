@@ -21,7 +21,7 @@
                     <tr>
 						<th>id</th>
                         <th style="width: 1px;">no</th>
-                        <th>kecamatan</th>
+                        <th>Kecamatan</th>
                         <th>Kelurahan</th>
                         <th>nama</th>
                         <th>alamat</th>

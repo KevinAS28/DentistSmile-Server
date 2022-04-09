@@ -10,7 +10,8 @@
         <div class="modal-body">
                 <div class="mb-3">
                     <label class="form-label">Kecamatan</label>
-                    <select class="form-select" name="kecamatan" onChange="updateKelurahan()" id="kecamatan" data-width="100%">
+                    <select class="form-select" name="kecamatan"  id="id_kecamatan" data-width="100%">
+                        <option class="mb-2" value=" ">---Pilih Kecamatan---</option>
                         @foreach(\App\Models\Kecamatan::get() as $value => $key)
                   
                         <option value="{{$key->id}}">{{$key->nama}}</option>
@@ -19,11 +20,8 @@
                 </div>
             <div class="mb-3">
                 <label class="form-label">Kelurahan</label>
-                <select class="form-select" name="kelurahan" data-width="100%">
-                    @foreach(\App\Models\Kelurahan::get() as $value => $key)
-              
-                    <option value="{{$key->id}}">{{$key->nama}}</option>
-                @endforeach
+                <select class="form-select" name="kelurahan" data-width="100%" id="id_desa">
+
                 </select>
             </div>
             <div class="mb-3">
@@ -87,6 +85,58 @@
 
             });
         });
+
+        $('#id_kecamatan').change(function(){
+        let kecamatan = $("#id_kecamatan").val()
+        console.log(kecamatan)
+        $("#id_desa").children().remove();
+        $("#id_desa").val('');
+        $("#id_desa").append('<option value="">---Pilih Kelurahan---</option>');
+        $("#id_desa").prop('disabled', true)
+        if (kecamatan != '' && kecamatan != null) {
+            $.ajax({
+                url: "{{url('')}}/list-desa/" + kecamatan,
+                success: function (res) {
+                    $("#id_desa").prop('disabled', false)
+                    let tampilan_option = '';
+                    $.each(res, function (index, desa) {
+                        tampilan_option += `<option value="${desa.id}">${desa.nama}</option>`
+                    })
+                    $("#id_desa").append(tampilan_option);
+                },
+            });
+        }
+    });
+
+//     $('#kecamatan').change(function(){
+//     var id_kecamatan = $(this).val();    
+//     if(id_kecamatan){
+//         $.ajax({
+//            type:"GET",
+//            url:"/getdesa?id_kecamatan="+id_kecamatan,
+//            dataType: 'JSON',
+//            success:function(res){               
+//             if(res){
+                
+//                 $("#desa").empty();
+                
+//                 $("#desa").append('<option>---Pilih Kelurahan---</option>');
+//                 $.each(res,function(id,desa){
+//                     $("#desa").append(`<option value="${desa.id}">${desa.nama}</option>`);
+//                     console.log(id);
+//                     console.log(desa);
+                    
+//                 });
+//             }else{
+//                $("#desa").empty();
+//             }
+//            }
+//         });
+//     }else{
+        
+//         $("#desa").empty();
+//     }      
+//    });
 
     });
 

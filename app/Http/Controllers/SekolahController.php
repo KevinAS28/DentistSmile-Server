@@ -24,8 +24,8 @@ class SekolahController extends Controller
 
            return $btn;
        })
-       ->addColumn('kecamatan',function($row){
-        return $row->kecamatan->nama;
+    ->addColumn('kecamatan',function($row){
+        return $row->kelurahan->kecamatan->nama;
     })
     ->addColumn('kelurahan',function($row){
         return $row->kelurahan->nama;
@@ -65,7 +65,7 @@ class SekolahController extends Controller
             return response()->json(['error' => $validator->errors()->all()]);
         }else{
             $data= Sekolah::create([
-                'id_kecamatan'=> request('kecamatan'),
+                
                 'id_kelurahan'=> request('kelurahan'),
                 'nama'=> request('nama'),
                 'alamat' => request('alamat')

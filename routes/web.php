@@ -29,8 +29,9 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-
-
+Route::get('/list-desa/{id_kecamatan}', [App\Http\Controllers\KelurahanController::class, 'listDesa'])
+    ->name('list-desa');
+Route::get('/getdesa', [KelurahanController::class, 'getDesa']);
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
 
 // Route::post('/dokter',[DokterController::class,'store']);
@@ -109,4 +110,4 @@ Route::group(['prefix' => 'dokter'], function () {
   });
 
 
-    Route::get('/list-kelurahan/{id_kecamatan}', [KelurahanController::class, 'listDesa'])->name('list-kelurahan');
+
