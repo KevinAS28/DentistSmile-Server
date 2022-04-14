@@ -66,6 +66,7 @@ Route::group(['prefix' => 'orangtua'], function () {
     Route::get('/anak/create',[OrangtuaController::class,'viewTambahAnak'])->name('view-anak.create');
     Route::post('/anak/store',[OrangtuaController::class,'tambahAnak'])->name('tambahanak.store');
     Route::resource('pemeriksaangigi', PemeriksaanGigiController::class)->except('destroy');
+    Route::get('/pemeriksaan/riwayat',[PemeriksaanFisikController::class,'riwayat'])->name('view-riwayat');
     });
   });
 
@@ -76,7 +77,9 @@ Route::group(['prefix' => 'admin/table'], function () {
     Route::get('/data-kecamatan',[KecamatanController::class, 'data'])->name('kecamatan.table');
     Route::get('/data-kelurahan',[KelurahanController::class, 'data'])->name('kelurahan.table');
     Route::get('/data-sekolah',[SekolahController::class, 'data'])->name('sekolah.table');
-    
+    Route::get('/data-pemeriksaan-fisik',[PemeriksaanFisikController::class,'riwayatfisik'])->name('riwayat-fisik');
+    Route::get('/data-pemeriksaan-mata',[PemeriksaanFisikController::class,'riwayatmata'])->name('riwayat-mata');
+    Route::get('/data-pemeriksaan-telinga',[PemeriksaanFisikController::class,'riwayattelinga'])->name('riwayat-telinga');
     
     });
 Route::group(['prefix' => 'orangtua/table'], function () {

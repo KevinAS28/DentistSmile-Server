@@ -19,7 +19,7 @@ class CreateAnakTable extends Migration
             $table->unsignedBigInteger('id_sekolah')->nullable();
             $table->string('nama')->nullable();
             $table->string('tempat_lahir')->nullable();
-            $table->datetime('tanggal_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->string('kelas')->nullable();
             $table->string('jenis_kelamin')->nullable();
             $table->timestamps();

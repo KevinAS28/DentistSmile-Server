@@ -130,4 +130,92 @@ class PemeriksaanFisikController extends Controller
     {
         //
     }
+
+    public function riwayat(){
+        $user = Auth::user();
+        $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
+        $anak = Anak::Where('id_orangtua',$orangtua)->get();
+        return view('orangtua.pemeriksaan.riwayat',compact('anak'));
+    }
+    public function riwayatfisik(Request $request){
+        
+        $user = Auth::user();
+        $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
+        $anak = Anak::Where('id_orangtua',$orangtua)->get();
+        if(!empty($request->anak)){
+        $pemeriksaanFisik = PemeriksaanFisik::Where('id_anak',$request->anak)->get();
+       }else{
+        $pemeriksaanFisik = PemeriksaanFisik::all();
+        }
+        return datatables()->of($pemeriksaanFisik)
+        ->addColumn('imt', function($pemeriksaanFisik){
+            if($pemeriksaanFisik->imt < 18.5){
+                $data= 'Kurus';
+            }else if($pemeriksaanFisik->imt >= 18.5 && $pemeriksaanFisik->imt <= 24.9){
+                $data = 'Ideal';
+            }else if($pemeriksaanFisik->imt >= 25 && $pemeriksaanFisik->imt <= 29.9){
+                $data = 'Gemuk';
+            }else{
+                $data = 'Obesitas';
+            }
+            return $data;
+        })
+        ->addColumn('tanggal', function($pemeriksaanFisik){
+            return $tanggal = date('d-m-Y', strtotime($pemeriksaanFisik->created_at));
+        })
+        ->addColumn('jam', function($pemeriksaanFisik){
+            return $jam = date('H:i', strtotime($pemeriksaanFisik->created_at));
+        })
+       ->addIndexColumn()
+       ->make(true);
+       
+    }
+
+    public function riwayatmata(Request $request){
+        $user = Auth::user();
+        $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
+        $anak = Anak::Where('id_orangtua',$orangtua)->get();
+        if(!empty($request->anak)){
+            $pemeriksaanMata = PemeriksaanMata::Where('id_anak',$request->anak)->get();
+           }else{
+            $pemeriksaanMata = PemeriksaanMata::all();
+            }
+            return datatables()->of($pemeriksaanMata)
+            ->addColumn('tanggal', function($pemeriksaanMata){
+               return $tanggal = date('d-m-Y', strtotime($pemeriksaanMata->created_at));
+                
+            })
+            ->addColumn('jam',function($pemeriksaanMata){
+                return $jam = date('H:i', strtotime($pemeriksaanMata->created_at));
+            })
+            ->addIndexColumn()
+            ->make(true);
+    }
+    public function riwayattelinga(Request $request){
+        $user = Auth::user();
+        $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
+        $anak = Anak::Where('id_orangtua',$orangtua)->get();
+        if(!empty($request->anak)){
+            $pemeriksaanTelinga = PemeriksaanTelinga::Where('id_anak',$request->anak)->get();
+           }else{
+            $pemeriksaanTelinga = PemeriksaanTelinga::all();
+            }
+            return datatables()->of($pemeriksaanTelinga)
+            ->addColumn('tanggal', function($pemeriksaanTelinga){
+               return $tanggal = date('d-m-Y', strtotime($pemeriksaanTelinga->created_at));
+                
+            })
+            ->addColumn('jam',function($pemeriksaanTelinga){
+                return $jam = date('H:i', strtotime($pemeriksaanTelinga->created_at));
+            })
+            ->addIndexColumn()
+            ->make(true);
+    }
+    public function riwayatgigi(){
+        $user = Auth::user();
+        $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
+        $anak = Anak::Where('id_orangtua',$orangtua)->get();
+        $pemeriksaanGigi = PemeriksaanGigi::Where('id_anak',$anak)->get();
+        return view('orangtua.pemeriksaan.riwayatgigi',compact('anak','pemeriksaanGigi'));
+    }
 }

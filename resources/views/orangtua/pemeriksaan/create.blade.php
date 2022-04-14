@@ -92,7 +92,7 @@
                     <div class="mb-3">
                         <label class="col-md-12 mb-2"> Menggunakan kacamata </label>
                         <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" value="tidak" name="soal3" id="radioInline">
+                            <input type="radio" class="form-check-input" value="normal" name="soal3" id="radioInline">
                             <label class="form-check-label" for="radioInline">
                                 Tidak
                             </label>

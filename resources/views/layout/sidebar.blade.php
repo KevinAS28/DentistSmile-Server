@@ -1,3 +1,9 @@
+<style>
+    .nav-item{
+        margin-bottom: 5px;
+        
+    }
+</style>
 <nav class="sidebar">
     <div class="sidebar-header">
         <a href="#" class="sidebar-brand">
@@ -87,6 +93,12 @@
                 <a href="{{route('pemeriksaangigi.create')}}" class="nav-link">
                     <i class="link-icon" data-feather="box"></i>
                     <span class="link-title"> Periksa gigi</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{route('view-riwayat')}}" class="nav-link">
+                    <i class="link-icon" data-feather="box"></i>
+                    <span class="link-title"> Riwayat</span>
                 </a>
             </li>
 

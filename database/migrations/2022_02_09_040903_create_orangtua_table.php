@@ -19,7 +19,7 @@ class CreateOrangtuaTable extends Migration
             $table->unsignedBigInteger('id_kecamatan')->nullable();
             $table->unsignedBigInteger('id_kelurahan')->nullable();
             $table->string('tempat_lahir')->nullable();
-            $table->datetime('tanggal_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->string('nama')->nullable();
             $table->string('alamat')->nullable();
             $table->string('pendidikan')->nullale();
