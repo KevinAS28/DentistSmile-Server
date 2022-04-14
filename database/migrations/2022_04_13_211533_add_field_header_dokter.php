@@ -27,8 +27,5 @@ class AddFieldHeaderDokter extends Migration
     public function down()
     {
         //
-        Schema::table('dokter', function(Blueprint $table){
-            $table->string('header')->nullable();
-        });
     }
 }
