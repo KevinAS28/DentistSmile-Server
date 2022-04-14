@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
             'id_users'  => 2,
             'nik'       => '123456',
             'nama' => 'Indira',
+            'id_kecamatan' => 1,
             'jenis_kelamin' => 'Perempuan',
             'tempat_lahir'  => 'Bekasi',
             'tanggal_lahir' => '2000-01-01',
