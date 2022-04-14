@@ -27,19 +27,20 @@
         <div class="card">
             <div class="card-body">
                 @foreach (Auth::user()->dokter as $dokter)
-                <form action="{{route('dokter.profilEdit', $dokter->id)}}" class="forms-horizontal" id="" method="post" nctype="multipart/form-data" files=true>   
+                <form action="{{route('dokter.profilEdit', $dokter->id)}}" class="forms-horizontal" id="profil" method="post" nctype="multipart/form-data" files=true>   
                     @csrf
                     <div class="form-group">
 
                         {{-- foto profil --}}
                         <div class="position-relative">
                             <figure class="overflow-hidden mb-0 d-flex justify-content-center">
-                                <img src="https://via.placeholder.com/1560x370" class="rounded-top" alt="profile cover">
+                                <!-- <img src="https://via.placeholder.com/1560x370" class="rounded-top" alt="profile cover" wi> -->
+                                <img src="{{ asset('dokter/header/'.$dokter->header) }}" class="rounded-top" alt="profile cover" width="1560px" height="370px"">
                             </figure>
                             <div
                                 class="d-flex justify-content-between align-items-center position-absolute top-90 w-100 px-2 px-md-4 mt-n4">
                                 <div class="profil-photo">
-                                    <img class="wd-100 mt-3 rounded-square" src="https://via.placeholder.com/100x100"
+                                    <img class="wd-100 mt-3 rounded-square" src="{{ asset('dokter/avatar/'.$dokter->avatar) }}"
                                         alt="profile">
                                 </div>
                                 <div>

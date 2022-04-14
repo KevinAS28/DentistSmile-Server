@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Dokter;
 use App\Models\Kecamatan;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\File;
 use Auth;
 
 
@@ -201,6 +202,33 @@ class DokterController extends Controller
         $dokter->tanggal_lahir= $request->tanggal_lahir;
         $dokter->no_telp = $request->no_telp;
         $dokter->no_str= $request->no_str;
+        if($request->hasfile('avatar'))
+        {
+            $destination = 'dokter/avatar/'.$dokter->avatar;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+            $file = $request->file('avatar');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('dokter/avatar/', $filename);
+            $dokter->avatar = $filename;
+        }
+        if($request->hasfile('header'))
+        {
+            $destination = 'dokter/header/'.$dokter->header;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+            $file = $request->file('header');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('dokter/header/', $filename);
+            $dokter->header = $filename;
+        }
+
 
         $dokter->save();
         return redirect()->route('dokter.profil');

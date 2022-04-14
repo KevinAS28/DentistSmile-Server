@@ -27,28 +27,28 @@
         <div class="card">
             <div class="card-body">
 
-                <form action="{{ route('dokter.profilUpdate', $dokter -> id) }}" class="forms-horizontal" id="" method="post" nctype="multipart/form-data" files=true>   
+                <form action="{{ route('dokter.profilUpdate', $dokter -> id) }}" class="forms-horizontal" id="" method="post" enctype="multipart/form-data" files=true>   
                     @csrf
                     <div class="form-group">
 
                         {{-- foto profil --}}
+
                         <div class="position-relative">
                             <figure class="overflow-hidden mb-0 d-flex justify-content-center">
-                                <img src="https://via.placeholder.com/1560x370" class="rounded-top" alt="profile cover">
+                                <!-- <img src="https://via.placeholder.com/1560x370" class="rounded-top" alt="profile cover" wi> -->
+                                <img src="{{ asset('dokter/header/'.$dokter->header) }}" class="rounded-top" alt="profile cover" width="1560px" height="370px"">
+                                
                             </figure>
                             <div
                                 class="d-flex justify-content-between align-items-center position-absolute top-90 w-100 px-2 px-md-4 mt-n4">
                                 <div class="profil-photo">
-                                    <img class="wd-100 mt-3 rounded-square" src="https://via.placeholder.com/100x100"
-                                        alt="profile">
-                                </div>
-                                <div>
-                                    <button class="btn btn-primary btn-icon-text" type="submit">
-                                        <i data-feather="edit" class="btn-icon-prepend"></i> Simpan Perubahan
-                                    </button>
+                                    <img class="wd-100 mt-3 rounded-square" src="{{ asset('dokter/avatar/'.$dokter->avatar) }}"
+                                        alt="profile" onclick='<input type="file" class="form-control" id="avatar" name="avatar"
+                                            value="{{ $dokter -> avatar}}">'>
                                 </div>
                             </div>
                         </div>
+                        
 
                         {{-- Tag nama --}}
                         <div class="text-p">
@@ -60,6 +60,20 @@
                         {{-- form profil --}}
                         <div class="mt-5">
                             <form class="forms-sample mt-5">
+                                <div class="row mb-3">
+                                    <label for="avatar" class="col-sm-3 col-form-label">Avatar</label>
+                                    <div class="col-sm-9">
+                                        <input type="file" class="form-control" id="avatar" name="avatar"
+                                            value="{{ $dokter -> avatar}}">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="header" class="col-sm-3 col-form-label">Header</label>
+                                    <div class="col-sm-9">
+                                        <input type="file" class="form-control" id="header" name="header"
+                                            value="{{ $dokter -> header}}">
+                                    </div>
+                                </div>
                                 <div class="row mb-3">
                                     <label for="nama" class="col-sm-3 col-form-label">Nama</label>
                                     <div class="col-sm-9">
@@ -117,6 +131,11 @@
                                         <input type="number" class="form-control" id="nostr" name="no_str"
                                             placeholder="No STR" value="{{ $dokter -> no_str }}">
                                     </div>
+                                </div>
+                                <div class="row">
+                                    <button class="btn btn-primary btn-icon-text float-right" type="submit">
+                                        <i data-feather="edit" class="btn-icon-prepend"></i> Simpan Perubahan
+                                    </button>
                                 </div>
                             </form>
                         </div>
