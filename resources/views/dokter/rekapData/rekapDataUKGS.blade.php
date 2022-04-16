@@ -44,7 +44,9 @@
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Line chart</h6>
-                <canvas id="chartjsLine"></canvas>
+                <div class="flot-chart-wrapper">
+                    <div class="flot-chart" id="flotLine"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -52,7 +54,9 @@
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Line chart</h6>
-                <canvas id="chartjsLine"></canvas>
+                <div class="flot-chart-wrapper">
+                    <div class="flot-chart" id="flotLine2"></div>
+                </div>
             </div>
         </div>
     </div>
