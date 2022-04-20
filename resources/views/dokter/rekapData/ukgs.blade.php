@@ -19,11 +19,7 @@
                     <div class="col-sm-9">
                         <select class="form-select" id="exampleFormControlSelect1">
                             <option selected disabled>Pilih Kelurahan</option>
-                            <option>12-18</option>
-                            <option>18-22</option>
-                            <option>22-30</option>
-                            <option>30-60</option>
-                            <option>Above 60</option>
+                            <option>Pulo</option>
                         </select>
                     </div>
                 </div>
@@ -33,10 +29,6 @@
                         <select class="form-select" id="option-data-sekolah">
                             <option selected disabled>Pilih Sekolah</option>
                             <option>Sekolah</option>
-                            <option>18-22</option>
-                            <option>22-30</option>
-                            <option>30-60</option>
-                            <option>Above 60</option>
                         </select>
                     </div>
                 </div>
@@ -45,11 +37,7 @@
                     <div class="col-sm-9">
                         <select class="form-select" id="exampleFormControlSelect1">
                             <option selected disabled>Pilih Kelas</option>
-                            <option>12-18</option>
-                            <option>18-22</option>
-                            <option>22-30</option>
-                            <option>30-60</option>
-                            <option>Above 60</option>
+                            <option>5</option>
                         </select>
                     </div>
                 </div>
@@ -57,10 +45,8 @@
             <div class="col-md-6" id="nama-sekolah">
                 <div class="card border-primary">
                     <div class="card-body">
-                        <div class="row">
-                            <p class="card-title">SDN Pulo 07 (Jl. Brawijaya XII)</p>
-                        </div>
-                        <table class="table-sm table-borderless">
+                        <b>SDN Pulo 07</b> <span class="tx-11 text-muted">(Jl. Brawijaya XII)</span>
+                        <table class="table-sm table-borderless tx-12">
                             <tr>
                                 <td>Jumlah Siswa</td>
                                 <td>:</td>
@@ -124,12 +110,48 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
+                        <td>1</td>
+                        <td>Adisty Sahida</td>
+                        <td>Laki-laki</td>
+                        <td>SDN Pulo 07</td>
                         <td>5</td>
-                        <td>2011/04/25</td>
+                        <td>Sudah <span class="text-muted">(16/02/2022)</i></td>
+                        <td><a class="btn btn-primary btn-icon-text btn-xs" href="{{route('dokter.rekapDetailUKGS')}}" role="button">Lihat Rekap<i class="btn-icon-append" data-feather="book-open"></i></a> <a class="btn btn-info btn-icon btn-xs text-white" href="#" role="button"><i class="mdi mdi-tooth"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Almira Adzani</td>
+                        <td>Perempuan</td>
+                        <td>SDN Pulo 07</td>
+                        <td>5</td>
+                        <td>Sudah <span class="text-muted">(13/02/2022)</i></td>
+                        <td><a class="btn btn-primary btn-icon-text btn-xs" href="{{route('dokter.rekapDetailUKGS')}}" role="button">Lihat Rekap<i class="btn-icon-append" data-feather="book-open"></i></a> <a class="btn btn-info btn-icon btn-xs text-white" href="#" role="button"><i class="mdi mdi-tooth"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Rayna Salsabila</td>
+                        <td>Perempuan</td>
+                        <td>SDN Pulo 01</td>
+                        <td>2</td>
+                        <td>Belum</td>
+                        <td><a class="btn btn-primary btn-icon-text btn-xs" href="{{route('dokter.rekapDetailUKGS')}}" role="button">Lihat Rekap<i class="btn-icon-append" data-feather="book-open"></i></a> <a class="btn btn-info btn-icon btn-xs text-white" href="#" role="button"><i class="mdi mdi-tooth"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>M. Dayyan</td>
+                        <td>Laki-laki</td>
+                        <td>SDN Pulo 07</td>
+                        <td>5</td>
+                        <td>Sudah <span class="text-muted">(16/02/2022)</i></td>
+                        <td><a class="btn btn-primary btn-icon-text btn-xs" href="{{route('dokter.rekapDetailUKGS')}}" role="button">Lihat Rekap<i class="btn-icon-append" data-feather="book-open"></i></a> <a class="btn btn-info btn-icon btn-xs text-white" href="#" role="button"><i class="mdi mdi-tooth"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Safiya</td>
+                        <td>Perempuan</td>
+                        <td>SDN Pulo 07</td>
+                        <td>5</td>
+                        <td>Belum</td>
                         <td><a class="btn btn-primary btn-icon-text btn-xs" href="{{route('dokter.rekapDetailUKGS')}}" role="button">Lihat Rekap<i class="btn-icon-append" data-feather="book-open"></i></a> <a class="btn btn-info btn-icon btn-xs text-white" href="#" role="button"><i class="mdi mdi-tooth"></i></a></td>
                     </tr>
                 </tbody>
