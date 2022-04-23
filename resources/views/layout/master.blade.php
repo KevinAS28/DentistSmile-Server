@@ -16,6 +16,7 @@ License: For each use you must have a valid license purchased only from above li
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Responsive HTML Admin Dashboard Template based on Bootstrap 5">
     <meta name="author" content="NobleUI">
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <meta name="keywords"
         content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
@@ -128,6 +129,17 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{asset('assets/vendors/datatables.net/jquery.dataTables.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    
+    <script>
+        $(function()){
+            $ajaxSetup({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+            });
+        }
+    </script>
     <script>
         $(document).ready(function () {
             $('#dataTableExample').DataTable();

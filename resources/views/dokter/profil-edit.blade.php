@@ -36,13 +36,13 @@
                         <div class="position-relative">
                             <figure class="overflow-hidden mb-0 d-flex justify-content-center">
                                 <!-- <img src="https://via.placeholder.com/1560x370" class="rounded-top" alt="profile cover" wi> -->
-                                <img src="{{ asset('dokter/header/'.$dokter->header) }}" class="rounded-top" alt="profile cover" width="1560px" height="370px"">
+                                <img src="{{ asset('dokter/header/'.$dokter->header) }}" class="rounded-top" alt="profile cover" width="1560px" height="370px" onerror="this.onerror=null;this.src='https\://via.placeholder.com/1560x370';">
                                 
                             </figure>
                             <div
                                 class="d-flex justify-content-between align-items-center position-absolute top-90 w-100 px-2 px-md-4 mt-n4">
                                 <div class="profil-photo">
-                                    <img class="wd-100 mt-3 rounded-square" src="{{ asset('dokter/avatar/'.$dokter->avatar) }}"
+                                    <img class="wd-100 mt-3 rounded-square" src="{{ asset('dokter/avatar/'.$dokter->avatar) }}" width="100px" height="100px" onerror="this.onerror=null;this.src='https\://via.placeholder.com/100x100';"
                                         alt="profile" onclick='<input type="file" class="form-control" id="avatar" name="avatar"
                                             value="{{ $dokter -> avatar}}">'>
                                 </div>

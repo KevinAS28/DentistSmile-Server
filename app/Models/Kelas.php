@@ -5,18 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-class Sekolah extends Model
+class Kelas extends Model
 {
     use HasFactory;
     
-    protected $table = 'sekolah';
+    protected $table = 'kelas';
     protected $guarded = ['created_at', 'updated_at'];
     protected $fillable=[
-        'id_kelurahan',
-        'type',
+        'id_sekolah',
         'nama',
-        'alamat',
     ];
 
     public function kecamatan(){
@@ -25,7 +22,7 @@ class Sekolah extends Model
     public function kelurahan(){
         return $this->belongsTo('App\Models\Kelurahan', 'id_kelurahan');
     }
-    public function kelas(){
-        return $this->hasMany('App\Models\Kelas', 'id_sekolah');
+    public function sekolah(){
+        return $this->belongsTo('App\Models\Sekolah', 'id_sekolah');
     }
 }

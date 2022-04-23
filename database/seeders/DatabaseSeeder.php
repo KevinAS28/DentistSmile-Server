@@ -7,6 +7,8 @@ use App\Models\Dokter;
 use App\Models\Orangtua;
 use App\Models\Kecamatan;
 use App\Models\Kelurahan;
+use App\Models\Sekolah;
+use App\Models\Kelas;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -56,6 +58,29 @@ class DatabaseSeeder extends Seeder
             'no_str'    => '654321',
             
         ]);
+        $sekolah = Sekolah::create([
+            'id_kelurahan'     => '1',
+            'type' => 'Sekolah',
+            'nama' => 'SDN Mekarsari 04',
+            'alamat' => 'Jalan Tambun Raya 04',
+
+            
+        ]);
+
+        $sekolah = Sekolah::create([
+            'id_kelurahan'     => '1',
+            'type' => 'Posyandu',
+            'nama' => 'Puskesmas Jatibening',
+            'alamat' => 'Jalan Jatibening 90',
+
+            
+        ]);
+
+        $kelas = Kelas::create([
+            'id_sekolah'     => '1',
+            'nama' => 'I', 
+        ]);
+
 
 
     }
