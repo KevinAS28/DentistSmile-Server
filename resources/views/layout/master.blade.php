@@ -35,6 +35,7 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{asset('assets/swal/sweetalert.js')}}"></script>
     <!-- inject:css -->
     <link rel="stylesheet" href="{{asset('assets/fonts/feather-font/css/iconfont.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/fonts/feather-font/css/iconfont.css')}}">
 	<link rel="stylesheet" href="{{asset('assets/vendors/flag-icon-css/css/flag-icon.min.css')}}">
     
     <link rel="stylesheet" href="{{asset('assets/vendors/prismjs/themes/prism.css')}}">
@@ -112,6 +113,7 @@ License: For each use you must have a valid license purchased only from above li
 	<script src="{{asset('assets/vendors/clipboard/clipboard.min.js')}}"></script>
 
     <!-- inject:js -->
+    
     <script src="{{asset('assets/vendors/feather-icons/feather.min.js')}}"></script>
     <script src="{{asset('assets/js/template.js')}}"></script>
     <!-- endinject -->

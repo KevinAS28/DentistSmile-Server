@@ -17,8 +17,8 @@ class KecamatanController extends Controller
         $kecamatan = Kecamatan::all();
         return datatables()->of($kecamatan)
         ->addColumn('action', function($row){
-            $btn = '<div class="btn-group btn-group-sm">';
-            $btn .= '<button type="button" id="btn-edit" class="btn btn-info"><i class="lni lni-pencil"></i></button>';
+            $btn = '<div class="">';
+                $btn .= '<button type="button" id="btn-edit" class="btn btn-info btn-icon-text">  <i data-feather="edit"></i></button>';
             $btn .= '<button type="button" id="btn-delete" class="btn btn-danger"><i class="lni lni-trash"></i></button>';
             $btn .= '</div>';
 

@@ -55,19 +55,19 @@
                 </div>
                 <div class="col-md-8 ps-md-0">
                   <div class="auth-form-wrapper px-4 py-5">
-                    <a href="#" class="noble-ui-logo d-block mb-2">Noble<span>UI</span></a>
+                    <img class="img-fluid mb-2" src="{{asset('assets/images/logo-senyumin.png')}}" alt="" srcset="">
                     <h5 class="text-muted fw-normal mb-4">Selamat datang! silahkan masuk.</h5>
                     <form class="forms-sample" action="{{route('login')}}" method="POST"> 
                         @csrf
                       <div class="mb-3">
                         <label for="userEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email" id="userEmail" placeholder="username">
+                        <input type="email" class="form-control" name="email" id="userEmail" placeholder="email" required>
                       </div>
                       <div class="mb-3">
                         <label for="userPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" id="userPassword" autocomplete="current-password" placeholder="Password">
+                        <input type="password" class="form-control" name="password" id="userPassword" autocomplete="current-password" placeholder="Password" required>
                       </div>
-                      <div class="form-check mb-3">
+                      <div class="form-check mb-2">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">
                           Show Password
