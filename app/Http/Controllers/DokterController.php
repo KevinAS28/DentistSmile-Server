@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Dokter;
+use App\Models\Kelurahan;
 use App\Models\Kecamatan;
+use App\Models\Sekolah;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
 use Auth;
@@ -235,11 +237,50 @@ class DokterController extends Controller
 
     }
     public function pemeriksaan_ukgs(){
-        return view('dokter.pemeriksaanData.ukgs');
+        //$kelurahan = Kelurahan::all();
+        $kelurahan = Kelurahan::pluck('nama','id');
+        $sekolah = Sekolah::pluck('nama','id');
+        //$sekolah   = Sekolah::all();
+        return view('dokter.pemeriksaanData.ukgs',[
+            'kelurahan' => $kelurahan, 'sekolah '=> $sekolah,
+        ]);
+    }
+    public function dropdown_sekolah_ukgs(Request $request){
+        //$sekolah   = Sekolah::all();
+        //$kel_sek  = Sekolah::where('id', $id)->get();
+        $kel_sek  = Sekolah::where('id_kelurahan', $request->get('id'))
+            ->pluck('nama', 'id');
+
+        return response()->json($kel_sek);
+    }
+    public function dropdown_kelas_ukgs(Request $request){
+        //$sekolah   = Sekolah::all();
+        //$kel_sek  = Sekolah::where('id', $id)->get();
+        $sek_kelas  = Kelas::where('id_kelas', $request->get('id'))
+            ->pluck('nama', 'id');
+        return response()->json($sek_kelas);
     }
 
     public function pemeriksaan_ukgm(){
+
+        $kelurahan = Kelurahan::all();
+        $sekolah   = Sekolah::all();
         return view('dokter.pemeriksaanData.ukgm');
+    }
+    
+    public function pemeriksaan_ukgs_fetch(Request $request){
+        
+        // $logdokter = Auth::user()->dokter;
+        // $dokter = $logdokter->find($id);
+        // $sekolah = Sekolah::where('');
+        $kelurahan = Kelurahan::all();
+        $id_kelurahan = $request -> id;
+        $sekolah = Sekolah :: where('id', $id)->get();
+        foreach ($sekolah as $sekolah){
+
+            echo "<option value='$sekolah->id'>$sekolah->type, $sekolah->nama</option>";
+
+        }
     }
     public function pemeriksaan_data_ukgs(){
         return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS');
