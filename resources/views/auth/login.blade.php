@@ -1,6 +1,9 @@
+
+
 <!DOCTYPE html>
 
 <html lang="en">
+     
 
 <head>
     <meta charset="UTF-8">
@@ -56,16 +59,25 @@
                 <div class="col-md-8 ps-md-0">
                   <div class="auth-form-wrapper px-4 py-5">
                     <img class="img-fluid mb-2" src="{{asset('assets/images/logo-senyumin.png')}}" alt="" srcset="">
+                    @if(Session::has('error'))
+                        <div class="alert alert-warning">{{Session::get('error')}}</div>
+                    @endif 
                     <h5 class="text-muted fw-normal mb-4">Selamat datang! silahkan masuk.</h5>
                     <form class="forms-sample" action="{{route('login')}}" method="POST"> 
                         @csrf
                       <div class="mb-3">
                         <label for="userEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email" id="userEmail" placeholder="email" required>
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" id="userEmail" placeholder="username">
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                       </div>
                       <div class="mb-3">
                         <label for="userPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" id="userPassword" autocomplete="current-password" placeholder="Password" required>
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="userPassword" autocomplete="current-password" placeholder="Password">
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                       </div>
                       <div class="form-check mb-2">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
