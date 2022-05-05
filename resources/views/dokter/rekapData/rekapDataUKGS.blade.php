@@ -9,27 +9,37 @@
 </nav>
 <div class="card text-white bg-primary">
     <div class="card-body">
-      <table class="table table-borderless table-sm">
-        <tr style="color: white; line-height: 14px;">
-            <td><h3><b>Almira Adzani</b></h3></td>
-        </tr>
-        <tr style="color: white; line-height: 5px; font-size:small">
-            <td>nama</td>
-            <td>jenis kelamin</td>
-            <td>nama sekolah</td>
-            <td>kelas</td>
-            <td>TTL</td>
-            <td>usia anak</td>
-        </tr>
-        <tr style="color: white; line-height: 10px; font-size:larger;">
-            <td>Almira Adzani</td>
-            <td>Laki-laki</td>
-            <td>SDN Pulo 07</td>
-            <td>5</td>
-            <td>Jakarta, 10-01-2010</td>
-            <td>12 Tahun</td>
-        </tr>
-      </table>
+        <div class="row align-items-center">
+            <div class="col-md-auto">
+                <i data-feather="arrow-left-circle"></i>
+            </div>
+            <div class="col">
+                <table class="table table-borderless table-sm">
+                    <tr style="color: white; line-height: 14px;">
+                        <td><h3><b>Almira Adzani</b></h3></td>
+                    </tr>
+                    <tr style="color: white; line-height: 5px; font-size:small">
+                        <td>nama</td>
+                        <td>jenis kelamin</td>
+                        <td>nama sekolah</td>
+                        <td>kelas</td>
+                        <td>TTL</td>
+                        <td>usia anak</td>
+                    </tr>
+                    <tr style="color: white; line-height: 10px; font-size:larger;">
+                        <td>Almira Adzani</td>
+                        <td>Laki-laki</td>
+                        <td>SDN Pulo 07</td>
+                        <td>5</td>
+                        <td>Jakarta, 10-01-2010</td>
+                        <td>12 Tahun</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-auto">
+                <i data-feather="arrow-right-circle"></i>
+            </div>
+        </div>
     </div>
 </div>
 <br>
@@ -44,7 +54,9 @@
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Line chart</h6>
-                <canvas id="chartjsLine"></canvas>
+                <div class="flot-chart-wrapper">
+                    <div class="flot-chart" id="flotLine"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -52,7 +64,9 @@
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Line chart</h6>
-                <canvas id="chartjsLine"></canvas>
+                <div class="flot-chart-wrapper">
+                    <div class="flot-chart" id="flotLine2"></div>
+                </div>
             </div>
         </div>
     </div>
