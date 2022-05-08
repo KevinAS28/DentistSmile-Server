@@ -35,11 +35,14 @@ License: For each use you must have a valid license purchased only from above li
     <link rel="stylesheet" href="{{asset('assets/swal/sweetalert.css')}}">
     <script src="{{asset('assets/swal/sweetalert.js')}}"></script>
     <!-- inject:css -->
+    
     <link rel="stylesheet" href="{{asset('assets/fonts/feather-font/css/iconfont.css')}}">
     <link rel="stylesheet" href="{{asset('assets/fonts/feather-font/css/iconfont.css')}}">
 	<link rel="stylesheet" href="{{asset('assets/vendors/flag-icon-css/css/flag-icon.min.css')}}">
     
     <link rel="stylesheet" href="{{asset('assets/vendors/prismjs/themes/prism.css')}}">
+
+  
     
     <!-- select 2 -->
     <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet" />
@@ -63,7 +66,7 @@ License: For each use you must have a valid license purchased only from above li
 
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" />
 
-
+    <script src="https://use.fontawesome.com/62b53805d2.js"></script>
 
 </head>
 
@@ -115,7 +118,7 @@ License: For each use you must have a valid license purchased only from above li
 
     <!-- inject:js -->
     
-    <script src="{{asset('assets/vendors/feather-icons/feather.min.js')}}"></script>
+	<script src="{{asset('assets/vendors/feather-icons/feather.min.js')}}"></script>
     <script src="{{asset('assets/js/template.js')}}"></script>
     <!-- endinject -->
 
@@ -131,17 +134,10 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{asset('assets/vendors/datatables.net/jquery.dataTables.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
 
     
-    <script>
-        $(function()){
-            $ajaxSetup({
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-            });
-        }
-    </script>
+
     <script>
         $(document).ready(function () {
             $('#dataTableExample').DataTable();

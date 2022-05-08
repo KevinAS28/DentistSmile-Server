@@ -100,7 +100,6 @@
 
 @endsection
 
-
 @push('after-script')
 
 <script type="text/javascript">

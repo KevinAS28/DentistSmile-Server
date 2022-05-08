@@ -20,6 +20,12 @@
                         <input type="password" class="form-control" id="password" name="password" autocomplete="off" value="{{$dokter->user->password}}"
                             placeholder="Password">
                     </div>
+                    <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">
+                          Show Password
+                        </label>
+                      </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">NIK</label>
                         <input type="text" class="form-control" id="nik" name="nik" autocomplete="off" value="{{$dokter->nik}}"
@@ -78,6 +84,17 @@
 @endsection
 
 @push('after-script')
+<script type="text/javascript"> 
+    $(document).ready(function(){		
+      $('#exampleCheck1').click(function(){
+          if($(this).is(':checked')){
+              $('#password').attr('type','text');
+          }else{
+              $('#password').attr('type','password');
+          }
+      });
+  });
+</script>
 {{-- <script type="text/javascript">
     $(document).ready(function () {
         /* save data */

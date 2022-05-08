@@ -16,7 +16,7 @@ class CreateKelasTable extends Migration
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_sekolah')->nullable();
-            $table->enum('nama', ['I', 'II', 'III', 'IV', 'V', 'VI'])->nullable();
+            $table->string('kelas')->nullable();
             $table->timestamps();
           
             $table->foreign('id_sekolah')->references('id')->on('sekolah')->onDelete('cascade');

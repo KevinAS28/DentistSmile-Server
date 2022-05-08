@@ -218,4 +218,5 @@ class PemeriksaanFisikController extends Controller
         $pemeriksaanGigi = PemeriksaanGigi::Where('id_anak',$anak)->get();
         return view('orangtua.pemeriksaan.riwayatgigi',compact('anak','pemeriksaanGigi'));
     }
+
 }
