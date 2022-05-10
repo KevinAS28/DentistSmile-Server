@@ -11,6 +11,7 @@ use App\Models\Sekolah;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -91,18 +92,19 @@ class DokterController extends Controller
             // 'no_str' => 'required',
            
         ], $messages);
+        DB::beginTransaction();
 
+
+        try{
         $user = New User();
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->role ="dokter";
-        if($user){
-            $user->save();
-        }
-        if($user){
+        $user->save();
+        
             $dokter = new Dokter();
             $dokter->id_users=$user->id;
-            $dokter->id_kecamatan = 1;
+            $dokter->id_kecamatan = $request->kecamatan;
             $dokter->nik = $request->nik;
             $dokter->nama = $request->nama;
             $dokter->jenis_kelamin = $request->jenis_kelamin;
@@ -110,11 +112,15 @@ class DokterController extends Controller
             $dokter->tanggal_lahir = $request->tanggal_lahir;
             $dokter->no_telp = $request->no_telp;
             $dokter->no_str= $request->no_str;
-            if($dokter){
-                $dokter->save();
-                return redirect()->route('dokter.index');
-            }
+            $dokter->save();
+                  
             
+            DB::commit();
+            return redirect()->route('dokter.index');
+        
+        }catch(\Exception $e){
+        DB::rollback();
+        return redirect()->route('dokter.create')->with('error','Gagal menambahkan data');
         }
     }
 
@@ -238,7 +244,9 @@ class DokterController extends Controller
     }
     public function pemeriksaan_ukgs(){
         //$kelurahan = Kelurahan::all();
-        $kelurahan = Kelurahan::pluck('nama','id');
+        $user = Auth::user();
+        $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
+        $kelurahan = Kelurahan::where('id_kecamatan', $dokter)->pluck('nama','id');
         $sekolah = Sekolah::pluck('nama','id');
         //$sekolah   = Sekolah::all();
         return view('dokter.pemeriksaanData.ukgs',[
@@ -315,5 +323,13 @@ class DokterController extends Controller
         $dokter = Dokter::find($id);
         $dokter ->delete();
         return response()->json(['data'=>'success delete data']);
+    }
+
+    public function listKelurahan(){
+        $user = Auth::user();
+        $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
+        $kelurahan = Kelurahan::where('id_kecamatan', $dokter)->get();
+        return view('dokter.pemeriksaanData.ukgs');
+        
     }
 }

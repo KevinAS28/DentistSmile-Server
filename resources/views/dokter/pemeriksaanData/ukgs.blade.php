@@ -27,7 +27,7 @@
                     <div class="row mb-3">
                         <label for="exampleInputUsername2" class="col-sm-2 col-form-label">Wilayah Kelurahan</label>
                         <div class="col-sm-5 ">
-                            <select name="kelurahan" id="kelurahan" class="js-example-basic-single form-select" data-width="100%"
+                            <select name="kelurahan" id="id_desa" class="js-example-basic-single form-select" data-width="100%"
                                 placeholder="Pilih wilayah">
                                 <option selected disabled>Pilih Wilayah</option>
                                 @foreach ($kelurahan as $id => $nama)
@@ -40,7 +40,7 @@
                     <div class="row mb-3">
                         <label for="exampleInputEmail2" class="col-sm-2 col-form-label">Sekolah</label>
                         <div class="col-sm-5 ">
-                            <select name="sekolah" id="sekolah" class="js-example-basic-single form-select " data-width="100%"
+                            <select name="sekolah" id="id_sekolah" class="js-example-basic-single form-select " data-width="100%"
                                 placeholder="Pilih wilayah">
                                 <option selected disabled>Pilih Sekolah</option>
                             </select>
@@ -50,7 +50,7 @@
                     <div class="row mb-3">
                         <label for="exampleInputMobile" class="col-sm-2 col-form-label">Kelas</label>
                         <div class="col-sm-5">
-                            <select name="kelas" id="kelas" class="js-example-basic-single form-select" data-width="100%"
+                            <select name="kelas" id="id_kelas" class="js-example-basic-single form-select" data-width="100%"
                                 placeholder="Pilih Kelas">
                                 <option selected disabled>Pilih Kelas</option>
                             </select>
@@ -158,58 +158,55 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 
-$(function(){
-    $.ajaxSetup({
-        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-    });
-    
-    $('#kelurahan').on('change', function() {
-        
-        $.ajax({
-            url: '{{ route('dokter.sekolahUKGS') }}',
-            method: 'POST',
-            data : {id: $(this).val()},
 
-            
-
-            success:function(response){
-                
-                $('#sekolah').empty();
-
-                $.each(response, function (id, name) {
-                    $('#sekolah').append(new Option(name, id))
-                })
+$(document).ready(function() {
+    $('#id_desa').change(function () {
+            let kelurahan = $("#id_desa").val()
+            console.log(kelurahan)
+            $("#id_sekolah").children().remove();
+            $("#id_sekolah").val('');
+            $("#id_sekolah").append('<option value="">---Pilih Sekolah---</option>');
+            $("#id_sekolah").prop('disabled', true)
+            $("#id_kelas").children().remove();
+            $("#id_kelas").val('');
+            if (kelurahan != '' && kelurahan != null) {
+                $.ajax({
+                    url: "{{url('')}}/list-sekolah/" + kelurahan,
+                    success: function (res) {
+                        $("#id_sekolah").prop('disabled', false)
+                        let tampilan_option = '';
+                        $.each(res, function (index, sekolah) {
+                            tampilan_option +=
+                                `<option value="${sekolah.id}">${sekolah.nama}</option>`
+                        })
+                        $("#id_sekolah").append(tampilan_option);
+                    },
+                });
             }
-            
-        })
-        
-    });
-});
+        });
 
-$(function(){
-    
-    $('#sekolah').on('change', function() {
-        alert(1);
-        
-        $.ajax({
-            url: '{{ route('dokter.kelasUKGS') }}',
-            method: 'POST',
-            data : {id: $(this).val()},
-
-            
-
-            success:function(response){
-                
-                $('#kelas').empty();
-
-                $.each(response, function (id, name) {
-                    $('#kelas').append(new Option(name, id))
-                })
+        $('#id_sekolah').change(function () {
+            let sekolah = $("#id_sekolah").val()
+            $("#id_kelas").children().remove();
+            $("#id_kelas").val('');
+            $("#id_kelas").append('<option value="">---Pilih Kelas---</option>');
+            $("#id_kelas").prop('disabled', true)
+            if (sekolah != '' && sekolah != null) {
+                $.ajax({
+                    url: "{{url('')}}/list-kelas/" + sekolah,
+                    success: function (res) {
+                        $("#id_kelas").prop('disabled', false)
+                        let tampilan_option = '';
+                        $.each(res, function (index, kelas) {
+                            tampilan_option +=
+                                `<option value="${kelas.id}">${kelas.kelas}</option>`
+                        })
+                        $("#id_kelas").append(tampilan_option);
+                    },
+                });
             }
-            
-        })
-        
-    });
+        });
+    
 });
 
 

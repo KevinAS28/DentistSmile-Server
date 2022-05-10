@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sekolah;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -20,6 +21,7 @@ class SekolahController extends Controller
             $btn = '<div class="btn-group btn-group-sm">';
             $btn .= '<button type="button" id="btn-edit" class="btn btn-info"><i class="lni lni-pencil"></i></button>';
             $btn .= '<button type="button" id="btn-delete" class="btn btn-danger"><i class="lni lni-trash"></i></button>';
+            $btn .= '<a href="'.route('viewKelas',$row->id).'" type="button"  class="btn btn-info"><i class="lni lni-pencil"></i></a>';
             $btn .= '</div>';
 
            return $btn;
@@ -64,14 +66,20 @@ class SekolahController extends Controller
         if($validator->fails()){
             return response()->json(['error' => $validator->errors()->all()]);
         }else{
-            $data= Sekolah::create([
-                
-                'id_kelurahan'=> request('kelurahan'),
-                'type'=> request('type'),
-                'nama'=> request('nama'),
-                'alamat' => request('alamat')
+            $data= new Sekolah();
+            $data->id_kelurahan= $request->kelurahan;
+            $data->type= $request->type;
+            $data->nama= $request->nama;
+            $data->alamat= $request->alamat;
 
-            ]);
+            $data->save();
+
+            foreach ($request->kelas as $key => $value){
+                $kelas = new Kelas();
+                $kelas->id_sekolah = $data->id;
+                $kelas->kelas = $request->kelas[$key];
+                $kelas->save();
+                }
             return response()->json(['success'=>'Data added successfully','data'=>$data]);
         }
     }
@@ -143,10 +151,27 @@ class SekolahController extends Controller
         $sekolah = Sekolah::where('type','sekolah')->where('id_kelurahan', $id_kelurahan)->get();
         return response()->json($sekolah);
     }
+    public function listKelas($id_sekolah)
+    {
+        $kelas = Kelas::where('id_sekolah', $id_sekolah)->get();
+        return response()->json($kelas);
+    }
 
     public function listPosyandu($id_kelurahan)
     {
         $posyandu = Sekolah::where('type','posyandu')->where('id_kelurahan', $id_kelurahan)->get();
         return response()->json($posyandu);
+    }
+
+    public function viewKelas($id){
+        $sekolah= Sekolah::find($id);
+        return view('admin.sekolah.kelas', compact('sekolah'));
+    }
+    public function dataKelas($id){
+        $sekolah= Sekolah::find($id);
+        $kelas = Kelas::where('id_sekolah', $id)->get();
+        return datatables()->of($kelas)
+        ->addIndexColumn()
+        ->make(true);
     }
 }

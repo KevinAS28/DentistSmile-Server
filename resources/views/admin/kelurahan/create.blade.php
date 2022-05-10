@@ -14,7 +14,7 @@
                     <option class="mb-2" value=" ">---Pilih Kecamatan---</option>
                     @foreach(\App\Models\Kecamatan::get() as $value => $key)
                     <option class="mb-2" value="{{$key->id}}">{{$key->nama}}</option>
-                @endforeach
+                    @endforeach
                 </select>
             </div>
                 <div class="form-group">

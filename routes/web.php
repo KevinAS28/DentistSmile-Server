@@ -36,6 +36,10 @@ Route::get('/list-sekolah/{id_kelurahan}', [App\Http\Controllers\SekolahControll
     ->name('list-sekolah');
     Route::get('/list-posyandu/{id_kelurahan}', [App\Http\Controllers\SekolahController::class, 'listPosyandu'])
     ->name('list-posyandu');
+    Route::get('/list-kelas/{id_sekolah}', [App\Http\Controllers\SekolahController::class, 'listKelas'])
+    ->name('list-sekolah');
+    Route::get('/list-kelurahandokter', [App\Http\Controllers\DokterController::class, 'listKelurahan'])
+    ->name('list-kelurahandokter');
 // Route::post('/dokter',[DokterController::class,'store']);
 Route::get('/home',function(){
     return view('home');
@@ -51,6 +55,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('sekolah', SekolahController::class)->except('destroy');
     Route::get('/dashboard',function(){return view('admin.dashboard.dashboard');
     });
+    Route::get('/kelas/{id}',[App\Http\Controllers\SekolahController::class,'viewKelas'])->name('viewKelas');
   });
 });
 Route::post('/daftarUser', [App\Http\Controllers\Auth\RegisterController::class, 'storeOrangtua'])
@@ -80,6 +85,7 @@ Route::group(['prefix' => 'admin/table'], function () {
     Route::get('/data-pemeriksaan-fisik',[PemeriksaanFisikController::class,'riwayatfisik'])->name('riwayat-fisik');
     Route::get('/data-pemeriksaan-mata',[PemeriksaanFisikController::class,'riwayatmata'])->name('riwayat-mata');
     Route::get('/data-pemeriksaan-telinga',[PemeriksaanFisikController::class,'riwayattelinga'])->name('riwayat-telinga');
+    Route::get('/data-kelas/{id}',[SekolahController::class, 'dataKelas'])->name('kelas.table');
     
     });
 Route::group(['prefix' => 'orangtua/table'], function () {

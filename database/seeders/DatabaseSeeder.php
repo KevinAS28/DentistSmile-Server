@@ -76,10 +76,7 @@ class DatabaseSeeder extends Seeder
             
         ]);
 
-        $kelas = Kelas::create([
-            'id_sekolah'     => '1',
-            'nama' => 'I', 
-        ]);
+
 
 
 

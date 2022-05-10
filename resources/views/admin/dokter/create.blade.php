@@ -1,7 +1,11 @@
 @extends('layout.master')
 
 @section('content')
-
+@if(session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session()->get('error') }}
+    </div>
+@endif
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
@@ -14,10 +18,18 @@
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" autocomplete="off"
-                            placeholder="Password">
-                    </div>
+                        <label for="userPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="userPassword" autocomplete="current-password" placeholder="Password">
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                      </div>
+                    <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">
+                          Show Password
+                        </label>
+                      </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">NIK</label>
                         <input type="text" class="form-control" id="nik" name="nik" autocomplete="off"
@@ -29,21 +41,32 @@
                         <input type="text" class="form-control" id="nama" name="nama" autocomplete="off"
                             placeholder="Nama">
                     </div>
-                    {{-- <div class="mb-3">
+                    <div class="mb-3">
                         <label class="form-label">Wilayah</label>
-                        <select class="js-example-basic-single form-select" data-width="100%">
-                            <option value="TX">Texas</option>
-                            <option value="NY">New York</option>
-                            <option value="FL">Florida</option>
-                            <option value="KN">Kansas</option>
-                            <option value="HW">Hawaii</option>
+                        <select class="js-example-basic-single form-select" name="kecamatan" data-width="100%">
+                            <option selected disabled class="mb-2" value=" ">Pilih Kecamatan</option>
+                            @foreach(\App\Models\Kecamatan::get() as $value => $key)
+                            <option class="mb-2" value="{{$key->id}}">{{$key->nama}}</option>
+                            @endforeach
                         </select>
-                    </div> --}}
+                    </div>
                     
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Jenis Kelamin</label>
-                        <input type="text" class="form-control" id="jenis_kelamin" name="jenis_kelamin" autocomplete="off"
-                            placeholder="Nama">
+                        <label class="col-md-12 mb-2"> Jenis Kelamin </label>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" value="laki-laki" name="jenis_kelamin"
+                                id="radioInline">
+                            <label class="form-check-label" for="radioInline">
+                                Laki-Laki
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" value="perempuan" class="form-check-input" name="jenis_kelamin"
+                                id="radioInline1">
+                            <label class="form-check-label" for="radioInline1">
+                                Perempuan
+                            </label>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Tempat Lahir</label>
@@ -76,34 +99,18 @@
 @endsection
 
 @push('after-script')
-{{-- <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
-        /* save data */
-        $('#dokter-store').on('submit', function (e) {
-            e.preventDefault();
-            $.ajax({
-                'type': 'POST',
-                'url': "{{ route('dokter.store') }}",
-                'data': new FormData(this),
-                'processData': false,
-                'contentType': false,
-                'dataType': 'JSON',
-                'success': function (data) {
-                    if (data.success) {
-                        window.location.href = "/dokter"
-                    } else {
-                        for (var count = 0; count < data.errors.length; count++) {
-                            swal(data.errors[count], {
-                                icon: "error",
-                                timer: false,
-                            });
-                        }
-                    }
-                },
+        $('#exampleCheck1').click(function(){
+			if($(this).is(':checked')){
+				$('#userPassword').attr('type','text');
+			}else{
+				$('#userPassword').attr('type','password');
+			}
+		});
+	});
+      
+   
 
-            });
-        });
-    });
-
-</script> --}}
+</script>
 @endpush

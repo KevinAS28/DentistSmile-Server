@@ -182,6 +182,9 @@ class OrangtuaController extends Controller
         ->addColumn('sekolah',function($row){
             return $row->sekolah->nama;
         })
+        ->addColumn('kelas',function($row){
+            return $row->kelas->kelas;
+        })
         ->rawColumns(['action'])->addIndexColumn()->make(true);
     }
 
@@ -210,7 +213,7 @@ class OrangtuaController extends Controller
         $anak->tempat_lahir = $request->tempat_lahir;
         $anak->tanggal_lahir = $request->tanggal_lahir;
         $anak->id_sekolah = $request->sekolah;
-        $anak->kelas = $request->kelas;
+        $anak->id_kelas = $request->kelas;
 
         $anak->save();
         return redirect()->route('viewanak');

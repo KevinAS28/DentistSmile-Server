@@ -3,6 +3,7 @@
 /public/storage
 /public/dokter/avatar
 /public/dokter/foto
+/public/dokter/header
 /storage/*.key
 /vendor
 .env

@@ -81,10 +81,11 @@
 
                             </select>
                         </div>
-                        <div id="kelas" class="mb-3 ">
+                        <div  class="mb-3 ">
                             <label for="exampleInputPassword1" class="form-label">Kelas</label>
-                            <input type="text" class="form-control" name="kelas" autocomplete="off"
-                                placeholder="masukkan kelas">
+                            <select class="form-select" name="kelas" data-width="100%" id="id_kelas">
+
+                            </select>
                         </div>
                     </div>
 
@@ -188,6 +189,31 @@
                 });
             }
         });
+
+        $('#id_sekolah').change(function () {
+            let sekolah = $("#id_sekolah").val()
+            $("#id_kelas").children().remove();
+            $("#id_kelas").val('');
+            $("#id_kelas").append('<option value="">---Pilih Kelas---</option>');
+            $("#id_kelas").prop('disabled', true)
+            if (sekolah != '' && sekolah != null) {
+                $.ajax({
+                    url: "{{url('')}}/list-kelas/" + sekolah,
+                    success: function (res) {
+                        $("#id_kelas").prop('disabled', false)
+                        let tampilan_option = '';
+                        $.each(res, function (index, kelas) {
+                            tampilan_option +=
+                                `<option value="${kelas.id}">${kelas.kelas}</option>`
+                        })
+                        $("#id_kelas").append(tampilan_option);
+                    },
+                });
+            }
+        });
+
+        
+
 
         $('#id_kecamatan_posyandu').change(function () {
             let kecamatan = $("#id_kecamatan_posyandu").val()

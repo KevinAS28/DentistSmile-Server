@@ -13,21 +13,16 @@ class Anak extends Model
 
     protected $table = 'anak';
     protected $guarded = ['created_at', 'updated_at'];
-    protected $fillable=[
-        'id_orangtua',
-        'nama',
-        'tanggal_lahir',
-        'id_sekolah',
-        'kelas',
-        'bb',
-        'tb',
-    ];
+
 
     public function orangtua(){
         return $this->belongsTo('App\Models\Orangtua', 'id_orangtua');
     }
     public function sekolah(){
         return $this->belongsTo('App\Models\Sekolah', 'id_sekolah');
+    }
+    public function kelas(){
+        return $this->belongsTo('App\Models\Kelas', 'id_kelas');
     }
 }
     

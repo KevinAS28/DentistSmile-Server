@@ -17,16 +17,17 @@ class CreateAnakTable extends Migration
             $table->id();
             $table->unsignedBigInteger('id_orangtua')->nullable();
             $table->unsignedBigInteger('id_sekolah')->nullable();
+            $table->unsignedBigInteger('id_kelas')->nullable();
             $table->string('nama')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
-            $table->string('kelas')->nullable();
             $table->string('jenis_kelamin')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('id_orangtua')->references('id')->on('orangtua')->onDelete('cascade');
             $table->foreign('id_sekolah')->references('id')->on('sekolah')->onDelete('cascade');
+            $table->foreign('id_kelas')->references('id')->on('kelas');
         });
     }
 
