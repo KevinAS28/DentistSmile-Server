@@ -12,6 +12,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
 use Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\PemeriksaanFisik;
 
 
 
@@ -332,4 +333,41 @@ class DokterController extends Controller
         return view('dokter.pemeriksaanData.ukgs');
         
     }
+
+    public function listAnak(Request $request){
+        $pemeriksaanfisik = PemeriksaanFisik::with('anak')->whereHas('anak',function($query) use($request) {$query->where('id_kelas',$request->id_kelas)->orderBy('id', 'DESC');})->latest();
+        
+        return datatables()->of($pemeriksaanfisik)
+        ->addColumn('action', function($row){
+            $btn = '';
+            $btn .= '<a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data"><i class="mdi mdi-book-open-page-variant"></i></a> ';
+            $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGS').'">Periksa  <i class="mdi mdi-tooth"></i></a>';
+            
+            
+            return $btn;
+        })
+        
+        ->addColumn('tanggal', function($pemeriksaanfisik){
+            return $tanggal = date('d-m-Y', strtotime($pemeriksaanfisik->waktu_pemeriksaan));
+        })
+        ->addColumn('waktu', function($pemeriksaanfisik){
+            return $waktu = date('H:i', strtotime($pemeriksaanfisik->waktu_pemeriksaan));
+        })
+        ->addColumn('nama', function($pemeriksaanfisik){
+            return $pemeriksaanfisik->anak->nama;
+        })
+        ->addColumn('kelas', function($pemeriksaanfisik){
+            return $pemeriksaanfisik->anak->kelas->kelas;
+        })
+        ->addColumn('sekolah', function($pemeriksaanfisik){
+            return $pemeriksaanfisik->anak->kelas->sekolah->nama;
+        })
+        ->addColumn('jenis_kelamin', function($pemeriksaanfisik){
+            return $pemeriksaanfisik->anak->jenis_kelamin;
+        })
+        ->addIndexColumn()
+       ->make(true);
+        
+    }
+
 }

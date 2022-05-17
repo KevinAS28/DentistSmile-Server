@@ -27,7 +27,7 @@ class CreateAnakTable extends Migration
 
             $table->foreign('id_orangtua')->references('id')->on('orangtua')->onDelete('cascade');
             $table->foreign('id_sekolah')->references('id')->on('sekolah')->onDelete('cascade');
-            $table->foreign('id_kelas')->references('id')->on('kelas');
+            
         });
     }
 

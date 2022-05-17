@@ -40,6 +40,8 @@ Route::get('/list-sekolah/{id_kelurahan}', [App\Http\Controllers\SekolahControll
     ->name('list-sekolah');
     Route::get('/list-kelurahandokter', [App\Http\Controllers\DokterController::class, 'listKelurahan'])
     ->name('list-kelurahandokter');
+    Route::get('list-anakdokter', [App\Http\Controllers\DokterController::class, 'listAnak'])
+    ->name('list-anakdokter');
 // Route::post('/dokter',[DokterController::class,'store']);
 Route::get('/home',function(){
     return view('home');

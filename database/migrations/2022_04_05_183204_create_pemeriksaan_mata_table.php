@@ -22,6 +22,7 @@ class CreatePemeriksaanMataTable extends Migration
             $table->string('soal4')->nullable();
             $table->string('soal5')->nullable();
             $table->string('soal6')->nullable();
+            $table->datetime('waktu_pemeriksaan')->nullable();
 
             $table->timestamps();
             $table->foreign('id_anak')->references('id')->on('anak')->onDelete('cascade');

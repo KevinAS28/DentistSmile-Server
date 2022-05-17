@@ -37,44 +37,44 @@ class DatabaseSeeder extends Seeder
             'role'      => 'orangtua',
             
         ]);
-        $kecamatan = Kecamatan::create([
-            'nama'     => 'Tambun',
+        // $kecamatan = Kecamatan::create([
+        //     'nama'     => 'Tambun',
             
-        ]);
-        $kelurahan = Kelurahan::create([
-            'nama'     => 'Mekarsari',
-            'id_kecamatan' => 1,
+        // ]);
+        // $kelurahan = Kelurahan::create([
+        //     'nama'     => 'Mekarsari',
+        //     'id_kecamatan' => 1,
             
-        ]);
-        $dokter = Dokter::create([
-            'id_users'  => 2,
-            'nik'       => '123456',
-            'nama' => 'Indira',
-            'id_kecamatan' => 1,
-            'jenis_kelamin' => 'Perempuan',
-            'tempat_lahir'  => 'Bekasi',
-            'tanggal_lahir' => '2000-01-01',
-            'no_telp'   => '088210968646',
-            'no_str'    => '654321',
+        // ]);
+        // $dokter = Dokter::create([
+        //     'id_users'  => 2,
+        //     'nik'       => '123456',
+        //     'nama' => 'Indira',
+        //     'id_kecamatan' => 1,
+        //     'jenis_kelamin' => 'Perempuan',
+        //     'tempat_lahir'  => 'Bekasi',
+        //     'tanggal_lahir' => '2000-01-01',
+        //     'no_telp'   => '088210968646',
+        //     'no_str'    => '654321',
             
-        ]);
-        $sekolah = Sekolah::create([
-            'id_kelurahan'     => '1',
-            'type' => 'Sekolah',
-            'nama' => 'SDN Mekarsari 04',
-            'alamat' => 'Jalan Tambun Raya 04',
+        // ]);
+        // $sekolah = Sekolah::create([
+        //     'id_kelurahan'     => '1',
+        //     'type' => 'Sekolah',
+        //     'nama' => 'SDN Mekarsari 04',
+        //     'alamat' => 'Jalan Tambun Raya 04',
 
             
-        ]);
+        // ]);
 
-        $sekolah = Sekolah::create([
-            'id_kelurahan'     => '1',
-            'type' => 'Posyandu',
-            'nama' => 'Puskesmas Jatibening',
-            'alamat' => 'Jalan Jatibening 90',
+        // $sekolah = Sekolah::create([
+        //     'id_kelurahan'     => '1',
+        //     'type' => 'Posyandu',
+        //     'nama' => 'Puskesmas Jatibening',
+        //     'alamat' => 'Jalan Jatibening 90',
 
             
-        ]);
+        // ]);
 
 
 

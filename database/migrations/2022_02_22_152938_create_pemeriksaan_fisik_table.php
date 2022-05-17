@@ -21,6 +21,7 @@ class CreatePemeriksaanFisikTable extends Migration
             $table->float('imt',10,1)->nullable();
             $table->integer('sistole')->nullable();
             $table->integer('diastole')->nullable();
+            $table->datetime('waktu_pemeriksaan')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

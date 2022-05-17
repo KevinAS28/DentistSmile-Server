@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Orangtua;
 use App\Models\Anak;
 use Auth;
+use Carbon\Carbon;
 
 class PemeriksaanFisikController extends Controller
 {
@@ -49,7 +50,7 @@ class PemeriksaanFisikController extends Controller
         $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
         $anak = Anak::Where('id_orangtua',$orangtua)->get();
 
-        
+        $waktu_pemeriksaan = Carbon::now();
 
         $pFisik = new PemeriksaanFisik();
         $pFisik->id_anak =  $request->anak;
@@ -60,6 +61,7 @@ class PemeriksaanFisikController extends Controller
         }
         $pFisik->sistole = $request->sistole;
         $pFisik->diastole = $request->diastole;
+        $pFisik->waktu_pemeriksaan = $waktu_pemeriksaan;
         $pFisik->save();
         $pMata = new PemeriksaanMata();
         $pMata->id_anak =  $request->anak;
@@ -69,6 +71,7 @@ class PemeriksaanFisikController extends Controller
         $pMata->soal4=$request->soal4;
         $pMata->soal5=$request->soal5;
         $pMata->soal6=$request->soal6;
+        $pMata->waktu_pemeriksaan=$waktu_pemeriksaan;
         $pMata->save();
         $pTelinga = new PemeriksaanTelinga();
         $pTelinga->id_anak =  $request->anak;
@@ -79,6 +82,7 @@ class PemeriksaanFisikController extends Controller
         $pTelinga->soal5=$request->soal5;
         $pTelinga->soal6=$request->soal6;
         $pTelinga->soal7=$request->soal7;
+        $pTelinga->waktu_pemeriksaan=$waktu_pemeriksaan;
         $pTelinga->save();
 
 
@@ -151,9 +155,9 @@ class PemeriksaanFisikController extends Controller
         ->addColumn('imt', function($pemeriksaanFisik){
             if($pemeriksaanFisik->imt < 18.5){
                 $data= 'Kurus';
-            }else if($pemeriksaanFisik->imt >= 18.5 && $pemeriksaanFisik->imt <= 24.9){
+            }else if($pemeriksaanFisik->imt >= 18.5 && $pemeriksaanFisik->imt <= 25.0){
                 $data = 'Ideal';
-            }else if($pemeriksaanFisik->imt >= 25 && $pemeriksaanFisik->imt <= 29.9){
+            }else if($pemeriksaanFisik->imt >= 25.1 && $pemeriksaanFisik->imt <= 29.9){
                 $data = 'Gemuk';
             }else{
                 $data = 'Obesitas';
@@ -161,10 +165,10 @@ class PemeriksaanFisikController extends Controller
             return $data;
         })
         ->addColumn('tanggal', function($pemeriksaanFisik){
-            return $tanggal = date('d-m-Y', strtotime($pemeriksaanFisik->created_at));
+            return $tanggal = date('d-m-Y', strtotime($pemeriksaanFisik->waktu_pemeriksaan));
         })
         ->addColumn('jam', function($pemeriksaanFisik){
-            return $jam = date('H:i', strtotime($pemeriksaanFisik->created_at));
+            return $jam = date('H:i', strtotime($pemeriksaanFisik->waktu_pemeriksaan));
         })
        ->addIndexColumn()
        ->make(true);

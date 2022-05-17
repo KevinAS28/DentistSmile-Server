@@ -48,8 +48,13 @@
                 <div class="row w-100 mx-0 auth-page">
                     <div class="col-md-8 col-xl-6 mx-auto">
                         <div class="card">
+                            
                             <div class="row">
-
+                                @if(session()->has('error'))
+                                <div class="alert alert-danger">
+                                    {{ session()->get('error') }}
+                                </div>
+                            @endif
                                 <div class="col-md-12 ps-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
                                         <a href="#" class="noble-ui-logo d-block mb-2">Noble<span>UI</span></a>
@@ -60,7 +65,11 @@
                                                 <label for="userEmail" class="form-label">Email address</label>
                                                 <input type="email" class="form-control" id="userEmail" name="email"
                                                     placeholder="Email" required>
+                                                    @error('email')
+                                                    <div  class="badge bg-danger mt-2 ">{{ $message }}</div>
+                                                  @enderror
                                             </div>
+
                                             <div class="mb-3">
                                                 <label for="userPassword" class="form-label">Password</label>
                                                 <input type="password" class="form-control" id="userPassword"
@@ -76,8 +85,8 @@
                                             <div class="mb-3">
                                                 <label for="exampleInputUsername1" class="form-label">Name</label>
                                                 <input type="text" class="form-control" 
-                                                    autocomplete="Name" placeholder="masukkan nama" name="nama" id="name"
-                                                    required>
+                                                    autocomplete="Name" placeholder="masukkan nama" name="nama" id="name" value="{{old('nama')}}" required>
+                                                    
                                             </div>
                                             <div class="row col-md-10">
                                                 <div class="col-md-4">

@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Orangtua;
 use App\Models\Anak;
 use Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 class OrangtuaController extends Controller
 {
     /**
@@ -140,14 +142,39 @@ class OrangtuaController extends Controller
     }
     public function registerUser(Request $request)
     {
+        $messages = [
+           
+            'email.required' => 'Email wajib diisi.',
+            'email.unique' => 'Email sudah terdaftar.',
+
+        ];
+        $validator = $request->validate([
+            // 'NIK' => ['required', 'min:16',
+            //             Rule::unique('dokter', 'NIK')],
+            // 'nama' => 'required|min:3',
+            'email' => ['required', 'email',
+                        Rule::unique('users', 'email')],
+            // 'password' => 'required',
+            // 'no_telp' => 'required',
+            // 'id_kecamatan' => 'required',
+            // 'jenis_kelamin' => 'required',
+            // 'tempat_lahir' => 'required',
+            // 'tanggal_lahir' => 'required',
+            // 'no_str' => 'required',
+           
+        ], $messages);
+        DB::beginTransaction();
+        try{
+
+        
         $user = New User();
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->role ="orangtua";
-        if($user){
-            $user->save();
-        }
-        if($user){
+       
+        $user->save();
+       
+        
             $orangtua = new Orangtua();
             $orangtua->id_users=$user->id;
             $orangtua->nama = $request->nama;
@@ -157,12 +184,15 @@ class OrangtuaController extends Controller
             $orangtua->tanggal_lahir = $request->tanggal_lahir;
             $orangtua->alamat = $request->alamat;
             $orangtua->pendidikan= $request->pendidikan;
-            if($orangtua){
-                $orangtua->save();
-                
-            }
+            
+            $orangtua->save();
+            DB::commit();
+           
             Auth::loginUsingId($user->id);
             return redirect('/');
+        }catch(Exception $e){
+            DB::rollback();
+            return redirect('/register')->with('error','Gagal menambahkan data');
         }
     }
 

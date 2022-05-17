@@ -68,23 +68,26 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <span class="h9 text-facebook">Berikut merupakan tabel pasien gigi di Pulo</span>
+                <span  class="h9 text-facebook ket-data">Berikut merupakan tabel pasien gigi di <span id="text-wilayah"></span>  </span>
                 <div class="table-responsive mt-2">
-                    <table id="dataTableExample" class="table">
+                    <table id="table-ukgs" class="table" style="width:100%">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>TANGGAL SKRINING</th>
-                                <th>WAKTU</th>
-                                <th>NAMA</th>
+                             
+                                <th hidden>id</th>
+                                <th>No</th>
+                                <th>Tanggal Skrinning</th>
+                                <th>Waktu Skrinning</th>
+                                <th>Nama </th>
                                 <th>JENIS KELAMIN</th>
-                                <th>NAMA SEKOLAH</th>
-                                <th>KELAS</th>
-                                <th>AKSI</th>
+                                <th>Kelas</th>
+                                <th>Sekolah</th>
+                                <th>Action</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            {{-- <tr>
                                 <td>1</td>
                                 <td>07/02/2020</td>
                                 <td>14:00</td>
@@ -143,7 +146,7 @@
                                 <td>SDN Pulo 07</td>
                                 <td>5</td>
                                 <td><a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data"><i class="mdi mdi-book-open-page-variant"></i></a> <a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="{{route('dokter.pemeriksaanDataUKGS')}}">Periksa  <i class="mdi mdi-tooth"></i></a></td>
-                            </tr>   
+                            </tr>    --}}
                         </tbody>
                     </table>
                 </div>
@@ -154,21 +157,46 @@
 </div>
 @endsection
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+@push('after-script')
+
 <script type="text/javascript">
 
 
 $(document).ready(function() {
+
+    if ($('#id_kelas').val() == 'null') {
+            $('#table-ukgs').DataTable({
+                "oLanguage": {
+                    "sEmptyTable": "Silahkan pilih sekolah dan kelas terlebih dahulu",
+                },
+            }).clear();
+
+        } else {
+            $('#table-ukgs').DataTable({
+                "oLanguage": {
+                    "sEmptyTable": "Silahkan pilih sekolah dan kelas terlebih dahulu",
+                },
+            }).clear();
+
+
+        }
+        $(".ket-data").hide()
     $('#id_desa').change(function () {
             let kelurahan = $("#id_desa").val()
-            console.log(kelurahan)
+            let namadesa = $('#id_desa option:selected').text()
+            
             $("#id_sekolah").children().remove();
             $("#id_sekolah").val('');
             $("#id_sekolah").append('<option value="">---Pilih Sekolah---</option>');
             $("#id_sekolah").prop('disabled', true)
             $("#id_kelas").children().remove();
             $("#id_kelas").val('');
+            $("#id_kelas").append('<option disable value="">---Pilih Kelas---</option>');
+            $("#id_kelas").prop('disabled', true)
+            $("#text-wilayah").empty()
+            $("#text-wilayah").append(namadesa)
+            $(".ket-data").show()
+            
             if (kelurahan != '' && kelurahan != null) {
                 $.ajax({
                     url: "{{url('')}}/list-sekolah/" + kelurahan,
@@ -206,15 +234,116 @@ $(document).ready(function() {
                 });
             }
         });
+
+            var tableData;
+            function load_data(id_kelas = '') {
+            tableData = $('#table-ukgs').DataTable({
+                "oLanguage": {
+                    "sEmptyTable": "Silahkan pilih sekolah dan kelas terlebih dahulu",
+                    "zeroRecords": "Data tidak ditemukan",
+                },
+                processing: true,
+                serverSide: true,
+
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Cari",
+                    processing: `<div class="spinner-border text-primary" role="status">
+                             <span class="visually-hidden">Loading...</span>
+                            </div>`
+                },
+                "searching": true,
+                "bPaginate": true,
+                serverSide: true,
+                stateSave: true,
+                ajax: {
+                    url: "{{ url('list-anakdokter') }}",
+                    type: "GET",
+                    data: {
+                        id_kelas: id_kelas,
+                        
+                    }
+
+                },
+                columns: [{
+                        data: 'id',
+                        name: 'id',
+                        visible: false
+                    },
+                    {
+                        data:'DT_RowIndex',
+                        name:'DT_RowIndex',
+                        visible: true,
+                    },
+ 
+                    {
+                        data: 'tanggal',
+                        name: 'tanggal',
+                        visible: true
+                    },
+                    {
+                        data: 'waktu',
+                        name: 'waktu',
+                        visible: true
+                    },
+                    {
+                        data: 'nama',
+                        name: 'nama',
+                        visible: true
+                    },
+                    {
+                        data: 'jenis_kelamin',
+                        name: 'jenis_kelamin',
+                        visible: true
+                    },
+                    {
+                        data: 'kelas',
+                        name:'kelas',
+                        visible: true
+                    },
+                    {
+                        data: 'sekolah',
+                        name:'sekolah',
+                        visible: true
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        visible: true
+                    },
+
+
+
+
+                ],
+
+            });
+        }
+        $('#id_kelas').change(function () {
+            var id_kelas = $(this).val();
+           
+
+            if (id_kelas) {
+                $('#table-ukgs').DataTable().clear().destroy();
+                
+
+                load_data(id_kelas);
+            } else {
+                $('#table-ukgs').DataTable().clear().destroy();
+
+
+            }
+        });
+
+        
+        
+
     
 });
-
-
-
-
 
 
 
 </script>
 
 
+@endpush

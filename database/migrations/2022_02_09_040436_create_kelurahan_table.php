@@ -20,7 +20,7 @@ class CreateKelurahanTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('id_kecamatan')->references('id')->on('kecamatan')->onDelete('cascade');
+            
         });
     }
 

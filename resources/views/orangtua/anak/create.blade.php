@@ -77,7 +77,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Sekolah</label>
-                            <select class="form-select" name="sekolah" data-width="100%" id="id_sekolah">
+                            <select class="form-select"  data-width="100%" id="id_sekolah">
 
                             </select>
                         </div>
@@ -109,7 +109,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Posyandu</label>
-                            <select class="form-select" name="sekolah" data-width="100%" id="id_posyandu">
+                            <select class="form-select"  data-width="100%" id="id_posyandu">
 
                             </select>
                         </div>
@@ -129,16 +129,20 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#data-sekolah').hide();
+        $('#id_posyandu').attr('name', 'sekolah');
         $('#chk').on('change', function () {
             if ($(this).is(':checked')) {
                 $('#data-sekolah').show();
                 $('#data-posyandu').hide();
-
+                $('#id_sekolah').attr('name', 'sekolah');
                 $('#labelchk').text('Sudah Sekolah');
+                $('#id_posyandu').attr('name', ' ');
 
             } else {
+                $('#id_sekolah').attr('name', ' ');
                 $('#data-sekolah').hide();
                 $('#data-posyandu').show();
+                $('#id_posyandu').attr('name', 'sekolah');
                 $('#labelchk').text('Belum Sekolah');
             }
         });

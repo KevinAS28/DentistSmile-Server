@@ -23,6 +23,7 @@ class CreatePemeriksaanGigiTable extends Migration
             $table->string('gambar5')->nullable();
             $table->string('soal1')->nullable();
             $table->string('soal2')->nullable();
+            $table->datetime('waktu_pemeriksaan')->nullable();
             $table->timestamps();
 
             $table->foreign('id_anak')->references('id')->on('anak')->onDelete('cascade');

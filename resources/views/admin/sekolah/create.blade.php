@@ -171,9 +171,9 @@
         $('#tipe').change(function () {
             let tipe = $("#tipe").val();
             if (tipe == 'sekolah') {
-                $('.form-kelas').show();
+                $('.form-kelas').slideDown();
             } else {
-                $('.form-kelas').hide();
+                $('.form-kelas').slideUp();
             }
         });
 

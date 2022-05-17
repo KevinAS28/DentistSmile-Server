@@ -77,21 +77,18 @@
             <div class="card-body">
                 <span class="h9 text-facebook">Berikut merupakan tabel pasien gigi di Pulo</span>
                 <div class="table-responsive mt-2">
-                    <table id="dataTableExample" class="table">
+                    <table id="table-ukgs" class="table">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>TANGGAL SKRINING</th>
-                                <th>WAKTU</th>
                                 <th>NAMA</th>
                                 <th>JENIS KELAMIN</th>
-                                <th>NAMA SEKOLAH</th>
-                                <th>KELAS</th>
                                 <th>AKSI</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            {{-- <tr>
                                 <td>1</td>
                                 <td>07/02/2020</td>
                                 <td>14:00</td>
@@ -150,7 +147,7 @@
                                 <td>SDN Pulo 07</td>
                                 <td>5</td>
                                 <td><a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data"><i class="mdi mdi-book-open-page-variant"></i></a> <a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="{{route('dokter.pemeriksaanDataUKGS')}}">Periksa  <i class="mdi mdi-tooth"></i></a></td>
-                            </tr>   
+                            </tr>    --}}
                         </tbody>
                     </table>
                 </div>
@@ -161,3 +158,91 @@
 </div>
 
 @endsection
+
+@push('after-script')
+
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+    var tableData;
+    function load_data(anak = '') {
+            tableData = $('#table-ukgs').DataTable({
+                "oLanguage": {
+                    "sEmptyTable": "Silakan pilih anak terlebih dahulu",
+                    "zeroRecords": "Data tidak ditemukan",
+                },
+                processing: true,
+                serverSide: true,
+
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Cari",
+                    processing: `<div class="spinner-border text-primary" role="status">
+                             <span class="visually-hidden">Loading...</span>
+                            </div>`
+                },
+                "searching": true,
+                "bPaginate": true,
+                serverSide: true,
+                stateSave: true,
+                ajax: {
+                    url: "{{ url('list-anakdokter') }}",
+                    type: "GET",
+                    data: {
+                        anak: anak
+                    }
+                },
+                columns: [{
+                        data: 'id',
+                        name: 'id',
+                        visible: false
+                    },
+                    {
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        visible: true
+                    },
+
+                    {
+                        data: 'tanggal',
+                        name: 'tanggal',
+                        visible: true
+                    },
+                  
+                    {
+                        data: 'nama',
+                        name: 'nama',
+                        visible: true
+                    },
+                    {
+                        data: 'jenis_kelamin',
+                        name: 'jenis_kelamin',
+                        visible: true
+                    },
+
+
+
+
+                ],
+
+            });
+        }
+        $('#id_kelas').change(function () {
+            var anak = $(this).val();
+
+            if (anak) {
+                $('#table-ukgs').DataTable().clear().destroy();
+
+                load_data(anak);
+            } else {
+                $('#table-ukgs').DataTable().clear().destroy();
+               
+
+            }
+        });
+});
+
+</script>
+@endpush
