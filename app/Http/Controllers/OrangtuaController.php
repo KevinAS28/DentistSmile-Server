@@ -16,19 +16,25 @@ class OrangtuaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //  HALAMAN ADMIN
+
+    // function untuk menampilkan data data akun orangtua yang terdaftar
     public function data(){
         $orangtua = Orangtua::all();
         return datatables()->of($orangtua)
         ->addColumn('action', function($row){
             $btn = '<div class="btn-group btn-group-sm">';
-            $btn .= '<a href="'.route('orangtua.edit',$row->id).'" type="button" id="btn-edit" class="btn btn-warning btn-icon"><i class="lni lni-pencil-alt "></i></a>';
-            $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="lni lni-trash"></i></button>';
+            $btn .= '<a href="'.route('orangtua.edit',$row->id).'" type="button" id="btn-edit" class="btn btn-warning btn-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+            $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="fa fa-trash " ></i></button>';
             
             $btn .= '</div>';
             return $btn;
         })
         ->rawColumns(['action'])->addIndexColumn()->make(true);
     }
+
+    // function untuk menampilkan halaman index akun orangtua
     public function index()
     {
         return view('admin.orangtua.index');
@@ -50,6 +56,8 @@ class OrangtuaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //  FUNCTION UNTUK MENDAFTARKAN AKUN ORANGTUA DI HALAMAN ADMIN
     public function store(Request $request)
     {
         $user = New User();
@@ -132,6 +140,8 @@ class OrangtuaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    // Function untuk menghapus akun orangtua dihalaman admin
     public function destroy($id)
     {
         $orangtua = Orangtua::find($id);
@@ -140,6 +150,13 @@ class OrangtuaController extends Controller
         $orangtua->delete();
         return response()->json(['data'=>'success delete data']);
     }
+
+
+
+
+    // HALAMAN ORANGTUA
+
+    // function untuk register akun orangtua dihalaman register
     public function registerUser(Request $request)
     {
         $messages = [
@@ -195,7 +212,8 @@ class OrangtuaController extends Controller
             return redirect('/register')->with('error','Gagal menambahkan data');
         }
     }
-
+    
+    // function untuk menampilkan data data anak berupa json untuk datatable dihalaman orangtua berdasarkan id orangtua ketika login
     public function dataAnak(){
         $user = Auth::user();
         $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
@@ -222,15 +240,19 @@ class OrangtuaController extends Controller
         return view('orangtua.dashboard.dashboard');
     }
 
+    // function untuk menampilkan data anak di halaman orangtua
     public function viewAnak()
     {
         return view('orangtua.anak.index');
     }
+    // function untuk menampilkan halaman tambah anak
     public function viewTambahAnak()
     {
         return view ('orangtua.anak.create');
     }
 
+
+    // function untuk menambah anak di halaman tambah anak orangtua
     public function tambahAnak(Request $request)
     {
         $user = Auth::user();

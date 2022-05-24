@@ -14,11 +14,17 @@
 
                     <div class="mb-3">
                         <label class="form-label">Nama Anak</label>
-                        <select class=" form-select" name="anak" data-width="100%">
+                        <select class=" form-select" name="anak" id="anak" data-width="100%">
                             @foreach($anak as $anak)
 
-                            <option value="{{$anak->id}}">{{$anak->nama}}</option>
+                            <option value="{{$anak->id}}">{{$anak->nama}} <p class="id_sekolah" value="{{$anak->id_sekolah}}"></p> </option>
                             @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Kelas</label>
+                        <select class=" form-select" name="kelas" id="kelas" data-width="100%">
+
                         </select>
                     </div>
                     <div class="hasilimt">
@@ -289,28 +295,29 @@
 
             if (bb != "" && tb != "") {
                 var imt = bb / (tb * tb);
-                imt=imt.toFixed(1)   
+                imtfix=imt.toFixed(1)   
+                console.log(imtfix)
                
                 if (imt >= 27) {
                     $("#imt").removeClass("bg-success bg-info");
                     $("#imt").addClass("bg-danger");
-                    $("#imt").val(imt+ " (Obesitas)");
-                } else if ((imt >= 25.1) & (imt < 27)) {
+                    $("#imt").val(imtfix+ " (Obesitas)");
+                } else if ((imtfix >= 25.1) & (imtfix < 27)) {
                     $("#imt").addClass("bg-danger");
                     $("#imt").removeClass("bg-success bg-info");
-                    $("#imt").val(imt + " (Gemuk)");
-                } else if ((imt >= 18.5) & (imt <= 25)) {
+                    $("#imt").val(imtfix + " (Gemuk)");
+                } else if ((imtfix >= 18.5) & (imtfix <= 25)) {
                     $("#imt").removeClass("bg-danger bg-info");
                     $("#imt").addClass("bg-success");
-                    $("#imt").val(imt + " (Normal)");
-                } else if ((imt >= 17) & (imt <= 18.4)) {
+                    $("#imt").val(imtfix + " (Normal)");
+                } else if ((imtfix >= 17) & (imtfix <= 18.4)) {
                     $("#imt").addClass("bg-info");
                     $("#imt").removeClass("bg-success bg-danger");
-                    $(".imt").val(imt + " (Kurus)");
+                    $("#imt").val(imtfix + " (Kurus)");
                 } else {
                     $("#imt").addClass("bg-info");
                     $("#imt").removeClass("bg-success bg-danger");
-                    $("#imt").val(imt + " (Sangat Kurus)");
+                    $("#imt").val(imtfix + " (Sangat Kurus)");
                 }
             } else if (bb == "" && tb != "") {
                 $("#imt").removeClass("bg-danger bg-success bg-info");
@@ -326,6 +333,11 @@
 
 
         });
+        $('#anak').change(function(){
+            let anak = $('.id_sekolah').val();
+            console.log(anak);
+         
+        })
     });
 
 </script>

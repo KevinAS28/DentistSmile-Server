@@ -25,8 +25,7 @@
                         <th>nama Anak</th>
                         <th>sekolah</th>
                         <th>kelas</th>
-                        <th>bb</th>
-                        <th>tb</th>
+
                         <th>action</th>
                     </tr>
                 </thead>
@@ -88,16 +87,7 @@ $(document).ready(function () {
                     name: 'kelas',
                     visible: true
                 },
-                {
-                    data: 'bb',
-                    name: 'bb',
-                    visible: true
-                },
-                {
-                    data: 'tb',
-                    name: 'tb',
-                    visible: true
-                },
+ 
                  { data: 'action', name:'action', visible:true},
 
             ],

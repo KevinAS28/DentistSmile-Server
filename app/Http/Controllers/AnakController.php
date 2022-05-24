@@ -27,6 +27,12 @@ class AnakController extends Controller
         ->addColumn('orangtua',function($row){
             return $row->orangtua->nama;
         })
+        ->addColumn('sekolah',function($row){
+            return $row->sekolah->nama;
+        })
+        ->addColumn('kelas',function($row){
+            return $row->kelas->kelas;
+        })
         ->rawColumns(['action'])->addIndexColumn()->make(true);
     }
 

@@ -13,14 +13,7 @@ class Orangtua extends Model
 
     protected $table = 'orangtua';
     protected $guarded = ['created_at', 'updated_at'];
-    protected $fillable=[
-        'id_users',
-        'id_kecamatan',
-        'id_kelurahan',
-        'nama',
-        'alamat',
-        'pendidikan',
-    ];
+
 
 
     public function user(){
@@ -32,4 +25,11 @@ class Orangtua extends Model
     public function kelurahan(){
         return $this->belongsTo('App\Models\Kelurahan', 'id_kelurahan');
     }
+    public function sekolah(){
+        return $this->belongsTo('App\Models\Sekolah', 'id_sekolah');
+    }
+    public function kelas(){
+        return $this->belongsTo('App\Models\Kelas', 'id_kelas');
+    }
+    
 }

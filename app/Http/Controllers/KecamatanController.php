@@ -13,12 +13,13 @@ class KecamatanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // untuk menampilkan data kecamatan di datatables
     public function data(){
         $kecamatan = Kecamatan::all();
         return datatables()->of($kecamatan)
         ->addColumn('action', function($row){
             $btn = '';
-            $btn .= '<a type="button" id="btn-edit" class="btn btn-info"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+            $btn .= '<a type="button" id="btn-edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
             $btn .= '<a type="button" id="btn-delete" class="btn btn-danger"> <i class="fa fa-trash " ></i></a>';
             
 
@@ -29,6 +30,7 @@ class KecamatanController extends Controller
        ->make(true);
     }
 
+    // view halaman admin list kecamatan
     public function index()
     {
         return view('admin.kecamatan.index');
@@ -39,6 +41,8 @@ class KecamatanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // halaman create kecamatan
     public function create()
     {
         return view('admin.kecamatan.create');
@@ -50,6 +54,8 @@ class KecamatanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //  list menambah kecamatan di halaman admin
     public function store(Request $request)
     {
         $rules = [
@@ -97,6 +103,8 @@ class KecamatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //  untuk update kecamatan di halaman admin
     public function update(Request $request, $id)
     {
         $rules = [
@@ -123,6 +131,7 @@ class KecamatanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // menghapus kecamatan dihalaman admin
     public function destroy($id)
     {
         $kecamatan = Kecamatan::find($id);

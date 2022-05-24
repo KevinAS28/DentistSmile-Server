@@ -75,7 +75,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <button class="btn btn-secondary">Cancel</button>
+                    <a href="{{URL::previous()}}" type="button" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>

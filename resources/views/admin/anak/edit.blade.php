@@ -28,17 +28,30 @@
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Tanggal Lahir</label>
                         <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" autocomplete="off" value="{{$anak->tanggal_lahir}}"
-                            placeholder="masukkan tanggal lahir">
+                            placeholder="masukkan tanggal lahir" >
                     </div>
-
+                    
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Sekolah</label>
-                        <input type="text" class="form-control" id="sekolah" name="sekolah" autocomplete="off" value="{{$anak->sekolah}}"
-                            placeholder="alamat">
+
+                            <select name="sekolah"  class="js-example-basic-single form-select " data-width="100%"
+                            placeholder="Pilih wilayah" >
+                                <option  value="{{$anak->sekolah->nama}}" >{{$anak->sekolah->nama}} </option>
+                                {{-- @foreach(\App\Models\Sekolah::get() as $value => $key)
+                                <option value="{{$key->id}}">{{$key->nama}}</option>
+                                @endforeach --}}
+                            
+                        </select>
                     </div>
+                    <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="edit_sekolah">
+                        <label class="form-check-label" for="exampleCheck1">
+                          Ubah Sekolah
+                        </label>
+                      </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Kelas</label>
-                        <input type="text" class="form-control" id="kelas" name="kelas" autocomplete="off" value="{{$anak->kelas}}"
+                        <input type="text" class="form-control" id="kelas" name="kelas" autocomplete="off" value="{{$anak->kelas->kelas}}"
                             placeholder="masukkan kelas">
                     </div>
                     <div class="mb-3">
@@ -53,7 +66,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <button class="btn btn-secondary">Cancel</button>
+                    <a href="{{URL::previous()}}" type="button" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>
@@ -62,6 +75,8 @@
 @endsection
 
 @push('after-script')
+
+
 {{-- <script type="text/javascript">
     $(document).ready(function () {
         /* save data */

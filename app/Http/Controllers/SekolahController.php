@@ -146,6 +146,8 @@ class SekolahController extends Controller
         $data->delete();
     }
 
+
+    
     public function listSekolah($id_kelurahan)
     {
         $sekolah = Sekolah::where('type','sekolah')->where('id_kelurahan', $id_kelurahan)->get();

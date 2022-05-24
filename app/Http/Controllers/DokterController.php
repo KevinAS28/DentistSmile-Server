@@ -23,20 +23,24 @@ class DokterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // HALAMAN ADMIN UNTUK DOKTER
 
+    // function untuk menampilkan data data akun dokter yang terdaftar DI HALAMAN ADMIN
     public function data(){
         $dokter = Dokter::all();
         return datatables()->of($dokter)
         ->addColumn('action', function($row){
             $btn = '<div class="btn-group btn-group-sm">';
-            $btn .= '<a href="'.route('dokter.edit',$row->id).'" type="button" id="btn-edit" class="btn btn-warning btn-icon"><i class="lni lni-pencil-alt "></i></a>';
-            $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="lni lni-trash"></i></button>';
+            $btn .= '<a href="'.route('dokter.edit',$row->id).'" type="button" id="btn-edit" class="btn btn-warning btn-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+            $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="fa fa-trash " ></i></button>';
             
             $btn .= '</div>';
             return $btn;
         })
         ->rawColumns(['action'])->addIndexColumn()->make(true);
     }
+
+    // function untuk menampilkan halaman index akun dokter DI HALAMAN ADMIN
     public function index()
     {
         
@@ -48,6 +52,8 @@ class DokterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // function untuk menampilkan halaman create akun dokter DI HALAMAN ADMIN
     public function create()
     {
         return view('admin.dokter.create');
@@ -59,6 +65,8 @@ class DokterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //  FUNCTION UNTUK MENDAFTARKAN AKUN DOKTER DI HALAMAN ADMIN
     public function store(Request $request)
     {
         $messages = [
@@ -156,6 +164,8 @@ class DokterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    // function untuk mengupdate data akun dokter yang terdaftar di HALAMAN ADMIN
     public function update(Request $request, $id)
     {
         $dokter = Dokter::find($id);
@@ -182,23 +192,41 @@ class DokterController extends Controller
             
         }
 
-
     }
+
+    // function untuk menghapus data dokter dihalaman dokter
+    public function destroy($id)
+    {
+        
+        $dokter = Dokter::find($id);
+        $dokter ->delete();
+        return response()->json(['data'=>'success delete data']);
+    }
+
+
+    
+    // -------- HALAMAN DOKTER --------------
+
+    // function untuk menampilkan dashboard pada HALAMAN DOKTER
     public function viewDashboard()
     {
         return view('dokter.dashboard');
     }
 
+    // function untuk menampilkan halaman profil pada HALAMAN DOKTER
     public function profil()
     {
         return view('dokter.profil');
     }
+    // function untuk menampilkan halaman ubah profil pada HALAMAN DOKTER
     public function profil_edit($id)
     {   
         $logdokter = Auth::user()->dokter;
         $dokter = $logdokter->find($id);
         return view('dokter.profil-edit',compact('dokter'));
     }
+
+    // function untuk mengupdate data profil pada HALAMAN DOKTER
     public function profil_update(Request $request, $id)
     {
  
@@ -243,6 +271,8 @@ class DokterController extends Controller
         return redirect()->route('dokter.profil');
 
     }
+
+    // function untuk menampilkan halaman riwayat pemeriksaan pada HALAMAN DOKTER
     public function pemeriksaan_ukgs(){
         //$kelurahan = Kelurahan::all();
         $user = Auth::user();
@@ -270,6 +300,7 @@ class DokterController extends Controller
         return response()->json($sek_kelas);
     }
 
+    
     public function pemeriksaan_ukgm(){
 
         $kelurahan = Kelurahan::all();
@@ -318,14 +349,8 @@ class DokterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        
-        $dokter = Dokter::find($id);
-        $dokter ->delete();
-        return response()->json(['data'=>'success delete data']);
-    }
 
+    // function untuk menampilkan list list kelurahan
     public function listKelurahan(){
         $user = Auth::user();
         $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
@@ -334,6 +359,7 @@ class DokterController extends Controller
         
     }
 
+    // function untuk menampilkan list anak yang telah melakukan pemeriksaanfisik berdasarkan id kelas
     public function listAnak(Request $request){
         $pemeriksaanfisik = PemeriksaanFisik::with('anak')->whereHas('anak',function($query) use($request) {$query->where('id_kelas',$request->id_kelas)->orderBy('id', 'DESC');})->latest();
         

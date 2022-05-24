@@ -42,6 +42,8 @@ Route::get('/list-sekolah/{id_kelurahan}', [App\Http\Controllers\SekolahControll
     ->name('list-kelurahandokter');
     Route::get('list-anakdokter', [App\Http\Controllers\DokterController::class, 'listAnak'])
     ->name('list-anakdokter');
+    Route::get('list-anak/{anak}', [App\Http\Controllers\PemeriksaanFisikController::class, 'listAnak'])
+    ->name('list-anak');
 // Route::post('/dokter',[DokterController::class,'store']);
 Route::get('/home',function(){
     return view('home');

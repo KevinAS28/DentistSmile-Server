@@ -9,8 +9,12 @@ use App\Models\PemeriksaanTelinga;
 use App\Models\User;
 use App\Models\Orangtua;
 use App\Models\Anak;
+use App\Models\Sekolah;
+use App\Models\Kelas;
 use Auth;
 use Carbon\Carbon;
+
+//----------------- HALAMAN ORANGTUA-----------------//
 
 class PemeriksaanFisikController extends Controller
 {
@@ -29,13 +33,22 @@ class PemeriksaanFisikController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // menambah data pemeriksaan fisik diHALAMAN ORANGTUA
     public function create()
     {
         $user = Auth::user();
         $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
-        $anak = Anak::Where('id_orangtua',$orangtua)->get();
-
+        $anak = Anak::Where('id_orangtua',$orangtua)->get();  //mendapatkan list anak berdasarkan id orangtua yang login
+        
         return view('orangtua.pemeriksaan.create',compact('anak'));
+    }
+    public function listAnak($anak){
+        $user = Auth::user();
+        $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
+        $anak = Anak::Where('id_orangtua',$orangtua)->get();
+          //mendapatkan list anak berdasarkan id orangtua yang login
+        $kelas = Kelas::Where('id_sekolah',$anak)->get();
+        return response()->json($kelas);
     }
 
     /**
@@ -50,29 +63,29 @@ class PemeriksaanFisikController extends Controller
         $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
         $anak = Anak::Where('id_orangtua',$orangtua)->get();
 
-        $waktu_pemeriksaan = Carbon::now();
+        $waktu_pemeriksaan = Carbon::now(); //mendapatkan waktu sekarang
 
         $pFisik = new PemeriksaanFisik();
         $pFisik->id_anak =  $request->anak;
         $pFisik->tinggi_badan = $request->tinggi_badan;
         $pFisik->berat_badan = $request->berat_badan;
         if($request->tinggi_badan > 0 && $request->berat_badan > 0){
-            $pFisik->imt = $request->berat_badan/((($request->tinggi_badan)/100)*(($request->tinggi_badan)/100));
+            $pFisik->imt = $request->berat_badan/((($request->tinggi_badan)/100)*(($request->tinggi_badan)/100)); // perhitungan IMT
         }
         $pFisik->sistole = $request->sistole;
         $pFisik->diastole = $request->diastole;
         $pFisik->waktu_pemeriksaan = $waktu_pemeriksaan;
-        $pFisik->save();
+        $pFisik->save(); // MENYIMPAN PEMERIKSAAN FISIK
         $pMata = new PemeriksaanMata();
         $pMata->id_anak =  $request->anak;
-        $pMata->soal1=$request->soal1;
-        $pMata->soal2=$request->soal2;
-        $pMata->soal3=$request->soal3;
-        $pMata->soal4=$request->soal4;
-        $pMata->soal5=$request->soal5;
-        $pMata->soal6=$request->soal6;
+        $pMata->soal1=$request->soal1; // menyimpan jawaban soal mata
+        $pMata->soal2=$request->soal2; // menyimpan jawaban soal mata
+        $pMata->soal3=$request->soal3; // menyimpan jawaban soal mata
+        $pMata->soal4=$request->soal4; // menyimpan jawaban soal mata
+        $pMata->soal5=$request->soal5; // menyimpan jawaban soal mata
+        $pMata->soal6=$request->soal6; // menyimpan jawaban soal mata
         $pMata->waktu_pemeriksaan=$waktu_pemeriksaan;
-        $pMata->save();
+        $pMata->save(); // MENYIMPAN PEMERIKSAAN MATA
         $pTelinga = new PemeriksaanTelinga();
         $pTelinga->id_anak =  $request->anak;
         $pTelinga->soal1=$request->soal1;
@@ -83,7 +96,7 @@ class PemeriksaanFisikController extends Controller
         $pTelinga->soal6=$request->soal6;
         $pTelinga->soal7=$request->soal7;
         $pTelinga->waktu_pemeriksaan=$waktu_pemeriksaan;
-        $pTelinga->save();
+        $pTelinga->save(); // MENYIMPAN PEMERIKSAAN TELINGA
 
 
         return redirect()->route('viewDashboard.orangtua');
@@ -135,21 +148,24 @@ class PemeriksaanFisikController extends Controller
         //
     }
 
+    // ----------- HALAMAN ORANGTUA - > RIWAYAT --------------//
     public function riwayat(){
         $user = Auth::user();
         $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
         $anak = Anak::Where('id_orangtua',$orangtua)->get();
         return view('orangtua.pemeriksaan.riwayat',compact('anak'));
     }
+
+    // ----------- HALAMAN ORANGTUA - > RIWAYAT -> RIWAYAT FISIK --------------//
     public function riwayatfisik(Request $request){
-        
+        // MENAMPILKAN DATA PEMERIKSAAN FISIK
         $user = Auth::user();
-        $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
-        $anak = Anak::Where('id_orangtua',$orangtua)->get();
-        if(!empty($request->anak)){
-        $pemeriksaanFisik = PemeriksaanFisik::Where('id_anak',$request->anak)->get();
+        $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');  // MENDAPATKAN ID ORANGTUA
+        $anak = Anak::Where('id_orangtua',$orangtua)->get(); // MENDAPATKAN LIST ANAK BERDASARKAN ID ORANGTUA
+        if(!empty($request->anak)){ 
+        $pemeriksaanFisik = PemeriksaanFisik::Where('id_anak',$request->anak)->get(); // MENDAPATKAN LIST PEMERIKSAAN FISIK BERDASARKAN ID ANAK
        }else{
-        $pemeriksaanFisik = PemeriksaanFisik::all();
+        $pemeriksaanFisik = PemeriksaanFisik::where(''); // MENDAPATKAN LIST PEMERIKSAAN FISIK
         }
         return datatables()->of($pemeriksaanFisik)
         ->addColumn('imt', function($pemeriksaanFisik){
@@ -180,10 +196,8 @@ class PemeriksaanFisikController extends Controller
         $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
         $anak = Anak::Where('id_orangtua',$orangtua)->get();
         if(!empty($request->anak)){
-            $pemeriksaanMata = PemeriksaanMata::Where('id_anak',$request->anak)->get();
-           }else{
-            $pemeriksaanMata = PemeriksaanMata::all();
-            }
+            $pemeriksaanMata = PemeriksaanMata::Where('id_anak',$request->anak)->get(); // mendatkan data pemeriksaan mata berdarkan request anak
+           }
             return datatables()->of($pemeriksaanMata)
             ->addColumn('tanggal', function($pemeriksaanMata){
                return $tanggal = date('d-m-Y', strtotime($pemeriksaanMata->created_at));

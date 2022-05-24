@@ -13,13 +13,15 @@ class KelurahanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //  list kelurahan didatatables
     public function data(){
         $kelurahan = Kelurahan::all();
         return datatables()->of($kelurahan)
         ->addColumn('action', function($row){
             $btn = '<div class="btn-group btn-group-sm">';
-            $btn .= '<button type="button" id="btn-edit" class="btn btn-info"><i class="lni lni-pencil"></i></button>';
-            $btn .= '<button type="button" id="btn-delete" class="btn btn-danger"><i class="lni lni-trash"></i></button>';
+            $btn .= '<button type="button" id="btn-edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
+            $btn .= '<button type="button" id="btn-delete" class="btn btn-danger"><i class="fa fa-trash " ></i></button>';
             $btn .= '</div>';
 
            return $btn;
@@ -30,7 +32,8 @@ class KelurahanController extends Controller
        ->addIndexColumn()
        ->make(true);
     }
-
+    
+    
     public function index()
     {
         return view ('admin.kelurahan.index');
