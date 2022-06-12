@@ -119,7 +119,6 @@ class KecamatanController extends Controller
           $data->nama   = $request->nama_edit;
   
           $data->save();
-  
           return response()->json(['success'=>'Data added successfully','data'=>$data]);
         }
   
