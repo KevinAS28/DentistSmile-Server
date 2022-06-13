@@ -13,7 +13,7 @@ class Kelas extends Model
     protected $guarded = ['created_at', 'updated_at'];
     protected $fillable=[
         'id_sekolah',
-        'nama',
+        'kelas',
     ];
 
     public function kecamatan(){

@@ -114,8 +114,8 @@ Route::group(['prefix' => 'dokter'], function () {
     Route::post('/profil/edit/{id}',[DokterController::class, 'profil_edit'])->name('dokter.profilEdit');
     Route::post('/profil/{id}',[DokterController::class, 'profil_update'])->name('dokter.profilUpdate');
     Route::get('/pemeriksaan-ukgs',[DokterController::class, 'pemeriksaan_ukgs'])->name('dokter.periksaUKGS');
-    Route::post('/pemeriksaan-ukgs/sekolah',[DokterController::class, 'dropdown_sekolah_ukgs'])->name('dokter.sekolahUKGS');
-    Route::post('/pemeriksaan-ukgs/kelas',[DokterController::class, 'dropdown_kelas_ukgs'])->name('dokter.kelasUKGS');
+    Route::get('/pemeriksaan-ukgs/sekolah',[DokterController::class, 'dropdown_sekolah_ukgs'])->name('dokter.sekolahUKGS');
+    Route::get('/pemeriksaan-ukgs/kelas',[DokterController::class, 'dropdown_kelas_ukgs'])->name('dokter.kelasUKGS');
     //Route::post('/pemeriksaan-ukgs/fetch',[DokterController::class, 'dropdown_wilayah_ukgs'])->name('dokter.periksaUKGS.fetch');
     Route::get('/pemeriksaan-ukgm',[DokterController::class, 'pemeriksaan_ukgm'])->name('dokter.periksaUKGM');
     Route::get('/pemeriksaan-ukgs/pemeriksaan-data',[DokterController::class, 'pemeriksaan_data_ukgs'])->name('dokter.pemeriksaanDataUKGS');

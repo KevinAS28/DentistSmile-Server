@@ -17,9 +17,11 @@
                 <div class="row mb-3">
                     <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Wilayah Kelurahan</label>
                     <div class="col-sm-9">
-                        <select class="form-select" id="exampleFormControlSelect1">
-                            <option selected disabled>Pilih Kelurahan</option>
-                            <option>Pulo</option>
+                        <select class="form-select" id="kelurahan">
+                            <option selected>Pilih Kelurahan</option>
+                            @foreach($kelurahan as $dataKelurahan)
+                            <option value="{{ $dataKelurahan->id }}">{{ $dataKelurahan->nama }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -28,16 +30,14 @@
                     <div class="col-sm-9">
                         <select class="form-select" id="option-data-sekolah">
                             <option selected disabled>Pilih Sekolah</option>
-                            <option>Sekolah</option>
                         </select>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Kelas</label>
                     <div class="col-sm-9">
-                        <select class="form-select" id="exampleFormControlSelect1">
+                        <select class="form-select" id="option-data-kelas">
                             <option selected disabled>Pilih Kelas</option>
-                            <option>5</option>
                         </select>
                     </div>
                 </div>
@@ -164,6 +164,8 @@
 @push('after-script')
 
 <script  type="text/javascript"> 
+
+$('input').val('');
 var tableData;
 
 $(document).ready(function () {
@@ -212,6 +214,45 @@ $(document).ready(function () {
             ],
 
         });
+
+        // Get Sekolah
+
+        $('#kelurahan').on('change', function() {
+            var id_kel = this.value;
+            console.log(id_kel);
+            $.ajax({
+                url : "{{ url('/dokter/pemeriksaan-ukgs/sekolah?id=') }}"+id_kel,
+                type:'GET',
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response);
+                    $.each(response,function(key, value)
+                    {
+                        $("#option-data-sekolah").append('<option value=' + key + '>' + value + '</option>');
+                    });
+                }
+            });
+        });
+
+        // Get Kelas
+
+        $('#option-data-sekolah').on('change', function() {
+            var id_kel = this.value;
+            console.log(id_kel);
+            $.ajax({
+                url : "{{ url('/dokter/pemeriksaan-ukgs/kelas?id=') }}"+id_kel,
+                type:'GET',
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response);
+                    $.each(response,function(key, value)
+                    {
+                        $("#option-data-kelas").append('<option value=' + key + '>' + value + '</option>');
+                    });
+                }
+            });
+        });
+
         $('#table-dokter tbody').on( 'click', '#btn-delete', function () {
         var data = tableData.row( $(this).parents('tr') ).data();
        Swal.fire({

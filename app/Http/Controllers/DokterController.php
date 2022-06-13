@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Dokter;
 use App\Models\Kelurahan;
 use App\Models\Kecamatan;
+use App\Models\Kelas;
 use App\Models\Sekolah;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
@@ -293,10 +294,8 @@ class DokterController extends Controller
         return response()->json($kel_sek);
     }
     public function dropdown_kelas_ukgs(Request $request){
-        //$sekolah   = Sekolah::all();
-        //$kel_sek  = Sekolah::where('id', $id)->get();
-        $sek_kelas  = Kelas::where('id_kelas', $request->get('id'))
-            ->pluck('nama', 'id');
+        $sek_kelas  = Kelas::where('id_sekolah', $request->get('id'))
+            ->pluck('kelas', 'id');
         return response()->json($sek_kelas);
     }
 
@@ -330,7 +329,8 @@ class DokterController extends Controller
         return view ('dokter.pemeriksaanData.pemeriksaanDataUKGM');
     }
     public function rekap_ukgs(){
-        return view('dokter.rekapData.ukgs');
+        $kelurahan = Kelurahan::all();
+        return view('dokter.rekapData.ukgs', compact('kelurahan'));
     }
 
     public function rekap_ukgm(){
