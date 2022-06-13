@@ -42,6 +42,8 @@ Route::get('/list-sekolah/{id_kelurahan}', [App\Http\Controllers\SekolahControll
     ->name('list-kelurahandokter');
     Route::get('list-anakdokter', [App\Http\Controllers\DokterController::class, 'listAnak'])
     ->name('list-anakdokter');
+    Route::get('list-anakdokter-rekap', [App\Http\Controllers\DokterController::class, 'listAnakRekap'])
+    ->name('list-anakdokter-rekap');
     Route::get('list-anak/{anak}', [App\Http\Controllers\PemeriksaanFisikController::class, 'listAnak'])
     ->name('list-anak');
 // Route::post('/dokter',[DokterController::class,'store']);
@@ -123,6 +125,7 @@ Route::group(['prefix' => 'dokter'], function () {
     Route::get('/rekap-ukgs',[DokterController::class, 'rekap_ukgs'])->name('dokter.rekapDataUKGS');
     Route::get('/rekap-ukgm',[DokterController::class, 'rekap_ukgm'])->name('dokter.rekapDataUKGM');
     Route::get('/rekap-ukgs/rekap-datail-ukgs',[DokterController::class, 'rekap_detail_ukgs'])->name('dokter.rekapDetailUKGS');
+    Route::get('/rekap-ukgs/rekap-datail-ukgs/{id}',[DokterController::class, 'rekap_detail_ukgs_id'])->name('dokter.rekapDetailUKGSID');
     Route::get('/rekap-ukgm/rekap-data-ukgm',[DokterController::class, 'rekap_detail_ukgm'])->name('dokter.rekapDetailUKGM');
     });
   });
