@@ -221,18 +221,17 @@ class OrangtuaController extends Controller
         return datatables()->of($anak)
         ->addColumn('action', function($row){
             $btn = '<div class="btn-group btn-group-sm">';
-            $btn .= '<a href="'.route('anak.edit',$row->id).'" class="btn btn-warning btn-icon"><i class="lni lni-pencil-alt "></i></a>';
-            $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="lni lni-trash"></i></button>';
+            $btn .= '<a href="'.route('orangtua-anak.edit',$row->id).'" class="btn btn-warning btn-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+            $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="fa fa-trash " ></i></button>';
             
             $btn .= '</div>';
             return $btn;
         })
-        ->addColumn('sekolah',function($row){
-            return $row->sekolah->nama;
-        })
-        ->addColumn('kelas',function($row){
-            return $row->kelas->kelas;
-        })
+        ->addColumn('tanggal_lahir', function($row){
+            return $tanggal = date('d-m-Y', strtotime($row->tanggal_lahir));
+             
+         })
+        
         ->rawColumns(['action'])->addIndexColumn()->make(true);
     }
 
@@ -264,10 +263,35 @@ class OrangtuaController extends Controller
         $anak->jenis_kelamin = $request->jenis_kelamin;
         $anak->tempat_lahir = $request->tempat_lahir;
         $anak->tanggal_lahir = $request->tanggal_lahir;
-        $anak->id_sekolah = $request->sekolah;
-        $anak->id_kelas = $request->kelas;
+      
 
         $anak->save();
         return redirect()->route('viewanak');
+    }
+
+    public function editAnak($id){
+        $anak = Anak::find($id);
+        return view('orangtua.anak.edit',compact('anak'));
+    }
+
+    public function updateAnak(Request $request, $id){
+        $anak = Anak::find($id);
+        $user = Auth::user();
+        $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
+        
+        $anak->nama = $request->nama;
+        $anak->jenis_kelamin=$request->jenis_kelamin;
+        $anak->tempat_lahir=$request->tempat_lahir;
+        $anak->tanggal_lahir=$request->tanggal_lahir;
+
+        
+        $anak->save();
+        return redirect()->route('viewanak');
+
+    }
+
+    public function deleteAnak($id){
+        $anak=Anak::find($id);
+        $anak->delete();
     }
 }

@@ -74,6 +74,8 @@ Route::group(['prefix' => 'orangtua'], function () {
     Route::get('/anak',[OrangtuaController::class,'viewAnak'])->name('viewanak');
     Route::get('/anak/create',[OrangtuaController::class,'viewTambahAnak'])->name('view-anak.create');
     Route::post('/anak/store',[OrangtuaController::class,'tambahAnak'])->name('tambahanak.store');
+    Route::get('/anak/{id}/edit',[OrangtuaController::class,'editAnak'])->name('orangtua-anak.edit');
+    Route::put('/anak/{id}/update',[OrangtuaController::class,'updateAnak'])->name('orangtua-anak.update');
     Route::resource('pemeriksaangigi', PemeriksaanGigiController::class)->except('destroy');
     Route::get('/pemeriksaan/riwayat',[PemeriksaanFisikController::class,'riwayat'])->name('view-riwayat');
     });
@@ -89,7 +91,9 @@ Route::group(['prefix' => 'admin/table'], function () {
     Route::get('/data-pemeriksaan-fisik',[PemeriksaanFisikController::class,'riwayatfisik'])->name('riwayat-fisik');
     Route::get('/data-pemeriksaan-mata',[PemeriksaanFisikController::class,'riwayatmata'])->name('riwayat-mata');
     Route::get('/data-pemeriksaan-telinga',[PemeriksaanFisikController::class,'riwayattelinga'])->name('riwayat-telinga');
-    Route::get('/data-kelas/{id}',[SekolahController::class, 'dataKelas'])->name('kelas.table');
+    Route::get('/data-pemeriksaan-gigi',[PemeriksaanFisikController::class,'riwayatgigi'])->name('riwayat-gigi');
+    
+    Route::get('/data-kelas/{id}',[KelasController::class,'data'])->name('kelas.table');
     
     });
 Route::group(['prefix' => 'orangtua/table'], function () {
@@ -103,7 +107,9 @@ Route::group(['prefix' => 'delete'], function () {
   Route::get('dokter/{id}', [DokterController::class, 'destroy'])->name('dokter.destroy');
   Route::get('orangtua/{id}', [OrangtuaController::class, 'destroy'])->name('orangtua.destroy');
   Route::get('kecamatan/{id}', [KecamatanController::class, 'destroy'])->name('kecamatan.destroy');
+  Route::get('/kelurahan/{id}',[KelurahanController::class, 'destroy'])->name('kelurahan.destroy');
   Route::get('sekolah/{id}', [SekolahController::class, 'destroy'])->name('sekolah.destroy');
+  Route::get('/orangtua-anak/{id}',[OrangtuaController::Class,'deleteAnak'])->name('orangtua-anak.destroy');
 
 });
 
@@ -127,5 +133,7 @@ Route::group(['prefix' => 'dokter'], function () {
     });
   });
 
+
+ 
 
 

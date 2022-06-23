@@ -123,7 +123,7 @@ $(document).ready(function () {
         }).then((willDelete) => {
           if (willDelete.isConfirmed) {
             $.ajax({
-              url: "{{ url('delete/kecamatan') }}"+"/"+data['id'],
+              url: "{{ url('delete/kelurahan') }}"+"/"+data['id'],
               method: 'get',
               success: function(result){
                 tableData.ajax.reload();

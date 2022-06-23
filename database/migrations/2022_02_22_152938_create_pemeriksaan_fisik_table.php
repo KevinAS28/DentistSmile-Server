@@ -15,19 +15,19 @@ class CreatePemeriksaanFisikTable extends Migration
     {
         Schema::create('pemeriksaan_fisik', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_anak')->nullable();
+            $table->unsignedBigInteger('id_anak');
+            $table->unsignedBigInteger('id_sekolah')->nullable();
             $table->unsignedBigInteger('id_kelas')->nullable();
-            $table->integer('tinggi_badan')->nullable();
-            $table->integer('berat_badan')->nullable();
-            $table->float('imt',10,1)->nullable();
-            $table->integer('sistole')->nullable();
-            $table->integer('diastole')->nullable();
-            $table->datetime('waktu_pemeriksaan')->nullable();
+            $table->integer('tinggi_badan');
+            $table->integer('berat_badan');
+            $table->float('imt',10,1);
+            $table->integer('sistole');
+            $table->integer('diastole');
+            $table->datetime('waktu_pemeriksaan');
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('id_anak')->references('id')->on('anak')->onDelete('cascade');
-            $table->foreign('id_kelas')->references('id')->on('kelas');
+         
         });
     }
 

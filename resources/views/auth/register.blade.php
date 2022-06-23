@@ -10,7 +10,7 @@
     <meta name="keywords"
         content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-    <title>NobleUI - HTML Bootstrap 5 Admin Dashboard Template</title>
+    <title>Senyumin - Register</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,7 +64,7 @@
                                             <div class="mb-3">
                                                 <label for="userEmail" class="form-label">Email address</label>
                                                 <input type="email" class="form-control" id="userEmail" name="email"
-                                                    placeholder="Email" required>
+                                                    placeholder="Masukkan Email" required>
                                                     @error('email')
                                                     <div  class="badge bg-danger mt-2 ">{{ $message }}</div>
                                                   @enderror
@@ -74,16 +74,16 @@
                                                 <label for="userPassword" class="form-label">Password</label>
                                                 <input type="password" class="form-control" id="userPassword"
                                                     name="password" autocomplete="current-password"
-                                                    placeholder="Password" required>
+                                                    placeholder="Masukkan Password" required>
                                             </div>
                                             <div class="form-check mb-3">
                                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                                 <label class="form-check-label" for="exampleCheck1">
-                                                    Show Password
+                                                    Tampilkan Password
                                                 </label>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputUsername1" class="form-label">Name</label>
+                                                <label for="exampleInputUsername1" class="form-label">Nama</label>
                                                 <input type="text" class="form-control" 
                                                     autocomplete="Name" placeholder="masukkan nama" name="nama" id="name" value="{{old('nama')}}" required>
                                                     
@@ -129,14 +129,29 @@
                                             <div class="mb-3">
                                                 <label for="exampleInputUsername2" class="form-label">alamat</label>
                                                 <input type="text" class="form-control" 
-                                                    autocomplete="Username" placeholder="Username" name="alamat"
+                                                    autocomplete="alamat" placeholder="alamat" name="alamat"
                                                     required>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputUsername3" class="form-label">pendidikan</label>
-                                                <input type="text" class="form-control" 
-                                                    autocomplete="Username" placeholder="Username" name="pendidikan"
-                                                    required>
+                                                <label class="form-label">Pendidikan</label>
+                                                <select class="form-select" name="pendidikan" id="pendidikan"
+                                                    data-width="100%" required>
+                                                    <option selected disabled>Pilih Pendidikan</option>
+                                                   
+
+                                                    <option value="SD">SD</option>
+                                                    <option value="SMP">SMP</option>
+                                                    <option value="SMA">SMA/SMK</option>
+                                                    <option value="D1">D1</option>
+                                                    <option value="D2">D2</option>
+                                                    <option value="D3">D3</option>
+                                                    <option value="D3">D3</option>
+                                                    <option value="S1">S1</option>
+                                                    <option value="S2">S2</option>
+                                                    <option value="S3">S3</option>
+
+                                                    
+                                                </select>
                                             </div>
                                             <div>
                                                 <button type="submit"
@@ -161,6 +176,7 @@
     <script src="{{asset('assets/vendors/core/core.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            
 
             var email = $('#userEmail');
             var password = $('#userPassword');

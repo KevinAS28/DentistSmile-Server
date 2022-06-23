@@ -13,7 +13,7 @@
     <meta name="keywords"
         content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-    <title>NobleUI - HTML Bootstrap 5 Admin Dashboard Template</title>
+    <title>Senyumin - Login </title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,14 +67,14 @@
                         @csrf
                       <div class="mb-3">
                         <label for="userEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" id="userEmail" placeholder="username">
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" id="userEmail" placeholder="masukkan email">
                         @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                       </div>
                       <div class="mb-3">
                         <label for="userPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="userPassword" autocomplete="current-password" placeholder="Password">
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="userPassword" autocomplete="current-password" placeholder="masukkan password">
                         @error('password')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -82,13 +82,13 @@
                       <div class="form-check mb-2">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">
-                          Show Password
+                          Tampilkan Password
                         </label>
                       </div>
                       <br>
                       <div>
                         <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0 text-white">
-                          Login
+                          Masuk
                         </button>
                       </div>
                       <a href="/register" class="d-block mt-3 text-muted">Belum punya akun? 

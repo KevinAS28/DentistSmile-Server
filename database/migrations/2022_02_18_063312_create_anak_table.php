@@ -16,8 +16,6 @@ class CreateAnakTable extends Migration
         Schema::create('anak', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_orangtua')->nullable();
-            $table->unsignedBigInteger('id_sekolah')->nullable();
-            $table->unsignedBigInteger('id_kelas')->nullable();
             $table->string('nama')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
@@ -26,7 +24,7 @@ class CreateAnakTable extends Migration
             $table->softDeletes();
 
             $table->foreign('id_orangtua')->references('id')->on('orangtua')->onDelete('cascade');
-            $table->foreign('id_sekolah')->references('id')->on('sekolah')->onDelete('cascade');
+            
             
         });
     }

@@ -15,14 +15,16 @@ class CreatePemeriksaanGigiTable extends Migration
     {
         Schema::create('pemeriksaan_gigi', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_anak')->nullable();
+            $table->unsignedBigInteger('id_anak');
+            $table->unsignedBigInteger('id_sekolah')->nullable();
+            $table->unsignedBigInteger('id_kelas')->nullable();
             $table->string('gambar1')->nullable();
             $table->string('gambar2')->nullable();
             $table->string('gambar3')->nullable();
             $table->string('gambar4')->nullable();
             $table->string('gambar5')->nullable();
-            $table->string('soal1')->nullable();
-            $table->string('soal2')->nullable();
+            $table->string('gsoal1')->nullable();
+            $table->string('gsoal2')->nullable();
             $table->datetime('waktu_pemeriksaan')->nullable();
             $table->timestamps();
 

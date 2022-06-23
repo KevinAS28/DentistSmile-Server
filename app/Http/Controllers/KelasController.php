@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Sekolah;
+use App\Models\Kelas;
 
 class KelasController extends Controller
 {
@@ -11,6 +13,22 @@ class KelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function data($id){
+        $sekolah = Sekolah::find($id);
+        $kelas = Kelas::where('sekolah_id',$sekolah)->get();
+        return datatables()->of($kelas)
+        ->addColumn('action', function($row){
+            $btn = '<div class="btn-group btn-group-sm">';
+            $btn .= '<button type="button" id="btn-edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
+            $btn .= '<button type="button" id="btn-delete" class="btn btn-danger"><i class="fa fa-trash " ></i></button>';
+            $btn .= '</div>';
+
+           return $btn;
+        })
+        ->addColumn('sekolah',function($row){
+            return $row->sekolah->nama;
+        });
+    }
     public function index()
     {
         

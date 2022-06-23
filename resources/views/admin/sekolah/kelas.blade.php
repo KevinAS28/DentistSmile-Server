@@ -16,12 +16,12 @@
         </div>
         <hr />
 			<div class="table-responsive">
-            <table id="table-sekolah" class="table "  style="width:100%">
+            <table id="table-kelas" class="table "  style="width:100%">
                 <thead>
                     <tr>
 						<th>id</th>
                         <th style="width: 1px;">no</th>
-                        <th>Kelas</th>
+                        <th>Kelas</th>  
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -32,3 +32,44 @@
 
 @endsection
 
+@push('after-script')
+<script  type="text/javascript"> 
+var tableData;
+
+$(document).ready(function () {
+    
+    tableData= $('#table-kelas').DataTable({
+        processing: true,
+        serverSide: true,
+        responsive: true,
+        language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Cari"
+            },
+		"searching": true,
+        "bPaginate": true,
+        serverSide: true,
+        stateSave: true,
+        ajax:{
+            url: "{{ url('admin/table/data-kelas') }}"+"/"+data['id'],
+            type: "GET",
+
+        },
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'kelas', name: 'kelas'},
+            {data: 'action', name: 'action', orderable: false, searchable: false}
+        ]
+
+        });
+
+});
+
+
+
+
+
+</script>
+
+@endpush

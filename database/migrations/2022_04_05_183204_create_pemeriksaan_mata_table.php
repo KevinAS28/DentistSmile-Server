@@ -15,13 +15,16 @@ class CreatePemeriksaanMataTable extends Migration
     {
         Schema::create('pemeriksaan_mata', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_anak')->nullable();
-            $table->string('soal1')->nullable();
-            $table->string('soal2')->nullable();
-            $table->string('soal3')->nullable();
-            $table->string('soal4')->nullable();
-            $table->string('soal5')->nullable();
-            $table->string('soal6')->nullable();
+            $table->unsignedBigInteger('id_anak');
+            $table->unsignedBigInteger('id_sekolah')->nullable();
+            $table->unsignedBigInteger('id_kelas')->nullable();
+            $table->string('msoal1');
+            $table->string('msoal2');
+            $table->string('msoal3');
+            $table->string('msoal4');
+            $table->string('msoal5');
+            $table->string('msoal6');
+            $table->string('msoal7');
             $table->datetime('waktu_pemeriksaan')->nullable();
 
             $table->timestamps();
