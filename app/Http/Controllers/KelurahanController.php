@@ -16,6 +16,7 @@ class KelurahanController extends Controller
 
     //  list kelurahan didatatables
     public function data(){
+        
         $kelurahan = Kelurahan::all();
         return datatables()->of($kelurahan)
         ->addColumn('action', function($row){
@@ -129,7 +130,9 @@ class KelurahanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kelurahan = Kelurahan::find($id);
+        $kelurahan->delete();
+        
     }
 
     public function getDesa(Request $request){

@@ -1,13 +1,21 @@
 @extends('layout.master')
 
+@section('title') riwayat pemeriksaan @endsection
 @section('content')
+
+@if(session()->has('success'))
+
+<div class="alert alert-success">
+    {{ session()->get('success') }}
+</div>
+@endif
 
 <div class="card">
     <div class="card-body">
         <div class="row">
             <div class="col-10">
                 <div class="card-title">
-                    <h4 class="mb-0">Pemeriksaan</h4>
+                    <h4 class="mb-0">Riwayat Pemeriksaan </h4>
                 </div>
             </div>
             <div class="col-2">
@@ -37,7 +45,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link " id="gigi-line-tab" data-bs-toggle="tab" href="#gigi" role="tab"
-                    aria-controls="gigi" aria-selected="false">Disabled</a>
+                    aria-controls="gigi" aria-selected="false">Gigi</a>
             </li>
         </ul>
         <div class="tab-content mt-3" id="lineTabContent">
@@ -93,7 +101,23 @@
                     </table>
                 </div>
             </div>
-            <div class="tab-pane fade" id="gigi" role="tabpanel" aria-labelledby="disabled-line-tab">...</div>
+            <div class="tab-pane fade" id="gigi" role="tabpanel" aria-labelledby="disabled-line-tab">
+                <div class="">
+                    <table id="table-gigi" class="table table-striped table-bordered " style="width:100%">
+                        <thead>
+                            <tr class="col-lg-12">
+                                <th>id</th>
+                                <th style="width: 1px;">no</th>
+                                <th>Tanggal</th>
+                                <th>Waktu</th>
+                                <th>Gambar </th>
+
+                            </tr>
+                        </thead>
+                        <tbody class="col-lg-12"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -109,6 +133,7 @@
     let filter;
 
     $(document).ready(function () {
+
 
         $('#anak').select2({
             placeholder: 'Pilih anak',
@@ -130,6 +155,12 @@
                     "sEmptyTable": "Silakan pilih anak terlebih dahulu",
                 },
             }).clear();
+            $('#table-gigi').DataTable({
+                "oLanguage": {
+                    "sEmptyTable": "Silakan pilih anak terlebih dahulu",
+                },
+            }).clear();
+
 
 
         } else {
@@ -148,6 +179,12 @@
                     "sEmptyTable": "Silakan pilih anak terlebih dahulu",
                 },
             }).clear();
+            $('#table-gigi').DataTable({
+                "oLanguage": {
+                    "sEmptyTable": "Silakan pilih anak terlebih dahulu",
+                },
+            }).clear();
+   
 
         }
 
@@ -260,8 +297,8 @@
                         visible: true
                     },
                     {
-                        data: 'soal3',
-                        name: 'soal3',
+                        data: 'hasil',
+                        name: 'hasil',
                         visible: true
                     }
 
@@ -317,9 +354,68 @@
                         visible: true
                     },
                     {
-                        data: 'soal3',
-                        name: 'soal3',
+                        data: 'hasil',
+                        name: 'hasil',
                         visible: true
+                    }
+
+
+                ],
+
+            });
+
+            tableDataGigi = $('#table-gigi').DataTable({
+                "oLanguage": {
+                    "sEmptyTable": "Silakan pilih anak terlebih dahulu",
+                    "zeroRecords": "Data tidak ditemukan",
+                },
+                processing: true,
+                serverSide: true,
+
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Cari",
+                    processing: `<div class="spinner-border text-primary" role="status">
+                             <span class="visually-hidden">Loading...</span>
+                            </div>`
+                },
+                "searching": true,
+                "bPaginate": true,
+                serverSide: true,
+                stateSave: true,
+                ajax: {
+                    url: "{{ url('admin/table/data-pemeriksaan-gigi') }}",
+                    type: "GET",
+                    data: {
+                        anak: anak
+                    }
+                },
+                columns: [{
+                        data: 'id',
+                        name: 'id',
+                        visible: false
+                    },
+                    {
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        visible: true
+                    },
+
+                    {
+                        data: 'tanggal',
+                        name: 'tanggal',
+                        visible: true
+                    },
+                    {
+                        data: 'jam',
+                        name: 'jam',
+                        visible: true
+                    },
+                    {
+                        data: 'gambar',
+                        name: 'gambar',
+                        visible: true
+
                     }
 
 
@@ -335,12 +431,14 @@
                 $('#table-fisik').DataTable().clear().destroy();
                 $('#table-mata').DataTable().clear().destroy();
                 $('#table-telinga').DataTable().clear().destroy();
+                $('#table-gigi').DataTable().clear().destroy();
 
                 load_data(anak);
             } else {
                 $('#table-fisik').DataTable().clear().destroy();
                 $('#table-mata').DataTable().clear().destroy();
                 $('#table-telinga').DataTable().clear().destroy();
+                $('#table-gigi').DataTable().clear().destroy();
 
             }
         });

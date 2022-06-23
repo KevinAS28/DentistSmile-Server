@@ -9,7 +9,11 @@ use Auth;
 use App\Models\User;
 use App\Models\Orangtua;
 use App\Models\Anak;
+use App\Models\Kelurahan;
+use App\Models\ResikoKaries;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class PemeriksaanGigiController extends Controller
 {
@@ -33,7 +37,8 @@ class PemeriksaanGigiController extends Controller
         $user = Auth::user();
         $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
         $anak = Anak::Where('id_orangtua',$orangtua)->get();
-        return view('orangtua.pemeriksaan.pemeriksaanGigi',compact('anak'));
+        $kelurahan=Kelurahan::all()->pluck('nama','id');
+        return view('orangtua.pemeriksaan.pemeriksaanGigi',compact('anak','kelurahan'));
     }
 
     /**
@@ -44,8 +49,28 @@ class PemeriksaanGigiController extends Controller
      */
     public function store(Request $request)
     {
+
+        $messages = [
+           
+            'gambar1.required' => 'Gambar 1 wajib diisi.',
+            'gambar2.required' => 'Gambar 2 wajib diisi.',
+            'gambar3.required' => 'Gambar 3 wajib diisi.',
+            
+
+        ];
+        $validator = $request->validate([
+            'gambar1' => 'required',
+            'gambar2' => 'required',
+            'gambar3' => 'required'
+            
+           
+        ], $messages);
+        
+        
         $pgigi = new PemeriksaanGigi();
         $pgigi->id_anak = $request->anak;
+        $pgigi->id_sekolah= $request->id_sekolah;
+        $pgigi->id_kelas = $request->kelas;
         if(!empty($request->gambar1)){
              $file = $request->file('gambar1');
              $extension = strtolower($file->getClientOriginalExtension());
@@ -87,11 +112,31 @@ class PemeriksaanGigiController extends Controller
            $pgigi->gambar5=$filename5;
         }
         
-        $pgigi->soal1= $request->soal1;
-        $pgigi->soal2= $request->soal2;
+        $pgigi->gsoal1= $request->gsoal1;
+        $pgigi->gsoal2= $request->gsoal2;
         
         $pgigi->save();
-        return redirect()->route('viewDashboard.orangtua');
+        
+        // rk = resiko karies
+        if($pgigi->id_kelas==NULL){
+        $rk= new ResikoKaries();
+        $rk->id_pemeriksaan_gigi=$pgigi->id;
+        $rk->rksoal1=$request->rksoal1;
+        $rk->rksoal2=$request->rksoal2;
+        $rk->rksoal3=$request->rksoal3;
+        $rk->rksoal4=$request->rksoal4;
+        $rk->rksoal5=$request->rksoal5;
+        $rk->rksoal6=$request->rksoal6;
+        $rk->rksoal7=$request->rksoal7;
+        $rk->rksoal8=$request->rksoal8;
+        $rk->rksoal9=$request->rksoal9;
+        $rk->rksoal10=$request->rksoal10;
+        $rk->rksoal11=$request->rksoal11;
+        $rk->rksoal12=$request->rksoal12;
+        $rk->rksoal13=$request->rksoal13;
+        $rk->save();
+        }
+        return redirect()->route('view-riwayat')->with('success','sukses mengisi data pemeriksaan gigi');
     }
 
     /**

@@ -17,4 +17,8 @@ class PemeriksaanGigi extends Model
     {
         return $this->belongsTo(Anak::class, 'id_anak');
     }
+    public function resikoKaries()
+    {
+        return $this->belongsTo(ResikoKaries::class, 'id_pemeriksaan_gigi');
+    }
 }

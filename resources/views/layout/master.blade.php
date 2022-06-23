@@ -20,7 +20,7 @@ License: For each use you must have a valid license purchased only from above li
     <meta name="keywords"
         content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-    <title>NobleUI - HTML Bootstrap 5 Admin Dashboard Template</title>
+    <title>Senyumin - @yield('title')</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,7 +42,7 @@ License: For each use you must have a valid license purchased only from above li
     
     <link rel="stylesheet" href="{{asset('assets/vendors/prismjs/themes/prism.css')}}">
 
-  
+    <link rel="stylesheet" href="{{asset('assets/vendors/dropify/dist/dropify.min.css')}}">
     
     <!-- select 2 -->
     <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet" />
@@ -116,6 +116,8 @@ License: For each use you must have a valid license purchased only from above li
 	<script src="{{asset('assets/vendors/prismjs/prism.js')}}"></script>
 	<script src="{{asset('assets/vendors/clipboard/clipboard.min.js')}}"></script>
 
+    <script src="{{asset('assets/vendors/dropify/dist/dropify.min.js')}}"></script>
+    <script src="{{asset('assets/js/dropify.js')}}"></script>
     <!-- inject:js -->
     
 	<script src="{{asset('assets/vendors/feather-icons/feather.min.js')}}"></script>
@@ -124,6 +126,7 @@ License: For each use you must have a valid license purchased only from above li
 
     <!-- Custom js for this page -->
     <script src="{{asset('select2/dist/js/select2.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/js/dropify.js')}}"></script>
 
     <script src="{{asset('assets/js/dashboard-light.js')}}"></script>
     <script src="{{asset('assets/js/datepicker.js')}}"></script>

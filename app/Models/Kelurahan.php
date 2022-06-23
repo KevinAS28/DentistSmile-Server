@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Kelurahan extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory;
     protected $table= 'kelurahan';
     public $timestamps = true;
     protected $guarded = ['created_at', 'updated_at'];

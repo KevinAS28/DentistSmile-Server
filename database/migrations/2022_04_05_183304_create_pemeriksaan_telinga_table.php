@@ -16,13 +16,17 @@ class CreatePemeriksaanTelingaTable extends Migration
         Schema::create('pemeriksaan_telinga', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_anak')->nullable();
-            $table->string('soal1')->nullable();
-            $table->string('soal2')->nullable();
-            $table->string('soal3')->nullable();
-            $table->string('soal4')->nullable();
-            $table->string('soal5')->nullable();
-            $table->string('soal6')->nullable();
-            $table->string('soal7')->nullable();
+            $table->unsignedBigInteger('id_sekolah')->nullable();
+            $table->unsignedBigInteger('id_kelas')->nullable();
+            $table->string('tsoal1');
+            $table->string('tsoal2');
+            $table->string('tsoal3');
+            $table->string('tsoal4');
+            $table->string('tsoal5');
+            $table->string('tsoal6');
+            $table->string('tsoal7');
+            $table->string('tsoal8');
+            $table->string('tsoal9');
             $table->datetime('waktu_pemeriksaan')->nullable();
             $table->timestamps();
 

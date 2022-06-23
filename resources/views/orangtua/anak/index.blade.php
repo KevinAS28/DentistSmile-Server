@@ -1,5 +1,6 @@
 @extends('layout.master')
 
+@section('title') Data Anak @endsection
 @section('content')
 
 <div class="card">
@@ -21,9 +22,9 @@
                     <tr>
 						<th>id</th>
                         <th style="width: 1px;">no</th>
-                        <th>nama Anak</th>
-                        <th>sekolah</th>
-                        <th>kelas</th>
+                        <th>Nama Anak</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Tanggal Lahir</th>
                         <th>action</th>
                     </tr>
                 </thead>
@@ -72,13 +73,13 @@ $(document).ready(function () {
                     visible: true
                 },
                 {
-                    data: 'sekolah',
-                    name: 'sekolah',
+                    data: 'jenis_kelamin',
+                    name: 'jenis_kelamin',
                     visible: true
                 },
                 {
-                    data: 'kelas',
-                    name: 'kelas',
+                    data: 'tanggal_lahir',
+                    name: 'tanggal_lahir',
                     visible: true
                 },
                  { data: 'action', name:'action', visible:true},
@@ -87,7 +88,7 @@ $(document).ready(function () {
 
         });
 
-        $('#table-orangtua tbody').on( 'click', '#btn-delete', function () {
+        $('#table-anak tbody').on( 'click', '#btn-delete', function () {
         var data = tableData.row( $(this).parents('tr') ).data();
        Swal.fire({
             title: 'Harap Konfirmasi',
@@ -100,7 +101,7 @@ $(document).ready(function () {
         }).then((willDelete) => {
           if (willDelete.isConfirmed) {
             $.ajax({
-              url: "{{ url('delete/orangtua') }}"+"/"+data['id'],
+              url: "{{ url('delete/orangtua-anak') }}"+"/"+data['id'],
               method: 'get',
               success: function(result){
                 tableData.ajax.reload();
@@ -115,6 +116,8 @@ $(document).ready(function () {
           }
         });
       });
+
+      
         
 
 
