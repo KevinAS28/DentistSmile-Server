@@ -49,6 +49,15 @@
     </div>
 </div>
 <br>
+
+
+@if(empty($pemeriksaanFisik))
+<div class="row align-center text-center">
+    <div class= "col-md-4" ><hr></div>
+    <div class= "col-md-4" ><h5><span class="badge rounded-pill bg-secondary px-6 py-2 content-center">Data Pemeriksaan Kosong</span></h5></div>
+    <div class= "col-md-4" ><hr></div>
+</div>
+@else
 <div class="row">
     <div class= "col-md-4" ><hr></div>
     <div class= "col-md-4" ><h5><span class="badge rounded-pill bg-secondary px-6 py-2 content-center">Pemeriksaan Tahun (Tahun 2022)</span></h5></div>
@@ -65,31 +74,31 @@
                     <div class="row mb-3">
                         <label for="exampleInputMobile" class="col-sm-3 col-form-label">Tinggi badan (cm)</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Tinggi badan">
+                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Tinggi badan" readonly value="{{ $pemeriksaanFisik->tinggi_badan }}">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="exampleInputMobile" class="col-sm-3 col-form-label">Berat badan (kg)</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Berat badan">
+                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Berat badan" readonly value="{{ $pemeriksaanFisik->berat_badan }}">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="exampleInputMobile" class="col-sm-3 col-form-label">IMT (kg/m2)</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="IMT">
+                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="IMT" readonly value="{{ $pemeriksaanFisik->imt }}">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="exampleInputMobile" class="col-sm-3 col-form-label">Sistole (mmHg)</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Sistole">
+                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Sistole" readonly value="{{ $pemeriksaanFisik->sistole }}">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="exampleInputMobile" class="col-sm-3 col-form-label">Diastole (mmHg)</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Diastole">
+                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Diastole" readonly value="{{ $pemeriksaanFisik->diastole }}">
                         </div>
                     </div>
                 </div>
@@ -117,13 +126,13 @@
                                 Mata perih/merah dan bengkak
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline">
+                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline" {{ ($pemeriksaanMata->soal1 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline1">
+                            <div class="form-check form-check-inline"> 
+                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline1" {{ ($pemeriksaanMata->soal1 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -136,13 +145,13 @@
                                 Tidak dapat membaca/melihat dengan jelas
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline">
+                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline"  {{ ($pemeriksaanMata->soal2 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline1">
+                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline1"  {{ ($pemeriksaanMata->soal2 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -155,13 +164,13 @@
                                 Menggunakan kacamata
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline">
+                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline"  {{ ($pemeriksaanMata->soal3 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline1">
+                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline1"  {{ ($pemeriksaanMata->soal3 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -174,13 +183,13 @@
                                 Mata juling
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline">
+                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline"  {{ ($pemeriksaanMata->soal4 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline1">
+                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline1"  {{ ($pemeriksaanMata->soal4 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -193,13 +202,13 @@
                                 Tidak dapat membedakan warna dengan baik
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline">
+                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline"  {{ ($pemeriksaanMata->soal5 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline1">
+                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline1"  {{ ($pemeriksaanMata->soal5 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -225,6 +234,7 @@
     </div>
 </div>
 <br>
+{{ $pemeriksaanTelinga }}
 <div class="card">
     <div class="card-body">
         <h6 class="card-title">PEMERIKSAAN TELINGA</h6>
@@ -238,13 +248,13 @@
                                 Tidak merespon bila ada suara keras
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline">
+                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline"  {{ ($pemeriksaanTelinga->soal1 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline1">
+                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline1"  {{ ($pemeriksaanTelinga->soal1 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -257,13 +267,13 @@
                                 Tidak mendengar bila dipanggil
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline">
+                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline" {{ ($pemeriksaanTelinga->soal2 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline1">
+                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline1" {{ ($pemeriksaanTelinga->soal2 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -276,13 +286,13 @@
                                 Tidak dapat mendengar dengan jelas
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline">
+                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline" {{ ($pemeriksaanTelinga->soal3 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline1">
+                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline1" {{ ($pemeriksaanTelinga->soal3 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -295,13 +305,13 @@
                                 Keluar cairan telingan
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline">
+                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline" {{ ($pemeriksaanTelinga->soal4 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline1">
+                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline1" {{ ($pemeriksaanTelinga->soal4 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -314,13 +324,13 @@
                                 Telinga terasa tertutup atau tersumbat
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline">
+                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline" {{ ($pemeriksaanTelinga->soal5 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline1">
+                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline1" {{ ($pemeriksaanTelinga->soal5 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -333,13 +343,13 @@
                                 Nyeri telinga
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline6" id="radioInline">
+                                <input type="radio" class="form-check-input" name="radioInline6" id="radioInline" {{ ($pemeriksaanTelinga->soal6 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline6" id="radioInline1">
+                                <input type="radio" class="form-check-input" name="radioInline6" id="radioInline1" {{ ($pemeriksaanTelinga->soal6 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -353,19 +363,19 @@
                         <div class="col-sm-7">
                         <div class="sm-1">
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline7" id="radioInline">
+                                <input type="radio" class="form-check-input" name="radioInline7" id="radioInline" {{ ($pemeriksaanTelinga->soal7 < 35) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Kecil
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline7" id="radioInline1">
+                                <input type="radio" class="form-check-input" name="radioInline7" id="radioInline1" {{ ($pemeriksaanTelinga->soal7 >= 34 && $pemeriksaanTelinga->soal7 < 75) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Sedang
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline7" id="radioInline1">
+                                <input type="radio" class="form-check-input" name="radioInline7" id="radioInline1" {{ ($pemeriksaanTelinga->soal7 > 75) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline2">
                                     Besar
                                 </label>
@@ -392,6 +402,13 @@
     </div>
 </div>
 <br>
+@if(empty($pemeriksaanGigi))
+<div class="row align-center text-center">
+    <div class= "col-md-4" ><hr></div>
+    <div class= "col-md-4" ><h5><span class="badge rounded-pill bg-secondary px-6 py-2 content-center">Data Pemeriksaan Gigi Kosong</span></h5></div>
+    <div class= "col-md-4" ><hr></div>
+</div>
+@else
 <div class="card">
     <div class="card-body">
         <h6 class="card-title">PEMERIKSAAN GIGI</h6>
@@ -457,10 +474,11 @@
     </div>
 </div>
 <br>
-<div class="row">
+@endif
+<div class="row align-center text-center">
     <div class= "col-md-4" ><hr></div>
     <div class= "col-md-4" ><h5><span class="badge rounded-pill bg-secondary px-7 py-2 content-center">Pemeriksaan Tahun 2021</span></h5></div>
     <div class= "col-md-4" ><hr></div>
 </div>
-
+@endif
 @endsection

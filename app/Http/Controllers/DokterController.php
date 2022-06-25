@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\File;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\PemeriksaanFisik;
+use App\Models\PemeriksaanMata;
+use App\Models\PemeriksaanTelinga;
+use App\Models\PemeriksaanGigi;
 
 class DokterController extends Controller
 {
@@ -344,7 +347,10 @@ class DokterController extends Controller
     public function rekap_detail_ukgs_id($id){
         $anak = Anak::with('sekolah','kelas')->find($id);
         $pemeriksaanFisik = PemeriksaanFisik::where('id_anak', $id)->orderBy('waktu_pemeriksaan', 'desc')->first();
-        return view ('dokter.rekapData.rekapDataUKGSID', compact('anak', 'pemeriksaanFisik'));
+        $pemeriksaanMata = PemeriksaanMata::where('id_anak', $id)->orderBy('waktu_pemeriksaan', 'desc')->first();
+        $pemeriksaanTelinga = PemeriksaanTelinga::where('id_anak', $id)->orderBy('waktu_pemeriksaan', 'desc')->first();
+        $pemeriksaanGigi = PemeriksaanGigi::where('id_anak', $id)->orderBy('waktu_pemeriksaan', 'desc')->first();
+        return view ('dokter.rekapData.rekapDataUKGSID', compact('anak', 'pemeriksaanFisik', 'pemeriksaanMata', 'pemeriksaanTelinga', 'pemeriksaanGigi'));
     }
 
     public function rekap_detail_ukgm(){
