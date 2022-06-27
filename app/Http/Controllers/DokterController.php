@@ -73,9 +73,9 @@ class DokterController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'NIK.required' => 'NIK wajib diisi.',
-            'NIK.unique' => 'NIK tidak boleh sama.',
-            'NIK.min' => 'NIK harus 16 digit.',
+            'nik.required' => 'NIK wajib diisi.',
+            'nik.unique' => 'NIK tidak boleh sama.',
+            'nik.min' => 'NIK harus 16 digit.',
             'nama.required' => 'Nama wajib diisi.',
             'nama.min' => 'Nama minimal 3 huruf.',
             'jenis_kelamin.required' => 'Jenis Kelamin harus diisi.',
@@ -86,22 +86,23 @@ class DokterController extends Controller
             'password.required' => 'Password wajib diisi.',
             'password.min' => 'Password minimal 4 karaketer.',
             'no_telp.required' => 'No telepon wajib diisi.',
-            'id_kecamatan.required' => 'Kecamatan wajib diisi.',
+            
+            'no_str.required' => 'No Str wajib diisi',
 
         ];
         $validator = $request->validate([
-            // 'NIK' => ['required', 'min:16',
-            //             Rule::unique('dokter', 'NIK')],
-            // 'nama' => 'required|min:3',
-            // 'email' => ['required', 'email',
-            //             Rule::unique('users', 'email')],
-            // 'password' => 'required',
-            // 'no_telp' => 'required',
-            // 'id_kecamatan' => 'required',
-            // 'jenis_kelamin' => 'required',
-            // 'tempat_lahir' => 'required',
-            // 'tanggal_lahir' => 'required',
-            // 'no_str' => 'required',
+            'nik' => ['required', 'min:16',
+                        Rule::unique('dokter', 'NIK')],
+            'nama' => 'required',
+            'email' => ['required', 'email',
+                        Rule::unique('users', 'email')],
+            'password' => 'required',
+            'no_telp' => 'required',
+            
+            'jenis_kelamin' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'no_str' => 'required',
            
         ], $messages);
         DB::beginTransaction();
@@ -132,7 +133,7 @@ class DokterController extends Controller
         
         }catch(\Exception $e){
         DB::rollback();
-        return redirect()->route('dokter.create')->with('error','Gagal menambahkan data');
+        return redirect()->route('dokter.create')->with('error',$messages);
         }
     }
 
@@ -172,12 +173,21 @@ class DokterController extends Controller
     public function update(Request $request, $id)
     {
         $dokter = Dokter::find($id);
-        $user = User::where('id', $dokter->id_users)->update([
+        if(!empty($request->password)){
+            $user = User::where('id', $dokter->id_users)->update([
             
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => "dokter"
-        ]);
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'role' => "dokter"
+            ]);
+        }else{
+            $user = User::where('id', $dokter->id_users)->update([
+            
+                'email' => $request->email,
+                'role' => "dokter"
+            ]);
+        }
+       
         
         
         if($user){

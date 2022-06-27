@@ -15,7 +15,10 @@
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email">
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="userPassword" class="form-label">Password</label>
@@ -32,23 +35,32 @@
                       </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">NIK</label>
-                        <input type="text" class="form-control" id="nik" name="nik" autocomplete="off"
-                            placeholder="NIK">
+                        <input type="text" class="form-control @error('nik') is-invalid @enderror" id="nik" name="nik" autocomplete="off" onkeypress="return isNumber(event)" 
+                            placeholder="NIK" >
+                            @error('nik')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama" autocomplete="off"
+                        <input type="text" class="form-control  @error('nama') is-invalid @enderror"  name="nama" autocomplete="off"
                             placeholder="Nama">
+                            @error('nama')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Wilayah</label>
                         <select class="js-example-basic-single form-select" name="kecamatan" data-width="100%">
                             <option selected disabled class="mb-2" value=" ">Pilih Kecamatan</option>
-                            @foreach(\App\Models\Kecamatan::get() as $value => $key)
+                            @foreach(\App\Models\Kecamatan::orderBy('nama','asc')->get() as $value => $key)
                             <option class="mb-2" value="{{$key->id}}">{{$key->nama}}</option>
                             @endforeach
                         </select>
+                        @error('id_kecamatan')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     
                     <div class="mb-3">
@@ -70,23 +82,35 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Tempat Lahir</label>
-                        <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" autocomplete="off"
-                            placeholder="Tempat Lahir">
+                        <input type="text" class="form-control @error('tempat_lahir') is-invalid @enderror" id="tempat_lahir" name="tempat_lahir" autocomplete="off"
+                            placeholder="Tempat Lahir" >
+                            @error('tempat_lahir')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">tanggal Lahir</label>
-                        <input type="date" class="form-control" id="tanggal" name="tanggal_lahir" autocomplete="off"
-                            placeholder="Tempat Lahir">
+                        <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" id="tanggal" name="tanggal_lahir" autocomplete="off"
+                            placeholder="Tanggal lahir">
+                            @error('tanggal_lahir')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">No Hp</label>
-                        <input type="text" class="form-control" id="no_telp" name="no_telp" autocomplete="off"
-                            placeholder="Tempat Lahir">
+                        <label for="exampleInputPassword1" class="form-label">No Handphone</label>
+                        <input type="text" class="form-control @error('no_telp') is-invalid @enderror" id="no_telp" name="no_telp" autocomplete="off" onkeypress="return isNumber(event)" 
+                            placeholder="nomer hp">
+                            @error('no_telp')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">No Str</label>
-                        <input type="text" class="form-control" id="no_str" name="no_str" autocomplete="off"
-                            placeholder="no_str">
+                        <input type="text" class="form-control @error('no_str') is-invalid @enderror" id="no_str" name="no_str" autocomplete="off"
+                            placeholder="nomer str">
+                            @error('no_str')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
@@ -110,7 +134,14 @@
 		});
 	});
       
-   
+    function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
 
 </script>
 @endpush

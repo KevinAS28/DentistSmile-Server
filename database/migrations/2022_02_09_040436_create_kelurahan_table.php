@@ -18,8 +18,6 @@ class CreateKelurahanTable extends Migration
             $table->string('nama');
             $table->unsignedBigInteger('id_kecamatan');
             $table->timestamps();
-            
-
             $table->foreign('id_kecamatan')->references('id')->on('kecamatan')->onDelete('cascade');
 
             
