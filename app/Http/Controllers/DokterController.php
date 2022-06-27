@@ -7,14 +7,17 @@ use App\Models\User;
 use App\Models\Dokter;
 use App\Models\Kelurahan;
 use App\Models\Kecamatan;
+use App\Models\Kelas;
 use App\Models\Sekolah;
+use App\Models\Anak;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\PemeriksaanFisik;
-
-
+use App\Models\PemeriksaanMata;
+use App\Models\PemeriksaanTelinga;
+use App\Models\PemeriksaanGigi;
 
 class DokterController extends Controller
 {
@@ -288,15 +291,13 @@ class DokterController extends Controller
         //$sekolah   = Sekolah::all();
         //$kel_sek  = Sekolah::where('id', $id)->get();
         $kel_sek  = Sekolah::where('id_kelurahan', $request->get('id'))
-            ->pluck('nama', 'id');
+            ->get();
 
         return response()->json($kel_sek);
     }
     public function dropdown_kelas_ukgs(Request $request){
-        //$sekolah   = Sekolah::all();
-        //$kel_sek  = Sekolah::where('id', $id)->get();
-        $sek_kelas  = Kelas::where('id_kelas', $request->get('id'))
-            ->pluck('nama', 'id');
+        $sek_kelas  = Kelas::where('id_sekolah', $request->get('id'))
+            ->pluck('kelas', 'id');
         return response()->json($sek_kelas);
     }
 
@@ -330,7 +331,10 @@ class DokterController extends Controller
         return view ('dokter.pemeriksaanData.pemeriksaanDataUKGM');
     }
     public function rekap_ukgs(){
-        return view('dokter.rekapData.ukgs');
+        $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
+        $kelurahan = Kelurahan::where('id_kecamatan', $dokter)->pluck('nama','id');
+        $sekolah = Sekolah::pluck('nama','id');
+        return view('dokter.rekapData.ukgs', compact('dokter', 'kelurahan', 'sekolah'));
     }
 
     public function rekap_ukgm(){
@@ -338,6 +342,15 @@ class DokterController extends Controller
     }
     public function rekap_detail_ukgs(){
         return view ('dokter.rekapData.rekapDataUKGS');
+    }
+
+    public function rekap_detail_ukgs_id($id){
+        $anak = Anak::with('sekolah','kelas')->find($id);
+        $pemeriksaanFisik = PemeriksaanFisik::where('id_anak', $id)->orderBy('waktu_pemeriksaan', 'desc')->first();
+        $pemeriksaanMata = PemeriksaanMata::where('id_anak', $id)->orderBy('waktu_pemeriksaan', 'desc')->first();
+        $pemeriksaanTelinga = PemeriksaanTelinga::where('id_anak', $id)->orderBy('waktu_pemeriksaan', 'desc')->first();
+        $pemeriksaanGigi = PemeriksaanGigi::where('id_anak', $id)->orderBy('waktu_pemeriksaan', 'desc')->first();
+        return view ('dokter.rekapData.rekapDataUKGSID', compact('anak', 'pemeriksaanFisik', 'pemeriksaanMata', 'pemeriksaanTelinga', 'pemeriksaanGigi'));
     }
 
     public function rekap_detail_ukgm(){
@@ -393,6 +406,41 @@ class DokterController extends Controller
         })
         ->addIndexColumn()
        ->make(true);
+        
+    }
+
+    // function untuk menampilkan list anak berdasarkan id kelas
+    public function listAnakRekap(Request $request){
+        $anak = DB::table('anak')
+        ->leftJoin('sekolah', 'sekolah.id', '=', 'anak.id_sekolah')
+        ->leftJoin('kelas', 'kelas.id', '=', 'anak.id_kelas')
+        ->leftJoin(DB::raw('(SELECT
+            id_anak,
+            max(waktu_pemeriksaan) as waktu_pemeriksaan
+            FROM pemeriksaan_fisik GROUP BY id_anak) pf'), 
+            function($join)
+            {
+            $join->on('anak.id', '=', 'pf.id_anak');
+            })
+        ->select('anak.id', 'anak.nama', 'anak.jenis_kelamin', 'sekolah.nama as sekolah', 'kelas.kelas', 'pf.waktu_pemeriksaan')
+        ->get();
+        
+        return datatables()->of($anak)
+        ->addColumn('action', function($row){
+            $btn = '';
+            $btn .= '<a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data" href="'.route('dokter.rekapDetailUKGSID', $row->id).'">Lihat Rekap <i class="mdi mdi-book-open-page-variant"></i></a> ';
+            $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGS').'"><i class="mdi mdi-tooth"></i></a>';
+
+            return $btn;
+        })
+        ->addColumn('skrining', function($anak){
+            if($anak->waktu_pemeriksaan==null)
+                return "Belum";
+            else
+                return "Sudah (".date('d/m/Y', strtotime($anak->waktu_pemeriksaan)).")";
+        })
+        ->addIndexColumn()
+        ->make(true);
         
     }
 
