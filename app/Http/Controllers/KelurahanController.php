@@ -142,7 +142,7 @@ class KelurahanController extends Controller
 
     public function listDesa($id_kecamatan)
     {
-        $desa = Kelurahan::WHERE('id_kecamatan', $id_kecamatan)->get();
+        $desa = Kelurahan::WHERE('id_kecamatan', $id_kecamatan)->orderBy('nama','asc')->get();
         return response()->json($desa);
     }
 

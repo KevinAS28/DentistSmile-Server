@@ -55,6 +55,7 @@ $(document).ready(function () {
                 search: "_INPUT_",
                 searchPlaceholder: "Cari"
             },
+            order: [ 0, 'desc' ],
 			"searching": true,
             "bPaginate": true,
             serverSide: true,

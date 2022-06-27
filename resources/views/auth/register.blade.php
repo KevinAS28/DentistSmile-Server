@@ -44,17 +44,15 @@
     <div class="main-wrapper">
         <div class="page-wrapper full-page">
             <div class="page-content d-flex align-items-center justify-content-center">
-
                 <div class="row w-100 mx-0 auth-page">
                     <div class="col-md-8 col-xl-6 mx-auto">
                         <div class="card">
-                            
                             <div class="row">
                                 @if(session()->has('error'))
                                 <div class="alert alert-danger">
                                     {{ session()->get('error') }}
                                 </div>
-                            @endif
+                                @endif
                                 <div class="col-md-12 ps-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
                                         <a href="#" class="noble-ui-logo d-block mb-2">Noble<span>UI</span></a>
@@ -65,9 +63,9 @@
                                                 <label for="userEmail" class="form-label">Email address</label>
                                                 <input type="email" class="form-control" id="userEmail" name="email"
                                                     placeholder="Masukkan Email" required>
-                                                    @error('email')
-                                                    <div  class="badge bg-danger mt-2 ">{{ $message }}</div>
-                                                  @enderror
+                                                @error('email')
+                                                <div class="badge bg-danger mt-2 ">{{ $message }}</div>
+                                                @enderror
                                             </div>
 
                                             <div class="mb-3">
@@ -84,9 +82,10 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputUsername1" class="form-label">Nama</label>
-                                                <input type="text" class="form-control" 
-                                                    autocomplete="Name" placeholder="masukkan nama" name="nama" id="name" value="{{old('nama')}}" required>
-                                                    
+                                                <input type="text" class="form-control" autocomplete="Name"
+                                                    placeholder="masukkan nama" name="nama" id="name"
+                                                    value="{{old('nama')}}" required>
+
                                             </div>
                                             <div class="row col-md-10">
                                                 <div class="col-md-4">
@@ -113,7 +112,8 @@
                                                 <select class="form-select" name="id_kecamatan" id="id_kecamatan"
                                                     data-width="100%">
                                                     <option class="mb-2" value=" ">---Pilih Kecamatan---</option>
-                                                    @foreach(\App\Models\Kecamatan::get() as $value => $key)
+                                                    @foreach(\App\Models\Kecamatan::orderBy('nama','asc')->get() as
+                                                    $value => $key)
 
                                                     <option value="{{$key->id}}">{{$key->nama}}</option>
                                                     @endforeach
@@ -128,16 +128,15 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="exampleInputUsername2" class="form-label">alamat</label>
-                                                <input type="text" class="form-control" 
-                                                    autocomplete="alamat" placeholder="alamat" name="alamat"
-                                                    required>
+                                                <input type="text" class="form-control" autocomplete="alamat"
+                                                    placeholder="alamat" name="alamat" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Pendidikan</label>
                                                 <select class="form-select" name="pendidikan" id="pendidikan"
                                                     data-width="100%" required>
                                                     <option selected disabled>Pilih Pendidikan</option>
-                                                   
+
 
                                                     <option value="SD">SD</option>
                                                     <option value="SMP">SMP</option>
@@ -150,7 +149,7 @@
                                                     <option value="S2">S2</option>
                                                     <option value="S3">S3</option>
 
-                                                    
+
                                                 </select>
                                             </div>
                                             <div>
@@ -176,7 +175,7 @@
     <script src="{{asset('assets/vendors/core/core.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            
+
 
             var email = $('#userEmail');
             var password = $('#userPassword');

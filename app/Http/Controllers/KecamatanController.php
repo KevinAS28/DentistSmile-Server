@@ -15,7 +15,7 @@ class KecamatanController extends Controller
      */
     // untuk menampilkan data kecamatan di datatables
     public function data(){
-        $kecamatan = Kecamatan::all();
+        $kecamatan = Kecamatan::orderBy('nama','desc')->get();
         return datatables()->of($kecamatan)
         ->addColumn('action', function($row){
             $btn = '';
