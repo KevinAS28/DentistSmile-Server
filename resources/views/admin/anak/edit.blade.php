@@ -26,44 +26,44 @@
                             placeholder="Nama">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Tanggal Lahir</label>
-                        <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" autocomplete="off" value="{{$anak->tanggal_lahir}}"
-                            placeholder="masukkan tanggal lahir" >
+                        <label class="col-md-12 mb-2"> Jenis Kelamin </label>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" value="laki-laki" name="jenis_kelamin"
+                                id="radioInline" {{ ($anak->jenis_kelamin=="laki-laki")? "checked" : "" }}>
+                            <label class="form-check-label" for="radioInline">
+                                Laki-Laki
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" value="perempuan" class="form-check-input" name="jenis_kelamin"
+                                id="radioInline1"  {{ ($anak->jenis_kelamin=="perempuan")? "checked" : "" }}>
+                            <label class="form-check-label" for="radioInline1">
+                                Perempuan
+                            </label>
+                        </div>
                     </div>
-                    
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Sekolah</label>
+                    <div class="row col-md-10">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Tempat
+                                    Lahir</label>
+                                <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
+                                    autocomplete="off" placeholder="Tempat Lahir" value="{{$anak->tempat_lahir}}">
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Tanggal
+                                    Lahir</label>
+                                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
+                                    autocomplete="off" placeholder="masukkan tanggal lahir" value="{{$anak->tanggal_lahir}}">
+                            </div>
+                        </div>
+                    </div>
 
-                            <select name="sekolah"  class="js-example-basic-single form-select " data-width="100%"
-                            placeholder="Pilih wilayah" >
-                                <option  value="{{$anak->sekolah->nama}}" >{{$anak->sekolah->nama}} </option>
-                                {{-- @foreach(\App\Models\Sekolah::get() as $value => $key)
-                                <option value="{{$key->id}}">{{$key->nama}}</option>
-                                @endforeach --}}
-                            
-                        </select>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="edit_sekolah">
-                        <label class="form-check-label" for="exampleCheck1">
-                          Ubah Sekolah
-                        </label>
-                      </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Kelas</label>
-                        <input type="text" class="form-control" id="kelas" name="kelas" autocomplete="off" value="{{$anak->kelas->kelas}}"
-                            placeholder="masukkan kelas">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Berat Badan</label>
-                        <input type="number" class="form-control" id="bb" name="bb" autocomplete="off" value="{{$anak->bb}}"
-                            placeholder="masukkan kelas">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Tinggi badan Badan</label>
-                        <input type="number" class="form-control" id="tb" name="tb" autocomplete="off" value="{{$anak->tb}}"
-                            placeholder="masukkan tinggi badan">
-                    </div>
+                    
+
+                  
 
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
                     <a href="{{URL::previous()}}" type="button" class="btn btn-secondary">Cancel</a>

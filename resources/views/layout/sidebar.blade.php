@@ -33,12 +33,7 @@
                     <span class="link-title">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="" class="nav-link">
-                    <i class="link-icon" data-feather="box"></i>
-                    <span class="link-title">Manajemen User</span>
-                </a>
-            </li>
+
 
             <li class="nav-item">
                 <a href="{{route('dokter.index')}}" class="nav-link">

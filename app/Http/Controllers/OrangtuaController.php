@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Orangtua;
 use App\Models\Anak;
+use App\Models\Kelurahan;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
+use File;
+
 class OrangtuaController extends Controller
 {
     /**
@@ -30,6 +34,8 @@ class OrangtuaController extends Controller
             
             $btn .= '</div>';
             return $btn;
+        })->addColumn('email',function($row){
+            return $row->user->email;
         })
         ->rawColumns(['action'])->addIndexColumn()->make(true);
     }
@@ -72,6 +78,8 @@ class OrangtuaController extends Controller
             $orangtua->id_users=$user->id;
             $orangtua->nama = $request->nama;
             $orangtua->alamat = $request->alamat;
+            $orangtua->id_kecamatan = $request->id_kecamatan;
+            $orangtua->id_kelurahan = $request->id_kelurahan;
             $orangtua->pendidikan= $request->pendidikan;
             if($orangtua){
                 $orangtua->save();
@@ -101,8 +109,9 @@ class OrangtuaController extends Controller
     public function edit($id)
     {
         $orangtua= Orangtua::find($id);
+        $kelurahan=Kelurahan::all();
 
-        return view('admin.orangtua.edit', compact('orangtua'));
+        return view('admin.orangtua.edit', compact('orangtua','kelurahan'));
     }
 
     /**
@@ -115,18 +124,34 @@ class OrangtuaController extends Controller
     public function update(Request $request, $id)
     {
             $orangtua = orangtua::find($id);
-            $user = User::where('id', $orangtua->id_users)->update([
+            if(!empty($request->password)){
+                $user = User::where('id', $orangtua->id_users)->update([
             
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => "orangtua"
-        ]);
+                    'email' => $request->email,
+                    
+                    'password' => bcrypt($request->password),
+                    'role' => "orangtua"
+                ]);
+            }else{
+                $user = User::where('id', $orangtua->id_users)->update([
+            
+                    'email' => $request->email,
+                    
+                    'role' => "orangtua"
+                ]);
+            };
+           
+       
         
         
         if($user){
             $orangtua = $orangtua->update([
             'nama' => $request->nama,
             'alamat' => $request->alamat,
+            'id_kecamatan' => $request->id_kecamatan,
+            'id_kelurahan' => $request->id_kelurahan,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
             'pendidikan' => $request->pendidikan,
             ]);
             return redirect()->route('orangtua.index');
@@ -201,6 +226,14 @@ class OrangtuaController extends Controller
             $orangtua->tanggal_lahir = $request->tanggal_lahir;
             $orangtua->alamat = $request->alamat;
             $orangtua->pendidikan= $request->pendidikan;
+            if(!empty($request->foto)){
+                $file = $request->file('foto');
+                $extension = strtolower($file->getClientOriginalExtension());
+                $filename = uniqid() . '.' . $extension;
+                Storage::put('public/orangtua/' . $filename, File::get($file));
+               $orangtua->foto=$filename;
+           }
+            
             
             $orangtua->save();
             DB::commit();
@@ -263,7 +296,7 @@ class OrangtuaController extends Controller
         $anak->jenis_kelamin = $request->jenis_kelamin;
         $anak->tempat_lahir = $request->tempat_lahir;
         $anak->tanggal_lahir = $request->tanggal_lahir;
-      
+        
 
         $anak->save();
         return redirect()->route('viewanak');

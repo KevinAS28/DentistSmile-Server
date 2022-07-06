@@ -15,7 +15,7 @@ class SekolahController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function data(){
-        $sekolah = Sekolah::all();
+        $sekolah = Sekolah::where('type','sekolah')->get();
         return datatables()->of($sekolah)
         ->addColumn('action', function($row){
             $btn = '<div class="btn-group btn-group-sm">';
@@ -68,7 +68,7 @@ class SekolahController extends Controller
         }else{
             $data= new Sekolah();
             $data->id_kelurahan= $request->kelurahan;
-            $data->type= $request->type;
+            $data->type= 'sekolah';
             $data->nama= $request->nama;
             $data->alamat= $request->alamat;
 
@@ -125,7 +125,7 @@ class SekolahController extends Controller
         } else {
           $data = Sekolah::find($id);
           $data->id_kelurahan   = $request->kelurahan_edit;
-            $data->type   = $request->type_edit;
+          $data->type   = 'sekolah';
           $data->nama = $request->nama_edit;
           $data->alamat = $request->alamat_edit;
           $data->save();

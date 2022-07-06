@@ -1,7 +1,5 @@
 @extends('layout.master')
-@section('title')
-Admin
-@endsection
+
 @section('content')
 
 <div class="card">
@@ -9,22 +7,24 @@ Admin
         <div class="row">
             <div class="col-10">
                	<div class="card-title">
-								<h4 class="mb-0">Orangtua</h4>
+								<h4 class="mb-0">Posyandu</h4>
 							</div>
             </div>
             <div class="col-2">
-            <a href="{{route('anak.create')}}" type="button" id="btn-create"  class="btn btn-primary">Tambah data</a>
+            <button type="button" id="btn-create" class="btn btn-primary">Tambah data</button>
             </div>
         </div>
         <hr />
 			<div class="table-responsive">
-            <table id="table-anak" class="table " style="width:100%" >
+            <table id="table-posyandu" class="table "  style="width:100%">
                 <thead>
                     <tr>
 						<th>id</th>
                         <th style="width: 1px;">no</th>
-                        <th>orangtua</th>
-                        <th>nama Anak</th>
+                        <th>Kecamatan</th>
+                        <th>Kelurahan</th>     
+                        <th>nama</th>
+                        <th>alamat</th>
                         <th>action</th>
                     </tr>
                 </thead>
@@ -33,7 +33,8 @@ Admin
         </div>
     </div>
 </div>
-
+@include('admin.posyandu.create')
+@include('admin.posyandu.edit')
 @endsection
 
 @push('after-script')
@@ -42,7 +43,17 @@ Admin
 var tableData;
 
 $(document).ready(function () {
-        tableData = $('#table-anak').DataTable({
+    $("#btn-create").on('click', function(){
+          $('.fileinput-remove-button').click();
+          $('input[name=kelurahan]').val('');
+          $('input[name=type]').val('');
+          $('input[name=nama]').val('');
+          $('input[name=alamat]').val('');
+          $('#modal-create').modal('show');
+
+
+      });
+        tableData = $('#table-posyandu').DataTable({
             processing: true,
 			serverSide: true,
             responsive: true,
@@ -55,7 +66,7 @@ $(document).ready(function () {
             serverSide: true,
             stateSave: true,
             ajax: {
-                url: "{{ url('admin/table/data-anak') }}",
+                url: "{{ url('admin/table/data-posyandu') }}",
                 type: "GET",
             },
             columns: [{
@@ -66,25 +77,55 @@ $(document).ready(function () {
 				{
 					data: 'DT_RowIndex', name:'DT_RowIndex', visible:true
 				},
+
                 {
-                    data: 'orangtua',
-                    name: 'orangtua',
+                    data: 'kecamatan',
+                    name: 'kecamatan',
                     visible: true
                 },
+                {
+                    data: 'kelurahan',
+                    name: 'kelurahan',
+                    visible: true
+                },
+
                 {
                     data: 'nama',
                     name: 'nama',
                     visible: true
                 },
-
- 
+                {
+                    data: 'alamat',
+                    name: 'alamat',
+                    visible: true
+                },
+                
                  { data: 'action', name:'action', visible:true},
 
             ],
 
         });
 
-        $('#table-orangtua tbody').on( 'click', '#btn-delete', function () {
+        $("#table-posyandu tbody").on('click','#btn-edit', function(){
+          $('.fileinput-remove-button').click();
+          $('#modal-edit').modal('show');
+
+
+          var data = tableData.row( $(this).parents('tr') ).data();
+          var id = data['id'];
+          var token = $('input[name=_token]').val();
+
+          $('input[name=_method]').val('PUT');
+          $('input[name=_token]').val(token);
+          $('input[name=id_edit]').val(data['id']);
+          $('input[name=nama_edit]').val(data['nama']);
+          $('input[name=alamat_edit]').val(data['alamat']);
+          
+
+
+        });
+
+        $('#table-posyandu tbody').on( 'click', '#btn-delete', function () {
         var data = tableData.row( $(this).parents('tr') ).data();
        Swal.fire({
             title: 'Harap Konfirmasi',
@@ -97,7 +138,7 @@ $(document).ready(function () {
         }).then((willDelete) => {
           if (willDelete.isConfirmed) {
             $.ajax({
-              url: "{{ url('delete/orangtua') }}"+"/"+data['id'],
+              url: "{{ url('delete/posyandu') }}"+"/"+data['id'],
               method: 'get',
               success: function(result){
                 tableData.ajax.reload();
@@ -112,7 +153,6 @@ $(document).ready(function () {
           }
         });
       });
-        
 
 
 })

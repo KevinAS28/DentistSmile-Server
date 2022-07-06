@@ -18,8 +18,8 @@ class AnakController extends Controller
         return datatables()->of($anak)
         ->addColumn('action', function($row){
             $btn = '<div class="btn-group btn-group-sm">';
-            $btn .= '<a href="'.route('anak.edit',$row->id).'" class="btn btn-warning btn-icon"><i class="lni lni-pencil-alt "></i></a>';
-            $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="lni lni-trash"></i></button>';
+            $btn .= '<a href="'.route('anak.edit',$row->id).'" class="btn btn-warning btn-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+            $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="fa fa-trash " ></i></button>';
             
             $btn .= '</div>';
             return $btn;
@@ -27,12 +27,7 @@ class AnakController extends Controller
         ->addColumn('orangtua',function($row){
             return $row->orangtua->nama;
         })
-        ->addColumn('sekolah',function($row){
-            return $row->sekolah->nama;
-        })
-        ->addColumn('kelas',function($row){
-            return $row->kelas->kelas;
-        })
+
         ->rawColumns(['action'])->addIndexColumn()->make(true);
     }
 
@@ -62,35 +57,21 @@ class AnakController extends Controller
        
      
         $messages = [
-            'NIK.required' => 'NIK wajib diisi.',
-            'NIK.unique' => 'NIK tidak boleh sama.',
-            'NIK.min' => 'NIK harus 16 digit.',
+
             'nama.required' => 'Nama wajib diisi.',
             'nama.min' => 'Nama minimal 3 huruf.',
             'jenis_kelamin.required' => 'Jenis Kelamin harus diisi.',
-            'Tempat_lahir.required' => 'Tempat lahir harus diisi',
-            'Tanggal_lahir.required' => 'Tanggal lahir harus diisi',
-            'email.required' => 'Email wajib diisi.',
-            'email.unique' => 'Email sudah terpakai.',
-            'password.required' => 'Password wajib diisi.',
-            'password.min' => 'Password minimal 4 karaketer.',
-            'no_telp.required' => 'No telepon wajib diisi.',
-            'id_kecamatan.required' => 'Kecamatan wajib diisi.',
+            'tempat_lahir.required' => 'Tempat lahir harus diisi',
+            'tanggal_lahir.required' => 'Tanggal lahir harus diisi',
+
 
         ];
         $validator = $request->validate([
-            // 'NIK' => ['required', 'min:16',
-            //             Rule::unique('dokter', 'NIK')],
-            // 'nama' => 'required|min:3',
-            // 'email' => ['required', 'email',
-            //             Rule::unique('users', 'email')],
-            // 'password' => 'required',
-            // 'no_telp' => 'required',
-            // 'id_kecamatan' => 'required',
-            // 'jenis_kelamin' => 'required',
-            // 'tempat_lahir' => 'required',
-            // 'tanggal_lahir' => 'required',
-            // 'no_str' => 'required',
+            'nama'=>'required',
+            'jenis_kelamin' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+          
            
         ], $messages);
 
@@ -100,11 +81,11 @@ class AnakController extends Controller
             $anak->jenis_kelamin = $request->jenis_kelamin;
             $anak->tempat_lahir = $request->tempat_lahir;
             $anak->tanggal_lahir = $request->tanggal_lahir;
-            $anak->id_sekolah = $request->sekolah;
-            $anak->kelas = $request->kelas;
+
 
             $anak->save();
             
+            return redirect()->route('anak.index');
             
         
     }
@@ -146,11 +127,10 @@ class AnakController extends Controller
 
         $anak->id_orangtua=$request->orangtua;
         $anak->nama = $request->nama;
+        $anak->jenis_kelamin = $request->jenis_kelamin;
+        $anak->tempat_lahir = $request->tempat_lahir;
         $anak->tanggal_lahir = $request->tanggal_lahir;
-        $anak->sekolah = $request->sekolah;
-        $anak->kelas = $request->kelas;
-        $anak->bb = $request->bb;
-        $anak->tb = $request->tb;
+     
 
         $anak->save();
         return redirect()->route('anak.index');

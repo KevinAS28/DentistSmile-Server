@@ -7,16 +7,17 @@
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title">Tambah Orangtua</h6>
-                <form action="{{ route('anak.store') }}" class="forms-sample" id="anak-store" method="post" nctype="multipart/form-data" files=true >
+                <form action="{{ route('anak.store') }}" class="forms-sample" id="anak-store" method="post"
+                    nctype="multipart/form-data" files=true>
                     @csrf
 
                     <div class="mb-3">
                         <label class="form-label">Nama Orangtua</label>
                         <select class="js-example-basic-single form-select" name="orangtua" data-width="100%">
                             @foreach(\App\Models\Orangtua::get() as $value => $key)
-                      
-                            <option value="{{$key->id}}">{{$key->nama}}</option>
-                        @endforeach
+
+                            <option value="{{$key->id}}">{{$key->nama}} - {{$key->kelurahan->nama}}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -26,31 +27,43 @@
                             placeholder="Nama">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Tanggal Lahir</label>
-                        <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" autocomplete="off"
-                            placeholder="masukkan tanggal lahir">
+                        <label class="col-md-12 mb-2"> Jenis Kelamin </label>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" value="laki-laki" name="jenis_kelamin"
+                                id="radioInline">
+                            <label class="form-check-label" for="radioInline">
+                                Laki-Laki
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" value="perempuan" class="form-check-input" name="jenis_kelamin"
+                                id="radioInline1">
+                            <label class="form-check-label" for="radioInline1">
+                                Perempuan
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row col-md-10">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Tempat
+                                    Lahir</label>
+                                <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
+                                    autocomplete="off" placeholder="Tempat Lahir">
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Tanggal
+                                    Lahir</label>
+                                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
+                                    autocomplete="off" placeholder="masukkan tanggal lahir">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Sekolah</label>
-                        <input type="text" class="form-control" id="sekolah" name="sekolah" autocomplete="off"
-                            placeholder="alamat">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Kelas</label>
-                        <input type="text" class="form-control" id="kelas" name="kelas" autocomplete="off"
-                            placeholder="masukkan kelas">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Berat Badan</label>
-                        <input type="number" class="form-control" id="bb" name="bb" autocomplete="off"
-                            placeholder="masukkan kelas">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Tinggi badan Badan</label>
-                        <input type="number" class="form-control" id="tb" name="tb" autocomplete="off"
-                            placeholder="masukkan tinggi badan">
-                    </div>
+
+
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
                     <a href="{{URL::previous()}}" type="button" class="btn btn-secondary">Cancel</a>
                 </form>
@@ -69,26 +82,13 @@
             $.ajax({
                 'type': 'POST',
                 'url': "{{ route('dokter.store') }}",
-                'data': new FormData(this),
-                'processData': false,
-                'contentType': false,
-                'dataType': 'JSON',
-                'success': function (data) {
-                    if (data.success) {
-                        window.location.href = "/dokter"
-                    } else {
-                        for (var count = 0; count < data.errors.length; count++) {
-                            swal(data.errors[count], {
-                                icon: "error",
-                                timer: false,
-                            });
-                        }
-                    }
-                },
-
-            });
-        });
-    });
-
-</script> --}}
-@endpush
+'data': new FormData(this),
+'processData': false,
+'contentType': false,
+'dataType': 'JSON',
+'success': function (data) {
+if (data.success) {
+window.location.href = "/dokter"
+} else {
+for (var count = 0; count < data.errors.length; count++) { swal(data.errors[count], { icon: "error" , timer: false, });
+    } } }, }); }); }); </script> --}} @endpush

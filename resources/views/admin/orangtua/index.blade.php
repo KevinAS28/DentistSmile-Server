@@ -21,6 +21,7 @@
                     <tr>
 						<th>id</th>
                         <th style="width: 1px;">no</th>
+                        <th>email</th>
                         <th>nama</th>
                         <th>alamat</th>
                         <th>pendidikan</th>
@@ -65,6 +66,11 @@ $(document).ready(function () {
 				{
 					data: 'DT_RowIndex', name:'DT_RowIndex', visible:true
 				},
+                {
+                    data: 'email',
+                    name: 'email',
+                    visible: true
+                },
                 {
                     data: 'nama',
                     name: 'nama',

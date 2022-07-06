@@ -45,6 +45,10 @@ class User extends Authenticatable
     ];
 
     public function dokter(){
-        return $this->hasMany('App\Models\Dokter', 'id_users');
+        return $this->hasOne('App\Models\Dokter', 'id_users');
+    }
+    public function orangtua()
+    {
+        return $this->hasOne('App\Models\Orangtua','id_users' );
     }
 }

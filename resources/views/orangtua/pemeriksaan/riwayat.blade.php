@@ -130,6 +130,7 @@
     var tableData;
     var tableDataMata;
     var tableDataTelinga;
+    var tableDataGigi;
     let filter;
 
     $(document).ready(function () {

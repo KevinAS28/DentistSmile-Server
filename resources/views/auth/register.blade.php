@@ -21,7 +21,9 @@
     <!-- core:css -->
     <link rel="stylesheet" href="{{asset('assets/vendors/core/core.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendors/select2/select2.min.css')}}">
+
     <!-- endinject -->
+    <link rel="stylesheet" href="{{asset('assets/vendors/dropify/dist/dropify.min.css')}}">
 
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{asset('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')}}">
@@ -57,7 +59,7 @@
                                     <div class="auth-form-wrapper px-4 py-5">
                                         <a href="#" class="noble-ui-logo d-block mb-2">Noble<span>UI</span></a>
                                         <h5 class="text-muted fw-normal mb-4">Buat akun</h5>
-                                        <form class="forms-sample" action="{{route('registeruser')}}" method="POST">
+                                        <form class="forms-sample" action="{{route('registeruser')}}" method="POST" enctype="multipart/form-data" files=true>
                                             @csrf
                                             <div class="mb-3">
                                                 <label for="userEmail" class="form-label">Email address</label>
@@ -144,13 +146,21 @@
                                                     <option value="D1">D1</option>
                                                     <option value="D2">D2</option>
                                                     <option value="D3">D3</option>
-                                                    <option value="D3">D3</option>
+                                                    <option value="D4">D4</option>
                                                     <option value="S1">S1</option>
                                                     <option value="S2">S2</option>
                                                     <option value="S3">S3</option>
 
 
                                                 </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="exampleInputPassword1" class="form-label">Foto Gigi Orangtua</label>
+                                                <input type="file" class="form-control dropify" name="foto"
+                                                    placeholder="masukkan gambar">
+                                                @error('foto')
+                                                <div class="badge bg-danger mt-2 ">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div>
                                                 <button type="submit"
@@ -173,6 +183,8 @@
     </div>
 
     <script src="{{asset('assets/vendors/core/core.js')}}"></script>
+    <script src="{{asset('assets/vendors/dropify/dist/dropify.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/js/dropify.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -210,6 +222,14 @@
                     });
                 }
             });
+            $('.dropify').dropify({
+    messages: {
+        'default': 'Drag and drop a file here or click',
+        'replace': 'Drag and drop or click to replace',
+        'remove':  'Hapus',
+        'error':   'Ooops, something wrong happended.'
+    }
+});
         });
 
     </script>

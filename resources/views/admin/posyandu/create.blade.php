@@ -5,7 +5,7 @@
                 <h5 class="modal-title">Tambah Sekolah</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
             </div>
-            <form class="form-horizontal" id="sekolah-store" method="post" enctype="multipart/form-data" files=true>
+            <form class="form-horizontal" id="posyandu-store" method="post" enctype="multipart/form-data" files=true>
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
@@ -38,33 +38,8 @@
                             <input type="text" name="alamat" class="form-control" placeholder="">
                         </div>
                     </div>
-                    <div class="form-group">
+                   
 
-
-
-                        <div class="form-group mb-2 form-kelas" >
-                            <label for="">Kelas :</label>
-                            <div class="input-group">
-                                
-                                <select class="form-select" name="kelas[]" data-width="100%">
-                                    <option class="mb-2" value=" ">---Pilih kelas---</option>
-                                    <option class="mb-2" value="1">1</option>
-                                    <option class="mb-2" value="2">2</option>
-                                    <option class="mb-2" value="3">3</option>
-                                    <option class="mb-2" value="4">4</option>
-                                    <option class="mb-2" value="5">5</option>
-                                    <option class="mb-2" value="6">6</option>
-        
-                                </select>
-                                <button type="button" name="add" id="add" class="btn btn-success btn-md"><i
-                                        class="fa fa-plus" aria-hidden="true"></i>
-                                        
-                                </button>
-                            </div>
-                        </div>
-                        <div id="body">
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -78,11 +53,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
         /* save data */
-        $('#sekolah-store').on('submit', function (e) {
+        $('#posyandu-store').on('submit', function (e) {
             e.preventDefault();
             $.ajax({
                 'type': 'POST',
-                'url': "{{ route('sekolah.store') }}",
+                'url': "{{ route('posyandu.store') }}",
                 'data': new FormData(this),
                 'processData': false,
                 'contentType': false,
@@ -133,31 +108,8 @@
             }
         });
 
-        $('#add ').click(function () {
-            var html = ` <div class="form-group form-add mb-2 form-kelas">
-                        <label for="">Kelas :</label>
-                        <div class="input-group">
-                            <select class="form-select" name="kelas[]" data-width="100%">
-                                    <option class="mb-2" value=" ">---Pilih kelas---</option>
-                                    <option class="mb-2" value="1">1</option>
-                                    <option class="mb-2" value="2">2</option>
-                                    <option class="mb-2" value="3">3</option>
-                                    <option class="mb-2" value="4">4</option>
-                                    <option class="mb-2" value="5">5</option>
-                                    <option class="mb-2" value="6">6</option>
-        
-                                </select>
-                        <button type="button" name="remove" id="" class="btn btn-danger btn-md remove" ><i class="fa fa-times" aria-hidden="true"></i></button>
-                        </div>
-                    </div>  `
-            $('#body').append(html);
 
 
-        });
-
-        $(document).on('click', '.remove', function () {
-            $(this).closest(".form-add").remove();
-        });
 
 
 

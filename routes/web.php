@@ -10,6 +10,7 @@ use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\PemeriksaanFisikController;
 use App\Http\Controllers\PemeriksaanGigiController;
+use App\Http\Controllers\PosyanduController;
 
 
 /*
@@ -59,6 +60,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('kecamatan', KecamatanController::class)->except('destroy');
     Route::resource('kelurahan', KelurahanController::class)->except('destroy');
     Route::resource('sekolah', SekolahController::class)->except('destroy');
+    Route::resource('posyandu', PosyanduController::class)->except('destroy');
     Route::get('/dashboard',function(){return view('admin.dashboard.dashboard');
     });
     Route::get('/kelas/{id}',[App\Http\Controllers\SekolahController::class,'viewKelas'])->name('viewKelas');
@@ -94,6 +96,7 @@ Route::group(['prefix' => 'admin/table'], function () {
     Route::get('/data-pemeriksaan-mata',[PemeriksaanFisikController::class,'riwayatmata'])->name('riwayat-mata');
     Route::get('/data-pemeriksaan-telinga',[PemeriksaanFisikController::class,'riwayattelinga'])->name('riwayat-telinga');
     Route::get('/data-pemeriksaan-gigi',[PemeriksaanFisikController::class,'riwayatgigi'])->name('riwayat-gigi');
+    Route::get('/data-posyandu',[PosyanduController::class, 'data'])->name('posyandu.table');
     
     Route::get('/data-kelas/{id}',[KelasController::class,'data'])->name('kelas.table');
     
@@ -112,6 +115,7 @@ Route::group(['prefix' => 'delete'], function () {
   Route::get('/kelurahan/{id}',[KelurahanController::class, 'destroy'])->name('kelurahan.destroy');
   Route::get('sekolah/{id}', [SekolahController::class, 'destroy'])->name('sekolah.destroy');
   Route::get('/orangtua-anak/{id}',[OrangtuaController::Class,'deleteAnak'])->name('orangtua-anak.destroy');
+  Route::get('/posyandu/{id}', [PosyanduController::class, 'destroy'])->name('posyandu.destroy');
 
 });
 

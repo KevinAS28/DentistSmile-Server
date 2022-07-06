@@ -289,12 +289,12 @@ class PemeriksaanFisikController extends Controller
             ->addIndexColumn()
             ->make(true);
     }
-    public function riwayatgigi(){
+    public function riwayatgigi(Request $request){
         $user = Auth::user();
         $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
-        $anak = Anak::Where('id_orangtua',$orangtua)->get(); 
+        $anak = Anak::Where('id_orangtua',$orangtua)->get();
         if(!empty($request->anak)){
-            $pemeriksaanGigi = PemeriksaanGigi::Where('id_anak',$anak)->get();
+            $pemeriksaanGigi = PemeriksaanGigi::Where('id_anak',$request->anak)->get();
            }else{
             $pemeriksaanGigi = PemeriksaanGigi::all();
             }
