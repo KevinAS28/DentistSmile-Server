@@ -18,14 +18,40 @@
                     <div id="wizard">
                         <h2>Pengisian Odontogram</h2>
                         <section>
-                            <h4>First Step</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut nulla nunc. Maecenas
-                                arcu
-                                sem, hendrerit a tempor quis,
-                                sagittis accumsan tellus. In hac habitasse platea dictumst. Donec a semper dui. Nunc
-                                eget
-                                quam libero. Nam at felis metus.
-                                Nam tellus dolor, tristique ac tempus nec, iaculis quis nisi.</p>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div>
+                                        <strong>PENGISIAN ODONTOGRAM</strong>
+                                        <p>Pilih posisi gigi dan klik aksi yang seseuai dengan kondisi gigi anak</p>
+                                    </div>
+                                    <!-- <div class="border border-light m-1 h-75"> -->
+                                        <div class="border border-light h-75 w-100 text-center" style="line-height: 0;">
+                                            @include('dokter.pemeriksaanData.odontogram')
+                                        </div>
+                                    <!-- </div> -->
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="d-flex flex-column bd-highlight mb-3">
+                                        <div class="p-2 bd-highlight"><strong>Aksi:</strong></div>
+                                        <div class="p-2 bd-highlight">
+                                            <div class="btn-group-vertical me-1" role="group" aria-label="Vertical button group">
+                                                <button type="button" class="btn btn-light" style="text-align:left;">Belum Erupsi</button>
+                                                <button type="button" class="btn btn-light" style="text-align:left;">Erupsi Sebagian</button>
+                                                <button type="button" class="btn btn-light" style="text-align:left;">Karies</button>
+                                                <button type="button" class="btn btn-light" style="text-align:left;">Non Vital</button>
+                                                <button type="button" class="btn btn-light" style="text-align:left;">Tambalan Logam</button>
+                                                <button type="button" class="btn btn-light" style="text-align:left;">Tambalan Non Logam</button>
+                                                <button type="button" class="btn btn-light" style="text-align:left;">Mahkota Logam</button>
+                                                <button type="button" class="btn btn-light" style="text-align:left;">Sisa Akar</button>
+                                                <button type="button" class="btn btn-light" style="text-align:left;">Gigi Hilang</button>
+                                                <button type="button" class="btn btn-light" style="text-align:left;">Jembatan</button>
+                                                <button type="button" class="btn btn-light" style="text-align:left;">Gigi Tiruan Lepas</button>
+                                                <button type="button" class="btn btn-danger">HAPUS AKSI</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
                         </section>
 
                         <h2>Skrining Indeks</h2>
