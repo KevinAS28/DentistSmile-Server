@@ -53,7 +53,7 @@
                                                 <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="gigi-hilang"><img src="{{asset('pemeriksaan/gigi-hilang.png')}}" alt="">&nbsp<span class="align-middle">Gigi Hilang</span></button>
                                                 <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="jembatan"><img src="{{asset('pemeriksaan/jembatan.png')}}" alt="">&nbsp<span class="align-middle">Jembatan</span></button>
                                                 <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="gigi-tiruan-lepas"><img src="{{asset('pemeriksaan/gigi-tiruan-lepas.png')}}" alt="">&nbsp<span class="align-middle">Gigi Tiruan Lepas</span></button>
-                                                <button type="button" class="btn btn-danger">HAPUS AKSI</button>
+                                                <button type="button" class="btn btn-danger btn-aksi" id="hapus-aksi">HAPUS AKSI</button>
                                             </div>
                                         </div>
                                     </div>
@@ -392,12 +392,14 @@
 @push('after-script')
 <script>
     $(document).ready(function(){
-        let action, jml, posisi;
-        let belumErupsi = [], erupsiSebagain = [], karies = [], nonVital = [], tambalanLogam = [], tambalanNonLogam = [], mahkotaLogam = [], mahkotaNonLogam = [], sisaAkar = [], gigiHilang = [], jembatan = [], gigiTiruanLepas = [];
+        let action, jml, posisi, x, y, filled;
+        let arrayAksi = {}, belumErupsi = [], erupsiSebagian = [], karies = [], nonVital = [], tambalanLogam = [], tambalanNonLogam = [], mahkotaLogam = [], mahkotaNonLogam = [], sisaAkar = [], gigiHilang = [], jembatan = [], gigiTiruanLepas = [];
         $('.btn-aksi').click(function(){
-            $('.btn-aksi').removeClass('btn-success').addClass('btn-light');
-            $(this).removeClass('btn-light').addClass('btn-success');
             action = $(this).attr('id');
+            if (action != 'hapus-aksi') {
+                $('.btn-aksi').removeClass('btn-success').addClass('btn-light');
+                $(this).removeClass('btn-light').addClass('btn-success');
+            }
         });
 
         $('polygon').click(function (evt) {
@@ -405,120 +407,184 @@
 			var odontogram = $(evt.target);
 			var odontogramParent = odontogram.parent().attr('id');
             var odontogramId = odontogramParent + '-' +odontogram.attr('id');
+
+            let foundParent = Object.keys(arrayAksi).filter(function(key) {
+                return arrayAksi[key].includes(odontogramParent);
+            });
+
+            let foundParentId = Object.keys(arrayAksi).filter(function(key) {
+                return arrayAksi[key].includes(odontogramId);
+            });
+
             switch (action) {
                 case 'belum-erupsi':
-                    if (!belumErupsi.includes(odontogramParent)) {
+                    if (foundParent < 1) {
+                        type = 'insert-text';
+                        x = 1.5; y = 15;
+                        color = '#5D5FEF';
+                        style = 'font-size: 10pt;font-weight:bold';
+                        element = 'UE';
                         belumErupsi.push(odontogramParent);
+                        arrayAksi['belumErupsi'] = belumErupsi;
+                        jml = belumErupsi.length;
+                        posisi = belumErupsi;
+                        filled = true;
                     }
-                    jml = belumErupsi.length;
-                    posisi = belumErupsi;
                     break;
                 case 'erupsi-sebagian':
-                    if (!erupsiSebagain.includes(odontogramParent)) {
-                        erupsiSebagain.push(odontogramParent);
+                    if (foundParent < 1) {
+                        type = 'insert-text';
+                        x = 1.5; y = 15;
+                        color = '#5D5FEF';
+                        style = 'font-size: 10pt;font-weight:bold';
+                        element = 'PE'
+                        erupsiSebagian.push(odontogramParent);
+                        arrayAksi['erupsiSebagian'] = erupsiSebagian;
+                        jml = erupsiSebagian.length;
+                        posisi = erupsiSebagian;
+                        filled = true;
                     }
-                    jml = erupsiSebagain.length;
-                    posisi = erupsiSebagain;
                     break;
                 case 'karies':
-                    color = 'grey';
-                    if (!karies.includes(odontogramId)) {
+                    if (foundParentId < 1) {
+                        color = 'grey';
                         karies.push(odontogramId);
+                        arrayAksi['karies'] = karies;
+                        jml = karies.length;
+                        posisi = karies;
+                        filled = true;
                     }
-                    jml = karies.length;
-                    posisi = karies;
                     break;
                 case 'non-vital':
-                    if (!nonVital.includes(odontogramParent)) {
+                    if (foundParent < 1) {
+                        type = 'insert-non-vital';
                         nonVital.push(odontogramParent);
+                        arrayAksi['nonVital'] = nonVital;
+                        jml = nonVital.length;
+                        posisi = nonVital;
+                        style = 'stroke-width:2';
+                        color = '#C71616';
+                        filled = true;
                     }
-                    jml = nonVital.length;
-                    posisi = nonVital;
                     break;
                 case 'tambalan-logam':
-                    color = 'pink';
-                    if (!tambalanLogam.includes(odontogramId)) {
+                    if (foundParentId < 1) {
+                        color = 'pink';
                         tambalanLogam.push(odontogramId);
+                        arrayAksi['tambalanLogam'] = tambalanLogam;
+                        jml = tambalanLogam.length;
+                        posisi = tambalanLogam;
+                        filled = true;
                     }
-                    jml = tambalanLogam.length;
-                    posisi = tambalanLogam;
                     break;
                 case 'tambalan-non-logam':
-                    color = 'blue';
-                    if (!tambalanNonLogam.includes(odontogramId)) {
+                    if (foundParentId < 1) {
+                        color = 'blue';
                         tambalanNonLogam.push(odontogramId);
+                        arrayAksi['tambalanNonLogam'] = tambalanNonLogam;
+                        jml = tambalanNonLogam.length;
+                        posisi = tambalanNonLogam;
+                        filled = true;
                     }
-                    jml = tambalanNonLogam.length;
-                    posisi = tambalanNonLogam;
                     break;
                 case 'mahkota-logam':
-                    color = 'green';
-                    if (!mahkotaLogam.includes(odontogramId)) {
+                    if (foundParentId < 1) {
+                        color = 'green';
                         mahkotaLogam.push(odontogramId);
+                        arrayAksi['mahkotaLogam'] = mahkotaLogam;
+                        jml = mahkotaLogam.length;
+                        posisi = mahkotaLogam;
+                        filled = true;
                     }
-                    jml = mahkotaLogam.length;
-                    posisi = mahkotaLogam;
                     break;
                 case 'mahkota-non-logam':
-                    color = '#66D1D1';
-                    if (!mahkotaNonLogam.includes(odontogramId)) {
+                    if (foundParentId < 1) {
+                        color = '#66D1D1';
                         mahkotaNonLogam.push(odontogramId);
+                        arrayAksi['mahkotaNonLogam'] = mahkotaNonLogam;
+                        jml = mahkotaNonLogam.length;
+                        posisi = mahkotaNonLogam;
+                        filled = true;
                     }
-                    jml = mahkotaNonLogam.length;
-                    posisi = mahkotaNonLogam;
                     break;
                 case 'sisa-akar':
-                    type = 'insert-text';
-                    color = '#5D5FEF';
-                    style = 'font-size: 15pt;font-weight:bold';
-                    element = 'V'
-                    if (!sisaAkar.includes(odontogramParent)) {
+                    if (foundParent < 1) {
+                        type = 'insert-text';
+                        x = 3.5; y = 17;
+                        color = '#5D5FEF';
+                        style = 'font-size: 15pt;font-weight:bold';
+                        element = 'V'
                         sisaAkar.push(odontogramParent);
+                        arrayAksi['sisaAkar'] = sisaAkar;
+                        jml = sisaAkar.length;
+                        posisi = sisaAkar;
+                        filled = true;
                     }
-                    jml = sisaAkar.length;
-                    posisi = sisaAkar;
                     break;
                 case 'gigi-hilang':
-                    type = 'insert-text';
-                    color = '#C71616';
-                    style = 'font-size: 15pt;font-weight:bold';
-                    element = 'X'
-                    if (!gigiHilang.includes(odontogramParent)) {
-                    gigiHilang.push(odontogramParent);
+                    if (foundParent < 1) {
+                        type = 'insert-text';
+                        x = 3.5; y = 17;
+                        color = '#C71616';
+                        style = 'font-size: 15pt;font-weight:bold';
+                        element = 'X'
+                        gigiHilang.push(odontogramParent);
+                        arrayAksi['gigiHilang'] = gigiHilang;
+                        jml = gigiHilang.length;
+                        posisi = gigiHilang;
+                        filled = true;
                     }
-                    jml = gigiHilang.length;
-                    posisi = gigiHilang;
                     break;
                 case 'jembatan':
-                    type = 'insert-line';
-                    color = '#048A3F';
-                    style = 'stroke-width:2';
-                    if (!jembatan.includes(odontogramParent)) {
+                    if (foundParent < 1) {
+                        type = 'insert-line';
+                        color = '#048A3F';
+                        style = 'stroke-width:2';
                         jembatan.push(odontogramParent);
+                        arrayAksi['jembatan'] = jembatan;
+                        jml = jembatan.length;
+                        posisi = jembatan;
+                        filled = true;
                     }
-                    jml = jembatan.length;
-                    posisi = jembatan;
                     break;
                 case 'gigi-tiruan-lepas':
-                    type = 'insert-line';
-                    color = '#E4AA04';
-                    style = 'stroke-width:2';
-                    if (!gigiTiruanLepas.includes(odontogramParent)) {
+                    if (foundParent < 1) {
+                        type = 'insert-line';
+                        color = '#E4AA04';
+                        style = 'stroke-width:2';
                         gigiTiruanLepas.push(odontogramParent);
+                        arrayAksi['gigiTiruanLepas'] = gigiTiruanLepas;
+                        jml = gigiTiruanLepas.length;
+                        posisi = gigiTiruanLepas;
+                        filled = true;
                     }
-                    jml = gigiTiruanLepas.length;
-                    posisi = gigiTiruanLepas;
+                    break;
+                case 'hapus-aksi':
+                    Object.keys(arrayAksi).filter(function(key) {
+                        return arrayAksi[key].filter(function(e) { return e !== odontogramParent });
+                    });
                     break;
             }
+
+            console.log(arrayAksi);
+
             if (type == 'insert-text') {
-                d3.select('g#'+odontogramParent).append('text').attr('x', '3.5').attr('y', '17').attr('stroke', color).attr('fill', color).attr('stroke-width', '0.1').attr('style', style).text(element);
+                d3.select('g#'+odontogramParent).append('text').attr('id',odontogramParent).attr('x', x).attr('y', y).attr('stroke', color).attr('fill', color).attr('stroke-width', '0.1').attr('style', style).text(element);
             } else if (type == 'insert-line') {
-                d3.select('g#'+odontogramParent).append('line').attr('x1', '20').attr('y1', '10').attr('x2', '0').attr('y2', '10').attr('stroke',color).attr('style', style);
+                d3.select('g#'+odontogramParent).append('line').attr('id',odontogramParent).attr('x1', '20').attr('y1', '10').attr('x2', '0').attr('y2', '10').attr('stroke',color).attr('style', style);
+            } else if (type == 'insert-non-vital') {
+                d3.select('g#'+odontogramParent).append('line').attr('id',odontogramId).attr('x1', '5').attr('y1', '15').attr('x2', '0').attr('y2', '15').attr('stroke',color).attr('style', style);
+                d3.select('g#'+odontogramParent).append('line').attr('id',odontogramId).attr('x1', '15').attr('y1', '5').attr('x2', '5').attr('y2', '15').attr('stroke',color).attr('style', style);
+                d3.select('g#'+odontogramParent).append('line').attr('id',odontogramId).attr('x1', '20').attr('y1', '5').attr('x2', '15').attr('y2', '5').attr('stroke',color).attr('style', style);
             } else {
                 odontogram.attr('fill', color);
             }
-            $("#keterangan form").find("input[name='"+action+"']").val(jml);
-            $("#keterangan form").find("input[name='"+action+"']").parent().find('span').text(posisi.toString().toUpperCase());
+
+            if (filled) {
+                filled = false;
+                $("#keterangan form").find("input[name='"+action+"']").val(jml);
+                $("#keterangan form").find("input[name='"+action+"']").parent().find('span').text(posisi.toString().toUpperCase());
+            }
 		});
     });
 </script>
