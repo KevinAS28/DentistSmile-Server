@@ -41,19 +41,19 @@
                                         <div class="p-2 bd-highlight"><strong>Aksi:</strong></div>
                                         <div class="p-2 bd-highlight">
                                             <div class="btn-group-vertical me-1" role="group" aria-label="Vertical button group">
-                                                <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="belum-erupsi"><img src="{{asset('pemeriksaan/belum-erupsi.png')}}" alt="">&nbsp<span class="align-middle">Belum Erupsi</span></button>
-                                                <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="erupsi-sebagian"><img src="{{asset('pemeriksaan/erupsi-sebagian.png')}}" alt="">&nbsp<span class="align-middle">Erupsi Sebagian</span></button>
-                                                <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="karies"><img src="{{asset('pemeriksaan/karies.png')}}" alt="">&nbsp<span class="align-middle">Karies</span></button>
-                                                <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="non-vital"><img src="{{asset('pemeriksaan/non-vital.png')}}" alt="">&nbsp<span class="align-middle">Non Vital</span></button>
-                                                <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="tambalan-logam"><img src="{{asset('pemeriksaan/tambalan-logam.png')}}" alt="">&nbsp<span class="align-middle">Tambalan Logam</span></button>
-                                                <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="tambalan-non-logam"><img src="{{asset('pemeriksaan/tambalan-non-logam.png')}}" alt="">&nbsp<span class="align-middle">Tambalan Non Logam</span></button>
-                                                <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="mahkota-logam"><img src="{{asset('pemeriksaan/mahkota-logam.png')}}" alt="">&nbsp<span class="align-middle">Mahkota Logam</span></button>
-                                                <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="mahkota-non-logam"><img src="{{asset('pemeriksaan/mahkota-non-logam.png')}}" alt="">&nbsp<span class="align-middle">Mahkota Non Logam</span></button>
-                                                <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="sisa-akar"><img src="{{asset('pemeriksaan/sisa-akar.png')}}" alt="">&nbsp<span class="align-middle">Sisa Akar</span></button>
-                                                <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="gigi-hilang"><img src="{{asset('pemeriksaan/gigi-hilang.png')}}" alt="">&nbsp<span class="align-middle">Gigi Hilang</span></button>
-                                                <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="jembatan"><img src="{{asset('pemeriksaan/jembatan.png')}}" alt="">&nbsp<span class="align-middle">Jembatan</span></button>
-                                                <button type="button" class="btn btn-light btn-aksi" style="text-align:left;" id="gigi-tiruan-lepas"><img src="{{asset('pemeriksaan/gigi-tiruan-lepas.png')}}" alt="">&nbsp<span class="align-middle">Gigi Tiruan Lepas</span></button>
-                                                <button type="button" class="btn btn-danger btn-aksi" id="hapus-aksi">HAPUS AKSI</button>
+                                                <button type="button" class="btn btn-light btn-group-aksi btn-aksi" style="text-align:left;" id="belum-erupsi"><img src="{{asset('pemeriksaan/belum-erupsi.png')}}" alt="">&nbsp<span class="align-middle">Belum Erupsi</span></button>
+                                                <button type="button" class="btn btn-light btn-group-aksi btn-aksi" style="text-align:left;" id="erupsi-sebagian"><img src="{{asset('pemeriksaan/erupsi-sebagian.png')}}" alt="">&nbsp<span class="align-middle">Erupsi Sebagian</span></button>
+                                                <button type="button" class="btn btn-light btn-group-aksi btn-aksi" style="text-align:left;" id="karies"><img src="{{asset('pemeriksaan/karies.png')}}" alt="">&nbsp<span class="align-middle">Karies</span></button>
+                                                <button type="button" class="btn btn-light btn-group-aksi btn-aksi" style="text-align:left;" id="non-vital"><img src="{{asset('pemeriksaan/non-vital.png')}}" alt="">&nbsp<span class="align-middle">Non Vital</span></button>
+                                                <button type="button" class="btn btn-light btn-group-aksi btn-aksi" style="text-align:left;" id="tambalan-logam"><img src="{{asset('pemeriksaan/tambalan-logam.png')}}" alt="">&nbsp<span class="align-middle">Tambalan Logam</span></button>
+                                                <button type="button" class="btn btn-light btn-group-aksi btn-aksi" style="text-align:left;" id="tambalan-non-logam"><img src="{{asset('pemeriksaan/tambalan-non-logam.png')}}" alt="">&nbsp<span class="align-middle">Tambalan Non Logam</span></button>
+                                                <button type="button" class="btn btn-light btn-group-aksi btn-aksi" style="text-align:left;" id="mahkota-logam"><img src="{{asset('pemeriksaan/mahkota-logam.png')}}" alt="">&nbsp<span class="align-middle">Mahkota Logam</span></button>
+                                                <button type="button" class="btn btn-light btn-group-aksi btn-aksi" style="text-align:left;" id="mahkota-non-logam"><img src="{{asset('pemeriksaan/mahkota-non-logam.png')}}" alt="">&nbsp<span class="align-middle">Mahkota Non Logam</span></button>
+                                                <button type="button" class="btn btn-light btn-group-aksi btn-aksi" style="text-align:left;" id="sisa-akar"><img src="{{asset('pemeriksaan/sisa-akar.png')}}" alt="">&nbsp<span class="align-middle">Sisa Akar</span></button>
+                                                <button type="button" class="btn btn-light btn-group-aksi btn-aksi" style="text-align:left;" id="gigi-hilang"><img src="{{asset('pemeriksaan/gigi-hilang.png')}}" alt="">&nbsp<span class="align-middle">Gigi Hilang</span></button>
+                                                <button type="button" class="btn btn-light btn-group-aksi btn-aksi" style="text-align:left;" id="jembatan"><img src="{{asset('pemeriksaan/jembatan.png')}}" alt="">&nbsp<span class="align-middle">Jembatan</span></button>
+                                                <button type="button" class="btn btn-light btn-group-aksi btn-aksi" style="text-align:left;" id="gigi-tiruan-lepas"><img src="{{asset('pemeriksaan/gigi-tiruan-lepas.png')}}" alt="">&nbsp<span class="align-middle">Gigi Tiruan Lepas</span></button>
+                                                <button type="button" class="btn btn-danger btn-group-aksi" id="hapus-aksi">HAPUS AKSI</button>
                                             </div>
                                         </div>
                                     </div>
@@ -390,202 +390,5 @@
 </style>
 @endpush
 @push('after-script')
-<script>
-    $(document).ready(function(){
-        let action, jml, posisi, x, y, filled;
-        let arrayAksi = {}, belumErupsi = [], erupsiSebagian = [], karies = [], nonVital = [], tambalanLogam = [], tambalanNonLogam = [], mahkotaLogam = [], mahkotaNonLogam = [], sisaAkar = [], gigiHilang = [], jembatan = [], gigiTiruanLepas = [];
-        $('.btn-aksi').click(function(){
-            action = $(this).attr('id');
-            if (action != 'hapus-aksi') {
-                $('.btn-aksi').removeClass('btn-success').addClass('btn-light');
-                $(this).removeClass('btn-light').addClass('btn-success');
-            }
-        });
-
-        $('polygon').click(function (evt) {
-            let color,type,element;
-			var odontogram = $(evt.target);
-			var odontogramParent = odontogram.parent().attr('id');
-            var odontogramId = odontogramParent + '-' +odontogram.attr('id');
-
-            let foundParent = Object.keys(arrayAksi).filter(function(key) {
-                return arrayAksi[key].includes(odontogramParent);
-            });
-
-            let foundParentId = Object.keys(arrayAksi).filter(function(key) {
-                return arrayAksi[key].includes(odontogramId);
-            });
-
-            switch (action) {
-                case 'belum-erupsi':
-                    if (foundParent < 1) {
-                        type = 'insert-text';
-                        x = 1.5; y = 15;
-                        color = '#5D5FEF';
-                        style = 'font-size: 10pt;font-weight:bold';
-                        element = 'UE';
-                        belumErupsi.push(odontogramParent);
-                        arrayAksi['belumErupsi'] = belumErupsi;
-                        jml = belumErupsi.length;
-                        posisi = belumErupsi;
-                        filled = true;
-                    }
-                    break;
-                case 'erupsi-sebagian':
-                    if (foundParent < 1) {
-                        type = 'insert-text';
-                        x = 1.5; y = 15;
-                        color = '#5D5FEF';
-                        style = 'font-size: 10pt;font-weight:bold';
-                        element = 'PE'
-                        erupsiSebagian.push(odontogramParent);
-                        arrayAksi['erupsiSebagian'] = erupsiSebagian;
-                        jml = erupsiSebagian.length;
-                        posisi = erupsiSebagian;
-                        filled = true;
-                    }
-                    break;
-                case 'karies':
-                    if (foundParentId < 1) {
-                        color = 'grey';
-                        karies.push(odontogramId);
-                        arrayAksi['karies'] = karies;
-                        jml = karies.length;
-                        posisi = karies;
-                        filled = true;
-                    }
-                    break;
-                case 'non-vital':
-                    if (foundParent < 1) {
-                        type = 'insert-non-vital';
-                        nonVital.push(odontogramParent);
-                        arrayAksi['nonVital'] = nonVital;
-                        jml = nonVital.length;
-                        posisi = nonVital;
-                        style = 'stroke-width:2';
-                        color = '#C71616';
-                        filled = true;
-                    }
-                    break;
-                case 'tambalan-logam':
-                    if (foundParentId < 1) {
-                        color = 'pink';
-                        tambalanLogam.push(odontogramId);
-                        arrayAksi['tambalanLogam'] = tambalanLogam;
-                        jml = tambalanLogam.length;
-                        posisi = tambalanLogam;
-                        filled = true;
-                    }
-                    break;
-                case 'tambalan-non-logam':
-                    if (foundParentId < 1) {
-                        color = 'blue';
-                        tambalanNonLogam.push(odontogramId);
-                        arrayAksi['tambalanNonLogam'] = tambalanNonLogam;
-                        jml = tambalanNonLogam.length;
-                        posisi = tambalanNonLogam;
-                        filled = true;
-                    }
-                    break;
-                case 'mahkota-logam':
-                    if (foundParentId < 1) {
-                        color = 'green';
-                        mahkotaLogam.push(odontogramId);
-                        arrayAksi['mahkotaLogam'] = mahkotaLogam;
-                        jml = mahkotaLogam.length;
-                        posisi = mahkotaLogam;
-                        filled = true;
-                    }
-                    break;
-                case 'mahkota-non-logam':
-                    if (foundParentId < 1) {
-                        color = '#66D1D1';
-                        mahkotaNonLogam.push(odontogramId);
-                        arrayAksi['mahkotaNonLogam'] = mahkotaNonLogam;
-                        jml = mahkotaNonLogam.length;
-                        posisi = mahkotaNonLogam;
-                        filled = true;
-                    }
-                    break;
-                case 'sisa-akar':
-                    if (foundParent < 1) {
-                        type = 'insert-text';
-                        x = 3.5; y = 17;
-                        color = '#5D5FEF';
-                        style = 'font-size: 15pt;font-weight:bold';
-                        element = 'V'
-                        sisaAkar.push(odontogramParent);
-                        arrayAksi['sisaAkar'] = sisaAkar;
-                        jml = sisaAkar.length;
-                        posisi = sisaAkar;
-                        filled = true;
-                    }
-                    break;
-                case 'gigi-hilang':
-                    if (foundParent < 1) {
-                        type = 'insert-text';
-                        x = 3.5; y = 17;
-                        color = '#C71616';
-                        style = 'font-size: 15pt;font-weight:bold';
-                        element = 'X'
-                        gigiHilang.push(odontogramParent);
-                        arrayAksi['gigiHilang'] = gigiHilang;
-                        jml = gigiHilang.length;
-                        posisi = gigiHilang;
-                        filled = true;
-                    }
-                    break;
-                case 'jembatan':
-                    if (foundParent < 1) {
-                        type = 'insert-line';
-                        color = '#048A3F';
-                        style = 'stroke-width:2';
-                        jembatan.push(odontogramParent);
-                        arrayAksi['jembatan'] = jembatan;
-                        jml = jembatan.length;
-                        posisi = jembatan;
-                        filled = true;
-                    }
-                    break;
-                case 'gigi-tiruan-lepas':
-                    if (foundParent < 1) {
-                        type = 'insert-line';
-                        color = '#E4AA04';
-                        style = 'stroke-width:2';
-                        gigiTiruanLepas.push(odontogramParent);
-                        arrayAksi['gigiTiruanLepas'] = gigiTiruanLepas;
-                        jml = gigiTiruanLepas.length;
-                        posisi = gigiTiruanLepas;
-                        filled = true;
-                    }
-                    break;
-                case 'hapus-aksi':
-                    Object.keys(arrayAksi).filter(function(key) {
-                        return arrayAksi[key].filter(function(e) { return e !== odontogramParent });
-                    });
-                    break;
-            }
-
-            console.log(arrayAksi);
-
-            if (type == 'insert-text') {
-                d3.select('g#'+odontogramParent).append('text').attr('id',odontogramParent).attr('x', x).attr('y', y).attr('stroke', color).attr('fill', color).attr('stroke-width', '0.1').attr('style', style).text(element);
-            } else if (type == 'insert-line') {
-                d3.select('g#'+odontogramParent).append('line').attr('id',odontogramParent).attr('x1', '20').attr('y1', '10').attr('x2', '0').attr('y2', '10').attr('stroke',color).attr('style', style);
-            } else if (type == 'insert-non-vital') {
-                d3.select('g#'+odontogramParent).append('line').attr('id',odontogramId).attr('x1', '5').attr('y1', '15').attr('x2', '0').attr('y2', '15').attr('stroke',color).attr('style', style);
-                d3.select('g#'+odontogramParent).append('line').attr('id',odontogramId).attr('x1', '15').attr('y1', '5').attr('x2', '5').attr('y2', '15').attr('stroke',color).attr('style', style);
-                d3.select('g#'+odontogramParent).append('line').attr('id',odontogramId).attr('x1', '20').attr('y1', '5').attr('x2', '15').attr('y2', '5').attr('stroke',color).attr('style', style);
-            } else {
-                odontogram.attr('fill', color);
-            }
-
-            if (filled) {
-                filled = false;
-                $("#keterangan form").find("input[name='"+action+"']").val(jml);
-                $("#keterangan form").find("input[name='"+action+"']").parent().find('span').text(posisi.toString().toUpperCase());
-            }
-		});
-    });
-</script>
+<script src="{{asset('assets/js/skrining-odontogram.js')}}"></script>
 @endpush

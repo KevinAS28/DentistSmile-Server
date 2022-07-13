@@ -55,14 +55,6 @@
         var y = (rootSVGSize.y - dataLabelSize.y) + (rootSVGSize.height - dataLabelSize.height) / 7;
 
         d3.select("g.gmain").attr("transform", "scale(1.75) translate(" + x + "," + y + ")");
-
-        // $('polygon').mouseover(function (e) {
-		// 	var odontogram = $(e.target);
-		// 	var no = odontogram.attr('id');
-		// 	var position = odontogram.parent().attr('id');
-		// });
-
-
     })
 
 </script>
