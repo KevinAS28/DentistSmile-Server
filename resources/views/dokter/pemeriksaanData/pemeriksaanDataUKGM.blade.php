@@ -71,18 +71,18 @@
                                             <div class="row mb-3">
                                                 <label for="d" class="col-sm-1 col-form-label">d</label>
                                                 <div class="col-sm-2">
-                                                    <input type="text" class="form-control" id="exampleInputD"
-                                                        placeholder="0">
+                                                    <input type="number" name="def_d" class="form-control skor-d"
+                                                        value="0" min="0">
                                                 </div>
                                                 <label for="e" class="col-sm-1 col-form-label">e</label>
                                                 <div class="col-sm-2">
-                                                    <input type="email" class="form-control" id="exampleInputE"
-                                                        placeholder="0">
+                                                    <input type="number" name="def_e" class="form-control skor-e"
+                                                        value="0" min="0">
                                                 </div>
                                                 <label for="f" class="col-sm-1 col-form-label">f</label>
                                                 <div class="col-sm-2">
-                                                    <input type="number" class="form-control" id="exampleInputF"
-                                                        placeholder="0">
+                                                    <input type="number" name="def_f" class="form-control skor-f"
+                                                        value="0" min="0">
                                                 </div>
                                             </div>
                                         </form>
@@ -90,7 +90,7 @@
                                             <div class="row mb-3">
                                                 <label for="readonlyDEFT" class="col-sm-1 col-form-label">def-t</label>
                                                 <div class="col-sm-1">
-                                                    <input type="text" class="form-control" id="exampleDEFT" readonly
+                                                    <input type="number" name="def_t" class="form-control total-skor" readonly
                                                         value="0">
                                                 </div>
                                             </div>
@@ -100,18 +100,18 @@
                                             <div class="row mb-3">
                                                 <label for="d" class="col-sm-1 col-form-label">d</label>
                                                 <div class="col-sm-2">
-                                                    <input type="text" class="form-control" id="exampleInputUsername2"
-                                                        placeholder="0">
+                                                    <input type="number" name="dmf_d" class="form-control skor-d"
+                                                        value="0" min="0">
                                                 </div>
                                                 <label for="m" class="col-sm-1 col-form-label">e</label>
                                                 <div class="col-sm-2">
-                                                    <input type="email" class="form-control" id="exampleInputEmail2"
-                                                        placeholder="0">
+                                                    <input type="number" name="dmf_e" class="form-control skor-e"
+                                                        value="0" min="0">
                                                 </div>
                                                 <label for="f" class="col-sm-1 col-form-label">f</label>
                                                 <div class="col-sm-2">
-                                                    <input type="number" class="form-control" id="exampleInputMobile"
-                                                        placeholder="0">
+                                                    <input type="number" name="dmf_f" class="form-control skor-f"
+                                                        value="0" min="0">
                                                 </div>
                                             </div>
                                         </form>
@@ -119,7 +119,7 @@
                                             <div class="row mb-3">
                                                 <label for="readonlyDMFT" class="col-sm-1 col-form-label">DMF-T</label>
                                                 <div class="col-sm-1">
-                                                    <input type="text" class="form-control" id="exampleDEFT" readonly
+                                                    <input type="number" name="dmf_t" class="form-control total-skor" readonly
                                                         value="0">
                                                 </div>
                                             </div>
@@ -390,7 +390,6 @@
 </style>
 @endpush
 @push('after-script')
-<script src="{{asset('assets/js/skrining-odontogram.js')}}"></script>
 <script>
     $(document).ready(function(){
         $("#wizard").steps({
@@ -428,4 +427,5 @@
 
     });
 </script>
+<script src="{{asset('assets/js/skrining-odontogram.js')}}"></script>
 @endpush
