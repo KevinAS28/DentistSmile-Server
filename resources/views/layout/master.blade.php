@@ -147,33 +147,6 @@ License: For each use you must have a valid license purchased only from above li
         });
 
     </script>
-
-    <script>
-        $("#wizard").steps({
-            headerTag: "h2",
-            bodyTag: "section",
-            transitionEffect: "slideLeft",
-            autoFocus: true,
-            labels: {
-                finish: "Submit",
-                next: "Lanjut",
-                previous: "Kembali"
-            },
-            onStepChanged:function(event, currentIndex, newIndex){
-                console.log("Step changed to: " + currentIndex);
-
-                if(currentIndex == 0){
-                    document.getElementById("keterangan").style.display = "";
-                }else{
-                    document.getElementById("keterangan").style.display = "none";
-                }
-                return true;
-            },
-        });
-
-    </script>
-
-
     <!-- End custom js for this page -->
     @stack('after-script')
 

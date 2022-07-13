@@ -29,8 +29,8 @@
                                             @include('dokter.pemeriksaanData.odontogram')
                                         </div>
                                         <div class="form-check mt-2">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">
+                                            <input type="checkbox" class="form-check-input" id="validation-skrining">
+                                            <label class="form-check-label" for="validation-skrining">
                                             <strong>VALIDASI</strong> Pemeriksaan odontogram telah sesuai kondisi gigi anak
                                             </label>
                                         </div>
@@ -391,4 +391,41 @@
 @endpush
 @push('after-script')
 <script src="{{asset('assets/js/skrining-odontogram.js')}}"></script>
+<script>
+    $(document).ready(function(){
+        $("#wizard").steps({
+            headerTag: "h2",
+            bodyTag: "section",
+            transitionEffect: "slideLeft",
+            autoFocus: true,
+            labels: {
+                finish: "Submit",
+                next: "Lanjut",
+                previous: "Kembali"
+            },
+            onStepChanging:function(){
+                let validation = $("#validation-skrining").is(':checked');
+                if (!validation) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Silahkan lakukan validasi terlebih dahulu',
+                        showConfirmButton: false,
+                    });
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+            onStepChanged:function(event, currentIndex, newIndex){
+                if(currentIndex == 0){
+                    document.getElementById("keterangan").style.display = "";
+                }else{
+                    document.getElementById("keterangan").style.display = "none";
+                }
+                return true;
+            },
+        });
+
+    });
+</script>
 @endpush
