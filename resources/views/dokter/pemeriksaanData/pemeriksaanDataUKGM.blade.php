@@ -425,6 +425,15 @@
             },
         });
 
+        $(document).on("change","input[name=def_d],input[name=def_e],input[name=def_f]", function(){
+            let total = parseInt($("input[name=def_d]").val()) + parseInt($("input[name=def_e]").val()) + parseInt($("input[name=def_f]").val());
+            $("input[name=def_t]").val(total);
+        });
+
+        $(document).on("change","input[name=dmf_d],input[name=dmf_e],input[name=dmf_f]", function(){
+            let total = parseInt($("input[name=dmf_d]").val()) + parseInt($("input[name=dmf_e]").val()) + parseInt($("input[name=dmf_f]").val());
+            $("input[name=dmf_t]").val(total);
+        });
     });
 </script>
 <script src="{{asset('assets/js/skrining-odontogram.js')}}"></script>
