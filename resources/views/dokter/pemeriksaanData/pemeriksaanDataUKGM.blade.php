@@ -144,9 +144,8 @@
                                                             Karies Anak
                                                         </label>
                                                         <div class="col-sm-5">
-                                                            <select class="js-example-basic-single form-select"
-                                                                data-width="100%" placeholder="Pilih Posyandu">
-                                                                <option selected disabled>Pilih Risiko</option>
+                                                            <select class="form-select"
+                                                                data-width="100%" placeholder="Pilih Resiko">
                                                                 <option value="#">Option 1</option>
                                                                 <option value="#">Option 2</option>
                                                                 <option value="#">Option 3</option>
@@ -272,18 +271,16 @@
                             <form class="forms-sample">
                                 <div class="row mb-3">
                                     <label for="diagnosa" class="col-sm-2 col-form-label">Resiko Karies</label>
-                                    <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="exampleInputD"
-                                            placeholder="isi diagnosa...">
+                                    <div class="col-sm-10">
+                                        <textarea name="diagnosa" class="form-control w-100" id="" rows="2"></textarea>
                                     </div>
                                 </div>
                             </form>
                             <form class="forms-sample">
                                 <div class="row mb-3">
                                     <label for="rekomendasi" class="col-sm-2 col-form-label">Rekomendasi</label>
-                                    <div class="col-sm-5">
-                                        <input type="text" class="form-control" id="exampleInputD"
-                                            placeholder="isi rekomendasi...">
+                                    <div class="col-sm-10">
+                                        <textarea name="rekomendasi" class="form-control w-100" id="" rows="2"></textarea>
                                     </div>
                                 </div>
                             </form>
