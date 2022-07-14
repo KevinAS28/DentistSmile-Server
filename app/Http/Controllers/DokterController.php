@@ -334,7 +334,17 @@ class DokterController extends Controller
         }
     }
     public function pemeriksaan_data_ukgs(){
-        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS');
+        $odontograms = [
+            'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
+            'b2k1' => ['p55','p54','p53','p52','p51'],
+            'b3k1' => ['p85','p84','p83','p82','p81'],
+            'b4k1' => ['p48','p47','p46','45','p44','p43','p42','p41'],
+            'b1k2' => ['p21','p22','p23','p24','p25','p26','p27','p28'],
+            'b2k2' => ['p61','p62','p63','p64','p65'],
+            'b3k2' => ['p71','p72','p73','p74','p75'],
+            'b4k2' => ['p31','p32','p33','p34','p35','p36','p37','p38']
+        ];
+        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS',compact('odontograms'));
     }
 
     public function pemeriksaan_data_ukgm(){

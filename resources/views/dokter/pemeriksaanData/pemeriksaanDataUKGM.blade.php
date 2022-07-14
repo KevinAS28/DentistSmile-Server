@@ -146,11 +146,9 @@
                                                         <div class="col-sm-5">
                                                             <select class="form-select"
                                                                 data-width="100%" placeholder="Pilih Resiko">
-                                                                <option value="#">Option 1</option>
-                                                                <option value="#">Option 2</option>
-                                                                <option value="#">Option 3</option>
-                                                                <option value="#">Option 4</option>
-                                                                <option value="#">Option 5</option>
+                                                                <option value="#">Tinggi</option>
+                                                                <option value="#">Sedang</option>
+                                                                <option value="#">Rendah</option>
                                                             </select>
                                                         </div>
                                                     </div>
