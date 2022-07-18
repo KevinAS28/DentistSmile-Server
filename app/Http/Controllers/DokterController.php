@@ -334,6 +334,7 @@ class DokterController extends Controller
         }
     }
     public function pemeriksaan_data_ukgs(){
+        // $data = PemeriksaanGigi::findOrFail($id);
         $odontograms = [
             'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
             'b2k1' => ['p55','p54','p53','p52','p51'],
@@ -348,6 +349,7 @@ class DokterController extends Controller
     }
 
     public function pemeriksaan_data_ukgm(){
+        // $data = PemeriksaanGigi::findOrFail($id);
         $odontograms = [
             'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
             'b2k1' => ['p55','p54','p53','p52','p51'],

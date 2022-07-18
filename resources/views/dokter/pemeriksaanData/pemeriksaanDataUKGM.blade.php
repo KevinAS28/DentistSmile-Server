@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Pemeriksaan Gigi</a></li>
+            <li class="breadcrumb-item"><a href="{{route('dokter.periksaUKGM')}}">Pemeriksaan Gigi</a></li>
             <li class="breadcrumb-item active" aria-current="page">
                 <--- User ---->
             </li>
@@ -23,8 +23,16 @@
                                     <div>
                                         <strong>PENGISIAN ODONTOGRAM</strong>
                                         <p>Pilih posisi gigi dan klik aksi yang seseuai dengan kondisi gigi anak</p>
+                                        <div class="w-100 mb-1">
+                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
+                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
+                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
+                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
+                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
+                                        </div>
                                     </div>
                                     <!-- <div class="border border-light m-1 h-75"> -->
+                                        
                                         <div class="border border-light h-75 w-100 text-center" style="line-height: 0;">
                                             @include('dokter.pemeriksaanData.odontogram')
                                         </div>
@@ -339,6 +347,13 @@
                             <label for="" class="col-sm-3 col-form-label">Mahkota Logam</label>
                             <div class="col-sm-9">
                                 <input type="text" name="mahkota-logam" class="form-control" readonly>
+                                <span class="posisi-gigi"></span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="" class="col-sm-3 col-form-label">Mahkota Non Logam</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="mahkota-non-logam" class="form-control" readonly>
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
