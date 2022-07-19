@@ -14,7 +14,7 @@ use App\Models\ResikoKaries;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
-
+use Carbon\Carbon;
 class PemeriksaanGigiController extends Controller
 {
     /**
@@ -65,12 +65,13 @@ class PemeriksaanGigiController extends Controller
             
            
         ], $messages);
-        
+        $waktu_pemeriksaan = Carbon::now();
         
         $pgigi = new PemeriksaanGigi();
         $pgigi->id_anak = $request->anak;
         $pgigi->id_sekolah= $request->id_sekolah;
         $pgigi->id_kelas = $request->kelas;
+        $pgigi->waktu_pemeriksaan = $waktu_pemeriksaan;
         if(!empty($request->gambar1)){
              $file = $request->file('gambar1');
              $extension = strtolower($file->getClientOriginalExtension());

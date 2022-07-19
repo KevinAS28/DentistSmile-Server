@@ -188,6 +188,7 @@ class OrangtuaController extends Controller
            
             'email.required' => 'Email wajib diisi.',
             'email.unique' => 'Email sudah terdaftar.',
+            'password.unique'=>'Password wajib diisi',
 
         ];
         $validator = $request->validate([
@@ -196,7 +197,7 @@ class OrangtuaController extends Controller
             // 'nama' => 'required|min:3',
             'email' => ['required', 'email',
                         Rule::unique('users', 'email')],
-            // 'password' => 'required',
+            'password' => 'required',
             // 'no_telp' => 'required',
             // 'id_kecamatan' => 'required',
             // 'jenis_kelamin' => 'required',
@@ -287,6 +288,23 @@ class OrangtuaController extends Controller
     // function untuk menambah anak di halaman tambah anak orangtua
     public function tambahAnak(Request $request)
     {
+
+        $messages = [
+            'nama.required' => 'Nama wajib diisi.',
+            'jenis_kelamin.required' => 'Jenis Kelamin wajib diisi',
+            'tempat_lahir.required'  => 'Tempat lahir wajib diisi',
+            'tanggal_lahir.required' => 'Tanggal lahir wajib diisi'
+
+        ];
+        $validator = $request->validate([
+
+            'nama' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'jenis_kelamin' => 'required'
+           
+        ], $messages);
+
         $user = Auth::user();
         $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
 
@@ -308,6 +326,21 @@ class OrangtuaController extends Controller
     }
 
     public function updateAnak(Request $request, $id){
+        $messages = [
+            'nama.required' => 'Nama wajib diisi.',
+            'jenis_kelamin.required' => 'Jenis Kelamin wajib diisi',
+            'tempat_lahir.required'  => 'Tempat lahir wajib diisi',
+            'tanggal_lahir.required' => 'Tanggal lahir wajib diisi'
+
+        ];
+        $validator = $request->validate([
+
+            'nama' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'jenis_kelamin' => 'required'
+           
+        ], $messages);
         $anak = Anak::find($id);
         $user = Auth::user();
         $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
@@ -319,12 +352,43 @@ class OrangtuaController extends Controller
 
         
         $anak->save();
-        return redirect()->route('viewanak');
+        return redirect()->route('viewanak')->with('error',$messages);
 
     }
 
     public function deleteAnak($id){
         $anak=Anak::find($id);
         $anak->delete();
+    }
+
+    public function profil(){
+     
+        $user=User::find(Auth::user()->id);
+        return view('orangtua.profil.edit',compact('user'));
+    }
+
+    public function updateProfil(Request $request){
+        $user=User::find(Auth::user()->id);
+        
+        $user->profilorangtua->nama =$request->nama;
+        $user->profilorangtua->tempat_lahir=$request->tempat_lahir;
+        $user->profilorangtua->tanggal_lahir=$request->tanggal_lahir;
+        $user->profilorangtua->pendidikan = $request->pendidikan;
+        $user->profilorangtua->alamat= $request->alamat;
+        if(!empty($request->foto)){
+
+            $file = $request->file('foto');
+            $extension = strtolower($file->getClientOriginalExtension());
+            $filename = uniqid() . '.' . $extension;
+            Storage::delete('/public/orangtua/'.$user->profilorangtua->foto); 
+            Storage::put('public/orangtua/' . $filename, File::get($file));
+            $user->profilorangtua->foto=$filename;
+       }
+        
+
+        $user->profilorangtua->save();
+
+        return redirect()->route('viewanak');;
+        
     }
 }

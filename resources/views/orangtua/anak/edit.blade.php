@@ -14,9 +14,12 @@
                     @method('PUT')
 
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Nama</label>
+                        <label for="exampleInputPassword1" class="form-label @error('nama') is-invalid @enderror">Nama</label>
                         <input type="text" class="form-control" id="nama" name="nama" autocomplete="off" value="{{$anak->nama}}"
                             placeholder="Nama">
+                            @error('nama')
+                               <div class="invalid-feedback">{{ $message }}</div>
+                                 @enderror
                     </div>
 
                     <div class="mb-3">
@@ -43,15 +46,21 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Tempat Lahir</label>
-                                <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
+                                <input type="text" class="form-control @error('tempat_lahir') is-invalid @enderror" id="tempat_lahir" name="tempat_lahir"
                                     autocomplete="off" placeholder="Tempat Lahir" value="{{$anak->tempat_lahir}}">
+                                    @error('tempat_lahir')
+                               <div class="invalid-feedback">{{ $message }}</div>
+                                 @enderror
                             </div>
                         </div>
                         <div class="col-md-7">
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Tanggal Lahir</label>
-                                <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
+                                <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" id="tanggal_lahir" name="tanggal_lahir"
                                     autocomplete="off" placeholder="masukkan tanggal lahir" value="{{$anak->tanggal_lahir}}">
+                                    @error('tempat_lahir')
+                               <div class="invalid-feedback">{{ $message }}</div>
+                                 @enderror
                             </div>
                         </div>
                     </div>

@@ -44,11 +44,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function dokter(){
+    public function profildokter(){
         return $this->hasOne('App\Models\Dokter', 'id_users');
+    }
+    public function profilorangtua(){
+        return $this->hasOne('App\Models\Orangtua','id_users' );
     }
     public function orangtua()
     {
-        return $this->hasOne('App\Models\Orangtua','id_users' );
+        return $this->hasMany('App\Models\Orangtua','id_users' );
     }
+    public function dokter(){
+        return $this->hasMany('App\Models\Dokter', 'id_users');
+    }
+
 }
