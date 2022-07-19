@@ -18,6 +18,7 @@ use App\Models\PemeriksaanFisik;
 use App\Models\PemeriksaanMata;
 use App\Models\PemeriksaanTelinga;
 use App\Models\PemeriksaanGigi;
+use Carbon\Carbon;
 
 class DokterController extends Controller
 {
@@ -297,49 +298,17 @@ class DokterController extends Controller
             'kelurahan' => $kelurahan, 'sekolah '=> $sekolah,
         ]);
     }
-    public function dropdown_sekolah_ukgs(Request $request){
-        //$sekolah   = Sekolah::all();
-        //$kel_sek  = Sekolah::where('id', $id)->get();
-        $kel_sek  = Sekolah::where('id_kelurahan', $request->get('id'))
-            ->get();
-
-        return response()->json($kel_sek);
-    }
-    public function dropdown_kelas_ukgs(Request $request){
-        $sek_kelas  = Kelas::where('id_sekolah', $request->get('id'))
-            ->pluck('kelas', 'id');
-        return response()->json($sek_kelas);
-    }
+    
 
     
-    public function pemeriksaan_ukgm(){
 
-        $kelurahan = Kelurahan::all();
-        $sekolah   = Sekolah::all();
-        return view('dokter.pemeriksaanData.ukgm');
-    }
     
-    public function pemeriksaan_ukgs_fetch(Request $request){
-        
-        // $logdokter = Auth::user()->dokter;
-        // $dokter = $logdokter->find($id);
-        // $sekolah = Sekolah::where('');
-        $kelurahan = Kelurahan::all();
-        $id_kelurahan = $request -> id;
-        $sekolah = Sekolah :: where('id', $id)->get();
-        foreach ($sekolah as $sekolah){
 
-            echo "<option value='$sekolah->id'>$sekolah->type, $sekolah->nama</option>";
-
-        }
-    }
     public function pemeriksaan_data_ukgs(){
         return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS');
     }
 
-    public function pemeriksaan_data_ukgm(){
-        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGM');
-    }
+
     public function rekap_ukgs(){
         $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
         $kelurahan = Kelurahan::where('id_kecamatan', $dokter)->pluck('nama','id');
@@ -378,13 +347,13 @@ class DokterController extends Controller
         $user = Auth::user();
         $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
         $kelurahan = Kelurahan::where('id_kecamatan', $dokter)->get();
-        return view('dokter.pemeriksaanData.ukgs');
+        return view('dokter.pemeriksaanData.ukgs',compact('kelurahan'));
         
     }
 
     // function untuk menampilkan list anak yang telah melakukan pemeriksaanfisik berdasarkan id kelas
     public function listAnak(Request $request){
-        $pemeriksaanfisik = PemeriksaanFisik::with('anak')->whereHas('anak',function($query) use($request) {$query->where('id_kelas',$request->id_kelas)->orderBy('id', 'DESC');})->latest();
+        $pemeriksaanfisik = PemeriksaanFisik::with('anak')->where('id_kelas',$request->id_kelas)->orderBy('id', 'DESC')->latest();
         
         return datatables()->of($pemeriksaanfisik)
         ->addColumn('action', function($row){
@@ -406,10 +375,10 @@ class DokterController extends Controller
             return $pemeriksaanfisik->anak->nama;
         })
         ->addColumn('kelas', function($pemeriksaanfisik){
-            return $pemeriksaanfisik->anak->kelas->kelas;
+            return $pemeriksaanfisik->kelas->kelas;
         })
         ->addColumn('sekolah', function($pemeriksaanfisik){
-            return $pemeriksaanfisik->anak->kelas->sekolah->nama;
+            return $pemeriksaanfisik->kelas->sekolah->nama;
         })
         ->addColumn('jenis_kelamin', function($pemeriksaanfisik){
             return $pemeriksaanfisik->anak->jenis_kelamin;
@@ -453,5 +422,74 @@ class DokterController extends Controller
         ->make(true);
         
     }
+
+    //----------UKGM--------------//
+    public function pemeriksaan_ukgm(){
+
+        $user = Auth::user();
+        $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
+        $kelurahan = Kelurahan::where('id_kecamatan', $dokter)->pluck('nama','id');
+        $sekolah = Sekolah::pluck('nama','id');
+        //$sekolah   = Sekolah::all();
+        return view('dokter.pemeriksaanData.ukgm',[
+            'kelurahan' => $kelurahan, 'sekolah '=> $sekolah,
+        ]);
+        
+    }
+
+    public function listAnakUkgm(Request $request){
+
+
+        $pemeriksaanGigi = PemeriksaanGigi::with('anak')->where('id_sekolah',$request->id_sekolah)->orderBy('id', 'DESC')-> latest();
+        
+        return datatables()->of($pemeriksaanGigi)
+        ->addColumn('action', function($row){
+            $btn = '';
+            $btn .= '<a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data"><i class="mdi mdi-book-open-page-variant"></i></a> ';
+            $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGM',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
+            
+            
+            return $btn;
+        })
+        
+        ->addColumn('tanggal', function($pemeriksaanGigi){
+            return $tanggal = date('d-m-Y', strtotime($pemeriksaanGigi->waktu_pemeriksaan));
+        })
+        ->addColumn('waktu', function($pemeriksaanGigi){
+            return $waktu = date('H:i', strtotime($pemeriksaanGigi->waktu_pemeriksaan));
+        })
+        ->addColumn('nama', function($pemeriksaanGigi){
+            return $pemeriksaanGigi->anak->nama;
+        })
+
+        ->addColumn('posyandu', function($pemeriksaanGigi){
+            return $pemeriksaanGigi->sekolah->nama;
+        })
+        ->addColumn('jenis_kelamin', function($pemeriksaanGigi){
+            return $pemeriksaanGigi->anak->jenis_kelamin;
+        })
+        ->addColumn('umur', function($pemeriksaanGigi){
+            $born=Carbon::parse($pemeriksaanGigi->anak->tanggal_lahir);
+            $age = $born->diff(Carbon::now())
+            ->format('%y tahun %m bulan ');
+
+            return $age;
+        })
+
+        ->addIndexColumn()
+       ->make(true);
+        
+    }
+    public function pemeriksaan_data_ukgm($id)
+    {
+        $ukgm=PemeriksaanGigi::with('resikoKaries')->find($id);
+        return view('dokter.pemeriksaanData.pemeriksaanDataUKGM',compact('ukgm'));
+    }
+
+    //------ Dashboard ----------//
+    public function dashboard(){
+        
+    }
+    
 
 }

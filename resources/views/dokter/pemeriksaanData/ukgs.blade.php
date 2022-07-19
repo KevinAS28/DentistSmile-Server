@@ -87,66 +87,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- <tr>
-                                <td>1</td>
-                                <td>07/02/2020</td>
-                                <td>14:00</td>
-                                <td>Adisty Sahida </td>
-                                <td>Laki-laki</td>
-                                <td>SDN Pulo 07</td>
-                                <td>5</td>
-                                <td><a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data"><i class="mdi mdi-book-open-page-variant"></i></a> <a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="{{route('dokter.pemeriksaanDataUKGS')}}">Periksa  <i class="mdi mdi-tooth"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>07/02/2020</td>
-                                <td>14:00</td>
-                                <td>Adisty Sahida </td>
-                                <td>Laki-laki</td>
-                                <td>SDN Pulo 07</td>
-                                <td>5</td>
-                                <td><a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data"><i class="mdi mdi-book-open-page-variant"></i></a> <a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="{{route('dokter.pemeriksaanDataUKGS')}}">Periksa  <i class="mdi mdi-tooth"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>07/02/2020</td>
-                                <td>14:00</td>
-                                <td>Adisty Sahida </td>
-                                <td>Laki-laki</td>
-                                <td>SDN Pulo 07</td>
-                                <td>5</td>
-                                <td><a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data"><i class="mdi mdi-book-open-page-variant"></i></a> <a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="{{route('dokter.pemeriksaanDataUKGS')}}">Periksa  <i class="mdi mdi-tooth"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>07/02/2020</td>
-                                <td>14:00</td>
-                                <td>Adisty Sahida </td>
-                                <td>Laki-laki</td>
-                                <td>SDN Pulo 07</td>
-                                <td>5</td>
-                                <td><a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data"><i class="mdi mdi-book-open-page-variant"></i></a> <a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="{{route('dokter.pemeriksaanDataUKGS')}}">Periksa  <i class="mdi mdi-tooth"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>07/02/2020</td>
-                                <td>14:00</td>
-                                <td>Adisty Sahida </td>
-                                <td>Laki-laki</td>
-                                <td>SDN Pulo 07</td>
-                                <td>5</td>
-                                <td><a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data"><i class="mdi mdi-book-open-page-variant"></i></a> <a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="{{route('dokter.pemeriksaanDataUKGS')}}">Periksa  <i class="mdi mdi-tooth"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>07/02/2020</td>
-                                <td>14:00</td>
-                                <td>Adisty Sahida </td>
-                                <td>Laki-laki</td>
-                                <td>SDN Pulo 07</td>
-                                <td>5</td>
-                                <td><a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data"><i class="mdi mdi-book-open-page-variant"></i></a> <a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="{{route('dokter.pemeriksaanDataUKGS')}}">Periksa  <i class="mdi mdi-tooth"></i></a></td>
-                            </tr>    --}}
+
                         </tbody>
                     </table>
                 </div>

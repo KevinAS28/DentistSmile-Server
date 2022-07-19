@@ -89,34 +89,37 @@
                             <p class="tx-16 fw-bolder">admin</p>
                             <p class="tx-12 text-muted">{{auth()->user()->email}}</p>
                             @elseif(Auth::user()->role=='orangtua')
-                            <p class="tx-16 fw-bolder">{{auth()->user()->orangtua->nama}}</p>
+                            <p class="tx-16 fw-bolder">{{auth()->user()->profilorangtua->nama}}</p>
                             <p class="tx-12 text-muted">{{auth()->user()->email}}</p>
                             @else
-                            <p class="tx-16 fw-bolder">{{auth()->user()->dokter->nama}}</p>
+                            <p class="tx-16 fw-bolder">{{auth()->user()->profildokter->nama}}</p>
                             <p class="tx-12 text-muted">{{auth()->user()->email}}</p>
                             @endif
                             @endif
                         </div>
                     </div>
                     <ul class="list-unstyled p-1">
+                   
+
+                        @if(Auth::check())
+                        @if(Auth::user()->role=='orangtua')
                         <li class="dropdown-item py-2">
-                            <a href="pages/general/profile.html" class="text-body ms-0">
-                                <i class="me-2 icon-md" data-feather="user"></i>
-                                <span>Profile</span>
+                            <a href="{{route('orangtua.profil')}}" class="text-body ms-0">
+                                <i class="me-2 icon-md" data-feather="edit"></i>
+                                <span>Ubah Profil</span>
                             </a>
                         </li>
+                        @endif
+                        @if(Auth::user()->role=='dokter')
                         <li class="dropdown-item py-2">
-                            <a href="javascript:;" class="text-body ms-0">
+                            <a href="{{route('dokter.profil')}}" class="text-body ms-0">
                                 <i class="me-2 icon-md" data-feather="edit"></i>
                                 <span>Edit Profile</span>
                             </a>
                         </li>
-                        <li class="dropdown-item py-2">
-                            <a href="javascript:;" class="text-body ms-0">
-                                <i class="me-2 icon-md" data-feather="repeat"></i>
-                                <span>Switch User</span>
-                            </a>
-                        </li>
+                        @endif
+                        @endif
+
                         <li class="dropdown-item py-2">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); 
                             document.getElementById('logout-form').submit();"

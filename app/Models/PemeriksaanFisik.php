@@ -22,5 +22,8 @@ class PemeriksaanFisik extends Model
     public function kelas(){
         return $this->belongsTo('App\Models\Kelas', 'id_kelas');
     }
+    public function sekolah(){
+        return $this->belongsTo('App\Models\Sekolah', 'id_sekolah');
+    }
 
 }
