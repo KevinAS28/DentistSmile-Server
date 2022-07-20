@@ -7,7 +7,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('dokter.periksaUKGM')}}">Pemeriksaan Gigi</a></li>
             <li class="breadcrumb-item active" aria-current="page">
-                <--- User ---->
+                {{ucwords($ukgm->anak->nama)}}
             </li>
         </ol>
     </nav>
@@ -23,16 +23,28 @@
                                     <div>
                                         <strong>PENGISIAN ODONTOGRAM</strong>
                                         <p>Pilih posisi gigi dan klik aksi yang seseuai dengan kondisi gigi anak</p>
-                                        <div class="w-100 mb-1">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
+                                        <div class="w-100 mb-1 d-flex">
+                                            <div>
+                                                <a href='{{asset("assets/images/others/placeholder.jpg?image=251")}}' data-toggle="lightbox">
+                                                    <img src='{{asset("assets/images/others/placeholder.jpg?image=251")}}' class="rounded img-thumbnail img-fluid" alt="">
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <img src="{{asset('assets/images/others/placeholder.jpg')}}" class="rounded img-thumbnail" alt="...">
+                                            </div>
+                                            <div>
+                                                <img src="{{asset('assets/images/others/placeholder.jpg')}}" class="rounded img-thumbnail" alt="...">
+                                            </div>
+                                            <div>
+                                                <img src="{{asset('assets/images/others/placeholder.jpg')}}" class="rounded img-thumbnail" alt="...">
+                                            </div>
+                                            <div>
+                                                <img src="{{asset('assets/images/others/placeholder.jpg')}}" class="rounded img-thumbnail" alt="...">
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- <div class="border border-light m-1 h-75"> -->
-                                        
+
                                         <div class="border border-light h-75 w-100 text-center" style="line-height: 0;">
                                             @include('dokter.pemeriksaanData.odontogram')
                                         </div>
@@ -167,8 +179,8 @@
                                 </div>
                                 <div class="container p-1">
                                     @include('dokter.pemeriksaanData.resikokaries')
-                                    
-  
+
+
                                 </div>
                             </div>
                         </section>
@@ -299,9 +311,10 @@
         min-height: 75vh !important;
     }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endpush
 @push('after-script')
-<script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js" integrity="sha512-YibiFIKqwi6sZFfPm5HNHQYemJwFbyyYHjrr3UT+VobMt/YBo1kBxgui5RWc4C3B4RJMYCdCAJkbXHt+irKfSA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script>
     $(document).ready(function(){
         $("#wizard").steps({
             headerTag: "h2",
@@ -345,7 +358,13 @@
             let total = parseInt($("input[name=dmf_d]").val()) + parseInt($("input[name=dmf_e]").val()) + parseInt($("input[name=dmf_f]").val());
             $("input[name=dmf_t]").val(total);
         });
+        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+            console.log('as');
+            $(this).ekkoLightbox();
+            event.preventDefault();
+        });
     });
+
 </script>
 <script src="{{asset('assets/js/skrining-odontogram.js')}}"></script>
 @endpush

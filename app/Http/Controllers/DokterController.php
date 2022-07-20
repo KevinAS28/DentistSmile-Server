@@ -298,11 +298,11 @@ class DokterController extends Controller
             'kelurahan' => $kelurahan, 'sekolah '=> $sekolah,
         ]);
     }
-    
 
-    
 
-    
+
+
+
 
     public function pemeriksaan_data_ukgs(){
         // $data = PemeriksaanGigi::findOrFail($id);
@@ -319,8 +319,9 @@ class DokterController extends Controller
         return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS',compact('odontograms'));
     }
 
-    public function pemeriksaan_data_ukgm(){
-        // $data = PemeriksaanGigi::findOrFail($id);
+    public function pemeriksaan_data_ukgm($id){
+        $ukgm = PemeriksaanGigi::with('anak','resikoKaries')->findOrFail($id);
+        // dd($ukgm);
         $odontograms = [
             'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
             'b2k1' => ['p55','p54','p53','p52','p51'],
@@ -331,7 +332,7 @@ class DokterController extends Controller
             'b3k2' => ['p71','p72','p73','p74','p75'],
             'b4k2' => ['p31','p32','p33','p34','p35','p36','p37','p38']
         ];
-        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGM',compact('odontograms'));
+        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGM',compact('ukgm','odontograms'));
     }
     public function rekap_ukgs(){
         $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
@@ -372,13 +373,13 @@ class DokterController extends Controller
         $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
         $kelurahan = Kelurahan::where('id_kecamatan', $dokter)->get();
         return view('dokter.pemeriksaanData.ukgs',compact('kelurahan'));
-        
+
     }
 
     // function untuk menampilkan list anak yang telah melakukan pemeriksaanfisik berdasarkan id kelas
     public function listAnak(Request $request){
         $pemeriksaanfisik = PemeriksaanFisik::with('anak')->where('id_kelas',$request->id_kelas)->orderBy('id', 'DESC')->latest();
-        
+
         return datatables()->of($pemeriksaanfisik)
         ->addColumn('action', function($row){
             $btn = '';
@@ -458,24 +459,24 @@ class DokterController extends Controller
         return view('dokter.pemeriksaanData.ukgm',[
             'kelurahan' => $kelurahan, 'sekolah '=> $sekolah,
         ]);
-        
+
     }
 
     public function listAnakUkgm(Request $request){
 
 
         $pemeriksaanGigi = PemeriksaanGigi::with('anak')->where('id_sekolah',$request->id_sekolah)->orderBy('id', 'DESC')-> latest();
-        
+
         return datatables()->of($pemeriksaanGigi)
         ->addColumn('action', function($row){
             $btn = '';
             $btn .= '<a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data"><i class="mdi mdi-book-open-page-variant"></i></a> ';
             $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGM',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
-            
-            
+
+
             return $btn;
         })
-        
+
         ->addColumn('tanggal', function($pemeriksaanGigi){
             return $tanggal = date('d-m-Y', strtotime($pemeriksaanGigi->waktu_pemeriksaan));
         })
@@ -502,18 +503,18 @@ class DokterController extends Controller
 
         ->addIndexColumn()
        ->make(true);
-        
+
     }
-    public function pemeriksaan_data_ukgm($id)
-    {
-        $ukgm=PemeriksaanGigi::with('resikoKaries')->find($id);
-        return view('dokter.pemeriksaanData.pemeriksaanDataUKGM',compact('ukgm'));
-    }
+    // public function pemeriksaan_data_ukgm($id)
+    // {
+    //     $ukgm=PemeriksaanGigi::with('resikoKaries')->find($id);
+    //     return view('dokter.pemeriksaanData.pemeriksaanDataUKGM',compact('ukgm'));
+    // }
 
     //------ Dashboard ----------//
     public function dashboard(){
-        
+
     }
-    
+
 
 }
