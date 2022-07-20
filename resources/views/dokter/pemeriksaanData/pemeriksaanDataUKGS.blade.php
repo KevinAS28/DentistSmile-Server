@@ -22,12 +22,17 @@
                                     <div>
                                         <strong>PENGISIAN ODONTOGRAM</strong>
                                         <p>Pilih posisi gigi dan klik aksi yang seseuai dengan kondisi gigi anak</p>
-                                        <div class="w-100 mb-1">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
+                                        <div class="w-100 mb-1 d-flex list-image-pemeriksaan">
+                                            @for($i=1; $i<=5; $i++)
+                                            @php $img = 'gambar'.$i;  @endphp
+                                            <div>
+                                                @if(!empty($ukgs[$img]))
+                                                <img src='{{@asset("storage/gigi/$ukgs[$img]")}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
+                                                @else
+                                                <img src='{{@asset("assets/images/others/placeholder.jpg")}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
+                                                @endif
+                                            </div>
+                                            @endfor
                                         </div>
                                     </div>
                                     <!-- <div class="border border-light m-1 h-75"> -->
@@ -185,7 +190,24 @@
     </div>
 
 </div>
-
+<!-- modal -->
+<div class="modal fade" id="modal-image" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="w-100 text-center">
+            <img src="" alt="" id="img-in-modal" class="img-fluid">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 @endsection
 @push('after-script')
@@ -232,6 +254,18 @@
         $(document).on("change","input[name=dmf_d],input[name=dmf_e],input[name=dmf_f]", function(){
             let total = parseInt($("input[name=dmf_d]").val()) + parseInt($("input[name=dmf_e]").val()) + parseInt($("input[name=dmf_f]").val());
             $("input[name=dmf_t]").val(total);
+        });
+
+        $('.list-image-pemeriksaan img').click(function() {
+            imageSrc = $(this).attr('src');
+        });
+
+        $('#modal-image').on('shown.bs.modal', function (e) {
+            $("#img-in-modal").attr('src', imageSrc  );
+        });
+
+        $('#modal-image').on('hide.bs.modal', function (e) {
+            $("#img-in-modal").attr('src','');
         });
     });
 </script>

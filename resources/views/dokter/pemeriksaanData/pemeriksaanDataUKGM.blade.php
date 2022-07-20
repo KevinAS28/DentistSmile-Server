@@ -28,9 +28,9 @@
                                             @php $img = 'gambar'.$i;  @endphp
                                             <div>
                                                 @if(!empty($ukgm[$img]))
-                                                <img src='{{@asset("storage/gigi/$ukgm[$img]")}}' data-bs-toggle="modal" data-bs-target="#modal-image" class="rounded img-thumbnail w-100 h-100" alt="...">
+                                                <img src='{{@asset("storage/gigi/$ukgm[$img]")}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
                                                 @else
-                                                <img src='{{@asset("assets/images/others/placeholder.jpg")}}' data-bs-toggle="modal" data-bs-target="#modal-image" class="rounded img-thumbnail w-100 h-100" alt="...">
+                                                <img src='{{@asset("assets/images/others/placeholder.jpg")}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
                                                 @endif
                                             </div>
                                             @endfor
@@ -360,6 +360,8 @@
             },
         });
 
+        
+
         $(document).on("change","input[name=def_d],input[name=def_e],input[name=def_f]", function(){
             let total = parseInt($("input[name=def_d]").val()) + parseInt($("input[name=def_e]").val()) + parseInt($("input[name=def_f]").val());
             $("input[name=def_t]").val(total);
@@ -373,17 +375,15 @@
         $('.list-image-pemeriksaan img').click(function() {
             imageSrc = $(this).attr('src');
         });
-        console.log(imageSrc);
 
         $('#modal-image').on('shown.bs.modal', function (e) {
             $("#img-in-modal").attr('src', imageSrc  );
-            });
         });
 
-        $('#myModal').on('hide.bs.modal', function (e) {
+        $('#modal-image').on('hide.bs.modal', function (e) {
             $("#img-in-modal").attr('src','');
-        })
-
+        });
+    });
 </script>
 <script src="{{asset('assets/js/skrining-odontogram.js')}}"></script>
 @endpush

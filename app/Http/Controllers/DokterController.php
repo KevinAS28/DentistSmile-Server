@@ -304,8 +304,8 @@ class DokterController extends Controller
 
 
 
-    public function pemeriksaan_data_ukgs(){
-        // $data = PemeriksaanGigi::findOrFail($id);
+    public function pemeriksaan_data_ukgs($id){
+        $ukgs = PemeriksaanGigi::with('anak','resikoKaries')->findOrFail($id);
         $odontograms = [
             'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
             'b2k1' => ['p55','p54','p53','p52','p51'],
@@ -316,7 +316,7 @@ class DokterController extends Controller
             'b3k2' => ['p71','p72','p73','p74','p75'],
             'b4k2' => ['p31','p32','p33','p34','p35','p36','p37','p38']
         ];
-        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS',compact('odontograms'));
+        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS',compact('ukgs','odontograms'));
     }
 
     public function pemeriksaan_data_ukgm($id){

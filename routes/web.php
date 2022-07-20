@@ -134,7 +134,7 @@ Route::group(['prefix' => 'dokter'], function () {
     Route::get('/pemeriksaan-ukgs/kelas',[DokterController::class, 'dropdown_kelas_ukgs'])->name('dokter.kelasUKGS');
     //Route::post('/pemeriksaan-ukgs/fetch',[DokterController::class, 'dropdown_wilayah_ukgs'])->name('dokter.periksaUKGS.fetch');
     Route::get('/pemeriksaan-ukgm',[DokterController::class, 'pemeriksaan_ukgm'])->name('dokter.periksaUKGM');
-    Route::get('/pemeriksaan-ukgs/pemeriksaan-data',[DokterController::class, 'pemeriksaan_data_ukgs'])->name('dokter.pemeriksaanDataUKGS');
+    Route::get('/pemeriksaan-ukgs/pemeriksaan-data/{id}',[DokterController::class, 'pemeriksaan_data_ukgs'])->name('dokter.pemeriksaanDataUKGS');
     Route::get('/pemeriksaan-ukgm/pemeriksaan-data/{id}',[DokterController::class, 'pemeriksaan_data_ukgm'])->name('dokter.pemeriksaanDataUKGM');
     Route::get('/rekap-ukgs',[DokterController::class, 'rekap_ukgs'])->name('dokter.rekapDataUKGS');
     Route::get('/rekap-ukgm',[DokterController::class, 'rekap_ukgm'])->name('dokter.rekapDataUKGM');
