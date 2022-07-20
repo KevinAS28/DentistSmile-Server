@@ -155,9 +155,9 @@ $(document).ready(function(){
                         d3.select("line#"+odontogramParent).remove();
                         break;
                     case 'insert-non-vital':
-                        d3.select("line#"+odontogramId).remove();
-                        d3.select("line#"+odontogramId).remove();
-                        d3.select("line#"+odontogramId).remove();
+                        d3.select("line#"+odontogramParent).remove();
+                        d3.select("line#"+odontogramParent).remove();
+                        d3.select("line#"+odontogramParent).remove();
                         break;
                     case 'insert-fill':
                         odontogram.attr('fill', 'white');
@@ -173,9 +173,9 @@ $(document).ready(function(){
         } else if (type == 'insert-line') {
             d3.select('g#'+odontogramParent).append('line').attr('id',odontogramParent).attr('type','insert-line').attr('x1', '20').attr('y1', '10').attr('x2', '0').attr('y2', '10').attr('stroke',color).attr('style', style);
         } else if (type == 'insert-non-vital') {
-            d3.select('g#'+odontogramParent).append('line').attr('id',odontogramId).attr('type','insert-non-vital').attr('x1', '5').attr('y1', '15').attr('x2', '0').attr('y2', '15').attr('stroke',color).attr('style', style);
-            d3.select('g#'+odontogramParent).append('line').attr('id',odontogramId).attr('type','insert-non-vital').attr('x1', '15').attr('y1', '5').attr('x2', '5').attr('y2', '15').attr('stroke',color).attr('style', style);
-            d3.select('g#'+odontogramParent).append('line').attr('id',odontogramId).attr('type','insert-non-vital').attr('x1', '20').attr('y1', '5').attr('x2', '15').attr('y2', '5').attr('stroke',color).attr('style', style);
+            d3.select('g#'+odontogramParent).append('line').attr('id',odontogramParent).attr('type','insert-non-vital').attr('x1', '5').attr('y1', '15').attr('x2', '0').attr('y2', '15').attr('stroke',color).attr('style', style);
+            d3.select('g#'+odontogramParent).append('line').attr('id',odontogramParent).attr('type','insert-non-vital').attr('x1', '15').attr('y1', '5').attr('x2', '5').attr('y2', '15').attr('stroke',color).attr('style', style);
+            d3.select('g#'+odontogramParent).append('line').attr('id',odontogramParent).attr('type','insert-non-vital').attr('x1', '20').attr('y1', '5').attr('x2', '15').attr('y2', '5').attr('stroke',color).attr('style', style);
         } else {
             odontogram.attr('fill', color).attr('type','insert-fill');
         }
