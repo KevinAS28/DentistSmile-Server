@@ -19,6 +19,12 @@ class PemeriksaanGigi extends Model
     }
     public function resikoKaries()
     {
-        return $this->belongsTo(ResikoKaries::class, 'id_pemeriksaan_gigi');
+        return $this->hasOne('App\Models\ResikoKaries', 'id_pemeriksaan_gigi');
+    }
+    public function kelas(){
+        return $this->belongsTo('App\Models\Kelas', 'id_kelas');
+    }
+    public function sekolah(){
+        return $this->belongsTo('App\Models\Sekolah', 'id_sekolah');
     }
 }

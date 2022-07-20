@@ -15,7 +15,7 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <div id="wizard">
+                    <div id="wizard" >
                         <h2>Pengisian Odontogram</h2>
                         <section>
                             <div class="row">
@@ -138,7 +138,7 @@
                         </section>
 
                         <h2>Peneliaian Resiko Karies</h2>
-                        <section>
+                        <section >
                             <div class="container p-1">
                                 <div class="row">
                                     <div class="col-md-15 grid-margin stretch-card">
@@ -166,108 +166,9 @@
                                     </div>
                                 </div>
                                 <div class="container p-1">
-                                    <form action="#" method="post">
-                                        <p style="font-weight:500;" class="mb-2">Ayah/ Ibu memiliki karies yang tidak ditambal?</p>
-                                        <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="radioDefault"
-                                                id="radioDefault">
-                                            <label class="form-check-label" for="radioDefault">
-                                                Ya
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-check-inline mb-3" >
-                                            <input type="radio" class="form-check-input" name="radioDefault"
-                                                id="radioDefault1">
-                                            <label class="form-check-label" for="radioDefault1">
-                                                Tidak
-                                            </label>
-                                        </div>
-                                    </form>
-                                    <form action="#" method="post">
-                                        <p style="font-weight:500;" class="mb-2">Orang tua memiliki sosioekonomi rendah?</p>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" name="radioDefault"
-                                            id="radioDefault2">
-                                        <label class="form-check-label" for="radioDefault2">
-                                            Ya
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline mb-3">
-                                        <input type="radio" class="form-check-input" name="radioDefault"
-                                            id="radioDefault13">
-                                        <label class="form-check-label" for="radioDefault3">
-                                            Tidak
-                                        </label>
-                                    </div>
-                                    </form>
-                                    <form action="#" method="post">
-                                        <p style="font-weight:500;" class="mb-2">Anak makan makanan ringan dan minuman manis (termasuk minuman bersoda) lebih dari 3x perhari?</p>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" name="radioDefault"
-                                            id="radioDefault4">
-                                        <label class="form-check-label" for="radioDefault4">
-                                            Ya
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline mb-3">
-                                        <input type="radio" class="form-check-input" name="radioDefault"
-                                            id="radioDefault5">
-                                        <label class="form-check-label" for="radioDefault5">
-                                            Tidak
-                                        </label>
-                                    </div>
-                                    </form>
-                                    <form action="#" method="post">
-                                        <p style="font-weight:500;" class="mb-2">Anak minum susu botol atau ASI sebagai pengantar tidur?</p>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" name="radioDefault"
-                                            id="radioDefault6">
-                                        <label class="form-check-label" for="radioDefault6">
-                                            Ya
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline mb-3">
-                                        <input type="radio" class="form-check-input" name="radioDefault"
-                                            id="radioDefault7">
-                                        <label class="form-check-label" for="radioDefault7">
-                                            Tidak
-                                        </label>
-                                    </div>
-                                    </form>
-                                    <form action="#" method="post">
-                                        <p style="font-weight:500;" class="mb-2">Anak baru pindah dari daerah tertentu? </p>
-                                        <div class="form-check form-check-inline">
-                                            <input type="radio" class="form-check-input" name="radioDefault"
-                                                id="radioDefault10">
-                                            <label class="form-check-label" for="radioDefault10">
-                                                Ya
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-check-inline mb-3">
-                                            <input type="radio" class="form-check-input" name="radioDefault"
-                                                id="radioDefault11">
-                                            <label class="form-check-label" for="radioDefault11">
-                                                Tidak
-                                            </label>
-                                        </div>
-                                    </form>
-                                    <form action="#" method="post">
-                                        <p style="font-weight:500;" class="mb-2">Anak mengkonsumsi vitamin mengandung fluoride?</p>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" name="radioDefault"
-                                            id="radioDefault12">
-                                        <label class="form-check-label" for="radioDefault12">
-                                            Tidak
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline mb-3">
-                                        <input type="radio" class="form-check-input" name="radioDefault"
-                                            id="radioDefault13">
-                                        <label class="form-check-label" for="radioDefault13">
-                                            Ya
-                                        </label>
-                                    </div>
-                                    </form>
+                                    @include('dokter.pemeriksaanData.resikokaries')
+                                    
+  
                                 </div>
                             </div>
                         </section>

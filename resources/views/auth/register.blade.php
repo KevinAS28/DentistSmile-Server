@@ -96,7 +96,7 @@
                                                             Lahir</label>
                                                         <input type="text" class="form-control" id="tempat_lahir"
                                                             name="tempat_lahir" autocomplete="off"
-                                                            placeholder="Tempat Lahir">
+                                                            placeholder="Tempat Lahir" required> 
                                                     </div>
                                                 </div>
                                                 <div class="col-md-7">

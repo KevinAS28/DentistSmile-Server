@@ -25562,7 +25562,7 @@ div.tox .tox-dialog__body {
 .wizard > .content {
   background: #fff;
   border: 1px solid #e9ecef;
-  min-height: 23em;
+  min-height: 720px;
   overflow: auto;
   margin: 0.5em 0;
 }
