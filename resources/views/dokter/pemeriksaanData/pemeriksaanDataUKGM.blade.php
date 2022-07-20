@@ -23,24 +23,17 @@
                                     <div>
                                         <strong>PENGISIAN ODONTOGRAM</strong>
                                         <p>Pilih posisi gigi dan klik aksi yang seseuai dengan kondisi gigi anak</p>
-                                        <div class="w-100 mb-1 d-flex">
+                                        <div class="w-100 mb-1 d-flex list-image-pemeriksaan">
+                                            @for($i=1; $i<=5; $i++)
+                                            @php $img = 'gambar'.$i;  @endphp
                                             <div>
-                                                <a href='{{asset("assets/images/others/placeholder.jpg?image=251")}}' data-toggle="lightbox">
-                                                    <img src='{{asset("assets/images/others/placeholder.jpg?image=251")}}' class="rounded img-thumbnail img-fluid" alt="">
-                                                </a>
+                                                @if(!empty($ukgm[$img]))
+                                                <img src='{{@asset("storage/gigi/$ukgm[$img]")}}' data-bs-toggle="modal" data-bs-target="#modal-image" class="rounded img-thumbnail w-100 h-100" alt="...">
+                                                @else
+                                                <img src='{{@asset("assets/images/others/placeholder.jpg")}}' data-bs-toggle="modal" data-bs-target="#modal-image" class="rounded img-thumbnail w-100 h-100" alt="...">
+                                                @endif
                                             </div>
-                                            <div>
-                                                <img src="{{asset('assets/images/others/placeholder.jpg')}}" class="rounded img-thumbnail" alt="...">
-                                            </div>
-                                            <div>
-                                                <img src="{{asset('assets/images/others/placeholder.jpg')}}" class="rounded img-thumbnail" alt="...">
-                                            </div>
-                                            <div>
-                                                <img src="{{asset('assets/images/others/placeholder.jpg')}}" class="rounded img-thumbnail" alt="...">
-                                            </div>
-                                            <div>
-                                                <img src="{{asset('assets/images/others/placeholder.jpg')}}" class="rounded img-thumbnail" alt="...">
-                                            </div>
+                                            @endfor
                                         </div>
                                     </div>
                                     <!-- <div class="border border-light m-1 h-75"> -->
@@ -304,6 +297,24 @@
         </div>
     </div>
 </div>
+<!-- modal -->
+<div class="modal fade" id="modal-image" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="w-100 text-center">
+            <img src="" alt="" id="img-in-modal" class="img-fluid">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 @push('after-style')
 <style>
@@ -311,10 +322,10 @@
         min-height: 75vh !important;
     }
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endpush
 @push('after-script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js" integrity="sha512-YibiFIKqwi6sZFfPm5HNHQYemJwFbyyYHjrr3UT+VobMt/YBo1kBxgui5RWc4C3B4RJMYCdCAJkbXHt+irKfSA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script>
+<script>
+    var imageSrc;
     $(document).ready(function(){
         $("#wizard").steps({
             headerTag: "h2",
@@ -358,12 +369,20 @@
             let total = parseInt($("input[name=dmf_d]").val()) + parseInt($("input[name=dmf_e]").val()) + parseInt($("input[name=dmf_f]").val());
             $("input[name=dmf_t]").val(total);
         });
-        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-            console.log('as');
-            $(this).ekkoLightbox();
-            event.preventDefault();
+
+        $('.list-image-pemeriksaan img').click(function() {
+            imageSrc = $(this).attr('src');
         });
-    });
+        console.log(imageSrc);
+
+        $('#modal-image').on('shown.bs.modal', function (e) {
+            $("#img-in-modal").attr('src', imageSrc  );
+            });
+        });
+
+        $('#myModal').on('hide.bs.modal', function (e) {
+            $("#img-in-modal").attr('src','');
+        })
 
 </script>
 <script src="{{asset('assets/js/skrining-odontogram.js')}}"></script>
