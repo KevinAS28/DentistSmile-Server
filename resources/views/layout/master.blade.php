@@ -35,15 +35,15 @@ License: For each use you must have a valid license purchased only from above li
     <link rel="stylesheet" href="{{asset('assets/swal/sweetalert.css')}}">
     <script src="{{asset('assets/swal/sweetalert.js')}}"></script>
     <!-- inject:css -->
-    
+
     <link rel="stylesheet" href="{{asset('assets/fonts/feather-font/css/iconfont.css')}}">
     <link rel="stylesheet" href="{{asset('assets/fonts/feather-font/css/iconfont.css')}}">
 	<link rel="stylesheet" href="{{asset('assets/vendors/flag-icon-css/css/flag-icon.min.css')}}">
-    
+
     <link rel="stylesheet" href="{{asset('assets/vendors/prismjs/themes/prism.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/vendors/dropify/dist/dropify.min.css')}}">
-    
+
     <!-- select 2 -->
     <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('select2/dist/css/select2-bootstrap4.min.css')}}">
@@ -119,7 +119,7 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{asset('assets/vendors/dropify/dist/dropify.min.js')}}"></script>
     <script src="{{asset('assets/js/dropify.js')}}"></script>
     <!-- inject:js -->
-    
+
 	<script src="{{asset('assets/vendors/feather-icons/feather.min.js')}}"></script>
     <script src="{{asset('assets/js/template.js')}}"></script>
     <!-- endinject -->
@@ -136,10 +136,10 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{asset('assets/js/jquery.flot-light.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net/jquery.dataTables.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
+    @stack('after-style')
 
-  
 
-    
+
 
     <script>
         $(document).ready(function () {
@@ -147,33 +147,6 @@ License: For each use you must have a valid license purchased only from above li
         });
 
     </script>
-
-    <script>
-        $("#wizard").steps({
-            headerTag: "h2",
-            bodyTag: "section",
-            transitionEffect: "slideLeft",
-            autoFocus: true,
-            labels: {
-                finish: "Submit",
-                next: "Lanjut",
-                previous: "Kembali"
-            },
-            onStepChanged:function(event, currentIndex, newIndex){
-                console.log("Step changed to: " + currentIndex);
-
-                if(currentIndex == 0){
-                    document.getElementById("keterangan").style.display = "";
-                }else{
-                    document.getElementById("keterangan").style.display = "none";
-                }
-                return true;
-            },
-        });
-
-    </script>
-
-
     <!-- End custom js for this page -->
     @stack('after-script')
 

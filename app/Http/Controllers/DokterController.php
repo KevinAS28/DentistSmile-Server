@@ -37,7 +37,7 @@ class DokterController extends Controller
             $btn = '<div class="btn-group btn-group-sm">';
             $btn .= '<a href="'.route('dokter.edit',$row->id).'" type="button" id="btn-edit" class="btn btn-warning btn-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
             $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="fa fa-trash " ></i></button>';
-            
+
             $btn .= '</div>';
             return $btn;
         })
@@ -47,7 +47,7 @@ class DokterController extends Controller
     // function untuk menampilkan halaman index akun dokter DI HALAMAN ADMIN
     public function index()
     {
-        
+
         return view('admin.dokter.index');
     }
 
@@ -87,7 +87,7 @@ class DokterController extends Controller
             'password.required' => 'Password wajib diisi.',
             'password.min' => 'Password minimal 4 karaketer.',
             'no_telp.required' => 'No telepon wajib diisi.',
-            
+
             'no_str.required' => 'No Str wajib diisi',
 
         ];
@@ -99,12 +99,12 @@ class DokterController extends Controller
                         Rule::unique('users', 'email')],
             'password' => 'required',
             'no_telp' => 'required',
-            
+
             'jenis_kelamin' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'no_str' => 'required',
-           
+
         ], $messages);
         DB::beginTransaction();
 
@@ -115,7 +115,7 @@ class DokterController extends Controller
         $user->password = bcrypt($request->password);
         $user->role ="dokter";
         $user->save();
-        
+
             $dokter = new Dokter();
             $dokter->id_users=$user->id;
             $dokter->id_kecamatan = $request->kecamatan;
@@ -127,11 +127,11 @@ class DokterController extends Controller
             $dokter->no_telp = $request->no_telp;
             $dokter->no_str= $request->no_str;
             $dokter->save();
-                  
-            
+
+
             DB::commit();
             return redirect()->route('dokter.index');
-        
+
         }catch(\Exception $e){
         DB::rollback();
         return redirect()->route('dokter.create')->with('error',$messages);
@@ -158,7 +158,7 @@ class DokterController extends Controller
     public function edit($id)
     {
         $dokter = Dokter::find($id);
-    
+
         return view('admin.dokter.edit',compact('dokter'));
     }
 
@@ -176,21 +176,21 @@ class DokterController extends Controller
         $dokter = Dokter::find($id);
         if(!empty($request->password)){
             $user = User::where('id', $dokter->id_users)->update([
-            
+
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
                 'role' => "dokter"
             ]);
         }else{
             $user = User::where('id', $dokter->id_users)->update([
-            
+
                 'email' => $request->email,
                 'role' => "dokter"
             ]);
         }
-       
-        
-        
+
+
+
         if($user){
             $dokter = $dokter->update([
             'nik' => $request->nik,
@@ -203,7 +203,7 @@ class DokterController extends Controller
 
             ]);
             return redirect()->route('dokter.index');
-            
+
         }
 
     }
@@ -211,14 +211,14 @@ class DokterController extends Controller
     // function untuk menghapus data dokter dihalaman dokter
     public function destroy($id)
     {
-        
+
         $dokter = Dokter::find($id);
         $dokter ->delete();
         return response()->json(['data'=>'success delete data']);
     }
 
 
-    
+
     // -------- HALAMAN DOKTER --------------
 
     // function untuk menampilkan dashboard pada HALAMAN DOKTER
@@ -234,7 +234,7 @@ class DokterController extends Controller
     }
     // function untuk menampilkan halaman ubah profil pada HALAMAN DOKTER
     public function profil_edit($id)
-    {   
+    {
         $logdokter = Auth::user()->dokter;
         $dokter = $logdokter->find($id);
         return view('dokter.profil-edit',compact('dokter'));
@@ -243,7 +243,7 @@ class DokterController extends Controller
     // function untuk mengupdate data profil pada HALAMAN DOKTER
     public function profil_update(Request $request, $id)
     {
- 
+
         $logdokter = Auth::user()->dokter;
         $dokter = $logdokter->find($id);
         $dokter->nik = $request->nik;
@@ -305,10 +305,34 @@ class DokterController extends Controller
     
 
     public function pemeriksaan_data_ukgs(){
-        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS');
+        // $data = PemeriksaanGigi::findOrFail($id);
+        $odontograms = [
+            'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
+            'b2k1' => ['p55','p54','p53','p52','p51'],
+            'b3k1' => ['p85','p84','p83','p82','p81'],
+            'b4k1' => ['p48','p47','p46','45','p44','p43','p42','p41'],
+            'b1k2' => ['p21','p22','p23','p24','p25','p26','p27','p28'],
+            'b2k2' => ['p61','p62','p63','p64','p65'],
+            'b3k2' => ['p71','p72','p73','p74','p75'],
+            'b4k2' => ['p31','p32','p33','p34','p35','p36','p37','p38']
+        ];
+        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS',compact('odontograms'));
     }
 
-
+    public function pemeriksaan_data_ukgm(){
+        // $data = PemeriksaanGigi::findOrFail($id);
+        $odontograms = [
+            'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
+            'b2k1' => ['p55','p54','p53','p52','p51'],
+            'b3k1' => ['p85','p84','p83','p82','p81'],
+            'b4k1' => ['p48','p47','p46','45','p44','p43','p42','p41'],
+            'b1k2' => ['p21','p22','p23','p24','p25','p26','p27','p28'],
+            'b2k2' => ['p61','p62','p63','p64','p65'],
+            'b3k2' => ['p71','p72','p73','p74','p75'],
+            'b4k2' => ['p31','p32','p33','p34','p35','p36','p37','p38']
+        ];
+        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGM',compact('odontograms'));
+    }
     public function rekap_ukgs(){
         $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
         $kelurahan = Kelurahan::where('id_kecamatan', $dokter)->pluck('nama','id');
@@ -360,11 +384,11 @@ class DokterController extends Controller
             $btn = '';
             $btn .= '<a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data"><i class="mdi mdi-book-open-page-variant"></i></a> ';
             $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGS').'">Periksa  <i class="mdi mdi-tooth"></i></a>';
-            
-            
+
+
             return $btn;
         })
-        
+
         ->addColumn('tanggal', function($pemeriksaanfisik){
             return $tanggal = date('d-m-Y', strtotime($pemeriksaanfisik->waktu_pemeriksaan));
         })
@@ -385,7 +409,7 @@ class DokterController extends Controller
         })
         ->addIndexColumn()
        ->make(true);
-        
+
     }
 
     // function untuk menampilkan list anak berdasarkan id kelas
@@ -396,14 +420,14 @@ class DokterController extends Controller
         ->leftJoin(DB::raw('(SELECT
             id_anak,
             max(waktu_pemeriksaan) as waktu_pemeriksaan
-            FROM pemeriksaan_fisik GROUP BY id_anak) pf'), 
+            FROM pemeriksaan_fisik GROUP BY id_anak) pf'),
             function($join)
             {
             $join->on('anak.id', '=', 'pf.id_anak');
             })
         ->select('anak.id', 'anak.nama', 'anak.jenis_kelamin', 'sekolah.nama as sekolah', 'kelas.kelas', 'pf.waktu_pemeriksaan')
         ->get();
-        
+
         return datatables()->of($anak)
         ->addColumn('action', function($row){
             $btn = '';
@@ -420,7 +444,7 @@ class DokterController extends Controller
         })
         ->addIndexColumn()
         ->make(true);
-        
+
     }
 
     //----------UKGM--------------//
