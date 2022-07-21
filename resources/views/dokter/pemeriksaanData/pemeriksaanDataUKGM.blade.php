@@ -12,6 +12,7 @@
         </ol>
     </nav>
     <div class="row">
+        <form action="" method="post" id="form-skrining-gigi">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -295,6 +296,7 @@
                 </div>
             </div>
         </div>
+        </form>
     </div>
 </div>
 <!-- modal -->
@@ -326,6 +328,7 @@
 @push('after-script')
 <script>
     var imageSrc;
+    var arrayAksi = {'belum-erupsi':[],'erupsi-sebagian':[],'karies':[],'non-vital':[],'tambalan-logam':[],'tambalan-non-logam':[],'mahkota-logam':[],'mahkota-non-logam':[],'sisa-akar':[],'gigi-hilang':[],'jembatan':[],'gigi-tiruan-lepas':[]}
     $(document).ready(function(){
         $("#wizard").steps({
             headerTag: "h2",
@@ -358,9 +361,36 @@
                 }
                 return true;
             },
+            onFinished: function(event, currentIndex) {
+                const formData = new FormData();
+                let token = "{{csrf_token()}}"
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': token
+                    }
+                });
+                formData.append('odontogram', JSON.stringify(arrayAksi));
+                formData.append('def-d',$("input[name=def_d]").val());
+                formData.append('def-e',$("input[name=def_d]").val());
+                formData.append('def-f',$("input[name=def_d]").val());
+                formData.append('dmf-d',$("input[name=dmf_d]").val());
+                formData.append('dmf-e',$("input[name=dmf_e]").val());
+                formData.append('dmf-f',$("input[name=dmf_f]").val());
+                $.ajax({
+                    'type': 'POST',
+                    'url': "{{route('dokter.storePemeriksaanData')}}",
+                    'data': formData,
+                    'processData': false,
+                    'contentType': false,
+                    'dataType': 'JSON',
+                    'success': function (data) {
+                        console.log(data);
+                    },
+                });
+            }
         });
 
-        
+
 
         $(document).on("change","input[name=def_d],input[name=def_e],input[name=def_f]", function(){
             let total = parseInt($("input[name=def_d]").val()) + parseInt($("input[name=def_e]").val()) + parseInt($("input[name=def_f]").val());

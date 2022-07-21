@@ -334,6 +334,13 @@ class DokterController extends Controller
         ];
         return view ('dokter.pemeriksaanData.pemeriksaanDataUKGM',compact('ukgm','odontograms'));
     }
+
+    public function storeSkriningGigiUkgm(Request $request){
+        if($request->ajax()){
+            return $request->odontogram;
+        }
+    }
+
     public function rekap_ukgs(){
         $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
         $kelurahan = Kelurahan::where('id_kecamatan', $dokter)->pluck('nama','id');

@@ -1,6 +1,5 @@
 $(document).ready(function(){
     let action, x, y, filled;
-    let arrayAksi = {'belum-erupsi':[],'erupsi-sebagian':[],'karies':[],'non-vital':[],'tambalan-logam':[],'tambalan-non-logam':[],'mahkota-logam':[],'mahkota-non-logam':[],'sisa-akar':[],'gigi-hilang':[],'jembatan':[],'gigi-tiruan-lepas':[]}
     $('.btn-group-aksi').click(function(){
         action = $(this).attr('id');
         $('.btn-aksi').removeClass('btn-success').addClass('btn-light');
@@ -190,4 +189,6 @@ $(document).ready(function(){
             filled = false;
         }
     });
+
+
 });
