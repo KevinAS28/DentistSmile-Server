@@ -337,7 +337,13 @@ class DokterController extends Controller
 
     public function storeSkriningGigiUkgm(Request $request){
         if($request->ajax()){
-            return $request->odontogram;
+            return response()->json($request->all());
+        }
+    }
+
+    public function storeSkriningGigiUkgs(Request $request){
+        if($request->ajax()){
+            return response()->json($request->all());
         }
     }
 

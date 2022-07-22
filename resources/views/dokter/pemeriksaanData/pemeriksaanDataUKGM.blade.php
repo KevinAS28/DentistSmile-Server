@@ -11,8 +11,9 @@
             </li>
         </ol>
     </nav>
+    <form method="post" id="form-skrining-gigi">
+    @csrf
     <div class="row">
-        <form action="" method="post" id="form-skrining-gigi">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -81,7 +82,6 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h6 class="card-title">SKOR def t</h6>
-                                        <form class="forms-sample">
                                             <div class="row mb-3">
                                                 <label for="d" class="col-sm-1 col-form-label">d</label>
                                                 <div class="col-sm-2">
@@ -99,8 +99,6 @@
                                                         value="0" min="0">
                                                 </div>
                                             </div>
-                                        </form>
-                                        <form class="forms-sample">
                                             <div class="row mb-3">
                                                 <label for="readonlyDEFT" class="col-sm-1 col-form-label">def-t</label>
                                                 <div class="col-sm-1">
@@ -108,9 +106,7 @@
                                                         value="0">
                                                 </div>
                                             </div>
-                                        </form>
                                         <h6 class="card-title">SKOR DMF-T</h6>
-                                        <form class="forms-sample">
                                             <div class="row mb-3">
                                                 <label for="d" class="col-sm-1 col-form-label">d</label>
                                                 <div class="col-sm-2">
@@ -128,8 +124,6 @@
                                                         value="0" min="0">
                                                 </div>
                                             </div>
-                                        </form>
-                                        <form class="forms-sample">
                                             <div class="row mb-3">
                                                 <label for="readonlyDMFT" class="col-sm-1 col-form-label">DMF-T</label>
                                                 <div class="col-sm-1">
@@ -137,7 +131,6 @@
                                                         value="0">
                                                 </div>
                                             </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -151,18 +144,18 @@
                                         <div class="card bg-light ">
                                             <div class="card-body">
                                                 <div class="card-text">
-                                                    <p style="font-weight:bold;">PENILIAN RISIKO KARIES</p>
+                                                    <p style="font-weight:bold;">PENILAIAN RISIKO KARIES</p>
                                                     <div class="row mb-3 ">
                                                         <label for="nama" class="col-sm-3 col-form-label">Penilaian
                                                             Risiko
                                                             Karies Anak
                                                         </label>
                                                         <div class="col-sm-5">
-                                                            <select class="form-select"
+                                                            <select class="form-select" name="penilaian_risiko_karies"
                                                                 data-width="100%" placeholder="Pilih Resiko">
-                                                                <option value="#">Tinggi</option>
-                                                                <option value="#">Sedang</option>
-                                                                <option value="#">Rendah</option>
+                                                                <option value="tinggi">Tinggi</option>
+                                                                <option value="sedang">Sedang</option>
+                                                                <option value="rendah">Rendah</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -173,30 +166,24 @@
                                 </div>
                                 <div class="container p-1">
                                     @include('dokter.pemeriksaanData.resikokaries')
-
-
                                 </div>
                             </div>
                         </section>
 
                         <h2>Hasil Pemeriksaan</h2>
                         <section>
-                            <form class="forms-sample">
-                                <div class="row mb-3">
-                                    <label for="diagnosa" class="col-sm-2 col-form-label">Resiko Karies</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="diagnosa" class="form-control w-100" id="" rows="2"></textarea>
-                                    </div>
+                            <div class="row mb-3">
+                                <label for="diagnosa" class="col-sm-2 col-form-label">Resiko Karies</label>
+                                <div class="col-sm-10">
+                                    <textarea name="diagnosa" class="form-control w-100" id="" rows="2"></textarea>
                                 </div>
-                            </form>
-                            <form class="forms-sample">
-                                <div class="row mb-3">
-                                    <label for="rekomendasi" class="col-sm-2 col-form-label">Rekomendasi</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="rekomendasi" class="form-control w-100" id="" rows="2"></textarea>
-                                    </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="rekomendasi" class="col-sm-2 col-form-label">Rekomendasi</label>
+                                <div class="col-sm-10">
+                                    <textarea name="rekomendasi" class="form-control w-100" id="" rows="2"></textarea>
                                 </div>
-                            </form>
+                            </div>
                         </section>
                     </div>
                 </div>
@@ -207,97 +194,107 @@
             <div class="card" id="keterangan">
                 <div class="card-body">
                     <p class="text-muted">KETERANGAN: </p>
-                    <form class="forms-sample">
                         <div class="row mb-3">
                             <label for="" class="col-sm-3 col-form-label">Belum Erupsi</label>
                             <div class="col-sm-9">
-                                <input type="text" name="belum-erupsi" class="form-control" readonly>
+                                <input type="text" id="field-belum-erupsi" class="form-control" readonly>
+                                <input type="hidden" name="h_belum_erupsi">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="" class="col-sm-3 col-form-label">Erupsi Sebagian</label>
                             <div class="col-sm-9">
-                                <input type="text" name="erupsi-sebagian" class="form-control" readonly>
+                                <input type="text" id="field-erupsi-sebagian" class="form-control" readonly>
+                                <input type="hidden" name="h_erupsi_sebagian">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="" class="col-sm-3 col-form-label">Karies</label>
                             <div class="col-sm-9">
-                                <input type="text" name="karies" class="form-control" readonly>
+                                <input type="text" id="field-karies" class="form-control" readonly>
+                                <input type="hidden" name="h_karies">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="" class="col-sm-3 col-form-label">Non Vital</label>
                             <div class="col-sm-9">
-                                <input type="text" name="non-vital" class="form-control" readonly>
+                                <input type="text" id="field-non-vital" class="form-control" readonly>
+                                <input type="hidden" name="h_non_vital">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="" class="col-sm-3 col-form-label">Tambalan Logam</label>
                             <div class="col-sm-9">
-                                <input type="text" name="tambalan-logam" class="form-control" readonly>
+                                <input type="text" id="field-tambalan-logam" class="form-control" readonly>
+                                <input type="hidden" name="h_tambalan_logam">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="" class="col-sm-3 col-form-label">Tambalan Non Logam</label>
                             <div class="col-sm-9">
-                                <input type="text" name="tambalan-non-logam" class="form-control" readonly>
+                                <input type="text" id="field-tambalan-non-logam" class="form-control" readonly>
+                                <input type="hidden" name="h_tambalan_non_logam">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="" class="col-sm-3 col-form-label">Mahkota Logam</label>
                             <div class="col-sm-9">
-                                <input type="text" name="mahkota-logam" class="form-control" readonly>
+                                <input type="text" id="field-mahkota-logam" class="form-control" readonly>
+                                <input type="hidden" name="h_mahkota_logam">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="" class="col-sm-3 col-form-label">Mahkota Non Logam</label>
                             <div class="col-sm-9">
-                                <input type="text" name="mahkota-non-logam" class="form-control" readonly>
+                                <input type="text" id="field-mahkota-non-logam" class="form-control" readonly>
+                                <input type="hidden" name="h_mahkota_non_logam">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="" class="col-sm-3 col-form-label">Sisa Akar</label>
                             <div class="col-sm-9">
-                                <input type="text" name="sisa-akar" class="form-control" readonly>
+                                <input type="text" id="field-sisa-akar" class="form-control" readonly>
+                                <input type="hidden" name="h_sisa_akar">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="" class="col-sm-3 col-form-label">Gigi Hilang</label>
                             <div class="col-sm-9">
-                                <input type="text" name="gigi-hilang" class="form-control" readonly>
+                                <input type="text" id="field-gigi-hilang" class="form-control" readonly>
+                                <input type="hidden" name="h_gigi_hilang">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="" class="col-sm-3 col-form-label">Jembatan</label>
                             <div class="col-sm-9">
-                                <input type="text" name="jembatan" class="form-control" readonly>
+                                <input type="text" id="field-jembatan" class="form-control" readonly>
+                                <input type="hidden" name="h_jembatan">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="" class="col-sm-3 col-form-label">Gigi Tiruan Lepas</label>
                             <div class="col-sm-9">
-                                <input type="text" name="gigi-tiruan-lepas" class="form-control" readonly>
+                                <input type="text" id="field-gigi-tiruan-lepas" class="form-control" readonly>
+                                <input type="hidden" name="h_gigi_tiruan_lepas">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
-        </form>
     </div>
+    </form>
 </div>
 <!-- modal -->
 <div class="modal fade" id="modal-image" tabindex="-1" aria-hidden="true">
@@ -362,23 +359,11 @@
                 return true;
             },
             onFinished: function(event, currentIndex) {
-                const formData = new FormData();
-                let token = "{{csrf_token()}}"
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': token
-                    }
-                });
-                formData.append('odontogram', JSON.stringify(arrayAksi));
-                formData.append('def-d',$("input[name=def_d]").val());
-                formData.append('def-e',$("input[name=def_d]").val());
-                formData.append('def-f',$("input[name=def_d]").val());
-                formData.append('dmf-d',$("input[name=dmf_d]").val());
-                formData.append('dmf-e',$("input[name=dmf_e]").val());
-                formData.append('dmf-f',$("input[name=dmf_f]").val());
+                const formData = new FormData(document.getElementById("form-skrining-gigi"));
+                formData.append('resikokaries',document.getElementById("form-resiko-karies"));
                 $.ajax({
                     'type': 'POST',
-                    'url': "{{route('dokter.storePemeriksaanData')}}",
+                    'url': "{{route('dokter.storePemeriksaanDataUkgm')}}",
                     'data': formData,
                     'processData': false,
                     'contentType': false,

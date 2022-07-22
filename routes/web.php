@@ -136,7 +136,8 @@ Route::group(['prefix' => 'dokter'], function () {
     Route::get('/pemeriksaan-ukgm',[DokterController::class, 'pemeriksaan_ukgm'])->name('dokter.periksaUKGM');
     Route::get('/pemeriksaan-ukgs/pemeriksaan-data/{id}',[DokterController::class, 'pemeriksaan_data_ukgs'])->name('dokter.pemeriksaanDataUKGS');
     Route::get('/pemeriksaan-ukgm/pemeriksaan-data/{id}',[DokterController::class, 'pemeriksaan_data_ukgm'])->name('dokter.pemeriksaanDataUKGM');
-    Route::post('pemeriksaan-data',[DokterController::class, 'storeSkriningGigiUkgm'])->name('dokter.storePemeriksaanData');
+    Route::post('pemeriksaan-data-ukgm',[DokterController::class, 'storeSkriningGigiUkgm'])->name('dokter.storePemeriksaanDataUkgm');
+    Route::post('pemeriksaan-data-ukgs',[DokterController::class, 'storeSkriningGigiUkgs'])->name('dokter.storePemeriksaanDataUkgs');
     Route::get('/rekap-ukgs',[DokterController::class, 'rekap_ukgs'])->name('dokter.rekapDataUKGS');
     Route::get('/rekap-ukgm',[DokterController::class, 'rekap_ukgm'])->name('dokter.rekapDataUKGM');
     Route::get('/rekap-ukgs/rekap-datail-ukgs',[DokterController::class, 'rekap_detail_ukgs'])->name('dokter.rekapDetailUKGS');

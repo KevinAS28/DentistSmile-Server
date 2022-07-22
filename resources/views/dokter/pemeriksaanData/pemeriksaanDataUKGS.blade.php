@@ -7,9 +7,13 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('dokter.periksaUKGS')}}">Pemeriksaan Gigi</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><--- User ----></li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ucwords($ukgs->anak->nama)}}
+            </li>
         </ol>
     </nav>
+    <form method="post" id="form-skrining-gigi">
+    @csrf
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
@@ -78,63 +82,55 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h6 class="card-title">SKOR def t</h6>
-                                        <form class="forms-sample">
-                                            <div class="row mb-3">
-                                                <label for="d" class="col-sm-1 col-form-label">d</label>
-                                                <div class="col-sm-2">
-                                                    <input type="number" name="def_d" class="form-control skor-d"
-                                                        value="0" min="0">
-                                                </div>
-                                                <label for="e" class="col-sm-1 col-form-label">e</label>
-                                                <div class="col-sm-2">
-                                                    <input type="number" name="def_e" class="form-control skor-e"
-                                                        value="0" min="0">
-                                                </div>
-                                                <label for="f" class="col-sm-1 col-form-label">f</label>
-                                                <div class="col-sm-2">
-                                                    <input type="number" name="def_f" class="form-control skor-f"
-                                                        value="0" min="0">
-                                                </div>
+                                        <div class="row mb-3">
+                                            <label for="d" class="col-sm-1 col-form-label">d</label>
+                                            <div class="col-sm-2">
+                                                <input type="number" name="def_d" class="form-control skor-d"
+                                                    value="0" min="0">
                                             </div>
-                                        </form>
-                                        <form class="forms-sample">
-                                            <div class="row mb-3">
-                                                <label for="readonlyDEFT" class="col-sm-1 col-form-label">def-t</label>
-                                                <div class="col-sm-1">
-                                                    <input type="number" name="def_t" class="form-control total-skor" readonly
-                                                        value="0">
-                                                </div>
+                                            <label for="e" class="col-sm-1 col-form-label">e</label>
+                                            <div class="col-sm-2">
+                                                <input type="number" name="def_e" class="form-control skor-e"
+                                                    value="0" min="0">
                                             </div>
-                                        </form>
+                                            <label for="f" class="col-sm-1 col-form-label">f</label>
+                                            <div class="col-sm-2">
+                                                <input type="number" name="def_f" class="form-control skor-f"
+                                                    value="0" min="0">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="readonlyDEFT" class="col-sm-1 col-form-label">def-t</label>
+                                            <div class="col-sm-1">
+                                                <input type="number" name="def_t" class="form-control total-skor" readonly
+                                                    value="0">
+                                            </div>
+                                        </div>
                                         <h6 class="card-title">SKOR DMF-T</h6>
-                                        <form class="forms-sample">
-                                            <div class="row mb-3">
-                                                <label for="d" class="col-sm-1 col-form-label">d</label>
-                                                <div class="col-sm-2">
-                                                    <input type="number" name="dmf_d" class="form-control skor-d"
-                                                        value="0" min="0">
-                                                </div>
-                                                <label for="m" class="col-sm-1 col-form-label">e</label>
-                                                <div class="col-sm-2">
-                                                    <input type="number" name="dmf_e" class="form-control skor-e"
-                                                        value="0" min="0">
-                                                </div>
-                                                <label for="f" class="col-sm-1 col-form-label">f</label>
-                                                <div class="col-sm-2">
-                                                    <input type="number" name="dmf_f" class="form-control skor-f"
-                                                        value="0" min="0">
-                                                </div>
+                                        <div class="row mb-3">
+                                            <label for="d" class="col-sm-1 col-form-label">d</label>
+                                            <div class="col-sm-2">
+                                                <input type="number" name="dmf_d" class="form-control skor-d"
+                                                    value="0" min="0">
                                             </div>
-                                        </form>
-                                        <form class="forms-sample">
-                                            <div class="row mb-3">
-                                                <label for="readonlyDMFT" class="col-sm-1 col-form-label">DMF-T</label>
-                                                <div class="col-sm-1">
-                                                    <input type="number" name="dmf_t" class="form-control total-skor" readonly
-                                                        value="0">
-                                                </div>
+                                            <label for="m" class="col-sm-1 col-form-label">e</label>
+                                            <div class="col-sm-2">
+                                                <input type="number" name="dmf_e" class="form-control skor-e"
+                                                    value="0" min="0">
                                             </div>
-                                        </form>
+                                            <label for="f" class="col-sm-1 col-form-label">f</label>
+                                            <div class="col-sm-2">
+                                                <input type="number" name="dmf_f" class="form-control skor-f"
+                                                    value="0" min="0">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="readonlyDMFT" class="col-sm-1 col-form-label">DMF-T</label>
+                                            <div class="col-sm-1">
+                                                <input type="number" name="dmf_t" class="form-control total-skor" readonly
+                                                    value="0">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -142,22 +138,18 @@
 
                         <h2>Hasil Pemeriksaan</h2>
                         <section>
-                            <form class="forms-sample">
-                                <div class="row mb-3">
-                                    <label for="diagnosa" class="col-sm-2 col-form-label">Resiko Karies</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="diagnosa" class="form-control w-100" id="" rows="2"></textarea>
-                                    </div>
+                            <div class="row mb-3">
+                                <label for="diagnosa" class="col-sm-2 col-form-label">Resiko Karies</label>
+                                <div class="col-sm-10">
+                                    <textarea name="diagnosa" class="form-control w-100" id="" rows="2"></textarea>
                                 </div>
-                            </form>
-                            <form class="forms-sample">
-                                <div class="row mb-3">
-                                    <label for="rekomendasi" class="col-sm-2 col-form-label">Rekomendasi</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="rekomendasi" class="form-control w-100" id="" rows="2"></textarea>
-                                    </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="rekomendasi" class="col-sm-2 col-form-label">Rekomendasi</label>
+                                <div class="col-sm-10">
+                                    <textarea name="rekomendasi" class="form-control w-100" id="" rows="2"></textarea>
                                 </div>
-                            </form>
+                            </div>
                         </section>
                     </div>
                 </div>
@@ -168,27 +160,27 @@
             <div class="card" id="keterangan">
                 <div class="card-body">
                     <p class="text-muted">KETERANGAN: </p>
-                    <form class="forms-sample">
-                        <div class="row mb-3">
-                            <label for="" class="col-sm-3 col-form-label">Sisa Akar</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="sisa-akar" class="form-control" readonly>
-                                <span class="posisi-gigi"></span>
-                            </div>
+                    <div class="row mb-3">
+                        <label for="" class="col-sm-3 col-form-label">Sisa Akar</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="field-sisa-akar" class="form-control" readonly>
+                            <input type="hidden" name="h_sisa_akar">
+                            <span class="posisi-gigi"></span>
                         </div>
-                        <div class="row mb-3">
-                            <label for="" class="col-sm-3 col-form-label">Gigi Hilang</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="gigi-hilang" class="form-control" readonly>
-                                <span class="posisi-gigi"></span>
-                            </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="" class="col-sm-3 col-form-label">Gigi Hilang</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="field-gigi-hilang" class="form-control" readonly>
+                            <input type="hidden" name="h_gigi_hilang">
+                            <span class="posisi-gigi"></span>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+    </form>
 </div>
 <!-- modal -->
 <div class="modal fade" id="modal-image" tabindex="-1" aria-hidden="true">
@@ -244,6 +236,20 @@
                 }
                 return true;
             },
+            onFinished: function(event, currentIndex) {
+                const formData = new FormData(document.getElementById("form-skrining-gigi"));
+                $.ajax({
+                    'type': 'POST',
+                    'url': "{{route('dokter.storePemeriksaanDataUkgs')}}",
+                    'data': formData,
+                    'processData': false,
+                    'contentType': false,
+                    'dataType': 'JSON',
+                    'success': function (data) {
+                        console.log(data);
+                    },
+                });
+            }
         });
 
         $(document).on("change","input[name=def_d],input[name=def_e],input[name=def_f]", function(){
