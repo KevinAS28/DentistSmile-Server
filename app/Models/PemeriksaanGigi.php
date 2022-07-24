@@ -21,6 +21,14 @@ class PemeriksaanGigi extends Model
     {
         return $this->hasOne('App\Models\ResikoKaries', 'id_pemeriksaan_gigi');
     }
+    public function skriningOdontogram()
+    {
+        return $this->hasMany('App\Models\SkriningOdontogram', 'id_pemeriksaan');
+    }
+    public function skriningIndeks()
+    {
+        return $this->hasOne('App\Models\SkriningIndeks', 'id_pemeriksaan');
+    }
     public function kelas(){
         return $this->belongsTo('App\Models\Kelas', 'id_kelas');
     }

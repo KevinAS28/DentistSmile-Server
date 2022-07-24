@@ -188,7 +188,7 @@
             </label>
         </div>
         <div class="form-check form-check-inline">
-            <input type="radio" value="tidak" class="form-check-input" name="rksoal13" id="radioInline1" {{ (@$ukgm->resikoKaries->rksoal14=="ya")? "checked" : "" }}>
+            <input type="radio" value="tidak" class="form-check-input" name="rksoal13" id="radioInline1" {{ (@$ukgm->resikoKaries->rksoal13=="tidak")? "checked" : "" }}>
             <label class="form-check-label" for="radioInline1">
                 Tidak
             </label>

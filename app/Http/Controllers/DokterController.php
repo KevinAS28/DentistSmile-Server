@@ -10,6 +10,8 @@ use App\Models\Kecamatan;
 use App\Models\Kelas;
 use App\Models\Sekolah;
 use App\Models\Anak;
+use App\Models\SkriningOdontogram;
+use App\Models\SkriningIndeks;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
 use Auth;
@@ -18,6 +20,7 @@ use App\Models\PemeriksaanFisik;
 use App\Models\PemeriksaanMata;
 use App\Models\PemeriksaanTelinga;
 use App\Models\PemeriksaanGigi;
+use App\Models\ResikoKaries;
 use Carbon\Carbon;
 
 class DokterController extends Controller
@@ -320,7 +323,7 @@ class DokterController extends Controller
     }
 
     public function pemeriksaan_data_ukgm($id){
-        $ukgm = PemeriksaanGigi::with('anak','resikoKaries')->findOrFail($id);
+        $ukgm = PemeriksaanGigi::with('anak','resikoKaries','skriningOdontogram','skriningIndeks')->findOrFail($id);
         // dd($ukgm);
         $odontograms = [
             'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
@@ -336,8 +339,51 @@ class DokterController extends Controller
     }
 
     public function storeSkriningGigiUkgm(Request $request){
+        // $arrayAksi = ['h_belum_erupsi','h_erupsi_sebagian','h_']
         if($request->ajax()){
-            return response()->json($request->all());
+            SkriningOdontogram::where('id_pemeriksaan',$request->id_pemeriksaan)->delete();
+            foreach ($request->aksi as $key => $value) {
+                $data = new SkriningOdontogram();
+                $data->id_pemeriksaan = $request->id_pemeriksaan;
+                $data->aksi = str_replace('h_','',$key);
+                $data->posisi = $value;
+                $data->save();
+            }
+            SkriningIndeks::updateOrCreate(
+                [
+                    'id_pemeriksaan' => $request->id_pemeriksaan
+                ],
+                [
+                    'def_d' => $request->def_d,
+                    'def_e' => $request->def_e,
+                    'def_f' => $request->def_f,
+                    'dmf_d' => $request->dmf_d,
+                    'dmf_e' => $request->dmf_e,
+                    'dmf_f' => $request->dmf_f
+                ]
+            );
+            ResikoKaries::updateOrCreate(
+                [
+                    'id_pemeriksaan_gigi' => $request->id_pemeriksaan
+                ],
+                [
+                    'rksoal1' => $request->rksoal1,
+                    'rksoal2' => $request->rksoal2,
+                    'rksoal3' => $request->rksoal3,
+                    'rksoal4' => $request->rksoal4,
+                    'rksoal5' => $request->rksoal5,
+                    'rksoal6' => $request->rksoal6,
+                    'rksoal7' => $request->rksoal7,
+                    'rksoal8' => $request->rksoal8,
+                    'rksoal9' => $request->rksoal9,
+                    'rksoal10' => $request->rksoal10,
+                    'rksoal11' => $request->rksoal11,
+                    'rksoal12' => $request->rksoal12,
+                    'rksoal13' => $request->rksoal13,
+                    'penilaian' => $request->penilaian_risiko_karies
+                ]
+            );
+            return response()->json(['success'=>'Data added successfully']);
         }
     }
 

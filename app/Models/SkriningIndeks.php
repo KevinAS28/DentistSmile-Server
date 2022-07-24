@@ -5,12 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SkriningOdontogram extends Model
+class SkriningIndeks extends Model
 {
     use HasFactory;
     protected $fillable = [
         'id_pemeriksaan',
-        'aksi',
-        'posisi',
+        'def_d',
+        'def_e',
+        'def_f',
+        'dmf_d',
+        'dmf_e',
+        'dmf_f',
     ];
 }

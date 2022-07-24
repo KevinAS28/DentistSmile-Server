@@ -86,24 +86,24 @@
                                                 <label for="d" class="col-sm-1 col-form-label">d</label>
                                                 <div class="col-sm-2">
                                                     <input type="number" name="def_d" class="form-control skor-d"
-                                                        value="0" min="0">
+                                                        value="{{@$ukgm->skriningIndeks->def_d ?: 0}}" min="0">
                                                 </div>
                                                 <label for="e" class="col-sm-1 col-form-label">e</label>
                                                 <div class="col-sm-2">
                                                     <input type="number" name="def_e" class="form-control skor-e"
-                                                        value="0" min="0">
+                                                        value="{{@$ukgm->skriningIndeks->def_e ?: 0}}" min="0">
                                                 </div>
                                                 <label for="f" class="col-sm-1 col-form-label">f</label>
                                                 <div class="col-sm-2">
                                                     <input type="number" name="def_f" class="form-control skor-f"
-                                                        value="0" min="0">
+                                                        value="{{@$ukgm->skriningIndeks->def_f ?: 0}}" min="0">
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <label for="readonlyDEFT" class="col-sm-1 col-form-label">def-t</label>
                                                 <div class="col-sm-1">
                                                     <input type="number" name="def_t" class="form-control total-skor" readonly
-                                                        value="0">
+                                                        value="{{@$ukgm->skriningIndeks->def_d + @$ukgm->skriningIndeks->def_e + @$ukgm->skriningIndeks->def_f ?: 0}}">
                                                 </div>
                                             </div>
                                         <h6 class="card-title">SKOR DMF-T</h6>
@@ -111,24 +111,24 @@
                                                 <label for="d" class="col-sm-1 col-form-label">d</label>
                                                 <div class="col-sm-2">
                                                     <input type="number" name="dmf_d" class="form-control skor-d"
-                                                        value="0" min="0">
+                                                        value="{{@$ukgm->skriningIndeks->dmf_d ?: 0}}" min="0">
                                                 </div>
                                                 <label for="m" class="col-sm-1 col-form-label">e</label>
                                                 <div class="col-sm-2">
                                                     <input type="number" name="dmf_e" class="form-control skor-e"
-                                                        value="0" min="0">
+                                                        value="{{@$ukgm->skriningIndeks->dmf_d ?: 0}}" min="0">
                                                 </div>
                                                 <label for="f" class="col-sm-1 col-form-label">f</label>
                                                 <div class="col-sm-2">
                                                     <input type="number" name="dmf_f" class="form-control skor-f"
-                                                        value="0" min="0">
+                                                        value="{{@$ukgm->skriningIndeks->dmf_d ?: 0}}" min="0">
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <label for="readonlyDMFT" class="col-sm-1 col-form-label">DMF-T</label>
                                                 <div class="col-sm-1">
                                                     <input type="number" name="dmf_t" class="form-control total-skor" readonly
-                                                        value="0">
+                                                        value="{{@$ukgm->skriningIndeks->dmf_d + @$ukgm->skriningIndeks->dmf_e + @$ukgm->skriningIndeks->dmf_f ?: 0}}">
                                                 </div>
                                             </div>
                                     </div>
@@ -151,11 +151,13 @@
                                                             Karies Anak
                                                         </label>
                                                         <div class="col-sm-5">
+                                                            @php $resiko = ['Tinggi','Sedang','Rendah'] @endphp
                                                             <select class="form-select" name="penilaian_risiko_karies"
                                                                 data-width="100%" placeholder="Pilih Resiko">
-                                                                <option value="tinggi">Tinggi</option>
-                                                                <option value="sedang">Sedang</option>
-                                                                <option value="rendah">Rendah</option>
+                                                                <option selected disabled>Pilih Resiko</option>
+                                                                @foreach ($resiko as $item)
+                                                                <option value="{{strtolower($item)}}" {{strtolower($item) == $ukgm->resikoKaries->penilaian ? 'selected':''}}>{{$item}}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                     </div>
@@ -198,7 +200,7 @@
                             <label for="" class="col-sm-3 col-form-label">Belum Erupsi</label>
                             <div class="col-sm-9">
                                 <input type="text" id="field-belum-erupsi" class="form-control" readonly>
-                                <input type="hidden" name="h_belum_erupsi">
+                                <input type="hidden" id="h_belum_erupsi" name="aksi[h_belum_erupsi]">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
@@ -206,7 +208,7 @@
                             <label for="" class="col-sm-3 col-form-label">Erupsi Sebagian</label>
                             <div class="col-sm-9">
                                 <input type="text" id="field-erupsi-sebagian" class="form-control" readonly>
-                                <input type="hidden" name="h_erupsi_sebagian">
+                                <input type="hidden" id="h_erupsi_sebagian" name="aksi[h_erupsi_sebagian]">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
@@ -214,7 +216,7 @@
                             <label for="" class="col-sm-3 col-form-label">Karies</label>
                             <div class="col-sm-9">
                                 <input type="text" id="field-karies" class="form-control" readonly>
-                                <input type="hidden" name="h_karies">
+                                <input type="hidden" id="h_karies" name="aksi[h_karies]">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
@@ -222,7 +224,7 @@
                             <label for="" class="col-sm-3 col-form-label">Non Vital</label>
                             <div class="col-sm-9">
                                 <input type="text" id="field-non-vital" class="form-control" readonly>
-                                <input type="hidden" name="h_non_vital">
+                                <input type="hidden" id="h_non_vital" name="aksi[h_non_vital]">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
@@ -230,7 +232,7 @@
                             <label for="" class="col-sm-3 col-form-label">Tambalan Logam</label>
                             <div class="col-sm-9">
                                 <input type="text" id="field-tambalan-logam" class="form-control" readonly>
-                                <input type="hidden" name="h_tambalan_logam">
+                                <input type="hidden" id="h_tambalan_logam" name="aksi[h_tambalan_logam]">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
@@ -238,7 +240,7 @@
                             <label for="" class="col-sm-3 col-form-label">Tambalan Non Logam</label>
                             <div class="col-sm-9">
                                 <input type="text" id="field-tambalan-non-logam" class="form-control" readonly>
-                                <input type="hidden" name="h_tambalan_non_logam">
+                                <input type="hidden" id="h_tambalan_non_logam" name="aksi[h_tambalan_non_logam]">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
@@ -246,7 +248,7 @@
                             <label for="" class="col-sm-3 col-form-label">Mahkota Logam</label>
                             <div class="col-sm-9">
                                 <input type="text" id="field-mahkota-logam" class="form-control" readonly>
-                                <input type="hidden" name="h_mahkota_logam">
+                                <input type="hidden" id="h_mahkota_logam" name="aksi[h_mahkota_logam]">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
@@ -254,7 +256,7 @@
                             <label for="" class="col-sm-3 col-form-label">Mahkota Non Logam</label>
                             <div class="col-sm-9">
                                 <input type="text" id="field-mahkota-non-logam" class="form-control" readonly>
-                                <input type="hidden" name="h_mahkota_non_logam">
+                                <input type="hidden" id="h_mahkota_non_logam" name="aksi[h_mahkota_non_logam]">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
@@ -262,7 +264,7 @@
                             <label for="" class="col-sm-3 col-form-label">Sisa Akar</label>
                             <div class="col-sm-9">
                                 <input type="text" id="field-sisa-akar" class="form-control" readonly>
-                                <input type="hidden" name="h_sisa_akar">
+                                <input type="hidden" id="h_sisa_akar" name="aksi[h_sisa_akar]">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
@@ -270,7 +272,7 @@
                             <label for="" class="col-sm-3 col-form-label">Gigi Hilang</label>
                             <div class="col-sm-9">
                                 <input type="text" id="field-gigi-hilang" class="form-control" readonly>
-                                <input type="hidden" name="h_gigi_hilang">
+                                <input type="hidden" id="h_gigi_hilang" name="aksi[h_gigi_hilang]">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
@@ -278,7 +280,7 @@
                             <label for="" class="col-sm-3 col-form-label">Jembatan</label>
                             <div class="col-sm-9">
                                 <input type="text" id="field-jembatan" class="form-control" readonly>
-                                <input type="hidden" name="h_jembatan">
+                                <input type="hidden" id="h_jembatan" name="aksi[h_jembatan]">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
@@ -286,7 +288,7 @@
                             <label for="" class="col-sm-3 col-form-label">Gigi Tiruan Lepas</label>
                             <div class="col-sm-9">
                                 <input type="text" id="field-gigi-tiruan-lepas" class="form-control" readonly>
-                                <input type="hidden" name="h_gigi_tiruan_lepas">
+                                <input type="hidden" id="h_gigi_tiruan_lepas" name="aksi[h_gigi_tiruan_lepas]">
                                 <span class="posisi-gigi"></span>
                             </div>
                         </div>
@@ -360,6 +362,7 @@
             },
             onFinished: function(event, currentIndex) {
                 const formData = new FormData(document.getElementById("form-skrining-gigi"));
+                formData.append('id_pemeriksaan', "{{$ukgm->id}}");
                 formData.append('resikokaries',document.getElementById("form-resiko-karies"));
                 $.ajax({
                     'type': 'POST',
