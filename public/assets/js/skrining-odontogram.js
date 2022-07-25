@@ -182,7 +182,7 @@ $(document).ready(function(){
         if (filled) {
             $.each(arrayAksi, function(index, value) {
                 $("#keterangan").find("input[id='field-"+index+"']").val(arrayAksi[index].length);
-                $("#keterangan").find("input[id='h_"+index.replace('-','_')+"']").val(value.toString());
+                $("#keterangan").find("input[id='h-"+index+"']").val(value.toString());
                 $("#keterangan").find("input[id='field-"+index+"']").parent().find('span').text(value.toString().toUpperCase());
             });
             let total_skor = arrayAksi['gigi-hilang'].length + arrayAksi['sisa-akar'].length + arrayAksi['karies'].length + arrayAksi['tambalan-logam'].length + arrayAksi['tambalan-non-logam'].length + arrayAksi['mahkota-logam'].length + arrayAksi['mahkota-non-logam'].length;

@@ -164,7 +164,7 @@
                     <div class="row mb-3">
                         <label for="" class="col-sm-3 col-form-label">{{str_replace('_',' ',ucfirst($value))}}</label>
                         <div class="col-sm-9">
-                            <input type="text" id="field-{{str_replace('_','-',$value)}}" class="form-control" value="{{substr_count($data->skriningOdontogram->where('aksi',$value)->first()->posisi,'p')}}" readonly>
+                            <input type="text" id="field-{{str_replace('_','-',$value)}}" class="form-control" value="{{substr_count(@$data->skriningOdontogram->where('aksi',$value)->first()->posisi,'p')}}" readonly>
                             <input type="hidden" id="h_{{$value}}" name="aksi[h_{{$value}}]" value="{{@$data->skriningOdontogram->where('aksi',$value)->first()->posisi}}">
                             <span class="posisi-gigi">{{strtoupper(@$data->skriningOdontogram->where('aksi',$value)->first()->posisi)}}</span>
                         </div>
@@ -198,6 +198,8 @@
 @endsection
 @push('after-script')
 <script>
+    var imageSrc;
+    var arrayAksi = {'belum-erupsi':[],'erupsi-sebagian':[],'karies':[],'non-vital':[],'tambalan-logam':[],'tambalan-non-logam':[],'mahkota-logam':[],'mahkota-non-logam':[],'sisa-akar':[],'gigi-hilang':[],'jembatan':[],'gigi-tiruan-lepas':[]}
     $(document).ready(function(){
         $("#wizard").steps({
             headerTag: "h2",

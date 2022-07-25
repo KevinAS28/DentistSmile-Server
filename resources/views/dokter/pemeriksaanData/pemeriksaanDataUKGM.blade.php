@@ -200,8 +200,8 @@
                     <div class="row mb-3">
                         <label for="" class="col-sm-3 col-form-label">{{str_replace('_',' ',ucfirst($value))}}</label>
                         <div class="col-sm-9">
-                            <input type="text" id="field-{{str_replace('_','-',$value)}}" class="form-control" value="{{substr_count($data->skriningOdontogram->where('aksi',$value)->first()->posisi,'p')}}" readonly>
-                            <input type="hidden" id="h_{{$value}}" name="aksi[h_{{$value}}]" value="{{@$data->skriningOdontogram->where('aksi',$value)->first()->posisi}}">
+                            <input type="text" id="field-{{str_replace('_','-',$value)}}" class="form-control" value="{{substr_count(@$data->skriningOdontogram->where('aksi',$value)->first()->posisi,'p')}}" readonly>
+                            <input type="hidden" id="h-{{$value}}" name="aksi[h-{{$value}}]" value="{{@$data->skriningOdontogram->where('aksi',$value)->first()->posisi}}">
                             <span class="posisi-gigi">{{strtoupper(@$data->skriningOdontogram->where('aksi',$value)->first()->posisi)}}</span>
                         </div>
                     </div>
@@ -292,8 +292,6 @@
             }
         });
 
-
-
         $(document).on("change","input[name=def_d],input[name=def_e],input[name=def_f]", function(){
             let total = parseInt($("input[name=def_d]").val()) + parseInt($("input[name=def_e]").val()) + parseInt($("input[name=def_f]").val());
             $("input[name=def_t]").val(total);
@@ -315,6 +313,91 @@
         $('#modal-image').on('hide.bs.modal', function (e) {
             $("#img-in-modal").attr('src','');
         });
+
+        // edit odontogram
+        if ("{{$data->skriningOdontogram->isNotEmpty()}}") {
+            var data = "{{$data->skriningOdontogram}}";
+            const obj = JSON.parse(data.replace(/&quot;/g, '"'));
+            $.each(obj, function(index, value){
+                let x, y, color, element, type, posisi = value.posisi || "";
+                let arrayPosisi = posisi.split(',');
+                $.each(arrayPosisi, function(index2, value2){
+                    if (value.posisi != null) {
+                        arrayAksi[value.aksi].push(value2);
+                    }
+                    switch (value.aksi) {
+                        case 'belum-erupsi':
+                            // type = 'insert-text';
+                            // x = 1.5; y = 15;
+                            // color = '#5D5FEF';
+                            // style = 'font-size: 10pt;font-weight:bold;cursor:default';
+                            // element = 'UE';
+                            console.log('belum-erupsi');
+                            break;
+                        case 'erupsi-sebagian':
+                            // type = 'insert-text';
+                            // x = 1.5; y = 15;
+                            // color = '#5D5FEF';
+                            // style = 'font-size: 10pt;font-weight:bold;cursor:default';
+                            // element = 'PE';
+                            break;
+                        case 'karies':
+
+                            break;
+                        case 'non-vital':
+                            type = 'insert-non-vital';
+                            style = 'stroke-width:2';
+                            color = '#C71616';
+                            break;
+                        case 'tambalan-logam':
+
+                            break;
+                        case 'tambalan-non-logam':
+
+                            break;
+                        case 'mahkota-logam':
+
+                            break;
+                        case 'mahkota-non-logam':
+
+                            break;
+                        case 'sisa-akar':
+                            // type = 'insert-text';
+                            // x = 3.5; y = 17;
+                            // color = '#5D5FEF';
+                            // style = 'font-size: 15pt;font-weight:bold;cursor:default';
+                            // element = 'V';
+                            break;
+                        case 'gigi-hilang':
+                            // type = 'insert-text';
+                            // x = 3.5; y = 17;
+                            // color = '#C71616';
+                            // style = 'font-size: 15pt;font-weight:bold;cursor:default';
+                            // element = 'X';
+                            break;
+                        case 'jembatan':
+                            // type = 'insert-line';
+                            // color = '#048A3F';
+                            // style = 'stroke-width:2';
+                            break;
+                        case 'gigi-tiruan-lepas':
+                            // type = 'insert-line';
+                            // color = '#E4AA04';
+                            // style = 'stroke-width:2';
+                            break;
+                    }
+                    if (type == 'insert-text') {
+                        d3.select('g#'+value2).append('text').attr('id',value2).attr('type','insert-text').attr('x', x).attr('y', y).attr('stroke', color).attr('fill', color).attr('stroke-width', '0.1').attr('style', style).text(element);
+                    } else if (type == 'insert-line') {
+                        d3.select('g#'+value2).append('line').attr('id',value2).attr('type','insert-line').attr('x1', '20').attr('y1', '10').attr('x2', '0').attr('y2', '10').attr('stroke',color).attr('style', style);
+                    } else if (type == 'insert-non-vital') {
+                        d3.select('g#'+value2).append('line').attr('id',value2).attr('type','insert-non-vital').attr('x1', '5').attr('y1', '15').attr('x2', '0').attr('y2', '15').attr('stroke',color).attr('style', style);
+                        d3.select('g#'+value2).append('line').attr('id',value2).attr('type','insert-non-vital').attr('x1', '15').attr('y1', '5').attr('x2', '5').attr('y2', '15').attr('stroke',color).attr('style', style);
+                        d3.select('g#'+value2).append('line').attr('id',value2).attr('type','insert-non-vital').attr('x1', '20').attr('y1', '5').attr('x2', '15').attr('y2', '5').attr('stroke',color).attr('style', style);
+                    }
+                });
+            });
+        }
     });
 </script>
 <script src="{{asset('assets/js/skrining-odontogram.js')}}"></script>

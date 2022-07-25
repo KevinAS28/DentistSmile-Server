@@ -309,7 +309,7 @@ class DokterController extends Controller
 
     public function pemeriksaan_data_ukgs($id){
         $data = PemeriksaanGigi::with('anak','resikoKaries')->findOrFail($id);
-        $aksi = ['sisa_akar','gigi_hilang'];
+        $aksi = ['sisa-akar','gigi-hilang'];
         $odontograms = [
             'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
             'b2k1' => ['p55','p54','p53','p52','p51'],
@@ -325,7 +325,7 @@ class DokterController extends Controller
 
     public function pemeriksaan_data_ukgm($id){
         $data = PemeriksaanGigi::with('anak','resikoKaries','skriningOdontogram','skriningIndeks')->findOrFail($id);
-        $aksi = ['belum_erupsi','erupsi_sebagian','karies','non_vital','tambalan_logam','tambalan_non_logam','mahkota_logam','mahkota_non_logam','sisa_akar','gigi_hilang','jembatan','gigi_tiruan_lepas'];
+        $aksi = ['belum-erupsi','erupsi-sebagian','karies','non-vital','tambalan-logam','tambalan-non-logam','mahkota-logam','mahkota-non-logam','sisa-akar','gigi-hilang','jembatan','gigi-tiruan-lepas'];
         $odontograms = [
             'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
             'b2k1' => ['p55','p54','p53','p52','p51'],
@@ -346,7 +346,7 @@ class DokterController extends Controller
             foreach ($request->aksi as $key => $value) {
                 $data = new SkriningOdontogram();
                 $data->id_pemeriksaan = $request->id_pemeriksaan;
-                $data->aksi = str_replace('h_','',$key);
+                $data->aksi = 'h-'.$key;
                 $data->posisi = $value;
                 $data->save();
             }
