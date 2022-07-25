@@ -308,7 +308,8 @@ class DokterController extends Controller
 
 
     public function pemeriksaan_data_ukgs($id){
-        $ukgs = PemeriksaanGigi::with('anak','resikoKaries')->findOrFail($id);
+        $data = PemeriksaanGigi::with('anak','resikoKaries')->findOrFail($id);
+        $aksi = ['sisa_akar','gigi_hilang'];
         $odontograms = [
             'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
             'b2k1' => ['p55','p54','p53','p52','p51'],
@@ -319,12 +320,12 @@ class DokterController extends Controller
             'b3k2' => ['p71','p72','p73','p74','p75'],
             'b4k2' => ['p31','p32','p33','p34','p35','p36','p37','p38']
         ];
-        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS',compact('ukgs','odontograms'));
+        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS',compact('data','odontograms','aksi'));
     }
 
     public function pemeriksaan_data_ukgm($id){
-        $ukgm = PemeriksaanGigi::with('anak','resikoKaries','skriningOdontogram','skriningIndeks')->findOrFail($id);
-        // dd($ukgm);
+        $data = PemeriksaanGigi::with('anak','resikoKaries','skriningOdontogram','skriningIndeks')->findOrFail($id);
+        $aksi = ['belum_erupsi','erupsi_sebagian','karies','non_vital','tambalan_logam','tambalan_non_logam','mahkota_logam','mahkota_non_logam','sisa_akar','gigi_hilang','jembatan','gigi_tiruan_lepas'];
         $odontograms = [
             'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
             'b2k1' => ['p55','p54','p53','p52','p51'],
@@ -335,7 +336,7 @@ class DokterController extends Controller
             'b3k2' => ['p71','p72','p73','p74','p75'],
             'b4k2' => ['p31','p32','p33','p34','p35','p36','p37','p38']
         ];
-        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGM',compact('ukgm','odontograms'));
+        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGM',compact('data','odontograms','aksi'));
     }
 
     public function storeSkriningGigiUkgm(Request $request){

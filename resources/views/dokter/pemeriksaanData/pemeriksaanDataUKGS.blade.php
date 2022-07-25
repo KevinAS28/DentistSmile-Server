@@ -8,7 +8,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('dokter.periksaUKGS')}}">Pemeriksaan Gigi</a></li>
             <li class="breadcrumb-item active" aria-current="page">
-                {{ucwords($ukgs->anak->nama)}}
+                {{ucwords($data->anak->nama)}}
             </li>
         </ol>
     </nav>
@@ -30,8 +30,8 @@
                                             @for($i=1; $i<=5; $i++)
                                             @php $img = 'gambar'.$i;  @endphp
                                             <div>
-                                                @if(!empty($ukgs[$img]))
-                                                <img src='{{@asset("storage/gigi/$ukgs[$img]")}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
+                                                @if(!empty($data[$img]))
+                                                <img src='{{@asset("storage/gigi/$data[$img]")}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
                                                 @else
                                                 <img src='{{@asset("assets/images/others/placeholder.jpg")}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
                                                 @endif
@@ -86,24 +86,24 @@
                                             <label for="d" class="col-sm-1 col-form-label">d</label>
                                             <div class="col-sm-2">
                                                 <input type="number" name="def_d" class="form-control skor-d"
-                                                    value="0" min="0">
+                                                    value="{{@$data->skriningIndeks->def_d ?: 0}}" min="0">
                                             </div>
                                             <label for="e" class="col-sm-1 col-form-label">e</label>
                                             <div class="col-sm-2">
                                                 <input type="number" name="def_e" class="form-control skor-e"
-                                                    value="0" min="0">
+                                                    value="{{@$data->skriningIndeks->def_e ?: 0}}" min="0">
                                             </div>
                                             <label for="f" class="col-sm-1 col-form-label">f</label>
                                             <div class="col-sm-2">
                                                 <input type="number" name="def_f" class="form-control skor-f"
-                                                    value="0" min="0">
+                                                    value="{{@$data->skriningIndeks->def_f ?: 0}}" min="0">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <label for="readonlyDEFT" class="col-sm-1 col-form-label">def-t</label>
                                             <div class="col-sm-1">
                                                 <input type="number" name="def_t" class="form-control total-skor" readonly
-                                                    value="0">
+                                                    value="{{@$data->skriningIndeks->def_d + @$data->skriningIndeks->def_e + @$data->skriningIndeks->def_f ?: 0}}">
                                             </div>
                                         </div>
                                         <h6 class="card-title">SKOR DMF-T</h6>
@@ -111,24 +111,24 @@
                                             <label for="d" class="col-sm-1 col-form-label">d</label>
                                             <div class="col-sm-2">
                                                 <input type="number" name="dmf_d" class="form-control skor-d"
-                                                    value="0" min="0">
+                                                    value="{{@$data->skriningIndeks->dmf_d ?: 0}}" min="0">
                                             </div>
                                             <label for="m" class="col-sm-1 col-form-label">e</label>
                                             <div class="col-sm-2">
                                                 <input type="number" name="dmf_e" class="form-control skor-e"
-                                                    value="0" min="0">
+                                                    value="{{@$data->skriningIndeks->dmf_e ?: 0}}" min="0">
                                             </div>
                                             <label for="f" class="col-sm-1 col-form-label">f</label>
                                             <div class="col-sm-2">
                                                 <input type="number" name="dmf_f" class="form-control skor-f"
-                                                    value="0" min="0">
+                                                    value="{{@$data->skriningIndeks->dmf_f ?: 0}}" min="0">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
                                             <label for="readonlyDMFT" class="col-sm-1 col-form-label">DMF-T</label>
                                             <div class="col-sm-1">
                                                 <input type="number" name="dmf_t" class="form-control total-skor" readonly
-                                                    value="0">
+                                                    value="{{@$data->skriningIndeks->dmf_d + @$data->skriningIndeks->dmf_e + @$data->skriningIndeks->dmf_f ?: 0}}">
                                             </div>
                                         </div>
                                     </div>
@@ -160,22 +160,16 @@
             <div class="card" id="keterangan">
                 <div class="card-body">
                     <p class="text-muted">KETERANGAN: </p>
+                    @foreach($aksi as $value)
                     <div class="row mb-3">
-                        <label for="" class="col-sm-3 col-form-label">Sisa Akar</label>
+                        <label for="" class="col-sm-3 col-form-label">{{str_replace('_',' ',ucfirst($value))}}</label>
                         <div class="col-sm-9">
-                            <input type="text" id="field-sisa-akar" class="form-control" readonly>
-                            <input type="hidden" name="h_sisa_akar">
-                            <span class="posisi-gigi"></span>
+                            <input type="text" id="field-{{str_replace('_','-',$value)}}" class="form-control" value="{{substr_count($data->skriningOdontogram->where('aksi',$value)->first()->posisi,'p')}}" readonly>
+                            <input type="hidden" id="h_{{$value}}" name="aksi[h_{{$value}}]" value="{{@$data->skriningOdontogram->where('aksi',$value)->first()->posisi}}">
+                            <span class="posisi-gigi">{{strtoupper(@$data->skriningOdontogram->where('aksi',$value)->first()->posisi)}}</span>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <label for="" class="col-sm-3 col-form-label">Gigi Hilang</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="field-gigi-hilang" class="form-control" readonly>
-                            <input type="hidden" name="h_gigi_hilang">
-                            <span class="posisi-gigi"></span>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
