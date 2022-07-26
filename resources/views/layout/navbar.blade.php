@@ -12,34 +12,42 @@
             </div>
         </form>
         <ul class="navbar-nav">
+            @php $notifications = Auth::user()->unreadNotifications; @endphp
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i data-feather="bell"></i>
+                    @if(count($notifications) > 0)
+                    <div class="indicator">
+                        <div class="circle"></div>
+                    </div>
+                    @endif
                 </a>
                 <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown">
-                    @php $notifications = Auth::user()->unreadNotifications; @endphp
                     <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
                         <p>{{$notifications->count()}} Notifikasi Baru</p>
-                        <a href="javascript:;" class="text-muted">Clear all</a>
                     </div>
                     <div class="p-1">
                         @if(Auth::user()->role == 'dokter')
-                        @foreach($notifications as $notification)
-                        <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                        @foreach($notifications as $i => $notification)
+                        @if($notification->data['pemeriksaan']['sekolah']['type'] == 'posyandu')
+                        <a href="{{route('dokter.pemeriksaanDataUKGM',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 item-notification {{$i >= 1 ? 'd-none':'' }}">
+                        @elseif($notification->data['pemeriksaan']['sekolah']['type'] == 'sekolah')
+                        <a href="{{route('dokter.pemeriksaanDataUKGS',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 item-notification {{$i >= 1 ? 'd-none':'' }}">
+                        @endif
                             <div
                                 class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
                                 <i class="icon-sm text-white" data-feather="gift"></i>
                             </div>
                             <div class="flex-grow-1 me-2">
-                                <p>{{$notification['id_anak']}}</p>
+                                <p>{{$notification->data['pemeriksaan']['anak']['nama'] . ' Melakukan Pemeriksaan Gigi'}}</p>
                                 <p class="tx-12 text-muted">{{$notification->created_at->diffForHumans()}}</p>
                             </div>
                         </a>
                         @endforeach @endif
                     </div>
                     <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
-                        <a href="javascript:;">View all</a>
+                        <a type="button" id="btn-all-notification">Lihat Semua</a>
                     </div>
                 </div>
             </li>
@@ -109,6 +117,18 @@
         </ul>
     </div>
 </nav>
+@push('after-script')
 <script>
-    console.log("{{$notifications}}")
+    $(document).ready(function() {
+        $(document).on('click', '#btn-all-notification', function (e) {
+            e.stopPropagation();
+            $(this).parent().parent().toggleClass('show');
+            $(this).parent().parent().attr('data-bs-popper', 'true');
+            $(this).parent().parent().siblings().toggleClass('show');
+            $(this).parent().parent().siblings().attr('aria-expanded', 'true');
+            $('.item-notification').removeClass('d-none');
+            $(this).text('Tampilkan lebih sedikit');
+        });
+    });
 </script>
+@endpush

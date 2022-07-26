@@ -144,7 +144,7 @@ class PemeriksaanGigiController extends Controller
         $dokter = User::whereHas('dokter',function($query) use($kecamatan){
             $query->where('id_kecamatan',$kecamatan);
         })->get();
-        Notification::send($dokter, new \App\Notifications\PemeriksaanGigiNotification(PemeriksaanGigi::with('anak')->find($pgigi->id)));
+        Notification::send($dokter, new \App\Notifications\PemeriksaanGigiNotification(PemeriksaanGigi::with('anak','sekolah')->find($pgigi->id)));
         return redirect()->route('view-riwayat')->with('success','sukses mengisi data pemeriksaan gigi');
     }
 
