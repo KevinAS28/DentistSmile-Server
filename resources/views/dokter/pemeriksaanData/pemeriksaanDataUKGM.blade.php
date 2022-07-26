@@ -177,13 +177,13 @@
                             <div class="row mb-3">
                                 <label for="diagnosa" class="col-sm-2 col-form-label">Resiko Karies</label>
                                 <div class="col-sm-10">
-                                    <textarea name="diagnosa" class="form-control w-100" id="" rows="2"></textarea>
+                                    <textarea name="diagnosa" class="form-control w-100" id="" rows="2">{{@$data->skriningIndeks->diagnosa}}</textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="rekomendasi" class="col-sm-2 col-form-label">Rekomendasi</label>
                                 <div class="col-sm-10">
-                                    <textarea name="rekomendasi" class="form-control w-100" id="" rows="2"></textarea>
+                                    <textarea name="rekomendasi" class="form-control w-100" id="" rows="2">{{@$data->skriningIndeks->rekomendasi}}</textarea>
                                 </div>
                             </div>
                         </section>
@@ -200,8 +200,8 @@
                     <div class="row mb-3">
                         <label for="" class="col-sm-3 col-form-label">{{str_replace('_',' ',ucfirst($value))}}</label>
                         <div class="col-sm-9">
-                            <input type="text" id="field-{{str_replace('_','-',$value)}}" class="form-control" value="{{substr_count(@$data->skriningOdontogram->where('aksi',$value)->first()->posisi,'p')}}" readonly>
-                            <input type="hidden" id="h-{{$value}}" name="aksi[h-{{$value}}]" value="{{@$data->skriningOdontogram->where('aksi',$value)->first()->posisi}}">
+                            <input type="text" id="field-{{$value}}" class="form-control" value="{{substr_count(@$data->skriningOdontogram->where('aksi',$value)->first()->posisi,'p')}}" readonly>
+                            <input type="hidden" id="h-{{$value}}" name="aksi[{{$value}}]" value="{{@$data->skriningOdontogram->where('aksi',$value)->first()->posisi}}">
                             <span class="posisi-gigi">{{strtoupper(@$data->skriningOdontogram->where('aksi',$value)->first()->posisi)}}</span>
                         </div>
                     </div>
@@ -277,7 +277,6 @@
             onFinished: function(event, currentIndex) {
                 const formData = new FormData(document.getElementById("form-skrining-gigi"));
                 formData.append('id_pemeriksaan', "{{$data->id}}");
-                formData.append('resikokaries',document.getElementById("form-resiko-karies"));
                 $.ajax({
                     'type': 'POST',
                     'url': "{{route('dokter.storePemeriksaanDataUkgm')}}",
@@ -286,7 +285,15 @@
                     'contentType': false,
                     'dataType': 'JSON',
                     'success': function (data) {
-                        console.log(data);
+                        if(data.success){
+                            window.location.href = "{{ route('dokter.periksaUKGM') }}";
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Terjadi kesalahan!',
+                                showConfirmButton: false,
+                            });
+                        }
                     },
                 });
             }
@@ -324,68 +331,74 @@
                 $.each(arrayPosisi, function(index2, value2){
                     if (value.posisi != null) {
                         arrayAksi[value.aksi].push(value2);
+                        switch (value.aksi) {
+                            case 'belum-erupsi':
+                                type = 'insert-text';
+                                x = 1.5; y = 15;
+                                color = '#5D5FEF';
+                                style = 'font-size: 10pt;font-weight:bold;cursor:default';
+                                element = 'UE';
+                                console.log('belum-erupsi');
+                                break;
+                            case 'erupsi-sebagian':
+                                type = 'insert-text';
+                                x = 1.5; y = 15;
+                                color = '#5D5FEF';
+                                style = 'font-size: 10pt;font-weight:bold;cursor:default';
+                                element = 'PE';
+                                break;
+                            case 'karies':
+                                type = 'insert-fill';
+                                color = 'grey';
+                                break;
+                            case 'non-vital':
+                                type = 'insert-non-vital';
+                                style = 'stroke-width:2';
+                                color = '#C71616';
+                                break;
+                            case 'tambalan-logam':
+                                type = 'insert-fill';
+                                color = 'pink';
+                                break;
+                            case 'tambalan-non-logam':
+                                type = 'insert-fill';
+                                color = 'blue';
+                                break;
+                            case 'mahkota-logam':
+                                type = 'insert-fill';
+                                color = 'green';
+                                break;
+                            case 'mahkota-non-logam':
+                                type = 'insert-fill';
+                                color = '#66D1D1';
+                                break;
+                            case 'sisa-akar':
+                                type = 'insert-text';
+                                x = 3.5; y = 17;
+                                color = '#5D5FEF';
+                                style = 'font-size: 15pt;font-weight:bold;cursor:default';
+                                element = 'V';
+                                break;
+                            case 'gigi-hilang':
+                                type = 'insert-text';
+                                x = 3.5; y = 17;
+                                color = '#C71616';
+                                style = 'font-size: 15pt;font-weight:bold;cursor:default';
+                                element = 'X';
+                                break;
+                            case 'jembatan':
+                                type = 'insert-line';
+                                color = '#048A3F';
+                                style = 'stroke-width:2';
+                                break;
+                            case 'gigi-tiruan-lepas':
+                                type = 'insert-line';
+                                color = '#E4AA04';
+                                style = 'stroke-width:2';
+                                break;
+                        }
                     }
-                    switch (value.aksi) {
-                        case 'belum-erupsi':
-                            // type = 'insert-text';
-                            // x = 1.5; y = 15;
-                            // color = '#5D5FEF';
-                            // style = 'font-size: 10pt;font-weight:bold;cursor:default';
-                            // element = 'UE';
-                            console.log('belum-erupsi');
-                            break;
-                        case 'erupsi-sebagian':
-                            // type = 'insert-text';
-                            // x = 1.5; y = 15;
-                            // color = '#5D5FEF';
-                            // style = 'font-size: 10pt;font-weight:bold;cursor:default';
-                            // element = 'PE';
-                            break;
-                        case 'karies':
 
-                            break;
-                        case 'non-vital':
-                            type = 'insert-non-vital';
-                            style = 'stroke-width:2';
-                            color = '#C71616';
-                            break;
-                        case 'tambalan-logam':
-
-                            break;
-                        case 'tambalan-non-logam':
-
-                            break;
-                        case 'mahkota-logam':
-
-                            break;
-                        case 'mahkota-non-logam':
-
-                            break;
-                        case 'sisa-akar':
-                            // type = 'insert-text';
-                            // x = 3.5; y = 17;
-                            // color = '#5D5FEF';
-                            // style = 'font-size: 15pt;font-weight:bold;cursor:default';
-                            // element = 'V';
-                            break;
-                        case 'gigi-hilang':
-                            // type = 'insert-text';
-                            // x = 3.5; y = 17;
-                            // color = '#C71616';
-                            // style = 'font-size: 15pt;font-weight:bold;cursor:default';
-                            // element = 'X';
-                            break;
-                        case 'jembatan':
-                            // type = 'insert-line';
-                            // color = '#048A3F';
-                            // style = 'stroke-width:2';
-                            break;
-                        case 'gigi-tiruan-lepas':
-                            // type = 'insert-line';
-                            // color = '#E4AA04';
-                            // style = 'stroke-width:2';
-                            break;
-                    }
                     if (type == 'insert-text') {
                         d3.select('g#'+value2).append('text').attr('id',value2).attr('type','insert-text').attr('x', x).attr('y', y).attr('stroke', color).attr('fill', color).attr('stroke-width', '0.1').attr('style', style).text(element);
                     } else if (type == 'insert-line') {
@@ -394,6 +407,9 @@
                         d3.select('g#'+value2).append('line').attr('id',value2).attr('type','insert-non-vital').attr('x1', '5').attr('y1', '15').attr('x2', '0').attr('y2', '15').attr('stroke',color).attr('style', style);
                         d3.select('g#'+value2).append('line').attr('id',value2).attr('type','insert-non-vital').attr('x1', '15').attr('y1', '5').attr('x2', '5').attr('y2', '15').attr('stroke',color).attr('style', style);
                         d3.select('g#'+value2).append('line').attr('id',value2).attr('type','insert-non-vital').attr('x1', '20').attr('y1', '5').attr('x2', '15').attr('y2', '5').attr('stroke',color).attr('style', style);
+                    } else if (type == 'insert-fill'){
+                        let id = value2.split('-');
+                        d3.select('g#'+id[0]+' polygon#'+id[1]).attr('fill', color).attr('type','insert-fill');
                     }
                 });
             });

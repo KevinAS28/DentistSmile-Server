@@ -340,13 +340,12 @@ class DokterController extends Controller
     }
 
     public function storeSkriningGigiUkgm(Request $request){
-        // $arrayAksi = ['h_belum_erupsi','h_erupsi_sebagian','h_']
         if($request->ajax()){
             SkriningOdontogram::where('id_pemeriksaan',$request->id_pemeriksaan)->delete();
             foreach ($request->aksi as $key => $value) {
                 $data = new SkriningOdontogram();
                 $data->id_pemeriksaan = $request->id_pemeriksaan;
-                $data->aksi = 'h-'.$key;
+                $data->aksi = $key;
                 $data->posisi = $value;
                 $data->save();
             }
@@ -360,7 +359,9 @@ class DokterController extends Controller
                     'def_f' => $request->def_f,
                     'dmf_d' => $request->dmf_d,
                     'dmf_e' => $request->dmf_e,
-                    'dmf_f' => $request->dmf_f
+                    'dmf_f' => $request->dmf_f,
+                    'diagnosa' => $request->diagnosa,
+                    'rekomendasi' => $request->rekomendasi
                 ]
             );
             ResikoKaries::updateOrCreate(
@@ -390,7 +391,30 @@ class DokterController extends Controller
 
     public function storeSkriningGigiUkgs(Request $request){
         if($request->ajax()){
-            return response()->json($request->all());
+            SkriningOdontogram::where('id_pemeriksaan',$request->id_pemeriksaan)->delete();
+            foreach ($request->aksi as $key => $value) {
+                $data = new SkriningOdontogram();
+                $data->id_pemeriksaan = $request->id_pemeriksaan;
+                $data->aksi = $key;
+                $data->posisi = $value;
+                $data->save();
+            }
+            SkriningIndeks::updateOrCreate(
+                [
+                    'id_pemeriksaan' => $request->id_pemeriksaan
+                ],
+                [
+                    'def_d' => $request->def_d,
+                    'def_e' => $request->def_e,
+                    'def_f' => $request->def_f,
+                    'dmf_d' => $request->dmf_d,
+                    'dmf_e' => $request->dmf_e,
+                    'dmf_f' => $request->dmf_f,
+                    'diagnosa' => $request->diagnosa,
+                    'rekomendasi' => $request->rekomendasi
+                ]
+            );
+            return response()->json(['success'=>'Data added successfully']);
         }
     }
 
