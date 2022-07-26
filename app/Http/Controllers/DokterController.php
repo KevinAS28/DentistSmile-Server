@@ -309,7 +309,7 @@ class DokterController extends Controller
 
     public function pemeriksaan_data_ukgs($id){
         $data = PemeriksaanGigi::with('anak','resikoKaries')->findOrFail($id);
-        $aksi = ['sisa-akar','gigi-hilang'];
+        $aksi = ['belum-erupsi','erupsi-sebagian','karies','non-vital','tambalan-logam','tambalan-non-logam','mahkota-logam','mahkota-non-logam','sisa-akar','gigi-hilang','jembatan','gigi-tiruan-lepas'];
         $odontograms = [
             'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
             'b2k1' => ['p55','p54','p53','p52','p51'],
