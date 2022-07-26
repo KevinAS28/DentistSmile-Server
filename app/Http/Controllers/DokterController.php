@@ -10,6 +10,8 @@ use App\Models\Kecamatan;
 use App\Models\Kelas;
 use App\Models\Sekolah;
 use App\Models\Anak;
+use App\Models\SkriningOdontogram;
+use App\Models\SkriningIndeks;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
 use Auth;
@@ -18,6 +20,7 @@ use App\Models\PemeriksaanFisik;
 use App\Models\PemeriksaanMata;
 use App\Models\PemeriksaanTelinga;
 use App\Models\PemeriksaanGigi;
+use App\Models\ResikoKaries;
 use Carbon\Carbon;
 
 class DokterController extends Controller
@@ -298,14 +301,15 @@ class DokterController extends Controller
             'kelurahan' => $kelurahan, 'sekolah '=> $sekolah,
         ]);
     }
-    
 
-    
 
-    
 
-    public function pemeriksaan_data_ukgs(){
-        // $data = PemeriksaanGigi::findOrFail($id);
+
+
+
+    public function pemeriksaan_data_ukgs($id){
+        $data = PemeriksaanGigi::with('anak','resikoKaries')->findOrFail($id);
+        $aksi = ['belum-erupsi','erupsi-sebagian','karies','non-vital','tambalan-logam','tambalan-non-logam','mahkota-logam','mahkota-non-logam','sisa-akar','gigi-hilang','jembatan','gigi-tiruan-lepas'];
         $odontograms = [
             'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
             'b2k1' => ['p55','p54','p53','p52','p51'],
@@ -316,11 +320,12 @@ class DokterController extends Controller
             'b3k2' => ['p71','p72','p73','p74','p75'],
             'b4k2' => ['p31','p32','p33','p34','p35','p36','p37','p38']
         ];
-        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS',compact('odontograms'));
+        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS',compact('data','odontograms','aksi'));
     }
 
-    public function pemeriksaan_data_ukgm(){
-        // $data = PemeriksaanGigi::findOrFail($id);
+    public function pemeriksaan_data_ukgm($id){
+        $data = PemeriksaanGigi::with('anak','resikoKaries','skriningOdontogram','skriningIndeks')->findOrFail($id);
+        $aksi = ['belum-erupsi','erupsi-sebagian','karies','non-vital','tambalan-logam','tambalan-non-logam','mahkota-logam','mahkota-non-logam','sisa-akar','gigi-hilang','jembatan','gigi-tiruan-lepas'];
         $odontograms = [
             'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
             'b2k1' => ['p55','p54','p53','p52','p51'],
@@ -331,8 +336,88 @@ class DokterController extends Controller
             'b3k2' => ['p71','p72','p73','p74','p75'],
             'b4k2' => ['p31','p32','p33','p34','p35','p36','p37','p38']
         ];
-        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGM',compact('odontograms'));
+        return view ('dokter.pemeriksaanData.pemeriksaanDataUKGM',compact('data','odontograms','aksi'));
     }
+
+    public function storeSkriningGigiUkgm(Request $request){
+        if($request->ajax()){
+            SkriningOdontogram::where('id_pemeriksaan',$request->id_pemeriksaan)->delete();
+            foreach ($request->aksi as $key => $value) {
+                $data = new SkriningOdontogram();
+                $data->id_pemeriksaan = $request->id_pemeriksaan;
+                $data->aksi = $key;
+                $data->posisi = $value;
+                $data->save();
+            }
+            SkriningIndeks::updateOrCreate(
+                [
+                    'id_pemeriksaan' => $request->id_pemeriksaan
+                ],
+                [
+                    'def_d' => $request->def_d,
+                    'def_e' => $request->def_e,
+                    'def_f' => $request->def_f,
+                    'dmf_d' => $request->dmf_d,
+                    'dmf_e' => $request->dmf_e,
+                    'dmf_f' => $request->dmf_f,
+                    'diagnosa' => $request->diagnosa,
+                    'rekomendasi' => $request->rekomendasi
+                ]
+            );
+            ResikoKaries::updateOrCreate(
+                [
+                    'id_pemeriksaan_gigi' => $request->id_pemeriksaan
+                ],
+                [
+                    'rksoal1' => $request->rksoal1,
+                    'rksoal2' => $request->rksoal2,
+                    'rksoal3' => $request->rksoal3,
+                    'rksoal4' => $request->rksoal4,
+                    'rksoal5' => $request->rksoal5,
+                    'rksoal6' => $request->rksoal6,
+                    'rksoal7' => $request->rksoal7,
+                    'rksoal8' => $request->rksoal8,
+                    'rksoal9' => $request->rksoal9,
+                    'rksoal10' => $request->rksoal10,
+                    'rksoal11' => $request->rksoal11,
+                    'rksoal12' => $request->rksoal12,
+                    'rksoal13' => $request->rksoal13,
+                    'penilaian' => $request->penilaian_risiko_karies
+                ]
+            );
+            return response()->json(['success'=>'Data added successfully']);
+        }
+    }
+
+    public function storeSkriningGigiUkgs(Request $request){
+        if($request->ajax()){
+            SkriningOdontogram::where('id_pemeriksaan',$request->id_pemeriksaan)->delete();
+            foreach ($request->aksi as $key => $value) {
+                $data = new SkriningOdontogram();
+                $data->id_pemeriksaan = $request->id_pemeriksaan;
+                $data->aksi = $key;
+                $data->posisi = $value;
+                $data->save();
+            }
+            SkriningIndeks::updateOrCreate(
+                [
+                    'id_pemeriksaan' => $request->id_pemeriksaan
+                ],
+                [
+                    'def_d' => $request->def_d,
+                    'def_e' => $request->def_e,
+                    'def_f' => $request->def_f,
+                    'dmf_d' => $request->dmf_d,
+                    'dmf_e' => $request->dmf_e,
+                    'dmf_f' => $request->dmf_f,
+                    'diagnosa' => $request->diagnosa,
+                    'rekomendasi' => $request->rekomendasi
+                ]
+            );
+            return response()->json(['success'=>'Data added successfully']);
+        }
+    }
+
     public function rekap_ukgs(){
         $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
         $kelurahan = Kelurahan::where('id_kecamatan', $dokter)->pluck('nama','id');
@@ -372,13 +457,13 @@ class DokterController extends Controller
         $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
         $kelurahan = Kelurahan::where('id_kecamatan', $dokter)->get();
         return view('dokter.pemeriksaanData.ukgs',compact('kelurahan'));
-        
+
     }
 
     // function untuk menampilkan list anak yang telah melakukan pemeriksaanfisik berdasarkan id kelas
     public function listAnak(Request $request){
         $pemeriksaanfisik = PemeriksaanFisik::with('anak')->where('id_kelas',$request->id_kelas)->orderBy('id', 'DESC')->latest();
-        
+
         return datatables()->of($pemeriksaanfisik)
         ->addColumn('action', function($row){
             $btn = '';
@@ -458,24 +543,24 @@ class DokterController extends Controller
         return view('dokter.pemeriksaanData.ukgm',[
             'kelurahan' => $kelurahan, 'sekolah '=> $sekolah,
         ]);
-        
+
     }
 
     public function listAnakUkgm(Request $request){
 
 
         $pemeriksaanGigi = PemeriksaanGigi::with('anak')->where('id_sekolah',$request->id_sekolah)->orderBy('id', 'DESC')-> latest();
-        
+
         return datatables()->of($pemeriksaanGigi)
         ->addColumn('action', function($row){
             $btn = '';
             $btn .= '<a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data"><i class="mdi mdi-book-open-page-variant"></i></a> ';
             $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGM',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
-            
-            
+
+
             return $btn;
         })
-        
+
         ->addColumn('tanggal', function($pemeriksaanGigi){
             return $tanggal = date('d-m-Y', strtotime($pemeriksaanGigi->waktu_pemeriksaan));
         })
@@ -502,18 +587,18 @@ class DokterController extends Controller
 
         ->addIndexColumn()
        ->make(true);
-        
+
     }
-    public function pemeriksaan_data_ukgm($id)
-    {
-        $ukgm=PemeriksaanGigi::with('resikoKaries')->find($id);
-        return view('dokter.pemeriksaanData.pemeriksaanDataUKGM',compact('ukgm'));
-    }
+    // public function pemeriksaan_data_ukgm($id)
+    // {
+    //     $ukgm=PemeriksaanGigi::with('resikoKaries')->find($id);
+    //     return view('dokter.pemeriksaanData.pemeriksaanDataUKGM',compact('ukgm'));
+    // }
 
     //------ Dashboard ----------//
     public function dashboard(){
-        
+
     }
-    
+
 
 }

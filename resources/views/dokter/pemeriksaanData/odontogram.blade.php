@@ -36,8 +36,6 @@
                 <polygon points="15,5 	20,0 	20,20 	15,15" fill="white" stroke="black" stroke-width="0.5" id="R" opacity="1"></polygon>
                 <polygon points="0,0 	5,5 	5,15 	0,20" fill="white " stroke="black" stroke-width="0.5" id="L" opacity="1"></polygon>
                 <text x="6" y="{{$yText}}" stroke="black" fill="black" stroke-width="0.1" style="font-size: 6pt;font-weight:normal">{{substr($odo,1)}}</text>
-                <!-- <line x1="20" y1="10" x2="0" y2="10" style="stroke:rgb(255,0,0);stroke-width:2" /> -->
-                <!-- <image href="{{asset('pemeriksaan/gigi-hilang.png')}}" x="5" y="5" width="10px" height="10px"></image> -->
             </g>
             @endforeach
         @endforeach

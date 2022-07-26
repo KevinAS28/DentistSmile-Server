@@ -72,7 +72,7 @@ Route::post('/daftarUser', [App\Http\Controllers\Auth\RegisterController::class,
     ->name('storeOrangtua');
 
 Route::post('/register-user',[OrangtuaController::class, 'registerUser'])->name('registeruser');
-  
+
 Route::group(['prefix' => 'orangtua'], function () {
   Route::group(['middleware' => ['auth','ceklevel:orangtua']], function () {
     Route::resource('pemeriksaanfisik', PemeriksaanFisikController::class)->except('destroy');
@@ -101,15 +101,15 @@ Route::group(['prefix' => 'admin/table'], function () {
     Route::get('/data-pemeriksaan-telinga',[PemeriksaanFisikController::class,'riwayattelinga'])->name('riwayat-telinga');
     Route::get('/data-pemeriksaan-gigi',[PemeriksaanFisikController::class,'riwayatgigi'])->name('riwayat-gigi');
     Route::get('/data-posyandu',[PosyanduController::class, 'data'])->name('posyandu.table');
-    
+
     Route::get('/data-kelas/{id}',[KelasController::class,'data'])->name('kelas.table');
-    
+
     });
 Route::group(['prefix' => 'orangtua/table'], function () {
-  
+
   Route::get('/data-anak',[OrangtuaController::class, 'dataAnak'])->name('anak-orangtua.table');
-  
-  
+
+
   });
 
 Route::group(['prefix' => 'delete'], function () {
@@ -134,8 +134,10 @@ Route::group(['prefix' => 'dokter'], function () {
     Route::get('/pemeriksaan-ukgs/kelas',[DokterController::class, 'dropdown_kelas_ukgs'])->name('dokter.kelasUKGS');
     //Route::post('/pemeriksaan-ukgs/fetch',[DokterController::class, 'dropdown_wilayah_ukgs'])->name('dokter.periksaUKGS.fetch');
     Route::get('/pemeriksaan-ukgm',[DokterController::class, 'pemeriksaan_ukgm'])->name('dokter.periksaUKGM');
-    Route::get('/pemeriksaan-ukgs/pemeriksaan-data',[DokterController::class, 'pemeriksaan_data_ukgs'])->name('dokter.pemeriksaanDataUKGS');
+    Route::get('/pemeriksaan-ukgs/pemeriksaan-data/{id}',[DokterController::class, 'pemeriksaan_data_ukgs'])->name('dokter.pemeriksaanDataUKGS');
     Route::get('/pemeriksaan-ukgm/pemeriksaan-data/{id}',[DokterController::class, 'pemeriksaan_data_ukgm'])->name('dokter.pemeriksaanDataUKGM');
+    Route::post('pemeriksaan-data-ukgm',[DokterController::class, 'storeSkriningGigiUkgm'])->name('dokter.storePemeriksaanDataUkgm');
+    Route::post('pemeriksaan-data-ukgs',[DokterController::class, 'storeSkriningGigiUkgs'])->name('dokter.storePemeriksaanDataUkgs');
     Route::get('/rekap-ukgs',[DokterController::class, 'rekap_ukgs'])->name('dokter.rekapDataUKGS');
     Route::get('/rekap-ukgm',[DokterController::class, 'rekap_ukgm'])->name('dokter.rekapDataUKGM');
     Route::get('/rekap-ukgs/rekap-datail-ukgs',[DokterController::class, 'rekap_detail_ukgs'])->name('dokter.rekapDetailUKGS');
@@ -145,6 +147,6 @@ Route::group(['prefix' => 'dokter'], function () {
   });
 
 
- 
+
 
 

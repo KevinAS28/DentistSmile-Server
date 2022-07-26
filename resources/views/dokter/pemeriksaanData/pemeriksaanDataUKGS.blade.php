@@ -7,9 +7,13 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('dokter.periksaUKGS')}}">Pemeriksaan Gigi</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><--- User ----></li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ucwords($data->anak->nama)}}
+            </li>
         </ol>
     </nav>
+    <form method="post" id="form-skrining-gigi">
+    @csrf
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
@@ -22,12 +26,17 @@
                                     <div>
                                         <strong>PENGISIAN ODONTOGRAM</strong>
                                         <p>Pilih posisi gigi dan klik aksi yang seseuai dengan kondisi gigi anak</p>
-                                        <div class="w-100 mb-1">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
-                                            <img src="{{asset('assets/images/others/placeholder.jpg')}}" style="width:200px" class="rounded img-thumbnail" alt="...">
+                                        <div class="w-100 mb-1 d-flex list-image-pemeriksaan">
+                                            @for($i=1; $i<=5; $i++)
+                                            @php $img = 'gambar'.$i;  @endphp
+                                            <div>
+                                                @if(!empty($data[$img]))
+                                                <img src='{{@asset("storage/gigi/$data[$img]")}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
+                                                @else
+                                                <img src='{{@asset("assets/images/others/placeholder.jpg")}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
+                                                @endif
+                                            </div>
+                                            @endfor
                                         </div>
                                     </div>
                                     <!-- <div class="border border-light m-1 h-75"> -->
@@ -73,63 +82,55 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h6 class="card-title">SKOR def t</h6>
-                                        <form class="forms-sample">
-                                            <div class="row mb-3">
-                                                <label for="d" class="col-sm-1 col-form-label">d</label>
-                                                <div class="col-sm-2">
-                                                    <input type="number" name="def_d" class="form-control skor-d"
-                                                        value="0" min="0">
-                                                </div>
-                                                <label for="e" class="col-sm-1 col-form-label">e</label>
-                                                <div class="col-sm-2">
-                                                    <input type="number" name="def_e" class="form-control skor-e"
-                                                        value="0" min="0">
-                                                </div>
-                                                <label for="f" class="col-sm-1 col-form-label">f</label>
-                                                <div class="col-sm-2">
-                                                    <input type="number" name="def_f" class="form-control skor-f"
-                                                        value="0" min="0">
-                                                </div>
+                                        <div class="row mb-3">
+                                            <label for="d" class="col-sm-1 col-form-label">d</label>
+                                            <div class="col-sm-2">
+                                                <input type="number" name="def_d" class="form-control skor-d"
+                                                    value="{{@$data->skriningIndeks->def_d ?: 0}}" min="0">
                                             </div>
-                                        </form>
-                                        <form class="forms-sample">
-                                            <div class="row mb-3">
-                                                <label for="readonlyDEFT" class="col-sm-1 col-form-label">def-t</label>
-                                                <div class="col-sm-1">
-                                                    <input type="number" name="def_t" class="form-control total-skor" readonly
-                                                        value="0">
-                                                </div>
+                                            <label for="e" class="col-sm-1 col-form-label">e</label>
+                                            <div class="col-sm-2">
+                                                <input type="number" name="def_e" class="form-control skor-e"
+                                                    value="{{@$data->skriningIndeks->def_e ?: 0}}" min="0">
                                             </div>
-                                        </form>
+                                            <label for="f" class="col-sm-1 col-form-label">f</label>
+                                            <div class="col-sm-2">
+                                                <input type="number" name="def_f" class="form-control skor-f"
+                                                    value="{{@$data->skriningIndeks->def_f ?: 0}}" min="0">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="readonlyDEFT" class="col-sm-1 col-form-label">def-t</label>
+                                            <div class="col-sm-1">
+                                                <input type="number" name="def_t" class="form-control total-skor" readonly
+                                                    value="{{@$data->skriningIndeks->def_d + @$data->skriningIndeks->def_e + @$data->skriningIndeks->def_f ?: 0}}">
+                                            </div>
+                                        </div>
                                         <h6 class="card-title">SKOR DMF-T</h6>
-                                        <form class="forms-sample">
-                                            <div class="row mb-3">
-                                                <label for="d" class="col-sm-1 col-form-label">d</label>
-                                                <div class="col-sm-2">
-                                                    <input type="number" name="dmf_d" class="form-control skor-d"
-                                                        value="0" min="0">
-                                                </div>
-                                                <label for="m" class="col-sm-1 col-form-label">e</label>
-                                                <div class="col-sm-2">
-                                                    <input type="number" name="dmf_e" class="form-control skor-e"
-                                                        value="0" min="0">
-                                                </div>
-                                                <label for="f" class="col-sm-1 col-form-label">f</label>
-                                                <div class="col-sm-2">
-                                                    <input type="number" name="dmf_f" class="form-control skor-f"
-                                                        value="0" min="0">
-                                                </div>
+                                        <div class="row mb-3">
+                                            <label for="d" class="col-sm-1 col-form-label">d</label>
+                                            <div class="col-sm-2">
+                                                <input type="number" name="dmf_d" class="form-control skor-d"
+                                                    value="{{@$data->skriningIndeks->dmf_d ?: 0}}" min="0">
                                             </div>
-                                        </form>
-                                        <form class="forms-sample">
-                                            <div class="row mb-3">
-                                                <label for="readonlyDMFT" class="col-sm-1 col-form-label">DMF-T</label>
-                                                <div class="col-sm-1">
-                                                    <input type="number" name="dmf_t" class="form-control total-skor" readonly
-                                                        value="0">
-                                                </div>
+                                            <label for="m" class="col-sm-1 col-form-label">e</label>
+                                            <div class="col-sm-2">
+                                                <input type="number" name="dmf_e" class="form-control skor-e"
+                                                    value="{{@$data->skriningIndeks->dmf_e ?: 0}}" min="0">
                                             </div>
-                                        </form>
+                                            <label for="f" class="col-sm-1 col-form-label">f</label>
+                                            <div class="col-sm-2">
+                                                <input type="number" name="dmf_f" class="form-control skor-f"
+                                                    value="{{@$data->skriningIndeks->dmf_f ?: 0}}" min="0">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="readonlyDMFT" class="col-sm-1 col-form-label">DMF-T</label>
+                                            <div class="col-sm-1">
+                                                <input type="number" name="dmf_t" class="form-control total-skor" readonly
+                                                    value="{{@$data->skriningIndeks->dmf_d + @$data->skriningIndeks->dmf_e + @$data->skriningIndeks->dmf_f ?: 0}}">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -137,22 +138,18 @@
 
                         <h2>Hasil Pemeriksaan</h2>
                         <section>
-                            <form class="forms-sample">
-                                <div class="row mb-3">
-                                    <label for="diagnosa" class="col-sm-2 col-form-label">Resiko Karies</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="diagnosa" class="form-control w-100" id="" rows="2"></textarea>
-                                    </div>
+                            <div class="row mb-3">
+                                <label for="diagnosa" class="col-sm-2 col-form-label">Resiko Karies</label>
+                                <div class="col-sm-10">
+                                    <textarea name="diagnosa" class="form-control w-100" id="" rows="2"></textarea>
                                 </div>
-                            </form>
-                            <form class="forms-sample">
-                                <div class="row mb-3">
-                                    <label for="rekomendasi" class="col-sm-2 col-form-label">Rekomendasi</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="rekomendasi" class="form-control w-100" id="" rows="2"></textarea>
-                                    </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="rekomendasi" class="col-sm-2 col-form-label">Rekomendasi</label>
+                                <div class="col-sm-10">
+                                    <textarea name="rekomendasi" class="form-control w-100" id="" rows="2"></textarea>
                                 </div>
-                            </form>
+                            </div>
                         </section>
                     </div>
                 </div>
@@ -163,33 +160,46 @@
             <div class="card" id="keterangan">
                 <div class="card-body">
                     <p class="text-muted">KETERANGAN: </p>
-                    <form class="forms-sample">
-                        <div class="row mb-3">
-                            <label for="" class="col-sm-3 col-form-label">Sisa Akar</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="sisa-akar" class="form-control" readonly>
-                                <span class="posisi-gigi"></span>
-                            </div>
+                    @foreach($aksi as $value)
+                    <div class="row mb-3">
+                        <label for="" class="col-sm-3 col-form-label">{{str_replace('_',' ',ucfirst($value))}}</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="field-{{$value}}" class="form-control" value="{{substr_count(@$data->skriningOdontogram->where('aksi',$value)->first()->posisi,'p')}}" readonly>
+                            <input type="hidden" id="h-{{$value}}" name="aksi[{{$value}}]" value="{{@$data->skriningOdontogram->where('aksi',$value)->first()->posisi}}">
+                            <span class="posisi-gigi">{{strtoupper(@$data->skriningOdontogram->where('aksi',$value)->first()->posisi)}}</span>
                         </div>
-                        <div class="row mb-3">
-                            <label for="" class="col-sm-3 col-form-label">Gigi Hilang</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="gigi-hilang" class="form-control" readonly>
-                                <span class="posisi-gigi"></span>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
-
+    </form>
 </div>
-
+<!-- modal -->
+<div class="modal fade" id="modal-image" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="w-100 text-center">
+            <img src="" alt="" id="img-in-modal" class="img-fluid">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 @endsection
 @push('after-script')
 <script>
+    var imageSrc;
+    var arrayAksi = {'belum-erupsi':[],'erupsi-sebagian':[],'karies':[],'non-vital':[],'tambalan-logam':[],'tambalan-non-logam':[],'mahkota-logam':[],'mahkota-non-logam':[],'sisa-akar':[],'gigi-hilang':[],'jembatan':[],'gigi-tiruan-lepas':[]}
     $(document).ready(function(){
         $("#wizard").steps({
             headerTag: "h2",
@@ -222,6 +232,28 @@
                 }
                 return true;
             },
+            onFinished: function(event, currentIndex) {
+                const formData = new FormData(document.getElementById("form-skrining-gigi"));
+                $.ajax({
+                    'type': 'POST',
+                    'url': "{{route('dokter.storePemeriksaanDataUkgs')}}",
+                    'data': formData,
+                    'processData': false,
+                    'contentType': false,
+                    'dataType': 'JSON',
+                    'success': function (data) {
+                        if(data.success){
+                            window.location.href = "{{ route('dokter.periksaUKGS') }}";
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Terjadi kesalahan!',
+                                showConfirmButton: false,
+                            });
+                        }
+                    },
+                });
+            }
         });
 
         $(document).on("change","input[name=def_d],input[name=def_e],input[name=def_f]", function(){
@@ -233,6 +265,112 @@
             let total = parseInt($("input[name=dmf_d]").val()) + parseInt($("input[name=dmf_e]").val()) + parseInt($("input[name=dmf_f]").val());
             $("input[name=dmf_t]").val(total);
         });
+
+        $('.list-image-pemeriksaan img').click(function() {
+            imageSrc = $(this).attr('src');
+        });
+
+        $('#modal-image').on('shown.bs.modal', function (e) {
+            $("#img-in-modal").attr('src', imageSrc  );
+        });
+
+        $('#modal-image').on('hide.bs.modal', function (e) {
+            $("#img-in-modal").attr('src','');
+        });
+
+        // edit odontogram
+        if ("{{$data->skriningOdontogram->isNotEmpty()}}") {
+            var data = "{{$data->skriningOdontogram}}";
+            const obj = JSON.parse(data.replace(/&quot;/g, '"'));
+            $.each(obj, function(index, value){
+                let x, y, color, element, type, posisi = value.posisi || "";
+                let arrayPosisi = posisi.split(',');
+                $.each(arrayPosisi, function(index2, value2){
+                    if (value.posisi != null) {
+                        arrayAksi[value.aksi].push(value2);
+                        switch (value.aksi) {
+                            case 'belum-erupsi':
+                                type = 'insert-text';
+                                x = 1.5; y = 15;
+                                color = '#5D5FEF';
+                                style = 'font-size: 10pt;font-weight:bold;cursor:default';
+                                element = 'UE';
+                                console.log('belum-erupsi');
+                                break;
+                            case 'erupsi-sebagian':
+                                type = 'insert-text';
+                                x = 1.5; y = 15;
+                                color = '#5D5FEF';
+                                style = 'font-size: 10pt;font-weight:bold;cursor:default';
+                                element = 'PE';
+                                break;
+                            case 'karies':
+                                type = 'insert-fill';
+                                color = 'grey';
+                                break;
+                            case 'non-vital':
+                                type = 'insert-non-vital';
+                                style = 'stroke-width:2';
+                                color = '#C71616';
+                                break;
+                            case 'tambalan-logam':
+                                type = 'insert-fill';
+                                color = 'pink';
+                                break;
+                            case 'tambalan-non-logam':
+                                type = 'insert-fill';
+                                color = 'blue';
+                                break;
+                            case 'mahkota-logam':
+                                type = 'insert-fill';
+                                color = 'green';
+                                break;
+                            case 'mahkota-non-logam':
+                                type = 'insert-fill';
+                                color = '#66D1D1';
+                                break;
+                            case 'sisa-akar':
+                                type = 'insert-text';
+                                x = 3.5; y = 17;
+                                color = '#5D5FEF';
+                                style = 'font-size: 15pt;font-weight:bold;cursor:default';
+                                element = 'V';
+                                break;
+                            case 'gigi-hilang':
+                                type = 'insert-text';
+                                x = 3.5; y = 17;
+                                color = '#C71616';
+                                style = 'font-size: 15pt;font-weight:bold;cursor:default';
+                                element = 'X';
+                                break;
+                            case 'jembatan':
+                                type = 'insert-line';
+                                color = '#048A3F';
+                                style = 'stroke-width:2';
+                                break;
+                            case 'gigi-tiruan-lepas':
+                                type = 'insert-line';
+                                color = '#E4AA04';
+                                style = 'stroke-width:2';
+                                break;
+                        }
+                    }
+
+                    if (type == 'insert-text') {
+                        d3.select('g#'+value2).append('text').attr('id',value2).attr('type','insert-text').attr('x', x).attr('y', y).attr('stroke', color).attr('fill', color).attr('stroke-width', '0.1').attr('style', style).text(element);
+                    } else if (type == 'insert-line') {
+                        d3.select('g#'+value2).append('line').attr('id',value2).attr('type','insert-line').attr('x1', '20').attr('y1', '10').attr('x2', '0').attr('y2', '10').attr('stroke',color).attr('style', style);
+                    } else if (type == 'insert-non-vital') {
+                        d3.select('g#'+value2).append('line').attr('id',value2).attr('type','insert-non-vital').attr('x1', '5').attr('y1', '15').attr('x2', '0').attr('y2', '15').attr('stroke',color).attr('style', style);
+                        d3.select('g#'+value2).append('line').attr('id',value2).attr('type','insert-non-vital').attr('x1', '15').attr('y1', '5').attr('x2', '5').attr('y2', '15').attr('stroke',color).attr('style', style);
+                        d3.select('g#'+value2).append('line').attr('id',value2).attr('type','insert-non-vital').attr('x1', '20').attr('y1', '5').attr('x2', '15').attr('y2', '5').attr('stroke',color).attr('style', style);
+                    } else if (type == 'insert-fill'){
+                        let id = value2.split('-');
+                        d3.select('g#'+id[0]+' polygon#'+id[1]).attr('fill', color).attr('type','insert-fill');
+                    }
+                });
+            });
+        }
     });
 </script>
 <script src="{{asset('assets/js/skrining-odontogram.js')}}"></script>

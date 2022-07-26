@@ -1,6 +1,5 @@
 $(document).ready(function(){
     let action, x, y, filled;
-    let arrayAksi = {'belum-erupsi':[],'erupsi-sebagian':[],'karies':[],'non-vital':[],'tambalan-logam':[],'tambalan-non-logam':[],'mahkota-logam':[],'mahkota-non-logam':[],'sisa-akar':[],'gigi-hilang':[],'jembatan':[],'gigi-tiruan-lepas':[]}
     $('.btn-group-aksi').click(function(){
         action = $(this).attr('id');
         $('.btn-aksi').removeClass('btn-success').addClass('btn-light');
@@ -155,9 +154,9 @@ $(document).ready(function(){
                         d3.select("line#"+odontogramParent).remove();
                         break;
                     case 'insert-non-vital':
-                        d3.select("line#"+odontogramId).remove();
-                        d3.select("line#"+odontogramId).remove();
-                        d3.select("line#"+odontogramId).remove();
+                        d3.select("line#"+odontogramParent).remove();
+                        d3.select("line#"+odontogramParent).remove();
+                        d3.select("line#"+odontogramParent).remove();
                         break;
                     case 'insert-fill':
                         odontogram.attr('fill', 'white');
@@ -173,21 +172,24 @@ $(document).ready(function(){
         } else if (type == 'insert-line') {
             d3.select('g#'+odontogramParent).append('line').attr('id',odontogramParent).attr('type','insert-line').attr('x1', '20').attr('y1', '10').attr('x2', '0').attr('y2', '10').attr('stroke',color).attr('style', style);
         } else if (type == 'insert-non-vital') {
-            d3.select('g#'+odontogramParent).append('line').attr('id',odontogramId).attr('type','insert-non-vital').attr('x1', '5').attr('y1', '15').attr('x2', '0').attr('y2', '15').attr('stroke',color).attr('style', style);
-            d3.select('g#'+odontogramParent).append('line').attr('id',odontogramId).attr('type','insert-non-vital').attr('x1', '15').attr('y1', '5').attr('x2', '5').attr('y2', '15').attr('stroke',color).attr('style', style);
-            d3.select('g#'+odontogramParent).append('line').attr('id',odontogramId).attr('type','insert-non-vital').attr('x1', '20').attr('y1', '5').attr('x2', '15').attr('y2', '5').attr('stroke',color).attr('style', style);
+            d3.select('g#'+odontogramParent).append('line').attr('id',odontogramParent).attr('type','insert-non-vital').attr('x1', '5').attr('y1', '15').attr('x2', '0').attr('y2', '15').attr('stroke',color).attr('style', style);
+            d3.select('g#'+odontogramParent).append('line').attr('id',odontogramParent).attr('type','insert-non-vital').attr('x1', '15').attr('y1', '5').attr('x2', '5').attr('y2', '15').attr('stroke',color).attr('style', style);
+            d3.select('g#'+odontogramParent).append('line').attr('id',odontogramParent).attr('type','insert-non-vital').attr('x1', '20').attr('y1', '5').attr('x2', '15').attr('y2', '5').attr('stroke',color).attr('style', style);
         } else {
             odontogram.attr('fill', color).attr('type','insert-fill');
         }
 
         if (filled) {
             $.each(arrayAksi, function(index, value) {
-                $("#keterangan form").find("input[name='"+index+"']").val(arrayAksi[index].length);
-                $("#keterangan form").find("input[name='"+index+"']").parent().find('span').text(value.toString().toUpperCase());
+                $("#keterangan").find("input[id='field-"+index+"']").val(arrayAksi[index].length);
+                $("#keterangan").find("input[id='h-"+index+"']").val(value.toString());
+                $("#keterangan").find("input[id='field-"+index+"']").parent().find('span').text(value.toString().toUpperCase());
             });
             let total_skor = arrayAksi['gigi-hilang'].length + arrayAksi['sisa-akar'].length + arrayAksi['karies'].length + arrayAksi['tambalan-logam'].length + arrayAksi['tambalan-non-logam'].length + arrayAksi['mahkota-logam'].length + arrayAksi['mahkota-non-logam'].length;
             $(".total-skor").val(total_skor);
             filled = false;
         }
     });
+
+
 });
