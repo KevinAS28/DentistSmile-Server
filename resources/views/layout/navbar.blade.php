@@ -31,9 +31,15 @@
                         @if(Auth::user()->role == 'dokter')
                         @foreach($notifications as $i => $notification)
                         @if($notification->data['pemeriksaan']['sekolah']['type'] == 'posyandu')
+<<<<<<< HEAD
                         <a href="{{route('dokter.pemeriksaanDataUKGM',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 {{$i >= 1 ? 'notif-collapse d-none':'' }}">
                         @elseif($notification->data['pemeriksaan']['sekolah']['type'] == 'sekolah')
                         <a href="{{route('dokter.pemeriksaanDataUKGS',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 {{$i >= 1 ? 'notif-collapse d-none':'' }}">
+=======
+                        <a href="{{route('dokter.pemeriksaanDataUKGM',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 item-notification {{$i >= 1 ? 'd-none':'' }}">
+                        @elseif($notification->data['pemeriksaan']['sekolah']['type'] == 'sekolah')
+                        <a href="{{route('dokter.pemeriksaanDataUKGS',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 item-notification {{$i >= 1 ? 'd-none':'' }}">
+>>>>>>> 858019d54f08bb1a9a086821bc3248be8926e558
                         @endif
                             <div
                                 class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
@@ -47,7 +53,11 @@
                         @endforeach @endif
                     </div>
                     <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
+<<<<<<< HEAD
                         <a type="button" id="btn-all-notification" data-type="expand">Lihat Semua</a>
+=======
+                        <a type="button" id="btn-all-notification">Lihat Semua</a>
+>>>>>>> 858019d54f08bb1a9a086821bc3248be8926e558
                     </div>
                 </div>
             </li>
@@ -121,7 +131,6 @@
 <script>
     $(document).ready(function() {
         $(document).on('click', '.navbar-nav #btn-all-notification', function (e) {
-            // e.stopPropagation();
             if ($(this).data('type') == 'expand') {
                 $(this).parent().parent().toggleClass('show');
                 $(this).parent().parent().attr('data-bs-popper', 'true');
