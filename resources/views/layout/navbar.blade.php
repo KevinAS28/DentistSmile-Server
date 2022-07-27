@@ -31,9 +31,9 @@
                         @if(Auth::user()->role == 'dokter')
                         @foreach($notifications as $i => $notification)
                         @if($notification->data['pemeriksaan']['sekolah']['type'] == 'posyandu')
-                        <a href="{{route('dokter.pemeriksaanDataUKGM',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 item-notification {{$i >= 1 ? 'd-none':'' }}">
+                        <a href="{{route('dokter.pemeriksaanDataUKGM',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 {{$i >= 1 ? 'notif-collapse d-none':'' }}">
                         @elseif($notification->data['pemeriksaan']['sekolah']['type'] == 'sekolah')
-                        <a href="{{route('dokter.pemeriksaanDataUKGS',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 item-notification {{$i >= 1 ? 'd-none':'' }}">
+                        <a href="{{route('dokter.pemeriksaanDataUKGS',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 {{$i >= 1 ? 'notif-collapse d-none':'' }}">
                         @endif
                             <div
                                 class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
@@ -47,7 +47,7 @@
                         @endforeach @endif
                     </div>
                     <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
-                        <a type="button" id="btn-all-notification">Lihat Semua</a>
+                        <a type="button" id="btn-all-notification" data-type="expand">Lihat Semua</a>
                     </div>
                 </div>
             </li>
@@ -120,14 +120,27 @@
 @push('after-script')
 <script>
     $(document).ready(function() {
-        $(document).on('click', '#btn-all-notification', function (e) {
-            e.stopPropagation();
-            $(this).parent().parent().toggleClass('show');
-            $(this).parent().parent().attr('data-bs-popper', 'true');
-            $(this).parent().parent().siblings().toggleClass('show');
-            $(this).parent().parent().siblings().attr('aria-expanded', 'true');
-            $('.item-notification').removeClass('d-none');
-            $(this).text('Tampilkan lebih sedikit');
+        $(document).on('click', '.navbar-nav #btn-all-notification', function (e) {
+            // e.stopPropagation();
+            if ($(this).data('type') == 'expand') {
+                $(this).parent().parent().toggleClass('show');
+                $(this).parent().parent().attr('data-bs-popper', 'true');
+                $(this).parent().parent().siblings().toggleClass('show');
+                $(this).parent().parent().siblings().attr('aria-expanded', 'true');
+                $('.notif-collapse').removeClass('d-none');
+                $(this).text('Tampilkan lebih sedikit');
+                $(this).data('type','collapsed');
+            }
+            else if ($(this).data('type') == 'collapsed') {
+                console.log('collaps');
+                $(this).parent().parent().toggleClass('show');
+                $(this).parent().parent().attr('data-bs-popper', 'true');
+                $(this).parent().parent().siblings().toggleClass('show');
+                $(this).parent().parent().siblings().attr('aria-expanded', 'true');
+                $('.notif-collapse').addClass('d-none');
+                $(this).text('Lihat Semua');
+                $(this).data('type','expand');
+            }
         });
     });
 </script>
