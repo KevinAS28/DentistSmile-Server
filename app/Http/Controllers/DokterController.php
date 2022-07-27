@@ -451,13 +451,14 @@ class DokterController extends Controller
     }
 
     public function rekap_detail_ukgs_id($id){
-        $anak = Anak::with('sekolah','kelas')->find($id);
         $pemeriksaanFisik = PemeriksaanFisik::where('id_anak', $id)->orderBy('waktu_pemeriksaan', 'desc')->first();
         $pemeriksaanMata = PemeriksaanMata::where('id_anak', $id)->orderBy('waktu_pemeriksaan', 'desc')->first();
         $pemeriksaanTelinga = PemeriksaanTelinga::where('id_anak', $id)->orderBy('waktu_pemeriksaan', 'desc')->first();
         $pemeriksaanGigi = PemeriksaanGigi::where('id_anak', $id)->orderBy('waktu_pemeriksaan', 'desc')->first();
-        return view ('dokter.rekapData.rekapDataUKGSID', compact('anak', 'pemeriksaanFisik', 'pemeriksaanMata', 'pemeriksaanTelinga', 'pemeriksaanGigi'));
+        return view ('dokter.rekapData.rekapDataUKGSID', compact( 'pemeriksaanFisik', 'pemeriksaanMata', 'pemeriksaanTelinga', 'pemeriksaanGigi'));
     }
+
+
 
     public function rekap_detail_ukgm(){
         return view ('dokter.rekapData.rekapDataUKGM');
@@ -480,13 +481,13 @@ class DokterController extends Controller
 
     // function untuk menampilkan list anak yang telah melakukan pemeriksaanfisik berdasarkan id kelas
     public function listAnak(Request $request){
-        $pemeriksaanfisik = PemeriksaanFisik::with('anak')->where('id_kelas',$request->id_kelas)->orderBy('id', 'DESC')->latest();
+        $pemeriksaanfisik = PemeriksaanGigi::with('anak')->where('id_kelas',$request->id_kelas)->orderBy('id', 'DESC')->latest();
 
         return datatables()->of($pemeriksaanfisik)
         ->addColumn('action', function($row){
             $btn = '';
-            $btn .= '<a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data"><i class="mdi mdi-book-open-page-variant"></i></a> ';
-            $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGS').'">Periksa  <i class="mdi mdi-tooth"></i></a>';
+            $btn .= '<a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data " href="'.route('dokter.rekapDetailUKGSID',$row->id_anak).'"><i class="mdi mdi-book-open-page-variant"></i></a> ';
+            $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGS',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
 
 
             return $btn;

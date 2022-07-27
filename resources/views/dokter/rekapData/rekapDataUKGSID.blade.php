@@ -16,7 +16,7 @@
             <div class="col">
                 <table class="table table-borderless table-sm">
                     <tr style="color: white; line-height: 14px;">
-                        <td><h3><b>{{ $anak->nama }}</b></h3></td>
+                        <td><h3><b>{{ $pemeriksaanFisik->anak->nama}}</b></h3></td>
                     </tr>
                     <tr style="color: white; line-height: 5px; font-size:small">
                         <td>nama</td>
@@ -27,18 +27,18 @@
                         <td>usia anak</td>
                     </tr>
                     <tr style="color: white; line-height: 10px; font-size:larger;">
-                        <td>{{ $anak->nama }}</td>
-                        <td>{{ $anak->jenis_kelamin }}</td>
-                        <td>{{ $anak->sekolah->nama }}</td>
-                        <td>{{ $anak->kelas->kelas }}</td>
-                        <td>{{ $anak->tempat_lahir }}, {{ $anak->tanggal_lahir }}</td>
+                        <td>{{ $pemeriksaanFisik->anak->nama }}</td>
+                        <td>{{ $pemeriksaanFisik->anak->jenis_kelamin }}</td>
+                        <td>{{ $pemeriksaanFisik->kelas->sekolah->nama}}</td>
+                        <td>{{ $pemeriksaanFisik->kelas->kelas }}</td>
+                        <td>{{ $pemeriksaanFisik->anak->tempat_lahir }}, {{ $pemeriksaanFisik->anak->tanggal_lahir }}</td>
                         <?php
                             $now = new DateTime(date('Y-m-d'));
-                            $ttl = new DateTime(($anak->tanggal_lahir));
+                            $ttl = new DateTime(($pemeriksaanFisik->anak->tanggal_lahir));
                             $different = $now->diff($ttl);
-                            $year = $different->format('%y');
+                            $year = $different->format('%y Tahun %m Bulan');
                         ?>
-                        <td>{{ $year }} Tahun</td>
+                        <td>{{ $year }} </td>
                     </tr>
                 </table>
             </div>
@@ -67,10 +67,16 @@
 <div class="card">
     <div class="card-body">
         <h6 class="card-title">PEMERIKSAAN FISIK</h6>
-        <p class="text-muted mb-3">(19/02/2022)</p>
+                          <?php
+                            
+                            $date = new DateTime(($pemeriksaanFisik->waktu_pemeriksaan));
+                            
+                            $waktu_pemeriksaan = $date->format('d/m/y');
+                            ?>
+        <p class="text-muted mb-3">({{$waktu_pemeriksaan}})</p>
         <form class="forms-sample">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <div class="row mb-3">
                         <label for="exampleInputMobile" class="col-sm-3 col-form-label">Tinggi badan (cm)</label>
                         <div class="col-sm-9">
@@ -102,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <h6>HASIL :</h6>
                     <button type="button" class="btn btn-success btn-lg mb-3"><b>IDEAL</b></button>
                     <h6>REKOMENDASI :</h6>
@@ -116,23 +122,23 @@
 <div class="card">
     <div class="card-body">
         <h6 class="card-title">PEMERIKSAAN MATA</h6>
-        <p class="text-muted mb-3">(19/02/2022)</p>
+        <p class="text-muted mb-3">({{$waktu_pemeriksaan}})</p>
         <form class="forms-sample">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <div class="row sm-1">
                         <div class="sm-1">
-                            <label for="exampleInputMobile" class="col-sm-8 col-form-label">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
                                 Mata perih/merah dan bengkak
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline" {{ ($pemeriksaanMata->soal1 == "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline" {{ ($pemeriksaanMata->msoal1 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline"> 
-                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline1" {{ ($pemeriksaanMata->soal1 != "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline1" {{ ($pemeriksaanMata->msoal1 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -141,17 +147,17 @@
                     </div>
                     <div class="row sm-1">
                         <div class="sm-1">
-                            <label for="exampleInputMobile" class="col-sm-8 col-form-label">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
                                 Tidak dapat membaca/melihat dengan jelas
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline"  {{ ($pemeriksaanMata->soal2 == "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline"  {{ ($pemeriksaanMata->msoal2 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline1"  {{ ($pemeriksaanMata->soal2 != "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline1"  {{ ($pemeriksaanMata->msoal2 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -160,17 +166,17 @@
                     </div>
                     <div class="row sm-1">
                         <div class="sm-1">
-                            <label for="exampleInputMobile" class="col-sm-8 col-form-label">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
                                 Menggunakan kacamata
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline"  {{ ($pemeriksaanMata->soal3 == "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline"  {{ ($pemeriksaanMata->msoal3 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline1"  {{ ($pemeriksaanMata->soal3 != "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline1"  {{ ($pemeriksaanMata->msoal3 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -179,17 +185,17 @@
                     </div>
                     <div class="row sm-1">
                         <div class="sm-1">
-                            <label for="exampleInputMobile" class="col-sm-8 col-form-label">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
                                 Mata juling
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline"  {{ ($pemeriksaanMata->soal4 == "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline"  {{ ($pemeriksaanMata->msoal4 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline1"  {{ ($pemeriksaanMata->soal4 != "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline1"  {{ ($pemeriksaanMata->msoal4 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -198,33 +204,75 @@
                     </div>
                     <div class="row sm-1">
                         <div class="sm-1">
-                            <label for="exampleInputMobile" class="col-sm-8 col-form-label">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
                                 Tidak dapat membedakan warna dengan baik
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline"  {{ ($pemeriksaanMata->soal5 == "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline"  {{ ($pemeriksaanMata->msoal5 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline1"  {{ ($pemeriksaanMata->soal5 != "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline1"  {{ ($pemeriksaanMata->msoal5 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row sm-1">
+                        <div class="sm-1">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
+                            Bagaimana kondisi kesehatan mata anak
+                            </label>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline"  {{ ($pemeriksaanMata->msoal6 == "normal") ? 'checked' : '' }}>
+                                <label class="form-check-label" for="radioInline">
+                                    Normal
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline1"  {{ ($pemeriksaanMata->msoal6 == "minus") ? 'checked' : '' }}>
+                                <label class="form-check-label" for="radioInline1">
+                                    Minus
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline1"  {{ ($pemeriksaanMata->msoal6 == "butawarna") ? 'checked' : '' }}>
+                                <label class="form-check-label" for="radioInline1">
+                                    Buta Warna
                                 </label>
                             </div>
                         </div>
                     </div>
                 </div> 
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <h6>HASIL :</h6>
                     <div class="btn-group btn-group-lg mb-3" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-danger"><b>
-                            MATA MINUS
+                        @if($pemeriksaanMata->msoal6=="normal")
+                        <button type="button" class="btn btn-success"><b>
+                        Normal
                         </b></button>
                         <a class="btn btn-icon btn-danger" href="#" role="button">
                             <i data-feather="edit-2"></i>
                         </a>
+                        @elseif($pemeriksaanMata->msoal6=="minus")
+                        <button type="button" class="btn btn-danger"><b>
+                        Minus
+                        </b></button>
+                        <a class="btn btn-icon btn-danger" href="#" role="button">
+                            <i data-feather="edit-2"></i>
+                        </a>
+                        @else
+                        <button type="button" class="btn btn-warning"><b>
+                        Butawarna
+                        </b></button>
+                        <a class="btn btn-icon btn-warning" href="#" role="button">
+                            <i data-feather="edit-2"></i>
+                        </a>
+                        @endif
+
                     </div>
                     <h6>REKOMENDASI :</h6>
                     <p>-</p>
@@ -234,27 +282,27 @@
     </div>
 </div>
 <br>
-{{ $pemeriksaanTelinga }}
+<!-- {{ $pemeriksaanTelinga }} -->
 <div class="card">
     <div class="card-body">
         <h6 class="card-title">PEMERIKSAAN TELINGA</h6>
-        <p class="text-muted mb-3">(19/02/2022)</p>
+        <p class="text-muted mb-3">({{$waktu_pemeriksaan}})</p>
         <form class="forms-sample">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <div class="row sm-1">
                         <div class="sm-1">
-                            <label for="exampleInputMobile" class="col-sm-8 col-form-label">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
                                 Tidak merespon bila ada suara keras
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline"  {{ ($pemeriksaanTelinga->soal1 == "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline"  {{ ($pemeriksaanTelinga->tsoal1 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline1"  {{ ($pemeriksaanTelinga->soal1 != "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline" id="radioInline1"  {{ ($pemeriksaanTelinga->tsoal1 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -263,17 +311,17 @@
                     </div>
                     <div class="row sm-1">
                         <div class="sm-1">
-                            <label for="exampleInputMobile" class="col-sm-8 col-form-label">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
                                 Tidak mendengar bila dipanggil
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline" {{ ($pemeriksaanTelinga->soal2 == "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline" {{ ($pemeriksaanTelinga->tsoal2 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline1" {{ ($pemeriksaanTelinga->soal2 != "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline2" id="radioInline1" {{ ($pemeriksaanTelinga->tsoal2 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -282,17 +330,17 @@
                     </div>
                     <div class="row sm-1">
                         <div class="sm-1">
-                            <label for="exampleInputMobile" class="col-sm-8 col-form-label">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
                                 Tidak dapat mendengar dengan jelas
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline" {{ ($pemeriksaanTelinga->soal3 == "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline" {{ ($pemeriksaanTelinga->tsoal3 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline1" {{ ($pemeriksaanTelinga->soal3 != "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline3" id="radioInline1" {{ ($pemeriksaanTelinga->tsoal3 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -301,17 +349,17 @@
                     </div>
                     <div class="row sm-1">
                         <div class="sm-1">
-                            <label for="exampleInputMobile" class="col-sm-8 col-form-label">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
                                 Keluar cairan telingan
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline" {{ ($pemeriksaanTelinga->soal4 == "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline" {{ ($pemeriksaanTelinga->tsoal4 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline1" {{ ($pemeriksaanTelinga->soal4 != "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline4" id="radioInline1" {{ ($pemeriksaanTelinga->tsoal4 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -320,17 +368,17 @@
                     </div>
                     <div class="row sm-1">
                         <div class="sm-1">
-                            <label for="exampleInputMobile" class="col-sm-8 col-form-label">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
                                 Telinga terasa tertutup atau tersumbat
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline" {{ ($pemeriksaanTelinga->soal5 == "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline" {{ ($pemeriksaanTelinga->tsoal5 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline1" {{ ($pemeriksaanTelinga->soal5 != "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline5" id="radioInline1" {{ ($pemeriksaanTelinga->tsoal5 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -339,17 +387,17 @@
                     </div>
                     <div class="row sm-1">
                         <div class="sm-1">
-                            <label for="exampleInputMobile" class="col-sm-8 col-form-label">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
                                 Nyeri telinga
                             </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline6" id="radioInline" {{ ($pemeriksaanTelinga->soal6 == "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline6" id="radioInline"{{ ($pemeriksaanTelinga->tsoal6 == "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Ya
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline6" id="radioInline1" {{ ($pemeriksaanTelinga->soal6 != "ya") ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline6" id="radioInline1" {{ ($pemeriksaanTelinga->tsoal6 != "ya") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
                                     Tidak
                                 </label>
@@ -357,38 +405,85 @@
                         </div>
                     </div>
                     <div class="row sm-1">
-                        <label for="exampleInputMobile" class="col-sm-5 col-form-label">
-                            Volume saat menonton TV / mendengarkan radio
-                        </label>
-                        <div class="col-sm-7">
                         <div class="sm-1">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
+                            Terdapat serumen pada bagian telinga kanan anak
+                            </label>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline7" id="radioInline" {{ ($pemeriksaanTelinga->soal7 < 35) ? 'checked' : '' }}>
+                                <input type="radio" class="form-check-input" name="radioInline7" id="radioInline" {{ ($pemeriksaanTelinga->tsoal7 == "ya") ? 'checked' : '' }}>
+                                <label class="form-check-label" for="radioInline">
+                                    Ya
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="radioInline7" id="radioInline1" {{ ($pemeriksaanTelinga->tsoal7 != "ya") ? 'checked' : '' }}>
+                                <label class="form-check-label" for="radioInline1">
+                                    Tidak
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row sm-1">
+                        <div class="sm-1">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
+                            Terdapat serumen pada bagian telinga kiri anak
+                            </label>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="radioInline8" id="radioInline" {{ ($pemeriksaanTelinga->tsoal8 == "ya") ? 'checked' : '' }}>
+                                <label class="form-check-label" for="radioInline">
+                                    Ya
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="radioInline8" id="radioInline1" {{ ($pemeriksaanTelinga->tsoal8 != "ya") ? 'checked' : '' }}>
+                                <label class="form-check-label" for="radioInline1">
+                                    Tidak
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row sm-1">
+                        <div class="sm-1">
+                            <label for="exampleInputMobile" class="col-sm-6 col-form-label">
+                            Volume saat menonton TV / mendengarkan radio
+                            </label>
+                            <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" name="radioInline9" id="radioInline" {{ ($pemeriksaanTelinga->tsoal9=="kecil") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline">
                                     Kecil
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline7" id="radioInline1" {{ ($pemeriksaanTelinga->soal7 >= 34 && $pemeriksaanTelinga->soal7 < 75) ? 'checked' : '' }}>
+                            <input type="radio" class="form-check-input" name="radioInline9" id="radioInline1" {{ ($pemeriksaanTelinga->tsoal9 =="sedang") ? 'checked' : '' }}>
                                 <label class="form-check-label" for="radioInline1">
-                                    Sedang
+                                   Sedang
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" class="form-check-input" name="radioInline7" id="radioInline1" {{ ($pemeriksaanTelinga->soal7 > 75) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="radioInline2">
-                                    Besar
+                            <input type="radio" class="form-check-input" name="radioInline9" id="radioInline1" {{ ($pemeriksaanTelinga->tsoal9=="besar") ? 'checked' : '' }}>
+                                <label class="form-check-label" for="radioInline1">
+                                   Keras
                                 </label>
                             </div>
                         </div>
-                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <h6>HASIL :</h6>
                     <div class="btn-group btn-group-lg mb-3" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-danger"><b>
-                            SERUMEN 2
+                            <?php
+                        if($pemeriksaanTelinga->tsoal7=='ya'&& $pemeriksaanTelinga->tsoal8=='ya'){
+                    $data = 'Serumen 2';
+                }else if($pemeriksaanTelinga->tsoal7=='ya'&& $pemeriksaanTelinga->tsoal8=='tidak'){
+                    $data = 'Serumen Kanan';
+                }else if($pemeriksaanTelinga->tsoal7=='tidak'&& $pemeriksaanTelinga->tsoal8=='ya'){
+                    $data = 'Serumen Kiri';
+                }else{
+                    $data = 'Serumen Tidak Ada';
+                }
+                ?>
+                    {{$data}}
                         </b></button>
                         <a class="btn btn-icon btn-danger" href="#" role="button">
                             <i data-feather="edit-2"></i>
@@ -412,10 +507,16 @@
 <div class="card">
     <div class="card-body">
         <h6 class="card-title">PEMERIKSAAN GIGI</h6>
-        <p class="text-muted mb-3">(19/02/2022)</p>
+                         <?php
+                            
+                            $gigi = new DateTime(($pemeriksaanGigi->waktu_pemeriksaan));
+                            
+                            $waktu_periksa= $date->format('d/m/y');
+                            ?>
+        <p class="text-muted mb-3">({{$waktu_periksa}})</p>
         <form class="forms-sample">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <div class="container">
                         <div class="row row-cols-5">
                             <div class="col">
@@ -443,23 +544,23 @@
                     <div class="row mb-1">
                         <label for="exampleInputMobile" class="col-sm-5 col-form-label">Frekuensi menyikat gigi</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Frekuensi menyikat gigi">
+                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Frekuensi menyikat gigi" readonly value="{{ $pemeriksaanGigi->gsoal1 }}">
                         </div>
                     </div>
                     <div class="row mb-1">
                         <label for="exampleInputMobile" class="col-sm-5 col-form-label">Kunjungan ke dokter gigi</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Kunjungan ke dokter gigi">
+                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Kunjungan ke dokter gigi" readonly value="{{ $pemeriksaanGigi->gsoal2 }}">
                         </div>
                     </div>
                     <div class="row mb-1">
                         <label for="exampleInputMobile" class="col-sm-5 col-form-label">Diagnosa Dokter</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Diagnosa Dokter">
+                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Diagnosa Dokter" readonly value="{{$pemeriksaanGigi->skriningIndeks}}">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <h6>HASIL :</h6>
                     <button type="button" class="btn btn-success btn-lg mb-3"><b>
                         BAIK
