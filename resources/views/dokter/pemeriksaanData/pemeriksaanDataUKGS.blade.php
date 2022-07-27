@@ -234,6 +234,7 @@
             },
             onFinished: function(event, currentIndex) {
                 const formData = new FormData(document.getElementById("form-skrining-gigi"));
+                formData.append('id_pemeriksaan', "{{$data->id}}");
                 $.ajax({
                     'type': 'POST',
                     'url': "{{route('dokter.storePemeriksaanDataUkgs')}}",
