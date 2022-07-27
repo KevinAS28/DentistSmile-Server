@@ -73,7 +73,7 @@
                     <div id="data-posyandu">
                         <div class="mb-3">
                             <label class="form-label">Posyandu</label>
-                            <select class="js-example-basic-single form-select" data-width="100%" name="id_sekolah"
+                            <select class="js-example-basic-single form-select" data-width="100%" name="id_posyandu"
                                 id="id_posyandu">
                             </select>
                         </div>
@@ -117,7 +117,7 @@
                             <label for="exampleInputPassword1" class="form-label">Gambar5</label>
                             <input type="file" class="form-control dropify" name="gambar5" placeholder="masukkan gambar">
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
@@ -140,13 +140,13 @@
                     </div>
                 </div>
             </div>
-            
-            
+
+
             <div class="mt-3 float-right">
                 <button type="submit" class="btn btn-primary me-2">Submit</button>
                 <button class="btn btn-secondary">Cancel</button>
             </div>
-        
+
         </form>
     </div>
 </div>
@@ -165,7 +165,7 @@
     }
 });
         $('#data-sekolah').hide();
-        
+
         $('#chk').on('change', function () {
             if ($(this).is(':checked')) {
                 $('#data-sekolah').show();

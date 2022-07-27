@@ -11,10 +11,13 @@ use App\Models\Orangtua;
 use App\Models\Anak;
 use App\Models\Kelurahan;
 use App\Models\ResikoKaries;
+use App\Models\Dokter;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
+use Notification;
+
 class PemeriksaanGigiController extends Controller
 {
     /**
@@ -51,32 +54,32 @@ class PemeriksaanGigiController extends Controller
     {
 
         $messages = [
-           
+
             'gambar1.required' => 'Gambar 1 wajib diisi.',
             'gambar2.required' => 'Gambar 2 wajib diisi.',
             'gambar3.required' => 'Gambar 3 wajib diisi.',
-            
+
 
         ];
         $validator = $request->validate([
             'gambar1' => 'required',
             'gambar2' => 'required',
             'gambar3' => 'required'
-            
-           
+
+
         ], $messages);
         $waktu_pemeriksaan = Carbon::now();
-        
+
         $pgigi = new PemeriksaanGigi();
         $pgigi->id_anak = $request->anak;
-        $pgigi->id_sekolah= $request->id_sekolah;
+        $pgigi->id_sekolah= $request->id_sekolah ?: $request->id_posyandu;
         $pgigi->id_kelas = $request->kelas;
         $pgigi->waktu_pemeriksaan = $waktu_pemeriksaan;
         if(!empty($request->gambar1)){
              $file = $request->file('gambar1');
              $extension = strtolower($file->getClientOriginalExtension());
              $filename1 = uniqid() . '.' . $extension;
-            
+
             Storage::put('public/gigi/' . $filename1, File::get($file));
             $pgigi->gambar1=$filename1;
         }
@@ -84,7 +87,7 @@ class PemeriksaanGigiController extends Controller
             $file = $request->file('gambar2');
             $extension = strtolower($file->getClientOriginalExtension());
             $filename2 = uniqid() . '.' . $extension;
-           
+
            Storage::put('public/gigi/' . $filename2, File::get($file));
            $pgigi->gambar2=$filename2;
        }
@@ -92,7 +95,7 @@ class PemeriksaanGigiController extends Controller
         $file = $request->file('gambar3');
         $extension = strtolower($file->getClientOriginalExtension());
         $filename3 = uniqid() . '.' . $extension;
-       
+
        Storage::put('public/gigi/' . $filename3, File::get($file));
        $pgigi->gambar3=$filename3;
         }
@@ -100,7 +103,7 @@ class PemeriksaanGigiController extends Controller
             $file = $request->file('gambar4');
             $extension = strtolower($file->getClientOriginalExtension());
             $filename4 = uniqid() . '.' . $extension;
-           
+
            Storage::put('public/gigi/' . $filename4, File::get($file));
            $pgigi->gambar4=$filename4;
         }
@@ -108,16 +111,16 @@ class PemeriksaanGigiController extends Controller
             $file = $request->file('gambar5');
             $extension = strtolower($file->getClientOriginalExtension());
             $filename5 = uniqid() . '.' . $extension;
-           
+
            Storage::put('public/gigi/' . $filename5, File::get($file));
            $pgigi->gambar5=$filename5;
         }
-        
+
         $pgigi->gsoal1= $request->gsoal1;
         $pgigi->gsoal2= $request->gsoal2;
-        
+
         $pgigi->save();
-        
+
         // rk = resiko karies
         if($pgigi->id_kelas==NULL){
         $rk= new ResikoKaries();
@@ -137,6 +140,11 @@ class PemeriksaanGigiController extends Controller
         $rk->rksoal13=$request->rksoal13;
         $rk->save();
         }
+        $kecamatan = $pgigi->sekolah->kelurahan->kecamatan->id;
+        $dokter = User::whereHas('dokter',function($query) use($kecamatan){
+            $query->where('id_kecamatan',$kecamatan);
+        })->get();
+        Notification::send($dokter, new \App\Notifications\PemeriksaanGigiNotification(PemeriksaanGigi::with('anak','sekolah')->find($pgigi->id)));
         return redirect()->route('view-riwayat')->with('success','sukses mengisi data pemeriksaan gigi');
     }
 

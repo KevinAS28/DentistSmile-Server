@@ -22,6 +22,7 @@ use App\Models\PemeriksaanTelinga;
 use App\Models\PemeriksaanGigi;
 use App\Models\ResikoKaries;
 use Carbon\Carbon;
+use App\Models\Notification;
 
 class DokterController extends Controller
 {
@@ -307,7 +308,15 @@ class DokterController extends Controller
 
 
 
-    public function pemeriksaan_data_ukgs($id){
+    public function pemeriksaan_data_ukgs(Request $request, $id){
+        if ($request->open == 'notification') {
+            // Auth::user()->unreadNotifications->when($request->input('id'), function ($query) use ($request) {
+            //     return $query->where('id', $request->input('id'));
+            // })->markAsRead();
+            $kec = Dokter::find($request->kec)->id_kecamatan;
+            $otherDokter = Dokter::where('id_kecamatan', $kec)->pluck('id_users')->toArray();
+            Notification::whereIn('notifiable_id', $otherDokter)->whereNull('read_at')->update(['read_at' => now()]);
+        } 
         $data = PemeriksaanGigi::with('anak','resikoKaries')->findOrFail($id);
         $aksi = ['belum-erupsi','erupsi-sebagian','karies','non-vital','tambalan-logam','tambalan-non-logam','mahkota-logam','mahkota-non-logam','sisa-akar','gigi-hilang','jembatan','gigi-tiruan-lepas'];
         $odontograms = [
@@ -323,7 +332,16 @@ class DokterController extends Controller
         return view ('dokter.pemeriksaanData.pemeriksaanDataUKGS',compact('data','odontograms','aksi'));
     }
 
-    public function pemeriksaan_data_ukgm($id){
+    public function pemeriksaan_data_ukgm(Request $request, $id){
+        if ($request->open == 'notification') {
+            // Auth::user()->unreadNotifications->when($request->input('id'), function ($query) use ($request) {
+            //     return $query->where('id', $request->input('id'));
+            // })->markAsRead();
+
+            $kec = Dokter::find($request->kec)->id_kecamatan;
+            $otherDokter = Dokter::where('id_kecamatan', $kec)->pluck('id_users')->toArray();
+            Notification::whereIn('notifiable_id', $otherDokter)->whereNull('read_at')->update(['read_at' => now()]);
+        }
         $data = PemeriksaanGigi::with('anak','resikoKaries','skriningOdontogram','skriningIndeks')->findOrFail($id);
         $aksi = ['belum-erupsi','erupsi-sebagian','karies','non-vital','tambalan-logam','tambalan-non-logam','mahkota-logam','mahkota-non-logam','sisa-akar','gigi-hilang','jembatan','gigi-tiruan-lepas'];
         $odontograms = [

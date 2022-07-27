@@ -3,127 +3,117 @@
         <i data-feather="menu"></i>
     </a>
     <div class="navbar-content">
-    <form class="search-form">
-						<div class="input-group">
-              <div class="input-group-text">
-                <i data-feather="search"></i>
-              </div>
-							<input type="text" class="form-control" id="navbarForm" placeholder="Search here...">
-						</div>
-					</form>
+        <form class="search-form">
+            <div class="input-group">
+                <div class="input-group-text">
+                    <i data-feather="search"></i>
+                </div>
+                <input type="text" class="form-control" id="navbarForm" placeholder="Search here..." />
+            </div>
+        </form>
         <ul class="navbar-nav">
+            @php $notifications = Auth::user()->unreadNotifications; @endphp
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i data-feather="bell"></i>
+                    @if(count($notifications) > 0)
+                    <div class="indicator">
+                        <div class="circle"></div>
+                    </div>
+                    @endif
                 </a>
                 <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown">
                     <div class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
-                        <p>6 New Notifications</p>
-                        <a href="javascript:;" class="text-muted">Clear all</a>
+                        <p>{{$notifications->count()}} Notifikasi Baru</p>
                     </div>
                     <div class="p-1">
-                    <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                        <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                                <i class="icon-sm text-white" data-feather="gift"></i>
-                        </div>
-                        <div class="flex-grow-1 me-2">
-                                                <p>New Order Recieved</p>
-                                                <p class="tx-12 text-muted">30 min ago</p>
-                        </div>	
-                    </a>
-                    <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                        <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                                <i class="icon-sm text-white" data-feather="alert-circle"></i>
-                        </div>
-                        <div class="flex-grow-1 me-2">
-                                                <p>Server Limit Reached!</p>
-                                                <p class="tx-12 text-muted">1 hrs ago</p>
-                        </div>	
-                    </a>
-                    <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                        <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                        <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
-                        </div>
-                        <div class="flex-grow-1 me-2">
-                                                <p>New customer registered</p>
-                                                <p class="tx-12 text-muted">2 sec ago</p>
-                        </div>	
-                    </a>
-                    <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                        <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                                <i class="icon-sm text-white" data-feather="layers"></i>
-                        </div>
-                        <div class="flex-grow-1 me-2">
-                                                <p>Apps are ready for update</p>
-                                                <p class="tx-12 text-muted">5 hrs ago</p>
-                        </div>	
-                    </a>
-                    <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                        <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                                <i class="icon-sm text-white" data-feather="download"></i>
-                        </div>
-                        <div class="flex-grow-1 me-2">
-                                                <p>Download completed</p>
-                                                <p class="tx-12 text-muted">6 hrs ago</p>
-                        </div>	
-                    </a>
+                        @if(Auth::user()->role == 'dokter')
+                        @foreach($notifications as $i => $notification)
+                        @if($notification->data['pemeriksaan']['sekolah']['type'] == 'posyandu')
+<<<<<<< HEAD
+                        <a href="{{route('dokter.pemeriksaanDataUKGM',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 {{$i >= 1 ? 'notif-collapse d-none':'' }}">
+                        @elseif($notification->data['pemeriksaan']['sekolah']['type'] == 'sekolah')
+                        <a href="{{route('dokter.pemeriksaanDataUKGS',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 {{$i >= 1 ? 'notif-collapse d-none':'' }}">
+=======
+                        <a href="{{route('dokter.pemeriksaanDataUKGM',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 item-notification {{$i >= 1 ? 'd-none':'' }}">
+                        @elseif($notification->data['pemeriksaan']['sekolah']['type'] == 'sekolah')
+                        <a href="{{route('dokter.pemeriksaanDataUKGS',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 item-notification {{$i >= 1 ? 'd-none':'' }}">
+>>>>>>> 858019d54f08bb1a9a086821bc3248be8926e558
+                        @endif
+                            <div
+                                class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                <i class="icon-sm text-white" data-feather="gift"></i>
+                            </div>
+                            <div class="flex-grow-1 me-2">
+                                <p>{{$notification->data['pemeriksaan']['anak']['nama'] . ' Melakukan Pemeriksaan Gigi'}}</p>
+                                <p class="tx-12 text-muted">{{$notification->created_at->diffForHumans()}}</p>
+                            </div>
+                        </a>
+                        @endforeach @endif
                     </div>
-                                    <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
-                                        <a href="javascript:;">View all</a>
-                                    </div>
-                                </div>
-			</li>
+                    <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
+<<<<<<< HEAD
+                        <a type="button" id="btn-all-notification" data-type="expand">Lihat Semua</a>
+=======
+                        <a type="button" id="btn-all-notification">Lihat Semua</a>
+>>>>>>> 858019d54f08bb1a9a086821bc3248be8926e558
+                    </div>
+                </div>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="profile">
+                    <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="profile" />
                 </a>
                 <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
                     <div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
                         <div class="mb-3">
-                            <img class="wd-80 ht-80 rounded-circle" src="https://via.placeholder.com/80x80" alt="">
+                            <img class="wd-80 ht-80 rounded-circle" src="https://via.placeholder.com/80x80" alt="" />
                         </div>
                         <div class="text-center">
-                            @if(Auth::check())
-                            @if(Auth::user()->role=='admin')
+                            @if(Auth::check()) @if(Auth::user()->role=='admin')
                             <p class="tx-16 fw-bolder">admin</p>
-                            <p class="tx-12 text-muted">{{auth()->user()->email}}</p>
+                            <p class="tx-12 text-muted">
+                                {{auth()->user()->email}}
+                            </p>
                             @elseif(Auth::user()->role=='orangtua')
-                            <p class="tx-16 fw-bolder">{{auth()->user()->profilorangtua->nama}}</p>
-                            <p class="tx-12 text-muted">{{auth()->user()->email}}</p>
+                            <p class="tx-16 fw-bolder">
+                                {{auth()->user()->profilorangtua->nama}}
+                            </p>
+                            <p class="tx-12 text-muted">
+                                {{auth()->user()->email}}
+                            </p>
                             @else
-                            <p class="tx-16 fw-bolder">{{auth()->user()->profildokter->nama}}</p>
-                            <p class="tx-12 text-muted">{{auth()->user()->email}}</p>
-                            @endif
-                            @endif
+                            <p class="tx-16 fw-bolder">
+                                {{auth()->user()->profildokter->nama}}
+                            </p>
+                            <p class="tx-12 text-muted">
+                                {{auth()->user()->email}}
+                            </p>
+                            @endif @endif
                         </div>
                     </div>
                     <ul class="list-unstyled p-1">
-                   
-
-                        @if(Auth::check())
-                        @if(Auth::user()->role=='orangtua')
+                        @if(Auth::check()) @if(Auth::user()->role=='orangtua')
                         <li class="dropdown-item py-2">
                             <a href="{{route('orangtua.profil')}}" class="text-body ms-0">
                                 <i class="me-2 icon-md" data-feather="edit"></i>
                                 <span>Ubah Profil</span>
                             </a>
                         </li>
-                        @endif
-                        @if(Auth::user()->role=='dokter')
+                        @endif @if(Auth::user()->role=='dokter')
                         <li class="dropdown-item py-2">
                             <a href="{{route('dokter.profil')}}" class="text-body ms-0">
                                 <i class="me-2 icon-md" data-feather="edit"></i>
                                 <span>Edit Profile</span>
                             </a>
                         </li>
-                        @endif
-                        @endif
+                        @endif @endif
 
                         <li class="dropdown-item py-2">
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); 
-                            document.getElementById('logout-form').submit();"
-                             class="text-body ms-0">
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();" class="text-body ms-0">
                                 <i class="me-2 icon-md" data-feather="log-out"></i>
                                 <span>Log Out</span>
                             </a>
@@ -137,3 +127,30 @@
         </ul>
     </div>
 </nav>
+@push('after-script')
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '.navbar-nav #btn-all-notification', function (e) {
+            if ($(this).data('type') == 'expand') {
+                $(this).parent().parent().toggleClass('show');
+                $(this).parent().parent().attr('data-bs-popper', 'true');
+                $(this).parent().parent().siblings().toggleClass('show');
+                $(this).parent().parent().siblings().attr('aria-expanded', 'true');
+                $('.notif-collapse').removeClass('d-none');
+                $(this).text('Tampilkan lebih sedikit');
+                $(this).data('type','collapsed');
+            }
+            else if ($(this).data('type') == 'collapsed') {
+                console.log('collaps');
+                $(this).parent().parent().toggleClass('show');
+                $(this).parent().parent().attr('data-bs-popper', 'true');
+                $(this).parent().parent().siblings().toggleClass('show');
+                $(this).parent().parent().siblings().attr('aria-expanded', 'true');
+                $('.notif-collapse').addClass('d-none');
+                $(this).text('Lihat Semua');
+                $(this).data('type','expand');
+            }
+        });
+    });
+</script>
+@endpush
