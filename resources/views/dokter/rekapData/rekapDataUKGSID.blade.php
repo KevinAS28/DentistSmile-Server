@@ -21,16 +21,24 @@
                     <tr style="color: white; line-height: 5px; font-size:small">
                         <td>nama</td>
                         <td>jenis kelamin</td>
+                        @if($pemeriksaanFisik->id_kelas !=null &&$pemeriksaanFisik->id_sekolah==null)
                         <td>nama sekolah</td>
                         <td>kelas</td>
+                        @else
+                        <td>nama posyandu</td>
+                        @endif
                         <td>TTL</td>
                         <td>usia anak</td>
                     </tr>
                     <tr style="color: white; line-height: 10px; font-size:larger;">
                         <td>{{ $pemeriksaanFisik->anak->nama }}</td>
                         <td>{{ $pemeriksaanFisik->anak->jenis_kelamin }}</td>
+                        @if($pemeriksaanFisik->id_kelas !=null &&$pemeriksaanFisik->id_sekolah==null)
                         <td>{{ $pemeriksaanFisik->kelas->sekolah->nama}}</td>
                         <td>{{ $pemeriksaanFisik->kelas->kelas }}</td>
+                        @else
+                        <td>{{ $pemeriksaanFisik->sekolah->nama}}</td>
+                        @endif
                         <td>{{ $pemeriksaanFisik->anak->tempat_lahir }}, {{ $pemeriksaanFisik->anak->tanggal_lahir }}</td>
                         <?php
                             $now = new DateTime(date('Y-m-d'));
@@ -254,7 +262,7 @@
                         <button type="button" class="btn btn-success"><b>
                         Normal
                         </b></button>
-                        <a class="btn btn-icon btn-danger" href="#" role="button">
+                        <a class="btn btn-icon btn-success" href="#" role="button">
                             <i data-feather="edit-2"></i>
                         </a>
                         @elseif($pemeriksaanMata->msoal6=="minus")
@@ -556,7 +564,7 @@
                     <div class="row mb-1">
                         <label for="exampleInputMobile" class="col-sm-5 col-form-label">Diagnosa Dokter</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Diagnosa Dokter" readonly value="{{$pemeriksaanGigi->skriningIndeks}}">
+                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Diagnosa Dokter" readonly value="{{$pemeriksaanGigi->skriningIndeks->diagnosa}}">
                         </div>
                     </div>
                 </div>
