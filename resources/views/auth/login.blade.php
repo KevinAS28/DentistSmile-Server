@@ -42,6 +42,13 @@
 
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" />
 </head>
+<style>
+        @media only screen and (max-width: 767px) {
+            #logo {
+            display: none;
+        }
+        }
+    </style>
 <body>
 	<div class="main-wrapper">
 		<div class="page-wrapper full-page">
@@ -53,11 +60,11 @@
 							<div class="row">
                 <div class="col-md-4 pe-md-0">
                   <div class="">
-                    <img class="img-fluid" src="{{asset('assets/images/login-bg.png')}}" alt="">
+                    <img id="logo" class="img-fluid" src="{{asset('assets/images/login-bg.png')}}" alt="">
                   </div>
                 </div>
                 <div class="col-md-8 ps-md-0">
-                  <div class="auth-form-wrapper px-4 py-5">
+                  <div class="auth-form-wrapper px-4 py-3">
                     <img class="img-fluid mb-2" src="{{asset('assets/images/logo-senyumin.png')}}" alt="" srcset="">
                     @if(Session::has('error'))
                         <div class="alert alert-warning">{{Session::get('error')}}</div>
@@ -128,6 +135,8 @@
 				$('#userPassword').attr('type','password');
 			}
 		});
+  
+    
 	});
   </script>
 

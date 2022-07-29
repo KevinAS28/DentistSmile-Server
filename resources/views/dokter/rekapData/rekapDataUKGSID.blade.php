@@ -19,16 +19,16 @@
                         <td><h3><b>{{ $pemeriksaanFisik->anak->nama}}</b></h3></td>
                     </tr>
                     <tr style="color: white; line-height: 5px; font-size:small">
-                        <td>nama</td>
-                        <td>jenis kelamin</td>
+                        <td>Nama</td>
+                        <td>Jenis Kelamin</td>
                         @if($pemeriksaanFisik->id_kelas !=null &&$pemeriksaanFisik->id_sekolah==null)
-                        <td>nama sekolah</td>
-                        <td>kelas</td>
+                        <td>Sekolahh</td>
+                        <td>Kelas</td>
                         @else
-                        <td>nama posyandu</td>
+                        <td>Posyandu</td>
                         @endif
                         <td>TTL</td>
-                        <td>usia anak</td>
+                        <td>Usia Anak</td>
                     </tr>
                     <tr style="color: white; line-height: 10px; font-size:larger;">
                         <td>{{ $pemeriksaanFisik->anak->nama }}</td>
@@ -528,24 +528,32 @@
                     <div class="container">
                         <div class="row row-cols-5">
                             <div class="col">
-                                <img src="..." class="rounded wd-100 wd-sm-150 me-3" alt="...">
+                                <img style="width:75px; height:75px;object-fit: cover; object-position: bottom;" src="{{url ('storage/gigi/'.$pemeriksaanGigi->gambar1) ?? ''}}" class=" img-fluid " alt="...">
                                 <p class="tx-11 text-muted">Foto sisi depan</p>
                             </div>
                             <div class="col">
-                                <img src="..." class="rounded wd-100 wd-sm-150 me-3" alt="...">
+                                <img style="width:75px; height:75px;object-fit: cover; object-position: bottom;" src="{{url ('storage/gigi/'.$pemeriksaanGigi->gambar2) ?? ''}}" class="img-fluid" alt="..." >
                                 <p class="tx-11 text-muted">Foto sisi kanan</p>
                             </div>
                             <div class="col">
-                                <img src="..." class="rounded wd-100 wd-sm-150 me-3" alt="...">
+                                <img  style="width:75px; height:75px ; object-fit: cover; object-position: bottom;" src="{{url ('storage/gigi/'.$pemeriksaanGigi->gambar3) ?? ''}}" class="img-fluid" alt="...">
                                 <p class="tx-11 text-muted">Foto sisi kiri</p>
                             </div>
                             <div class="col">
-                                <img src="..." class="rounded wd-100 wd-sm-150 me-3" alt="...">
+                                @if(!empty($pemeriksaanGigi->gambar4))
+                                <img style="width:75px; height:75px ; object-fit: cover; object-position: bottom;" src="{{url ('storage/gigi/'.$pemeriksaanGigi->gambar4)}}" class="rounded wd-100 wd-sm-150 me-3" alt="..." >
+                                @else
+                                    <img style="width:75px; height:75px ; object-fit: cover; object-position: bottom;" src='{{@asset("assets/images/others/placeholder.jpg")}}' class="rounded wd-100 wd-sm-150 me-3" alt="..." >
+                                @endif
                                 <p class="tx-11 text-muted">Foto sisi depan</p>
                             </div>
                             <div class="col">
-                                <img src="..." class="rounded wd-100 wd-sm-150 me-3" alt="...">
-                                <p class="tx-11 text-muted">Foto sisi belakang</p>
+                            @if(!empty($pemeriksaanGigi->gambar5))
+                                <img style="width:75px; height:75px ; object-fit: cover; object-position: bottom;" src="{{url ('storage/gigi/'.$pemeriksaanGigi->gambar5) ?? ''}}" class="img-fluid" alt="...">
+                            @else 
+                            <img style="width:75px; height:75px ; object-fit: cover; object-position: bottom;" src='{{@asset("assets/images/others/placeholder.jpg")}}' class="rounded wd-100 wd-sm-150 me-3" alt="..." >   
+                            @endif
+                            <p class="tx-11 text-muted">Foto sisi belakang</p>
                             </div>
                         </div>
                     </div>
@@ -564,7 +572,7 @@
                     <div class="row mb-1">
                         <label for="exampleInputMobile" class="col-sm-5 col-form-label">Diagnosa Dokter</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Diagnosa Dokter" readonly value="{{$pemeriksaanGigi->skriningIndeks->diagnosa}}">
+                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Diagnosa Dokter" readonly value="{{!empty($pemeriksaanGigi->skriningIndeks->diagnosa)?$pemeriksaanGigi->skriningIndeks->diagnosa: ''}}">
                         </div>
                     </div>
                 </div>
@@ -575,7 +583,7 @@
                     </b></button>
                     <h6>REKOMENDASI :</h6>
                     <p>
-                        Segera lakukan pencabutan akar ke dokter
+                    {{!empty($pemeriksaanGigi->skriningIndeks->rekomendasi)?$pemeriksaanGigi->skriningIndeks->rekomendasi: '-'}}
                     </p>
                 </div>
             </div>

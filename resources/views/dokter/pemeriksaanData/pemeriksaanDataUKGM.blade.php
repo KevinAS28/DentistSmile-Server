@@ -160,6 +160,10 @@
                                                                 @endforeach
                                                             </select>
                                                         </div>
+
+                                                        <div class ="col=md-4">
+                                                            <img src="" alt="">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -177,7 +181,15 @@
                             <div class="row mb-3">
                                 <label for="diagnosa" class="col-sm-2 col-form-label">Resiko Karies</label>
                                 <div class="col-sm-10">
-                                    <textarea name="diagnosa" class="form-control w-100" id="" rows="2">{{@$data->skriningIndeks->diagnosa}}</textarea>
+                                @php $resiko = ['Tinggi','Sedang','Rendah'] @endphp
+                                                            <select class="form-select" name="diagnosa"
+                                                                data-width="100%" placeholder="Pilih Resiko">
+                                                                <option selected disabled>Pilih Resiko</option>
+                                                                @foreach ($resiko as $item)
+                                                                <option value="{{strtolower($item)}}" {{strtolower($item) == @$data->skriningIndeks->diagnosa ? 'selected':''}}>{{$item}}</option>
+                                                                @endforeach
+                                                            </select>
+                                    
                                 </div>
                             </div>
                             <div class="row mb-3">

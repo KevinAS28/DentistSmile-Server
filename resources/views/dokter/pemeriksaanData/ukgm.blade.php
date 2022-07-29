@@ -168,6 +168,8 @@ $(document).ready(function() {
                         data:'DT_RowIndex',
                         name:'DT_RowIndex',
                         visible: true,
+                        
+                        orderable: false, searchable: false 
                     },
  
                     {

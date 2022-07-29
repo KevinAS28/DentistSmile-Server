@@ -270,7 +270,8 @@ class OrangtuaController extends Controller
     }
 
     public function viewDashboard(){
-        return view('orangtua.dashboard.dashboard');
+        $user=User::find(Auth::user()->id);
+        return view('orangtua.dashboard.dashboard',compact('user'));
     }
 
     // function untuk menampilkan data anak di halaman orangtua
@@ -391,4 +392,6 @@ class OrangtuaController extends Controller
         return redirect()->route('viewanak');;
         
     }
+
+    
 }

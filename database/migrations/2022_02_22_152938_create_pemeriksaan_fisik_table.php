@@ -21,8 +21,8 @@ class CreatePemeriksaanFisikTable extends Migration
             $table->integer('tinggi_badan');
             $table->integer('berat_badan');
             $table->float('imt',10,1);
-            $table->integer('sistole');
-            $table->integer('diastole');
+            $table->integer('sistole')->nullable();
+            $table->integer('diastole')->nullable();
             $table->datetime('waktu_pemeriksaan');
             $table->softDeletes();
             $table->timestamps();

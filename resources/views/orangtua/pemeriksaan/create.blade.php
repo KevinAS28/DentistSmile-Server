@@ -90,20 +90,19 @@
 
 
                     <div class="hasilimt">
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Berat badan</label>
-                            <input type="text" min="0" class="form-control" id="berat_badan" name="berat_badan"
-                                autocomplete="off" placeholder="masukkan berat badan" value="">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">tinggi badan</label>
+                    <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">tinggi badan (cm)</label>
                             <input type="text" min="0" class="form-control" id="tinggi_badan" name="tinggi_badan"
                                 autocomplete="off" placeholder="Masukkan Tinggi Badan" value="">
                             @error('tinggi_badan')
                             <div class="badge bg-danger mt-2 ">{{ $message }}</div>
                             @enderror
                         </div>
-
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Berat badan (kg)</label>
+                            <input type="text" min="0" class="form-control" id="berat_badan" name="berat_badan"
+                                autocomplete="off" placeholder="masukkan berat badan" value="">
+                        </div>
 
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">imt</label>
@@ -112,14 +111,14 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">sistole</label>
+                        <label for="exampleInputPassword1" class="form-label">sistole (mmHG)</label>
                         <input type="number" class="form-control" id="sistole" name="sistole" autocomplete="off"
-                            placeholder="masukkan kelas">
+                            placeholder="Kosongkan bila tidak mengetahui">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">diastole</label>
+                        <label for="exampleInputPassword1" class="form-label">diastole (mmHG)</label>
                         <input type="number" class="form-control" id="diastole" name="diastole" autocomplete="off"
-                            placeholder="masukkan kelas">
+                            placeholder="Kosongkan bila tidak mengetahui">
                     </div>
                 </div>
             </div>
@@ -282,7 +281,7 @@
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Berapa lama waktu menonton TV + melihat
                             gadget seperti HP/tablet + melihat layar komputer dalam 1 hari (Jam) </label>
-                        <input type="text" class="form-control" name="msoal7" autocomplete="off" placeholder="">
+                        <input type="number" class="form-control" name="msoal7" autocomplete="off" placeholder="0">
                     </div>
 
                 </div>

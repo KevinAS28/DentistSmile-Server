@@ -333,6 +333,7 @@ class DokterController extends Controller
     }
 
     public function pemeriksaan_data_ukgm(Request $request, $id){
+        
         if ($request->open == 'notification') {
             // Auth::user()->unreadNotifications->when($request->input('id'), function ($query) use ($request) {
             //     return $query->where('id', $request->input('id'));
@@ -432,19 +433,34 @@ class DokterController extends Controller
                     'rekomendasi' => $request->rekomendasi
                 ]
             );
+            
+
+
             return response()->json(['success'=>'Data added successfully']);
         }
     }
 
-    public function rekap_ukgs(){
+    public function rekap_ukgs(Request $request){
+        $user = Auth::user();
         $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
         $kelurahan = Kelurahan::where('id_kecamatan', $dokter)->pluck('nama','id');
         $sekolah = Sekolah::pluck('nama','id');
-        return view('dokter.rekapData.ukgs', compact('dokter', 'kelurahan', 'sekolah'));
+        //$sekolah   = Sekolah::all();
+        return view('dokter.rekapData.ukgs',[
+            'kelurahan' => $kelurahan, 'sekolah '=> $sekolah,
+        ]);
     }
 
     public function rekap_ukgm(){
-        return view('dokter.rekapData.ukgm');
+        $user = Auth::user();
+        $dokter = Dokter::Where('id_users', Auth::user()->id)->value('id_kecamatan');
+        $kelurahan = Kelurahan::where('id_kecamatan', $dokter)->pluck('nama','id');
+        $sekolah = Sekolah::pluck('nama','id');
+        //$sekolah   = Sekolah::all();
+        return view('dokter.rekapData.ukgm',[
+            'kelurahan' => $kelurahan, 'sekolah '=> $sekolah,
+        ]);
+        
     }
     public function rekap_detail_ukgs(){
         return view ('dokter.rekapData.rekapDataUKGS');
@@ -487,7 +503,13 @@ class DokterController extends Controller
         ->addColumn('action', function($row){
             $btn = '';
             $btn .= '<a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data " href="'.route('dokter.rekapDetailUKGSID',$row->id_anak).'"><i class="mdi mdi-book-open-page-variant"></i></a> ';
-            $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGS',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
+
+            if(empty($row->skriningIndeks)){
+                $btn .= '<a type="button" class="btn btn-danger btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGS',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
+            }else{
+                $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGS',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
+            }
+        
 
 
             return $btn;
@@ -573,10 +595,18 @@ class DokterController extends Controller
         return datatables()->of($pemeriksaanGigi)
         ->addColumn('action', function($row){
             $btn = '';
+
+           
+
             $btn .= '<a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data" href="'.route('dokter.rekapDetailUKGSID',$row->id_anak).'"><i class="mdi mdi-book-open-page-variant"></i></a> ';
-            $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGM',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
+            
+            if(empty($row->skriningIndeks)){
+                $btn .= '<a type="button" class="btn btn-danger btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGM',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
+            }else{
+                $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGM',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
+            }
 
-
+            
             return $btn;
         })
 

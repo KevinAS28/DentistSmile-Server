@@ -25,6 +25,9 @@
     <!-- endinject -->
     <link rel="stylesheet" href="{{asset('assets/vendors/dropify/dist/dropify.min.css')}}">
 
+    <link href="{{asset('select2/dist/css/select2.min.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('select2/dist/css/select2-bootstrap4.min.css')}}">
+
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{asset('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
@@ -41,6 +44,13 @@
 
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" />
 </head>
+    <style>
+        @media only screen and (max-width: 720px) {
+            #logo {
+            display: none;
+        }
+        }
+    </style>
 
 <body>
     <div class="main-wrapper">
@@ -57,7 +67,7 @@
                                 @endif
                                 <div class="col-md-12 ps-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
-                                        <a href="#" class="noble-ui-logo d-block mb-2">Noble<span>UI</span></a>
+                                    <img class="img-fluid mb-2" src="{{asset('assets/images/logo-senyumin.png')}}" alt="" srcset="">
                                         <h5 class="text-muted fw-normal mb-4">Buat akun</h5>
                                         <form class="forms-sample" action="{{route('registeruser')}}" method="POST" enctype="multipart/form-data" files=true>
                                             @csrf
@@ -85,12 +95,12 @@
                                             <div class="mb-3">
                                                 <label for="exampleInputUsername1" class="form-label">Nama</label>
                                                 <input type="text" class="form-control" autocomplete="Name"
-                                                    placeholder="masukkan nama" name="nama" id="name"
+                                                    placeholder="Masukkan nama" name="nama" id="name"
                                                     value="{{old('nama')}}" required>
 
                                             </div>
-                                            <div class="row col-md-10">
-                                                <div class="col-md-4">
+                                            <div class="row col-md-12">
+                                                <div class="col-md-5">
                                                     <div class="mb-3">
                                                         <label for="exampleInputPassword1" class="form-label">Tempat
                                                             Lahir</label>
@@ -131,7 +141,7 @@
                                             <div class="mb-3">
                                                 <label for="exampleInputUsername2" class="form-label">alamat</label>
                                                 <input type="text" class="form-control" autocomplete="alamat"
-                                                    placeholder="alamat" name="alamat" required>
+                                                    placeholder="Alamat" name="alamat" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Pendidikan</label>
@@ -185,6 +195,7 @@
     <script src="{{asset('assets/vendors/core/core.js')}}"></script>
     <script src="{{asset('assets/vendors/dropify/dist/dropify.min.js')}}"></script>
     <script src="{{asset('assets/vendors/js/dropify.js')}}"></script>
+    <script src="{{asset('select2/dist/js/select2.min.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -230,7 +241,12 @@
         'error':   'Ooops, something wrong happended.'
     }
 });
+
+    $('#id_kecamatan').select2()
+    $('#id_desa , #pendidikan').select2()
+    
         });
+        
 
     </script>
 

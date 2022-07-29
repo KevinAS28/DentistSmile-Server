@@ -179,10 +179,12 @@ $(document).ready(function() {
             var tableData;
             function load_data(id_kelas = '') {
             tableData = $('#table-ukgs').DataTable({
+                
                 "oLanguage": {
                     "sEmptyTable": "Silahkan pilih sekolah dan kelas terlebih dahulu",
                     "zeroRecords": "Data tidak ditemukan",
                 },
+                
                 processing: true,
                 serverSide: true,
 
@@ -195,6 +197,7 @@ $(document).ready(function() {
                 },
                 "searching": true,
                 "bPaginate": true,
+               
                 serverSide: true,
                 stateSave: true,
                 ajax: {
@@ -209,12 +212,14 @@ $(document).ready(function() {
                 columns: [{
                         data: 'id',
                         name: 'id',
-                        visible: false
+                        visible: false,
+                       
                     },
                     {
                         data:'DT_RowIndex',
                         name:'DT_RowIndex',
                         visible: true,
+                        orderable: false, searchable: false 
                     },
  
                     {
@@ -230,7 +235,8 @@ $(document).ready(function() {
                     {
                         data: 'nama',
                         name: 'nama',
-                        visible: true
+                        visible: true,
+                        searchable: true
                     },
                     {
                         data: 'jenis_kelamin',

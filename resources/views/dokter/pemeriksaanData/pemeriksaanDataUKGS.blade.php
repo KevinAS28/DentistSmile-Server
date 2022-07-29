@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('dokter.periksaUKGS')}}">Pemeriksaan Gigi</a></li>
+            <li class="breadcrumb-item"><a href="{{route('dokter.periksaUKGS')}}">Pemeriksaan Gigi UKGS</a></li>
             <li class="breadcrumb-item active" aria-current="page">
                 {{ucwords($data->anak->nama)}}
             </li>
@@ -40,7 +40,7 @@
                                         </div>
                                     </div>
                                     <!-- <div class="border border-light m-1 h-75"> -->
-                                        <div class="border border-light h-75 w-100 text-center" style="line-height: 0;">
+                                        <div class="border border-light h-100 w-100 text-center" style="line-height: 0;">
                                             @include('dokter.pemeriksaanData.odontogram')
                                         </div>
                                         <div class="form-check mt-2">
@@ -139,7 +139,7 @@
                         <h2>Hasil Pemeriksaan</h2>
                         <section>
                             <div class="row mb-3">
-                                <label for="diagnosa" class="col-sm-2 col-form-label">Resiko Karies</label>
+                                <label for="diagnosa" class="col-sm-2 col-form-label">Diagnosa</label>
                                 <div class="col-sm-10">
                                     <textarea name="diagnosa" class="form-control w-100" id="" rows="2"></textarea>
                                 </div>

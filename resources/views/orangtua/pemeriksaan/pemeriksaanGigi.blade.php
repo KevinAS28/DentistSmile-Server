@@ -88,33 +88,33 @@
 
                     <div class="">
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Gambar1</label>
+                            <label for="exampleInputPassword1" class="form-label">Foto gigi dari sisi depan</label>
                             <input type="file"  class="form-control dropify" name="gambar1" placeholder="masukkan gambar">
                             @error('gambar1')
                             <div class="badge bg-danger mt-2 ">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Gambar2</label>
+                            <label for="exampleInputPassword1" class="form-label">Foto gigi dari sisi kanan</label>
                             <input type="file" class="form-control dropify"  name="gambar2" placeholder="masukkan gambar">
                             @error('gambar2')
                             <div class="badge bg-danger mt-2 ">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Gambar3</label>
+                            <label for="exampleInputPassword1" class="form-label">Foto gigi dari sisi kiri</label>
                             <input type="file" class="form-control dropify" name="gambar3" placeholder="masukkan gambar">
                             @error('gambar3')
                             <div class="badge bg-danger mt-2 ">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Gambar4</label>
+                            <label for="exampleInputPassword1" class="form-label">Foto gigi dari sisi atas</label>
                             <input type="file" class="form-control dropify" name="gambar4" placeholder="masukkan gambar">
                         </div>
 
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Gambar5</label>
+                            <label for="exampleInputPassword1" class="form-label">Foto gigi dari sisi bawah</label>
                             <input type="file" class="form-control dropify" name="gambar5" placeholder="masukkan gambar">
                         </div>
 
@@ -127,13 +127,26 @@
                 <h6 class="card-title">Pemeriksaan Karies</h6>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Frekuensi menyikat gigi </label>
-                        <input type="text" min="0" class="form-control" name="gsoal1" autocomplete="off"
-                            placeholder="soal 1" value="">
+                        <select class=" form-select" name="gsoal1" id="frekuensi"  data-width="100%">
+                            <option selected disabled>Pilih salah satu</option>
+                            <option>1 kali saat mandi </option>
+                            <option>2 kali saat mandi </option>
+                            <option>lebih dari 2 kali (saat mandi, setelah sarapan, dan sebelum tidur)</option>
+
+                        </select>
+                        
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Kunjungan ke dokter gigi</label>
-                        <input type="text" min="0" class="form-control" name="gsoal2" autocomplete="off"
-                            placeholder="soal " value="">
+
+                        <select class=" form-select" name="gsoal2" id="kunjungan"  data-width="100%">
+                            <option selected disabled>Pilih salah satu </option>
+                            <option>6 bulan sekali  </option>
+                            <option>12 bulan sekali </option>
+                            <option>Saat sakit gigi saja </option>
+                            <option>Tidak pernah</option>
+
+                        </select>
                     </div>
                     <div id="form-karies">
                     @include('orangtua.pemeriksaan.resikoKaries')
@@ -201,6 +214,15 @@
             placeholder: 'Pilih posyandu',
 
         });
+        $('#frekuensi').select2({
+            placeholder: 'Pilih salah satu',
+
+        });
+        $('#kunjungan').select2({
+            placeholder: 'Pilih salah satu',
+
+        });
+        
 
 
         $('#id_desa').change(function () {

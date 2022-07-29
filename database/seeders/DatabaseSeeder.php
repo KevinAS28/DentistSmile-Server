@@ -25,18 +25,7 @@ class DatabaseSeeder extends Seeder
             'password'  =>  bcrypt('admin1234'),
             
         ]);
-        $dokter = User::create([
-            'email'     => 'dokter@dokter.com',
-            'password'  =>  bcrypt('dokter1234'),
-            'role'      => 'dokter',
-            
-        ]);
-        $ortu = User::create([
-            'email'     => 'ortu@ortu.com',
-            'password'  =>  bcrypt('ortu1234'),
-            'role'      => 'orangtua',
-            
-        ]);
+
         // $kecamatan = Kecamatan::create([
         //     'nama'     => 'Tambun',
             

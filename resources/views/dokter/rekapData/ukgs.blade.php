@@ -3,13 +3,10 @@
 @section('content')
 
 
-
-
-
 <div class="container-fluid">
-    <nav class="page-breadcrumb">
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Rekap Data Pasien</a></li>
+            <li class="breadcrumb-item"><a href="#">Pemeriksaan Gigi</a></li>
             <li class="breadcrumb-item active" aria-current="page">UKGS</li>
         </ol>
     </nav>
@@ -18,8 +15,8 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-            <h6 class="card-title">REKAP DATA PER WILAYAH</h6>
-            <p class="text-muted mb-3">Masukkan wilayah yang ingin ditampilkan datanya</p>
+                <h6 class="mb-1">DATA PASIEN PER WILAYAH</h6>
+                <span class="h9 text-facebook">Masukan wilayah yang ingin ditampilkan datanya</span>
                 
                 <form class="forms-sample mt-3">
                 
@@ -73,18 +70,21 @@
                     <table id="table-ukgs" class="table" style="width:100%">
                         <thead>
                             <tr>
+                             
                                 <th hidden>id</th>
-                                <th>#</th>
-                                <th>NAMA</th>
+                                <th>No</th>
+                                <th>Tanggal Skrinning</th>
+                                <th>Waktu Skrinning</th>
+                                <th>Nama </th>
                                 <th>JENIS KELAMIN</th>
-                                <th>NAMA SEKOLAH</th>
-                                <th>KELAS</th>
-                                <th>STATUS SKRINING</th>
-                                <th>AKSI</th>
+                                <th>Kelas</th>
+                                <th>Sekolah</th>
+                                <th>Action</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                         </tbody>
                     </table>
                 </div>
@@ -176,10 +176,12 @@ $(document).ready(function() {
             var tableData;
             function load_data(id_kelas = '') {
             tableData = $('#table-ukgs').DataTable({
+                
                 "oLanguage": {
                     "sEmptyTable": "Silahkan pilih sekolah dan kelas terlebih dahulu",
                     "zeroRecords": "Data tidak ditemukan",
                 },
+                
                 processing: true,
                 serverSide: true,
 
@@ -192,10 +194,11 @@ $(document).ready(function() {
                 },
                 "searching": true,
                 "bPaginate": true,
+               
                 serverSide: true,
                 stateSave: true,
                 ajax: {
-                    url: "{{ url('list-anakdokter-rekap') }}",
+                    url: "{{ url('list-anakdokter') }}",
                     type: "GET",
                     data: {
                         id_kelas: id_kelas,
@@ -206,18 +209,31 @@ $(document).ready(function() {
                 columns: [{
                         data: 'id',
                         name: 'id',
-                        visible: false
+                        visible: false,
+                       
                     },
                     {
                         data:'DT_RowIndex',
                         name:'DT_RowIndex',
                         visible: true,
+                        orderable: false, searchable: false 
                     },
  
                     {
+                        data: 'tanggal',
+                        name: 'tanggal',
+                        visible: true
+                    },
+                    {
+                        data: 'waktu',
+                        name: 'waktu',
+                        visible: true
+                    },
+                    {
                         data: 'nama',
                         name: 'nama',
-                        visible: true
+                        visible: true,
+                        searchable: true
                     },
                     {
                         data: 'jenis_kelamin',
@@ -225,18 +241,13 @@ $(document).ready(function() {
                         visible: true
                     },
                     {
-                        data: 'sekolah',
-                        name: 'sekolah',
-                        visible: true
-                    },
-                    {
                         data: 'kelas',
-                        name: 'kelas',
+                        name:'kelas',
                         visible: true
                     },
                     {
-                        data: 'skrining',
-                        name:'skrining',
+                        data: 'sekolah',
+                        name:'sekolah',
                         visible: true
                     },
                     {

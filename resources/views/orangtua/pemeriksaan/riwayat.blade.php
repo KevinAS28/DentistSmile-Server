@@ -59,6 +59,7 @@
                                 <th>Tanggal</th>
                                 <th>Waktu</th>
                                 <th>Hasil Pemeriksaan</th>
+                                
 
                             </tr>
                         </thead>
@@ -110,7 +111,8 @@
                                 <th style="width: 1px;">no</th>
                                 <th>Tanggal</th>
                                 <th>Waktu</th>
-                                <th>Gambar </th>
+                                <th style="width:30%">Gambar </th>
+                                <th>Diagnosa</th>
 
                             </tr>
                         </thead>
@@ -417,6 +419,11 @@
                         name: 'gambar',
                         visible: true
 
+                    },
+                    {
+                        data:'diagnosa',
+                        name:'diagnosa',
+                        visible:true
                     }
 
 

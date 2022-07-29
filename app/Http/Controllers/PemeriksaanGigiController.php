@@ -140,7 +140,14 @@ class PemeriksaanGigiController extends Controller
         $rk->rksoal13=$request->rksoal13;
         $rk->save();
         }
-        $kecamatan = $pgigi->sekolah->kelurahan->kecamatan->id;
+        
+        if($request->kelas){
+            $kecamatan = $pgigi->kelas->sekolah->kelurahan->kecamatan->id;
+        }else{
+            $kecamatan = $pgigi->sekolah->kelurahan->kecamatan->id;
+        }
+        
+        
         $dokter = User::whereHas('dokter',function($query) use($kecamatan){
             $query->where('id_kecamatan',$kecamatan);
         })->get();

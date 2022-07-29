@@ -350,7 +350,17 @@ class PemeriksaanFisikController extends Controller
                 
                 return $gambar;
             })
-            ->rawColumns(['gambar'])
+            ->addColumn('diagnosa',function($pemeriksaanGigi){
+                $diagnosa = '';
+                if(!empty($pemeriksaanGigi->skriningIndeks)){
+                    $diagnosa .= '<span class="badge bg-success">'.$pemeriksaanGigi->skriningIndeks->diagnosa.'</span>';
+                }else{
+                    $diagnosa .= '<span class="badge bg-danger">Menunggu hasil dari dokter</span>';
+                }
+                return $diagnosa;
+            })
+            
+            ->rawColumns(['gambar','diagnosa'])
             ->addIndexColumn()
             ->make(true);
         
