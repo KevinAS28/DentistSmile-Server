@@ -31,5 +31,8 @@ class Orangtua extends Model
     public function kelas(){
         return $this->belongsTo('App\Models\Kelas', 'id_kelas');
     }
+    public function anak(){
+        return $this->hasMany('App\Models\Anak', 'id_orangtua');
+    }
     
 }

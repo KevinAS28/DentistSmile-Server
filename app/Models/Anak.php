@@ -13,7 +13,7 @@ class Anak extends Model
 
     protected $table = 'anak';
     protected $guarded = ['created_at', 'updated_at'];
-
+    protected $dates = ['tanggal_lahir'];
 
     public function orangtua(){
         return $this->belongsTo('App\Models\Orangtua', 'id_orangtua');
