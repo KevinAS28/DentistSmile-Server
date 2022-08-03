@@ -184,13 +184,20 @@
             $('#row-data-anak').find('td').eq(1).html(jk);
             $('#row-data-anak').find('td').eq(2).html(ttl);
             $('#row-data-anak').find('td').eq(3).html(age + ' Tahun');
-            // chartTB(urlChart,idAnak);
-            chart.update({ background: true })
+            chartTB.update({ url: urlChart+"?type=tb&id_anak=" + idAnak });
+            chartBB.update({ url: urlChart+"?type=bb&id_anak=" + idAnak });
         });
 
-        const chart = new Chartisan({
+        const chartTB = new Chartisan({
             el: '#chart-tb',
-            url: urlChart+"?id_anak=" + idAnak,
+            url: urlChart+"?type=tb&id_anak=" + idAnak,
+            hooks: new ChartisanHooks()
+            .datasets([{ type: 'line', fill: false }]),
+        });
+        
+        const chartBB = new Chartisan({
+            el: '#chart-bb',
+            url: urlChart+"?type=bb&id_anak=" + idAnak,
             hooks: new ChartisanHooks()
             .datasets([{ type: 'line', fill: false }]),
         });  

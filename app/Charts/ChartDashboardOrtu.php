@@ -21,12 +21,20 @@ class ChartDashboardOrtu extends BaseChart
         $data = PemeriksaanFisik::select('tinggi_badan','berat_badan','waktu_pemeriksaan')->where('id_anak', $request->id_anak)->get();
         $arrayLabel = [];
         $arrayData = [];
-        foreach ($data as $key => $value) {
-            $arrayLabel[] = \Carbon\Carbon::parse($value->waktu_pemeriksaan)->format('j M Y');
-            $arrayData[] = $value->tinggi_badan;
+        if ($request->type == 'tb') {
+            foreach ($data as $key => $value) {
+                $arrayLabel[] = \Carbon\Carbon::parse($value->waktu_pemeriksaan)->format('j M Y');
+                $arrayData[] = $value->tinggi_badan;
+            }        
+        } elseif ($request->type == 'bb') {
+            foreach ($data as $key => $value) {
+                $arrayLabel[] = \Carbon\Carbon::parse($value->waktu_pemeriksaan)->format('j M Y');
+                $arrayData[] = $value->berat_badan;
+            }                
         }
+
         return Chartisan::build()
             ->labels($arrayLabel)
-            ->dataset('TB', $arrayData);
+            ->dataset(strtoupper($request->type), $arrayData);
     }
 }
