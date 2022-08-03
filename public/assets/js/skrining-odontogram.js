@@ -48,7 +48,17 @@ $(document).ready(function(){
                     color = 'grey';
                     arrayAksi['karies'].push(odontogramId);
                     filled = true;
-                    $(".skor-d").val(arrayAksi['karies'].length);
+                    let d = 0, D = 0;
+                    let check = parseInt(odontogramParent.replace('p',''))
+                    if (55 <= check && check <= 85) {
+                        d++;
+                        let skor = parseInt($(".skor-d").val());
+                        $(".skor-d").val(skor+d);
+                    } else if (11 <= check && check <= 48) {
+                        D++;
+                        let skor = parseInt($(".skor-D").val());
+                        $(".skor-D").val(skor+D);
+                    }
                 }
                 break;
             case 'non-vital':
@@ -65,8 +75,17 @@ $(document).ready(function(){
                     color = 'pink';
                     arrayAksi['tambalan-logam'].push(odontogramId);
                     filled = true;
-                    let jml = arrayAksi['tambalan-logam'].length + arrayAksi['tambalan-non-logam'].length + arrayAksi['mahkota-logam'].length + arrayAksi['mahkota-non-logam'].length;
-                    $(".skor-f").val(jml);
+                    let d = 0, D = 0;
+                    let check = parseInt(odontogramParent.replace('p',''))
+                    if (55 <= check && check <= 85) {
+                        d++;
+                        let skor = parseInt($(".skor-f").val());
+                        $(".skor-f").val(skor+d);
+                    } else if (11 <= check && check <= 48) {
+                        D++;
+                        let skor = parseInt($(".skor-F").val());
+                        $(".skor-F").val(skor+D);
+                    }
                 }
                 break;
             case 'tambalan-non-logam':
@@ -74,8 +93,17 @@ $(document).ready(function(){
                     color = 'blue';
                     arrayAksi['tambalan-non-logam'].push(odontogramId)
                     filled = true;
-                    let jml = arrayAksi['tambalan-logam'].length + arrayAksi['tambalan-non-logam'].length + arrayAksi['mahkota-logam'].length + arrayAksi['mahkota-non-logam'].length;
-                    $(".skor-f").val(jml);
+                    let d = 0, D = 0;
+                    let check = parseInt(odontogramParent.replace('p',''))
+                    if (55 <= check && check <= 85) {
+                        d++;
+                        let skor = parseInt($(".skor-f").val());
+                        $(".skor-f").val(skor+d);
+                    } else if (11 <= check && check <= 48) {
+                        D++;
+                        let skor = parseInt($(".skor-F").val());
+                        $(".skor-F").val(skor+D);
+                    }
                 }
                 break;
             case 'mahkota-logam':
@@ -83,8 +111,17 @@ $(document).ready(function(){
                     color = 'green';
                     arrayAksi['mahkota-logam'].push(odontogramId);
                     filled = true;
-                    let jml = arrayAksi['tambalan-logam'].length + arrayAksi['tambalan-non-logam'].length + arrayAksi['mahkota-logam'].length + arrayAksi['mahkota-non-logam'].length;
-                    $(".skor-f").val(jml);
+                    let d = 0, D = 0;
+                    let check = parseInt(odontogramParent.replace('p',''))
+                    if (55 <= check && check <= 85) {
+                        d++;
+                        let skor = parseInt($(".skor-f").val());
+                        $(".skor-f").val(skor+d);
+                    } else if (11 <= check && check <= 48) {
+                        D++;
+                        let skor = parseInt($(".skor-F").val());
+                        $(".skor-F").val(skor+D);
+                    }
                 }
                 break;
             case 'mahkota-non-logam':
@@ -92,8 +129,17 @@ $(document).ready(function(){
                     color = '#66D1D1';
                     arrayAksi['mahkota-non-logam'].push(odontogramId);
                     filled = true;
-                    let jml = arrayAksi['tambalan-logam'].length + arrayAksi['tambalan-non-logam'].length + arrayAksi['mahkota-logam'].length + arrayAksi['mahkota-non-logam'].length;
-                    $(".skor-f").val(jml);
+                    let d = 0, D = 0;
+                    let check = parseInt(odontogramParent.replace('p',''))
+                    if (55 <= check && check <= 85) {
+                        d++;
+                        let skor = parseInt($(".skor-f").val());
+                        $(".skor-f").val(skor+d);
+                    } else if (11 <= check && check <= 48) {
+                        D++;
+                        let skor = parseInt($(".skor-F").val());
+                        $(".skor-F").val(skor+D);
+                    }
                 }
                 break;
             case 'sisa-akar':
@@ -104,8 +150,17 @@ $(document).ready(function(){
                     style = 'font-size: 15pt;font-weight:bold;cursor:default';
                     element = 'V'
                     arrayAksi['sisa-akar'].push(odontogramParent);
-                    let jml = arrayAksi['gigi-hilang'].length + arrayAksi['sisa-akar'].length;
-                    $(".skor-e").val(jml);
+                    let d = 0, D = 0;
+                    let check = parseInt(odontogramParent.replace('p',''))
+                    if (55 <= check && check <= 85) {
+                        d++;
+                        let skor = parseInt($(".skor-e").val());
+                        $(".skor-e").val(skor+d);
+                    } else if (11 <= check && check <= 48) {
+                        D++;
+                        let skor = parseInt($(".skor-M").val());
+                        $(".skor-M").val(skor+D);
+                    }
                     filled = true;
                 }
                 break;
@@ -117,8 +172,17 @@ $(document).ready(function(){
                     style = 'font-size: 15pt;font-weight:bold;cursor:default';
                     element = 'X'
                     arrayAksi['gigi-hilang'].push(odontogramParent);
-                    let jml = arrayAksi['gigi-hilang'].length + arrayAksi['sisa-akar'].length;
-                    $(".skor-e").val(jml);
+                    let d = 0, D = 0;
+                    let check = parseInt(odontogramParent.replace('p',''))
+                    if (55 <= check && check <= 85) {
+                        d++;
+                        let skor = parseInt($(".skor-e").val());
+                        $(".skor-e").val(skor+d);
+                    } else if (11 <= check && check <= 48) {
+                        D++;
+                        let skor = parseInt($(".skor-M").val());
+                        $(".skor-M").val(skor+D);
+                    }
                     filled = true;
                 }
                 break;
@@ -185,8 +249,9 @@ $(document).ready(function(){
                 $("#keterangan").find("input[id='h-"+index+"']").val(value.toString());
                 $("#keterangan").find("input[id='field-"+index+"']").parent().find('span').text(value.toString().toUpperCase());
             });
-            let total_skor = arrayAksi['gigi-hilang'].length + arrayAksi['sisa-akar'].length + arrayAksi['karies'].length + arrayAksi['tambalan-logam'].length + arrayAksi['tambalan-non-logam'].length + arrayAksi['mahkota-logam'].length + arrayAksi['mahkota-non-logam'].length;
-            $(".total-skor").val(total_skor);
+            // let total_skor = arrayAksi['gigi-hilang'].length + arrayAksi['sisa-akar'].length + arrayAksi['karies'].length + arrayAksi['tambalan-logam'].length + arrayAksi['tambalan-non-logam'].length + arrayAksi['mahkota-logam'].length + arrayAksi['mahkota-non-logam'].length;
+            $("input[name='def_t']").val(parseInt($(".skor-d").val()) + parseInt($(".skor-e").val()) + parseInt($(".skor-f").val()));
+            $("input[name='dmf_t']").val(parseInt($(".skor-D").val()) + parseInt($(".skor-M").val()) + parseInt($(".skor-F").val()));
             filled = false;
         }
     });

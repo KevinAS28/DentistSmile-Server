@@ -125,7 +125,7 @@
                 <div class="card-body">
                     <h6 class="card-title">Grafik Tinggi Badan Anak</h6>
                     <div class="flot-chart-wrapper">
-                        <div class="flot-chart" id="flotLine"></div>
+                    <div class="flot-chart" id="chart-bb"></div>
                     </div>
                 </div>
             </div>
@@ -169,11 +169,12 @@
 <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
 <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
 <script>
-    var idAnak, urlChart = "@chart('chart_dashboard_ortu')", counter = 0;
+    var idAnak = null, urlChart = "@chart('chart_dashboard_ortu')", counter = 0;
     $(document).ready(function() {
         $('#pilih-anak').select2({
             placeholder: 'Pilih anak',
         });
+        
         $('#pilih-anak').on('change', function() {
             idAnak = $(this).val();
             var ttl = $(this).find(':selected').data('t') + ', ' + $(this).find(':selected').data('tl');
@@ -183,8 +184,16 @@
             $('#row-data-anak').find('td').eq(1).html(jk);
             $('#row-data-anak').find('td').eq(2).html(ttl);
             $('#row-data-anak').find('td').eq(3).html(age + ' Tahun');
-            chartTB(urlChart,idAnak);
+            // chartTB(urlChart,idAnak);
+            chart.update({ background: true })
         });
+
+        const chart = new Chartisan({
+            el: '#chart-tb',
+            url: urlChart+"?id_anak=" + idAnak,
+            hooks: new ChartisanHooks()
+            .datasets([{ type: 'line', fill: false }]),
+        });  
     });
 </script>
 <script src="{{asset('assets/js/chart-growth.js')}}"></script>
