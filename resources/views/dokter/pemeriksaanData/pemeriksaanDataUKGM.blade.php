@@ -108,19 +108,19 @@
                                             </div>
                                         <h6 class="card-title">SKOR DMF-T</h6>
                                             <div class="row mb-3">
-                                                <label for="d" class="col-sm-1 col-form-label">d</label>
+                                                <label for="d" class="col-sm-1 col-form-label">D</label>
                                                 <div class="col-sm-2">
-                                                    <input type="number" name="dmf_d" class="form-control skor-d"
+                                                    <input type="number" name="dmf_d" class="form-control skor-D"
                                                         value="{{@$data->skriningIndeks->dmf_d ?: 0}}" min="0">
                                                 </div>
-                                                <label for="m" class="col-sm-1 col-form-label">e</label>
+                                                <label for="m" class="col-sm-1 col-form-label">M</label>
                                                 <div class="col-sm-2">
-                                                    <input type="number" name="dmf_e" class="form-control skor-e"
+                                                    <input type="number" name="dmf_e" class="form-control skor-M"
                                                         value="{{@$data->skriningIndeks->dmf_e ?: 0}}" min="0">
                                                 </div>
-                                                <label for="f" class="col-sm-1 col-form-label">f</label>
+                                                <label for="f" class="col-sm-1 col-form-label">F</label>
                                                 <div class="col-sm-2">
-                                                    <input type="number" name="dmf_f" class="form-control skor-f"
+                                                    <input type="number" name="dmf_f" class="form-control skor-F"
                                                         value="{{@$data->skriningIndeks->dmf_f ?: 0}}" min="0">
                                                 </div>
                                             </div>

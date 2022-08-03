@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Orangtua;
 use App\Models\Anak;
 use App\Models\Kelurahan;
+use App\Models\PemeriksaanFisik;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -269,8 +270,8 @@ class OrangtuaController extends Controller
         ->rawColumns(['action'])->addIndexColumn()->make(true);
     }
 
-    public function viewDashboard(){
-        $user=User::find(Auth::user()->id);
+    public function viewDashboard(Request $request){
+        $user = Orangtua::with('anak')->where('id_users', Auth::user()->id)->first();
         return view('orangtua.dashboard.dashboard',compact('user'));
     }
 

@@ -103,6 +103,7 @@ License: For each use you must have a valid license purchased only from above li
     <!-- Plugin js for this page -->
     <script src="{{asset('assets/vendors/chartjs/Chart.min.js')}}"></script>
     <script src="{{asset('assets/vendors/jquery.flot/jquery.flot.js')}}"></script>
+    <script src="{{asset('assets/vendors/jquery.flot/jquery.flot.time.js')}}"></script>
     <script src="{{asset('assets/vendors/jquery.flot/jquery.flot.resize.js')}}"></script>
     <script src="{{asset('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
     <script src="{{asset('assets/vendors/apexcharts/apexcharts.min.js')}}"></script>
@@ -131,9 +132,6 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{asset('assets/js/dashboard-light.js')}}"></script>
     <script src="{{asset('assets/js/datepicker.js')}}"></script>
     <!-- Grafik -->
-    <script src="{{asset('assets/vendors/jquery.flot/jquery.flot.pie.js')}}"></script>
-    <script src="{{asset('assets/vendors/jquery.flot/jquery.flot.categories.js')}}"></script>
-    <script src="{{asset('assets/js/jquery.flot-light.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net/jquery.dataTables.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
     @stack('after-style')
