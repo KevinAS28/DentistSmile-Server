@@ -3,19 +3,18 @@
 ###############################################################################
 version: '3.1'
 services:
-    mysql:
-        image: 'mysql:8.0'
+    mariadb:
+        image: 'mariadb:10.6'
         working_dir: /application
         volumes:
-            - './mysql-data:/var/lib/mysql/data'
             - '.:/application'
         environment:
-            - MYSQL_ROOT_PASSWORD=password
-            - MYSQL_DATABASE=db_sim_gigi
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=db-sim-gigi
             - MYSQL_USER=admin-sim-gigi
             - MYSQL_PASSWORD=pass-sim-gigi
         ports:
-            - '8086:3306'
+            - '8087:3306'
 
     webserver:
         image: 'nginx:alpine'
