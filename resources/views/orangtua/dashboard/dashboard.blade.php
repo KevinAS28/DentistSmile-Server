@@ -123,7 +123,7 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Grafik Tinggi Badan Anak</h6>
+                    <h6 class="card-title">Grafik Berat Badan Anak</h6>
                     <div class="flot-chart-wrapper">
                         <canvas id="chart-bb"></canvas>
                     </div>
