@@ -111,7 +111,7 @@
                                 <th style="width: 1px;">no</th>
                                 <th>Tanggal</th>
                                 <th>Waktu</th>
-                                <th style="width:30%">Gambar </th>
+                                <th style="width:50%">Gambar </th>
                                 <th>Diagnosa</th>
 
                             </tr>

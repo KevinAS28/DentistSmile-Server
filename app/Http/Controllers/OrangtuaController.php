@@ -274,6 +274,8 @@ class OrangtuaController extends Controller
 
     public function viewDashboard(Request $request){
         $user = Orangtua::with('anak')->where('id_users', Auth::user()->id)->first();
+        $artikel = Artikel::All();
+        $video = Video::All();
         if ($request->ajax()) {
             $data = PemeriksaanFisik::select('tinggi_badan','berat_badan','waktu_pemeriksaan')->where('id_anak', $request->id)->get();
             $arrayLabel = [];
@@ -295,7 +297,7 @@ class OrangtuaController extends Controller
                 'data' => $arrayData,
             ]);
         }
-        return view('orangtua.dashboard.dashboard',compact('user'));
+        return view('orangtua.dashboard.dashboard',compact('user','artikel','video'));
     }
 
     // function untuk menampilkan data anak di halaman orangtua
