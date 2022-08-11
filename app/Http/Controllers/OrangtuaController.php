@@ -34,7 +34,7 @@ class OrangtuaController extends Controller
             $btn = '<div class="btn-group btn-group-sm">';
             $btn .= '<a href="'.route('orangtua.edit',$row->id).'" type="button" id="btn-edit" class="btn btn-warning btn-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
             $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="fa fa-trash " ></i></button>';
-            
+
             $btn .= '</div>';
             return $btn;
         })->addColumn('email',function($row){
@@ -88,7 +88,7 @@ class OrangtuaController extends Controller
                 $orangtua->save();
                 return redirect('/');
             }
-            
+
         }
     }
 
@@ -129,24 +129,24 @@ class OrangtuaController extends Controller
             $orangtua = orangtua::find($id);
             if(!empty($request->password)){
                 $user = User::where('id', $orangtua->id_users)->update([
-            
+
                     'email' => $request->email,
-                    
+
                     'password' => bcrypt($request->password),
                     'role' => "orangtua"
                 ]);
             }else{
                 $user = User::where('id', $orangtua->id_users)->update([
-            
+
                     'email' => $request->email,
-                    
+
                     'role' => "orangtua"
                 ]);
             };
-           
-       
-        
-        
+
+
+
+
         if($user){
             $orangtua = $orangtua->update([
             'nama' => $request->nama,
@@ -158,7 +158,7 @@ class OrangtuaController extends Controller
             'pendidikan' => $request->pendidikan,
             ]);
             return redirect()->route('orangtua.index');
-            
+
         }
     }
 
@@ -188,7 +188,7 @@ class OrangtuaController extends Controller
     public function registerUser(Request $request)
     {
         $messages = [
-           
+
             'email.required' => 'Email wajib diisi.',
             'email.unique' => 'Email sudah terdaftar.',
             'password.unique'=>'Password wajib diisi',
@@ -207,20 +207,20 @@ class OrangtuaController extends Controller
             // 'tempat_lahir' => 'required',
             // 'tanggal_lahir' => 'required',
             // 'no_str' => 'required',
-           
+
         ], $messages);
         DB::beginTransaction();
         try{
 
-        
+
         $user = New User();
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->role ="orangtua";
-       
+
         $user->save();
-       
-        
+
+
             $orangtua = new Orangtua();
             $orangtua->id_users=$user->id;
             $orangtua->nama = $request->nama;
@@ -237,11 +237,11 @@ class OrangtuaController extends Controller
                 Storage::put('public/orangtua/' . $filename, File::get($file));
                $orangtua->foto=$filename;
            }
-            
-            
+
+
             $orangtua->save();
             DB::commit();
-           
+
             Auth::loginUsingId($user->id);
             return redirect('/');
         }catch(Exception $e){
@@ -249,7 +249,7 @@ class OrangtuaController extends Controller
             return redirect('/register')->with('error','Gagal menambahkan data');
         }
     }
-    
+
     // function untuk menampilkan data data anak berupa json untuk datatable dihalaman orangtua berdasarkan id orangtua ketika login
     public function dataAnak(){
         $user = Auth::user();
@@ -260,23 +260,42 @@ class OrangtuaController extends Controller
             $btn = '<div class="btn-group btn-group-sm">';
             $btn .= '<a href="'.route('orangtua-anak.edit',$row->id).'" class="btn btn-warning btn-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
             $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="fa fa-trash " ></i></button>';
-            
+
             $btn .= '</div>';
             return $btn;
         })
         ->addColumn('tanggal_lahir', function($row){
             return $tanggal = date('d-m-Y', strtotime($row->tanggal_lahir));
-             
+
          })
-        
+
         ->rawColumns(['action'])->addIndexColumn()->make(true);
     }
 
     public function viewDashboard(Request $request){
         $user = Orangtua::with('anak')->where('id_users', Auth::user()->id)->first();
-        $artikel = Artikel::All();
-        $video = Video::All();
-        return view('orangtua.dashboard.dashboard',compact('user','artikel','video'));
+        if ($request->ajax()) {
+            $data = PemeriksaanFisik::select('tinggi_badan','berat_badan','waktu_pemeriksaan')->where('id_anak', $request->id)->get();
+            $arrayLabel = [];
+            $arrayData = [];
+            if ($request->type == 'tb') {
+                foreach ($data as $key => $value) {
+                    $arrayLabel[] = \Carbon\Carbon::parse($value->waktu_pemeriksaan)->format('j M Y');
+                    $arrayData[] = $value->tinggi_badan;
+                }
+            } elseif ($request->type == 'bb') {
+                foreach ($data as $key => $value) {
+                    $arrayLabel[] = \Carbon\Carbon::parse($value->waktu_pemeriksaan)->format('j M Y');
+                    $arrayData[] = $value->berat_badan;
+                }
+            }
+            return response()->json([
+                'type' => $request->type,
+                'label' => $arrayLabel,
+                'data' => $arrayData,
+            ]);
+        }
+        return view('orangtua.dashboard.dashboard',compact('user'));
     }
 
     // function untuk menampilkan data anak di halaman orangtua
@@ -308,7 +327,7 @@ class OrangtuaController extends Controller
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'jenis_kelamin' => 'required'
-           
+
         ], $messages);
 
         $user = Auth::user();
@@ -320,7 +339,7 @@ class OrangtuaController extends Controller
         $anak->jenis_kelamin = $request->jenis_kelamin;
         $anak->tempat_lahir = $request->tempat_lahir;
         $anak->tanggal_lahir = $request->tanggal_lahir;
-        
+
 
         $anak->save();
         return redirect()->route('viewanak');
@@ -345,18 +364,18 @@ class OrangtuaController extends Controller
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'jenis_kelamin' => 'required'
-           
+
         ], $messages);
         $anak = Anak::find($id);
         $user = Auth::user();
         $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');
-        
+
         $anak->nama = $request->nama;
         $anak->jenis_kelamin=$request->jenis_kelamin;
         $anak->tempat_lahir=$request->tempat_lahir;
         $anak->tanggal_lahir=$request->tanggal_lahir;
 
-        
+
         $anak->save();
         return redirect()->route('viewanak')->with('error',$messages);
 
@@ -368,14 +387,14 @@ class OrangtuaController extends Controller
     }
 
     public function profil(){
-     
+
         $user=User::find(Auth::user()->id);
         return view('orangtua.profil.edit',compact('user'));
     }
 
     public function updateProfil(Request $request){
         $user=User::find(Auth::user()->id);
-        
+
         $user->profilorangtua->nama =$request->nama;
         $user->profilorangtua->tempat_lahir=$request->tempat_lahir;
         $user->profilorangtua->tanggal_lahir=$request->tanggal_lahir;
@@ -386,17 +405,17 @@ class OrangtuaController extends Controller
             $file = $request->file('foto');
             $extension = strtolower($file->getClientOriginalExtension());
             $filename = uniqid() . '.' . $extension;
-            Storage::delete('/public/orangtua/'.$user->profilorangtua->foto); 
+            Storage::delete('/public/orangtua/'.$user->profilorangtua->foto);
             Storage::put('public/orangtua/' . $filename, File::get($file));
             $user->profilorangtua->foto=$filename;
        }
-        
+
 
         $user->profilorangtua->save();
 
         return redirect()->route('viewanak');;
-        
+
     }
 
-    
+
 }

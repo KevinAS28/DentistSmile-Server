@@ -120,7 +120,7 @@
                 <div class="card-body">
                     <h6 class="card-title">Grafik Tinggi Badan Anak</h6>
                     <div class="flot-chart-wrapper">
-                        <div class="flot-chart" id="chart-tb"></div>
+                        <canvas id="chart-tb"></canvas>
                     </div>
                 </div>
             </div>
@@ -128,9 +128,9 @@
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h6 class="card-title">Grafik Tinggi Badan Anak</h6>
+                    <h6 class="card-title">Grafik Berat Badan Anak</h6>
                     <div class="flot-chart-wrapper">
-                        <div class="flot-chart" id="chart-bb"></div>
+                        <canvas id="chart-bb"></canvas>
                     </div>
                 </div>
             </div>
@@ -190,18 +190,18 @@
 
 @endsection
 @push('after-script')
-<script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
-<script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    var idAnak = null,
-        urlChart = "@chart('chart_dashboard_ortu')",
-        counter = 0;
-    $(document).ready(function () {
+    var idAnak = null;
+    $(document).ready(function() {
         $('#pilih-anak').select2({
             placeholder: 'Pilih anak',
         });
 
-        $('#pilih-anak').on('change', function () {
+        var chartTb = new Chart($('#chart-tb'), configChart('Tinggi Badan'));
+        var chartBb = new Chart($('#chart-bb'), configChart('Berat Badan'));
+
+        $('#pilih-anak').on('change', function() {
             idAnak = $(this).val();
             var ttl = $(this).find(':selected').data('t') + ', ' + $(this).find(':selected').data('tl');
             var jk = $(this).find(':selected').data('jk');
@@ -210,41 +210,54 @@
             $('#row-data-anak').find('td').eq(1).html(jk);
             $('#row-data-anak').find('td').eq(2).html(ttl);
             $('#row-data-anak').find('td').eq(3).html(age + ' Tahun');
-            chartTB.update({
-                url: urlChart + "?type=tb&id_anak=" + idAnak
-            });
-            chartBB.update({
-                url: urlChart + "?type=bb&id_anak=" + idAnak
-            });
+            chart(chartTb,'tb');
+            chart(chartBb,'bb');
         });
-
-        const chartTB = new Chartisan({
-            el: '#chart-tb',
-            url: urlChart + "?type=tb&id_anak=" + idAnak,
-            hooks: new ChartisanHooks()
-                .datasets([{
-                    type: 'line',
-                    fill: false
-                }]),
-        });
-
-        const chartBB = new Chartisan({
-            el: '#chart-bb',
-            url: urlChart + "?type=bb&id_anak=" + idAnak,
-            hooks: new ChartisanHooks()
-                .datasets([{
-                    type: 'line',
-                    fill: false
-                }]),
-        });
-
-        $('#modal-artikel').click(function(){
-            var artikel = $(this).find('')data();
-            console.log(artikel)
-            $('#modal-pdf').modal('show');
-        })
     });
+    function chart(model,type) {
+    $.ajax({
+            type: "GET",
+            url: "{{ route('viewDashboard.orangtua') }}"+"?type="+type+"&id="+idAnak,
+            success: function (response) {
+                if (response.type == 'tb') {
+                    var labels = response.label.map(function (e) {
+                        return e
+                    });
+                    var data = response.data.map(function (e) {
+                        return e
+                    });
+                    model.data.labels = labels;
+                    model.data.datasets[0].data = data;
+                    model.update();
+                } else if (response.type == 'bb') {
+                    var labels = response.label.map(function (e) {
+                        return e
+                    });
+                    var data = response.data.map(function (e) {
+                        return e
+                    });
+                    model.data.labels = labels;
+                    model.data.datasets[0].data = data;
+                    model.update();
+                }
+            },
+            error: function(xhr) {
+                console.log(xhr.responseJSON);
+            }
+        });
+    }
 
+    function configChart(type){
+        return config = {
+            type: 'line',
+            data: {
+                datasets: [{
+                    label: type,
+                    backgroundColor: 'rgba(75, 192, 192, 1)',
+
+                }]
+            }
+        };
+    }
 </script>
-<script src="{{asset('assets/js/chart-growth.js')}}"></script>
 @endpush
