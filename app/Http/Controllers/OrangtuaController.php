@@ -8,6 +8,8 @@ use App\Models\Orangtua;
 use App\Models\Anak;
 use App\Models\Kelurahan;
 use App\Models\PemeriksaanFisik;
+use App\Models\Artikel;
+use App\Models\Video;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;

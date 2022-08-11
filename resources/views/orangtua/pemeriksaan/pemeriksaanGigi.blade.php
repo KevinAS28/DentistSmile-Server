@@ -89,7 +89,7 @@
                     <div class="">
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Foto gigi dari sisi depan</label>
-                            <input type="file"  class="form-control dropify" name="gambar1" placeholder="masukkan gambar">
+                            <input type="file"  class="form-control dropify"  data-show-loader="true" data-allowed-file-extensions="jpg png jpeg svg"  name="gambar1" placeholder="masukkan gambar">
                             @error('gambar1')
                             <div class="badge bg-danger mt-2 ">{{ $message }}</div>
                             @enderror
@@ -174,7 +174,11 @@
         'default': 'Drag and drop a file here or click',
         'replace': 'Drag and drop or click to replace',
         'remove':  'Hapus',
-        'error':   'Ooops, something wrong happended.'
+        
+    },
+    error: {
+        
+        'imageFormat': 'Format yang diizinkan hanya jpg , jpeg, png , dan svg.'
     }
 });
         $('#data-sekolah').hide();

@@ -29,10 +29,15 @@
                                                 <h3><b>Selamat Datang, {{$user->nama}}</b></h3>
                                             </div>
                                             <div class="w-25">
-                                                <select name="anak" class="form-control" id="pilih-anak" data-width="100%">
+                                                <select name="anak" class="form-control" id="pilih-anak"
+                                                    data-width="100%">
                                                     <option selected disabled>Pilih Anak</option>
                                                     @foreach($user->anak as $anak)
-                                                    <option data-t="{{ucwords($anak->tempat_lahir)}}" data-tl="{{$anak->tanggal_lahir->translatedFormat('j F Y')}}" data-age="{{$anak->tanggal_lahir->diffInYears(\Carbon\Carbon::now())}}" data-jk="{{ucwords($anak->jenis_kelamin)}}" value="{{$anak->id}}">{{$anak->nama}}</option>
+                                                    <option data-t="{{ucwords($anak->tempat_lahir)}}"
+                                                        data-tl="{{$anak->tanggal_lahir->translatedFormat('j F Y')}}"
+                                                        data-age="{{$anak->tanggal_lahir->diffInYears(\Carbon\Carbon::now())}}"
+                                                        data-jk="{{ucwords($anak->jenis_kelamin)}}"
+                                                        value="{{$anak->id}}">{{$anak->nama}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -133,31 +138,52 @@
     </div>
 
     <div class="row flex-grow-1">
-        <div class="col-md-8 grid-margin stretch-card">
+        <div class="col-md-5 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline">
                         <h6 class="card-title">ARTIKEL REKOMENDASI</h6>
                     </div>
-                    <div class="row">
+                        <div class="row">
+                            @foreach ($artikel as $artikel)
+                        <div class="col-md-6">
+                            <img class ="img-fluid"  src="{{url('storage/artikel/'.$artikel->gambar)}}" alt="">
+                        </div>
+                        <div class="col-md-6">
+                            <p id="judul">{{$artikel->judul}}</p>
+                            <a class ="btn" id="modal-artikel">Baca Artikel</a>
+                        </div>
 
-                    </div>
+                            @endforeach
+                        </div>
+                    
                 </div>
             </div>
         </div>
-        <div class="col-md-4 grid-margin stretch-card">
+        <div class="col-md-7 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline">
                         <h6 class="card-title">VIDEO REKOMENDASI</h6>
                     </div>
                     <div class="row">
-
+                        @foreach($video as $video)
+                        <div class="col-md-7">
+                        <iframe class="" width="240" height="180"
+                        src="{{$video->link}}">
+                            </iframe>
+                        </div>
+                        <div class="col-md-4">
+                            <p>{{$video->judul}}</p>
+                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    @include('orangtua.dashboard.artikel')
 </div>
 
 
