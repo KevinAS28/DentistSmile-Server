@@ -30,9 +30,9 @@
                     <div class="p-1">
                         @if(Auth::user()->role == 'dokter')
                         @foreach($notifications as $i => $notification)
-                        @if($notification->data['pemeriksaan']['sekolah']['type'] == 'posyandu')
+                        @if(@$notification->data['pemeriksaan']['sekolah']['type'] == 'posyandu')
                         <a href="{{route('dokter.pemeriksaanDataUKGM',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 item-notification {{$i >= 1 ? 'd-none':'' }}">
-                        @elseif($notification->data['pemeriksaan']['sekolah']['type'] == 'sekolah')
+                        @elseif(@$notification->data['pemeriksaan']['sekolah']['type'] == 'sekolah')
                         <a href="{{route('dokter.pemeriksaanDataUKGS',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 item-notification {{$i >= 1 ? 'd-none':'' }}">
                         @endif
                             <div
@@ -44,7 +44,8 @@
                                 <p class="tx-12 text-muted">{{$notification->created_at->diffForHumans()}}</p>
                             </div>
                         </a>
-                        @endforeach @endif
+                        @endforeach 
+                        @endif
                     </div>
                     <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
                         <a type="button" id="btn-all-notification">Lihat Semua</a>
