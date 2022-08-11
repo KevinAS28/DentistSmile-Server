@@ -155,9 +155,16 @@
                                                             <select class="form-select" name="penilaian_risiko_karies"
                                                                 data-width="100%" placeholder="Pilih Resiko">
                                                                 <option selected disabled>Pilih Resiko</option>
-                                                                @foreach ($resiko as $item)
-                                                                <option value="{{strtolower($item)}}" {{strtolower($item) == @$data->resikoKaries->penilaian ? 'selected':''}}>{{$item}}</option>
-                                                                @endforeach
+                                                                <option value="rendah"  {{($data->resikoKaries->rksoal7=="ya"||$data->resikoKaries->rksoal8=="ya"||$data->resikoKaries->rksoal9=="ya")? 'selected':'' }}>Rendah</option>
+                                                                <option value="sedang"  {{($data->resikoKaries->rksoal5=="ya"||$data->resikoKaries->rksoal6=="ya"||$data->resikoKaries->rksoal13=="ya")? 'selected':'' }}>Sedang</option>
+                                                                <option value="tinggi" {{($data->resikoKaries->rksoal1=="ya"|| $data->resikoKaries->rksoal2=="ya" ||
+                                                                    $data->resikoKaries->rksoal3=="ya" || $data->resikoKaries->rksoal3=="ya" || $data->resikoKaries->rksoal4=="ya" ||$data->resikoKaries->rksoal10 ||$data->resikoKaries->rksoal11||$data->resikoKaries->rksoal12 )? 'selected':'' }}>Tinggi</option>
+                                                                
+                                                                <!-- @foreach ($resiko as $item)
+                                                                @if(@$data->resikoKaries->rksoal1=="ya")
+                                                                <option value="tinggi" {{strtolower($item) == @$data->resikoKaries->penilaian ? 'selected':''}}>{{$item}}</option>
+                                                                @endif
+                                                                @endforeach -->
                                                             </select>
                                                         </div>
 
@@ -179,16 +186,9 @@
                         <h2>Hasil Pemeriksaan</h2>
                         <section>
                             <div class="row mb-3">
-                                <label for="diagnosa" class="col-sm-2 col-form-label">Resiko Karies</label>
+                                <label for="diagnosa" class="col-sm-2 col-form-label">Diagnosa</label>
                                 <div class="col-sm-10">
-                                @php $resiko = ['Tinggi','Sedang','Rendah'] @endphp
-                                                            <select class="form-select" name="diagnosa"
-                                                                data-width="100%" placeholder="Pilih Resiko">
-                                                                <option selected disabled>Pilih Resiko</option>
-                                                                @foreach ($resiko as $item)
-                                                                <option value="{{strtolower($item)}}" {{strtolower($item) == @$data->skriningIndeks->diagnosa ? 'selected':''}}>{{$item}}</option>
-                                                                @endforeach
-                                                            </select>
+                                <textarea name="diagnosa" class="form-control w-100" id="" rows="2">{{@$data->skriningIndeks->diagnosa}}</textarea>
                                     
                                 </div>
                             </div>

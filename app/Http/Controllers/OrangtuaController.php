@@ -8,6 +8,8 @@ use App\Models\Orangtua;
 use App\Models\Anak;
 use App\Models\Kelurahan;
 use App\Models\PemeriksaanFisik;
+use App\Models\Artikel;
+use App\Models\Video;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -272,7 +274,9 @@ class OrangtuaController extends Controller
 
     public function viewDashboard(Request $request){
         $user = Orangtua::with('anak')->where('id_users', Auth::user()->id)->first();
-        return view('orangtua.dashboard.dashboard',compact('user'));
+        $artikel = Artikel::All();
+        $video = Video::All();
+        return view('orangtua.dashboard.dashboard',compact('user','artikel','video'));
     }
 
     // function untuk menampilkan data anak di halaman orangtua

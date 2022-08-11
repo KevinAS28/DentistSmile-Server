@@ -11,6 +11,9 @@ use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\PemeriksaanFisikController;
 use App\Http\Controllers\PemeriksaanGigiController;
 use App\Http\Controllers\PosyanduController;
+use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\VideoController;
+
 
 
 /*
@@ -49,6 +52,7 @@ Route::get('/list-sekolah/{id_kelurahan}', [App\Http\Controllers\SekolahControll
     ->name('list-anakdokter-rekap');
     Route::get('list-anak/{anak}', [App\Http\Controllers\PemeriksaanFisikController::class, 'listAnak'])
     ->name('list-anak');
+    
 // Route::post('/dokter',[DokterController::class,'store']);
 Route::get('/home',function(){
     return view('home');
@@ -63,6 +67,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('kelurahan', KelurahanController::class)->except('destroy');
     Route::resource('sekolah', SekolahController::class)->except('destroy');
     Route::resource('posyandu', PosyanduController::class)->except('destroy');
+    Route::resource('artikel', ArtikelController::class)->except('destroy');
+    Route::resource('video', VideoController::class)->except('destroy');
     Route::get('/dashboard',function(){return view('admin.dashboard.dashboard');
     });
     Route::get('/kelas/{id}',[App\Http\Controllers\SekolahController::class,'viewKelas'])->name('viewKelas');
@@ -101,8 +107,11 @@ Route::group(['prefix' => 'admin/table'], function () {
     Route::get('/data-pemeriksaan-telinga',[PemeriksaanFisikController::class,'riwayattelinga'])->name('riwayat-telinga');
     Route::get('/data-pemeriksaan-gigi',[PemeriksaanFisikController::class,'riwayatgigi'])->name('riwayat-gigi');
     Route::get('/data-posyandu',[PosyanduController::class, 'data'])->name('posyandu.table');
-
+    Route::get('/data-artikel',[ArtikelController::class,'data'])->name('artikel.table');
     Route::get('/data-kelas/{id}',[KelasController::class,'data'])->name('kelas.table');
+    Route::get('/data-video',[VideoController::class,'data'])->name('video.table');
+    
+    
 
     });
 Route::group(['prefix' => 'orangtua/table'], function () {
@@ -120,6 +129,8 @@ Route::group(['prefix' => 'delete'], function () {
   Route::get('sekolah/{id}', [SekolahController::class, 'destroy'])->name('sekolah.destroy');
   Route::get('/orangtua-anak/{id}',[OrangtuaController::Class,'deleteAnak'])->name('orangtua-anak.destroy');
   Route::get('/posyandu/{id}', [PosyanduController::class, 'destroy'])->name('posyandu.destroy');
+  Route::get('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
+  Route::get('/video/{id}', [VideoController::class, 'destroy'])->name('video.destroy');
 
 });
 
@@ -144,6 +155,11 @@ Route::group(['prefix' => 'dokter'], function () {
     Route::get('/rekap-ukgs/rekap-datail-ukgs/{id}',[DokterController::class, 'rekap_detail_ukgs_id'])->name('dokter.rekapDetailUKGSID');
     Route::get('/rekap-ukgm/rekap-data-ukgm',[DokterController::class, 'rekap_detail_ukgm'])->name('dokter.rekapDetailUKGM');
     });
+  });
+
+  Route::group(['middleware' => ['auth','ceklevel:dokter,admin']], function () {
+    Route::resource('artikel', ArtikelController::class)->except('destroy');
+    Route::resource('video', VideoController::class)->except('destroy');
   });
 
 

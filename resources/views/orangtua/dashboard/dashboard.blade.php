@@ -19,7 +19,7 @@
                                 <h3 class="mb-2">3,897</h3>
                             </div>
                         </div> -->
-                        
+
                         <table class="table table-borderless table-sm">
                             <thead>
                                 <tr style="color: black; line-height: 14px;">
@@ -29,10 +29,15 @@
                                                 <h3><b>Selamat Datang, {{$user->nama}}</b></h3>
                                             </div>
                                             <div class="w-25">
-                                                <select name="anak" class="form-control" id="pilih-anak" data-width="100%">
+                                                <select name="anak" class="form-control" id="pilih-anak"
+                                                    data-width="100%">
                                                     <option selected disabled>Pilih Anak</option>
                                                     @foreach($user->anak as $anak)
-                                                    <option data-t="{{ucwords($anak->tempat_lahir)}}" data-tl="{{$anak->tanggal_lahir->translatedFormat('j F Y')}}" data-age="{{$anak->tanggal_lahir->diffInYears(\Carbon\Carbon::now())}}" data-jk="{{ucwords($anak->jenis_kelamin)}}" value="{{$anak->id}}">{{$anak->nama}}</option>
+                                                    <option data-t="{{ucwords($anak->tempat_lahir)}}"
+                                                        data-tl="{{$anak->tanggal_lahir->translatedFormat('j F Y')}}"
+                                                        data-age="{{$anak->tanggal_lahir->diffInYears(\Carbon\Carbon::now())}}"
+                                                        data-jk="{{ucwords($anak->jenis_kelamin)}}"
+                                                        value="{{$anak->id}}">{{$anak->nama}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -40,7 +45,7 @@
                                     </td>
                                 </tr>
                             </thead>
-                            <tbody> 
+                            <tbody>
                                 <tr style="color: black; line-height: 5px; font-size:small">
                                     <td>Nama anak</td>
                                     <td>Jenis kelamin</td>
@@ -125,7 +130,7 @@
                 <div class="card-body">
                     <h6 class="card-title">Grafik Tinggi Badan Anak</h6>
                     <div class="flot-chart-wrapper">
-                    <div class="flot-chart" id="chart-bb"></div>
+                        <div class="flot-chart" id="chart-bb"></div>
                     </div>
                 </div>
             </div>
@@ -133,33 +138,52 @@
     </div>
 
     <div class="row flex-grow-1">
-        <div class="col-md-8 grid-margin stretch-card">
+        <div class="col-md-5 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline">
                         <h6 class="card-title">ARTIKEL REKOMENDASI</h6>
                     </div>
-                    <div class="row">
+                        <div class="row">
+                            @foreach ($artikel as $artikel)
+                        <div class="col-md-6">
+                            <img class ="img-fluid"  src="{{url('storage/artikel/'.$artikel->gambar)}}" alt="">
+                        </div>
+                        <div class="col-md-6">
+                            <p id="judul">{{$artikel->judul}}</p>
+                            <a class ="btn" id="modal-artikel">Baca Artikel</a>
+                        </div>
 
-                    </div>
+                            @endforeach
+                        </div>
+                    
                 </div>
             </div>
         </div>
-        <div class="col-md-4 grid-margin stretch-card">
+        <div class="col-md-7 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline">
                         <h6 class="card-title">VIDEO REKOMENDASI</h6>
                     </div>
                     <div class="row">
-
+                        @foreach($video as $video)
+                        <div class="col-md-7">
+                        <iframe class="" width="240" height="180"
+                        src="{{$video->link}}">
+                            </iframe>
+                        </div>
+                        <div class="col-md-4">
+                            <p>{{$video->judul}}</p>
+                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
 
+    @include('orangtua.dashboard.artikel')
 </div>
 
 
@@ -169,13 +193,15 @@
 <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
 <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
 <script>
-    var idAnak = null, urlChart = "@chart('chart_dashboard_ortu')", counter = 0;
-    $(document).ready(function() {
+    var idAnak = null,
+        urlChart = "@chart('chart_dashboard_ortu')",
+        counter = 0;
+    $(document).ready(function () {
         $('#pilih-anak').select2({
             placeholder: 'Pilih anak',
         });
-        
-        $('#pilih-anak').on('change', function() {
+
+        $('#pilih-anak').on('change', function () {
             idAnak = $(this).val();
             var ttl = $(this).find(':selected').data('t') + ', ' + $(this).find(':selected').data('tl');
             var jk = $(this).find(':selected').data('jk');
@@ -184,24 +210,41 @@
             $('#row-data-anak').find('td').eq(1).html(jk);
             $('#row-data-anak').find('td').eq(2).html(ttl);
             $('#row-data-anak').find('td').eq(3).html(age + ' Tahun');
-            chartTB.update({ url: urlChart+"?type=tb&id_anak=" + idAnak });
-            chartBB.update({ url: urlChart+"?type=bb&id_anak=" + idAnak });
+            chartTB.update({
+                url: urlChart + "?type=tb&id_anak=" + idAnak
+            });
+            chartBB.update({
+                url: urlChart + "?type=bb&id_anak=" + idAnak
+            });
         });
 
         const chartTB = new Chartisan({
             el: '#chart-tb',
-            url: urlChart+"?type=tb&id_anak=" + idAnak,
+            url: urlChart + "?type=tb&id_anak=" + idAnak,
             hooks: new ChartisanHooks()
-            .datasets([{ type: 'line', fill: false }]),
+                .datasets([{
+                    type: 'line',
+                    fill: false
+                }]),
         });
-        
+
         const chartBB = new Chartisan({
             el: '#chart-bb',
-            url: urlChart+"?type=bb&id_anak=" + idAnak,
+            url: urlChart + "?type=bb&id_anak=" + idAnak,
             hooks: new ChartisanHooks()
-            .datasets([{ type: 'line', fill: false }]),
-        });  
+                .datasets([{
+                    type: 'line',
+                    fill: false
+                }]),
+        });
+
+        $('#modal-artikel').click(function(){
+            var artikel = $(this).find('')data();
+            console.log(artikel)
+            $('#modal-pdf').modal('show');
+        })
     });
+
 </script>
 <script src="{{asset('assets/js/chart-growth.js')}}"></script>
 @endpush

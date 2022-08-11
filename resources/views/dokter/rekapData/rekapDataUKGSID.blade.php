@@ -579,7 +579,7 @@
                 <div class="col-md-3">
                     <h6>HASIL :</h6>
                     <button type="button" class="btn btn-success btn-lg mb-3"><b>
-                        BAIK
+                    {{!empty($pemeriksaanGigi->skriningIndeks->diagnosa)?$pemeriksaanGigi->skriningIndeks->diagnosa: ''}}
                     </b></button>
                     <h6>REKOMENDASI :</h6>
                     <p>
