@@ -154,6 +154,7 @@ Route::group(['prefix' => 'dokter'], function () {
     Route::get('/rekap-ukgs/rekap-datail-ukgs',[DokterController::class, 'rekap_detail_ukgs'])->name('dokter.rekapDetailUKGS');
     Route::get('/rekap-ukgs/rekap-datail-ukgs/{id}',[DokterController::class, 'rekap_detail_ukgs_id'])->name('dokter.rekapDetailUKGSID');
     Route::get('/rekap-ukgm/rekap-data-ukgm',[DokterController::class, 'rekap_detail_ukgm'])->name('dokter.rekapDetailUKGM');
+    Route::get('/hasil-gambar/{id}/{filename}',[DokterController::class, 'lihat_gambar'])->name('dokter.lihat_gambar');
     });
   });
 

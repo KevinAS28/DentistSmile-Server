@@ -37,6 +37,18 @@
                                             </div>
                                             @endfor
                                         </div>
+                                        <div class="w-100 mb-1 d-flex list-image-pemeriksaan">
+                                            @for($i=1; $i<=5; $i++)
+                                            @php $img = 'gambar'.$i;  @endphp
+                                            <div>
+                                                @if(!empty($data[$img]))
+                                                <img src='{{route("dokter.lihat_gambar",["id"=>$data->id,"filename"=>$data[$img]])}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
+                                                @else
+                                                <img src='{{@asset("assets/images/others/placeholder.jpg")}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
+                                                @endif
+                                            </div>
+                                            @endfor
+                                        </div>
                                     </div>
                                     <!-- <div class="border border-light m-1 h-75"> -->
 

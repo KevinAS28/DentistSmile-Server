@@ -23,6 +23,7 @@ use App\Models\PemeriksaanGigi;
 use App\Models\ResikoKaries;
 use Carbon\Carbon;
 use App\Models\Notification;
+use Illuminate\Support\Facades\Http;
 
 class DokterController extends Controller
 {
@@ -649,5 +650,13 @@ class DokterController extends Controller
 
     }
 
+    public function lihat_gambar($id,$filename){
+        $response = Http::withBasicAuth('senyumin', 'asekasekjosh');
+        $response = $response->get(config('app.ai_url').'/api/ai/senyumin', [
+            'id' => $id,
+            'fileName' => $filename
+        ]);
+        return $response;
+    }
 
 }

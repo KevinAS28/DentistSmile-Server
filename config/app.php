@@ -56,6 +56,8 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'ai_url' => env('ENDPOINT_AI', null),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

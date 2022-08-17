@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use Notification;
+use Illuminate\Support\Facades\Http;
 
 class PemeriksaanGigiController extends Controller
 {
@@ -64,90 +65,109 @@ class PemeriksaanGigiController extends Controller
         $validator = $request->validate([
             'gambar1' => 'required',
             'gambar2' => 'required',
-            'gambar3' => 'required'
+            // 'gambar3' => 'required'
 
 
         ], $messages);
-        $waktu_pemeriksaan = Carbon::now();
+        try {        
+            $waktu_pemeriksaan = Carbon::now();
+            $imageArray = array();
+            $pgigi = new PemeriksaanGigi();
+            $pgigi->id_anak = $request->anak;
+            $pgigi->id_sekolah= $request->id_sekolah ?: $request->id_posyandu;
+            $pgigi->id_kelas = $request->kelas;
+            $pgigi->waktu_pemeriksaan = $waktu_pemeriksaan;
+            if(!empty($request->gambar1)){
+                $file = $request->file('gambar1');
+                $extension = strtolower($file->getClientOriginalExtension());
+                $filename1 = uniqid() . '.' . $extension;
+                $imageArray[0] = ['gambar' => $file, 'filename' => $filename1];
 
-        $pgigi = new PemeriksaanGigi();
-        $pgigi->id_anak = $request->anak;
-        $pgigi->id_sekolah= $request->id_sekolah ?: $request->id_posyandu;
-        $pgigi->id_kelas = $request->kelas;
-        $pgigi->waktu_pemeriksaan = $waktu_pemeriksaan;
-        if(!empty($request->gambar1)){
-             $file = $request->file('gambar1');
-             $extension = strtolower($file->getClientOriginalExtension());
-             $filename1 = uniqid() . '.' . $extension;
+                Storage::put('public/gigi/' . $filename1, File::get($file));
+                $pgigi->gambar1=$filename1;
+            }
+            if(!empty($request->gambar2)){
+                $file = $request->file('gambar2');
+                $extension = strtolower($file->getClientOriginalExtension());
+                $filename2 = uniqid() . '.' . $extension;
+                $imageArray[1] = ['gambar' => $file, 'filename' => $filename2];
 
-            Storage::put('public/gigi/' . $filename1, File::get($file));
-            $pgigi->gambar1=$filename1;
-        }
-        if(!empty($request->gambar2)){
-            $file = $request->file('gambar2');
-            $extension = strtolower($file->getClientOriginalExtension());
-            $filename2 = uniqid() . '.' . $extension;
+                Storage::put('public/gigi/' . $filename2, File::get($file));
+                $pgigi->gambar2=$filename2;
+            }
+            if(!empty($request->gambar3)){
+                $file = $request->file('gambar3');
+                $extension = strtolower($file->getClientOriginalExtension());
+                $filename3 = uniqid() . '.' . $extension;
+                $imageArray[2] = ['gambar' => $file, 'filename' => $filename3];
 
-           Storage::put('public/gigi/' . $filename2, File::get($file));
-           $pgigi->gambar2=$filename2;
-       }
-       if(!empty($request->gambar3)){
-        $file = $request->file('gambar3');
-        $extension = strtolower($file->getClientOriginalExtension());
-        $filename3 = uniqid() . '.' . $extension;
+                Storage::put('public/gigi/' . $filename3, File::get($file));
+                $pgigi->gambar3=$filename3;
+            }
+            if(!empty($request->gambar4)){
+                $file = $request->file('gambar4');
+                $extension = strtolower($file->getClientOriginalExtension());
+                $filename4 = uniqid() . '.' . $extension;
+                $imageArray[3] = ['gambar' => $file, 'filename' => $filename4];
 
-       Storage::put('public/gigi/' . $filename3, File::get($file));
-       $pgigi->gambar3=$filename3;
-        }
-        if(!empty($request->gambar4)){
-            $file = $request->file('gambar4');
-            $extension = strtolower($file->getClientOriginalExtension());
-            $filename4 = uniqid() . '.' . $extension;
+                Storage::put('public/gigi/' . $filename4, File::get($file));
+                $pgigi->gambar4=$filename4;
+            }
+            if(!empty($request->gambar5)){
+                $file = $request->file('gambar5');
+                $extension = strtolower($file->getClientOriginalExtension());
+                $filename5 = uniqid() . '.' . $extension;
+                $imageArray[4] = ['gambar' => $file, 'filename' => $filename5];
 
-           Storage::put('public/gigi/' . $filename4, File::get($file));
-           $pgigi->gambar4=$filename4;
-        }
-        if(!empty($request->gambar5)){
-            $file = $request->file('gambar5');
-            $extension = strtolower($file->getClientOriginalExtension());
-            $filename5 = uniqid() . '.' . $extension;
+                Storage::put('public/gigi/' . $filename5, File::get($file));
+                $pgigi->gambar5=$filename5;
+            }
 
-           Storage::put('public/gigi/' . $filename5, File::get($file));
-           $pgigi->gambar5=$filename5;
-        }
+            $pgigi->gsoal1= $request->gsoal1;
+            $pgigi->gsoal2= $request->gsoal2;
 
-        $pgigi->gsoal1= $request->gsoal1;
-        $pgigi->gsoal2= $request->gsoal2;
+            $pgigi->save();
 
-        $pgigi->save();
-
-        // rk = resiko karies
-        if($pgigi->id_kelas==NULL){
-        $rk= new ResikoKaries();
-        $rk->id_pemeriksaan_gigi=$pgigi->id;
-        $rk->rksoal1=$request->rksoal1;
-        $rk->rksoal2=$request->rksoal2;
-        $rk->rksoal3=$request->rksoal3;
-        $rk->rksoal4=$request->rksoal4;
-        $rk->rksoal5=$request->rksoal5;
-        $rk->rksoal6=$request->rksoal6;
-        $rk->rksoal7=$request->rksoal7;
-        $rk->rksoal8=$request->rksoal8;
-        $rk->rksoal9=$request->rksoal9;
-        $rk->rksoal10=$request->rksoal10;
-        $rk->rksoal11=$request->rksoal11;
-        $rk->rksoal12=$request->rksoal12;
-        $rk->rksoal13=$request->rksoal13;
-        $rk->save();
-        }
+            // rk = resiko karies
+            if($pgigi->id_kelas==NULL){
+            $rk= new ResikoKaries();
+            $rk->id_pemeriksaan_gigi=$pgigi->id;
+            $rk->rksoal1=$request->rksoal1;
+            $rk->rksoal2=$request->rksoal2;
+            $rk->rksoal3=$request->rksoal3;
+            $rk->rksoal4=$request->rksoal4;
+            $rk->rksoal5=$request->rksoal5;
+            $rk->rksoal6=$request->rksoal6;
+            $rk->rksoal7=$request->rksoal7;
+            $rk->rksoal8=$request->rksoal8;
+            $rk->rksoal9=$request->rksoal9;
+            $rk->rksoal10=$request->rksoal10;
+            $rk->rksoal11=$request->rksoal11;
+            $rk->rksoal12=$request->rksoal12;
+            $rk->rksoal13=$request->rksoal13;
+            $rk->save();
+            }
+            
+            if($request->kelas){
+                $kecamatan = $pgigi->kelas->sekolah->kelurahan->kecamatan->id;
+            }else{
+                $kecamatan = $pgigi->sekolah->kelurahan->kecamatan->id;
+            }
+            $response = Http::withBasicAuth('senyumin', 'asekasekjosh');
+            foreach ($imageArray as $key => $value) {        
+                $response = $response->attach(
+                    'image[]', file_get_contents($value['gambar']), $value['filename']
+                );
+            }
+            $response->post(config('app.ai_url').'/api/ai/senyumin',[
+                'id' => $pgigi->id,
+            ]);
+            dd($response);
         
-        if($request->kelas){
-            $kecamatan = $pgigi->kelas->sekolah->kelurahan->kecamatan->id;
-        }else{
-            $kecamatan = $pgigi->sekolah->kelurahan->kecamatan->id;
+        } catch (\Throwable $th) {
+            dd($th);
         }
-        
-        
+
         $dokter = User::whereHas('dokter',function($query) use($kecamatan){
             $query->where('id_kecamatan',$kecamatan);
         })->get();
