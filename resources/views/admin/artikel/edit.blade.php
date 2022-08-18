@@ -1,74 +1,47 @@
-<div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" >Ubah Artikel</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
-        </div>
-        <form class="form-horizontal" id="artikel-edit" method="post" enctype="multipart/form-data" files=true>  
-            @method('PUT')
-            @csrf      
-        <div class="modal-body">
-            <input type="hidden" name="id_edit">
-                <div class="form-group">
-                    <label>Judul</label>
-                    <input type="text"  name="judul_edit" class="form-control"
+@extends('layout.master')
+
+@section('title') Edit Artikel @endsection
+@section('content')
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Edit Artikel</h6>
+                <form action="{{ route('artikel.update',$artikel->id) }}" class="forms-sample" method="post" enctype="multipart/form-data" files=true >
+                   
+                    @csrf
+                    @method('PUT')
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label ">Judul</label>
+                        <input type="text"  name="judul_edit" class="form-control" value="{{$artikel->judul}}"
                         placeholder="">
-                </div>
-                <div class="form-group">
-                    <label>Gambar</label>
-                    <input type="file"  class="form-control dropify" id="gambar_edit" name="gambar_edit"  placeholder="masukkan gambar">
-                </div>
-                <div class="form-group">
-                    <label>Artikel</label>
-                    <input type="file"  class="form-control dropify" name="artikel_edit" placeholder="masukkan gambar">
-                </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label ">Gambar</label>
+                        <input type="file"  class="form-control " id="gambar_edit" name="gambar_edit"  placeholder="masukkan gambar">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label ">Artikel</label>
+                        <input type="file"  class="form-control " name="artikel_edit" placeholder="masukkan gambar">
+                    </div>
+                    
 
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <a href="{{URL::previous()}}" type="button" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-        </form>
-      </div>
     </div>
-  </div>
-@push('after-script')
-<script type="text/javascript">
-    $(document).ready(function () {
-        /* save data */
-        $('#artikel-edit').on('submit', function (e) {
-      e.preventDefault();
-        $.ajax({
-            'type': 'post',
-            'url' : "{{ url('artikel') }}"+"/"+$('input[name=id_edit]').val(),
-            'data': new FormData(this),
-            'processData': false,
-            'contentType': false,
-            'dataType': 'JSON',
-            'success': function(data){
-                if(data.success){
-                    $('#modal-edit').modal('hide');
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Data berhasil diubah',
-                        showConfirmButton: false,
-                        timer: 1500
-                            });
-                    tableData.ajax.reload();
-                }else{
-                    for(var count = 0; count < data.errors.length; count++){
-                        swal(data.errors[count], {
-                            icon: "error",
-                            timer: false,
-                        });
-                    }
-                }
-            },
+</div>
 
-        });
-    });
-    });
+@endsection
 
-</script>
-@endpush
+
+
+
+
+
+
+

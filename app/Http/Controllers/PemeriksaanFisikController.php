@@ -359,8 +359,18 @@ class PemeriksaanFisikController extends Controller
                 }
                 return $diagnosa;
             })
+            ->addColumn('rekomendasi',function($pemeriksaanGigi){
+                $rekomendasi = '';
+                if(!empty($pemeriksaanGigi->skriningIndeks->rekomendasi)){
+                    $rekomendasi .= '<span class="badge bg-success">'.$pemeriksaanGigi->skriningIndeks->rekomendasi.'</span>';
+                }else{
+                    $rekomendasi .= '<span class="badge bg-danger">Menunggu hasil dari dokter</span>';
+                }
+                return $rekomendasi;
+                
+            })
             
-            ->rawColumns(['gambar','diagnosa'])
+            ->rawColumns(['gambar','diagnosa','rekomendasi'])
             ->addIndexColumn()
             ->make(true);
         
