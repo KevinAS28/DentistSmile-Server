@@ -66,9 +66,7 @@ class PemeriksaanGigiController extends Controller
         $validator = $request->validate([
             'gambar1' => 'required',
             'gambar2' => 'required',
-            // 'gambar3' => 'required'
-
-
+            'gambar3' => 'required'
         ], $messages);
         try {
             $waktu_pemeriksaan = Carbon::now();
