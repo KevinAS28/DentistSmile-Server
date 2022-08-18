@@ -12,6 +12,7 @@ use App\Models\Anak;
 use App\Models\Kelurahan;
 use App\Models\ResikoKaries;
 use App\Models\Dokter;
+use App\Models\SkriningIndeks;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -69,7 +70,7 @@ class PemeriksaanGigiController extends Controller
 
 
         ], $messages);
-        try {        
+        try {
             $waktu_pemeriksaan = Carbon::now();
             $imageArray = array();
             $pgigi = new PemeriksaanGigi();
@@ -147,25 +148,48 @@ class PemeriksaanGigiController extends Controller
             $rk->rksoal13=$request->rksoal13;
             $rk->save();
             }
-            
+
             if($request->kelas){
                 $kecamatan = $pgigi->kelas->sekolah->kelurahan->kecamatan->id;
             }else{
                 $kecamatan = $pgigi->sekolah->kelurahan->kecamatan->id;
             }
             $response = Http::withBasicAuth('senyumin', 'asekasekjosh');
-            foreach ($imageArray as $key => $value) {        
+            foreach ($imageArray as $key => $value) {
                 $response = $response->attach(
                     'image[]', file_get_contents($value['gambar']), $value['filename']
                 );
             }
-            $response->post(config('app.ai_url').'/api/ai/senyumin',[
+            $response = $response->post(config('app.ai_url').'/api/ai/senyumin',[
                 'id' => $pgigi->id,
-            ]);
-            dd($response);
-        
+            ])
+            ->throw()
+            ->json();
+
+            $d = array_key_exists('GigiBerlubang', $response['data']) ? $response['data']['GigiBerlubang'] : 0;
+            $e = (array_key_exists('GigiHilang', $response['data']) ? $response['data']['GigiHilang'] : 0) + (array_key_exists('SisaAkar', $response['data']) ? $response['data']['SisaAkar'] : 0);
+            $f = 0;
+
+            $diagnosa = 'Terdapat ';
+            $rekomendasi = '';
+            $arrayRekomendasi = ['GigiBerlubang'=>'Pasien bisa ke dokter gigi di puskesmas untuk dilakukan penambalan gigi',
+                                'SisaAkar'=>'Pasien bisa ke dokter gigi di puskesmas untuk dilakukan pencabutan sisa akar',
+                                'GigiHilang'=>'Pasien silahkan ke dokter gigi untuk pembuatan gigi palus'];
+            foreach ($response['data'] as $key => $value) {
+                $diagnosa .= $key . ' sebanyak ' . $value;
+                $rekomendasi .= 'untuk ' . $key . ' ' . $arrayRekomendasi[$key];
+                if (last($response['data']) != $value) {
+                    $diagnosa .= ', ';
+                    $rekomendasi .= ', ';
+                }
+            }
+            SkriningIndeks::updateOrCreate(
+                ['id_pemeriksaan' => $pgigi->id],
+                ['def_d' => $d,'def_e' => $e,'def_f' => $f,'dmf_d' => $d,'dmf_e' => $e,'dmf_f' => $f,'diagnosa' => $diagnosa,'rekomendasi' => $rekomendasi]
+            );
+
         } catch (\Throwable $th) {
-            dd($th);
+            return redirect()->back()->with('error', $th->getMessage());
         }
 
         $dokter = User::whereHas('dokter',function($query) use($kecamatan){
