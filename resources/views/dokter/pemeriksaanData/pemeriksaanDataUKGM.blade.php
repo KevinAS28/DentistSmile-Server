@@ -158,7 +158,7 @@
                                                                 <option value="rendah"  {{($data->resikoKaries->rksoal7=="ya"||$data->resikoKaries->rksoal8=="ya"||$data->resikoKaries->rksoal9=="ya")? 'selected':'' }}>Rendah</option>
                                                                 <option value="sedang"  {{($data->resikoKaries->rksoal5=="ya"||$data->resikoKaries->rksoal6=="ya"||$data->resikoKaries->rksoal13=="ya")? 'selected':'' }}>Sedang</option>
                                                                 <option value="tinggi" {{($data->resikoKaries->rksoal1=="ya"|| $data->resikoKaries->rksoal2=="ya" ||
-                                                                    $data->resikoKaries->rksoal3=="ya" || $data->resikoKaries->rksoal3=="ya" || $data->resikoKaries->rksoal4=="ya" ||$data->resikoKaries->rksoal10 ||$data->resikoKaries->rksoal11||$data->resikoKaries->rksoal12 )? 'selected':'' }}>Tinggi</option>
+                                                                    $data->resikoKaries->rksoal3=="ya" || $data->resikoKaries->rksoal4=="ya" ||$data->resikoKaries->rksoal10=="ya" ||$data->resikoKaries->rksoal11=="ya"||$data->resikoKaries->rksoal12 == "ya")? 'selected':'' }}>Tinggi</option>
                                                                 
                                                                 <!-- @foreach ($resiko as $item)
                                                                 @if(@$data->resikoKaries->rksoal1=="ya")

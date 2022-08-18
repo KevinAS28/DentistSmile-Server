@@ -64,7 +64,7 @@ License: For each use you must have a valid license purchased only from above li
     <link rel="stylesheet" href="{{asset('assets/css/demo1/style.css')}}">
     <!-- End layout styles -->
 
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" />
+    <link rel="shortcut icon" href="{{asset('assets/images/logo-senyumin.png')}}" />
 
     <script src="https://use.fontawesome.com/62b53805d2.js"></script>
 

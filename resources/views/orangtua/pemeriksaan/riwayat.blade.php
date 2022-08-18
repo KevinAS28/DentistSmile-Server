@@ -111,8 +111,9 @@
                                 <th style="width: 1px;">no</th>
                                 <th>Tanggal</th>
                                 <th>Waktu</th>
-                                <th style="width:50%">Gambar </th>
+                                <th >Gambar </th>
                                 <th>Diagnosa</th>
+                                <th>Rekomendasi</th>
 
                             </tr>
                         </thead>
@@ -423,6 +424,11 @@
                     {
                         data:'diagnosa',
                         name:'diagnosa',
+                        visible:true
+                    },
+                    {
+                        data:'rekomendasi',
+                        name:'rekomendasi',
                         visible:true
                     }
 

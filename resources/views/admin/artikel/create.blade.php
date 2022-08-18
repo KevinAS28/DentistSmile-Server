@@ -1,74 +1,40 @@
-<div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" >Tambah Artikel</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
-        </div>
-        <form class="form-horizontal" id="artikel-store" method="post" enctype="multipart/form-data" files=true>  
-            @csrf
-        <div class="modal-body">
-                <div class="form-group">
-                    <label>Judul</label>
-                    <input type="text"  name="judul" class="form-control"
+@extends('layout.master')
+
+@section('title') Tambah Data Artikel @endsection
+@section('content')
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Tambah Artikel</h6>
+                <form action="{{ route('artikel.store') }}" class="forms-sample"  method="post"
+                enctype="multipart/form-data" files=true>
+                    @csrf
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Judul</label>
+                        <input type="text"  name="judul" class="form-control"
                         placeholder="">
-                </div>
-                <div class="form-group">
-                    <label>Gambar</label>
-                    <input type="file"  class="form-control dropify" name="gambar" placeholder="masukkan gambar">
-                </div>
-                <div class="form-group">
-                    <label>Artikel</label>
-                    <input type="file"  class="form-control dropify" name="artikel" placeholder="masukkan gambar">
-                </div>
 
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Gambar</label>
+                        <input type="file" class="form-control" name="gambar"  placeholder="masukkan gambar">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Artikel</label>
+                        <input type="file"  class="form-control " name="artikel" placeholder="masukkan artikel">
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <button class="btn btn-secondary">Cancel</button>
+                </form>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-        </form>
-      </div>
     </div>
-  </div>
-@push('after-script')
-<script type="text/javascript">
+</div>
+@endsection
 
-    $(document).ready(function () {
-        /* save data */
-        $('#artikel-store').on('submit', function (e) {
-            e.preventDefault();
-            $.ajax({
-                'type': 'POST',
-                'url': "{{ route('artikel.store') }}",
-                'data': new FormData(this),
-                'processData': false,
-                'contentType': false,
-                'dataType': 'JSON',
-                'success': function (data) {
-                    if (data.success) {
-                        $('#modal-create').modal('hide');
 
-                        Swal.fire({
-                        icon: 'success',
-                        title: 'Data berhasil ditambahkan',
-                        showConfirmButton: false,
-                        timer: 1500
-                            });
-                        tableData.ajax.reload();
-                    } else {
-                        for (var count = 0; count < data.errors.length; count++) {
-                            swal(data.errors[count], {
-                                icon: "error",
-                                timer: false,
-                            });
-                        }
-                    }
-                },
 
-            });
-        });
-    });
-
-</script>
-@endpush
