@@ -21,7 +21,7 @@ class ArtikelController extends Controller
         ->addColumn('action', function($row){
             $btn = '';
             $btn .= '<a type="button" id="btn-pdf" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i></a>';
-            $btn .= '<a type="button" id="btn-edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+            $btn .= '<a href="'.route('artikel.edit',$row->id).'" type="button" id="btn-edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
             $btn .= '<a type="button" id="btn-delete" class="btn btn-danger"> <i class="fa fa-trash " ></i></a>';
             
        
@@ -65,7 +65,7 @@ class ArtikelController extends Controller
         $messages = [
            
             'judul.required' => 'Judul wajib diisi.',
-            'gambar.unique'=>'Gambar wajib diisi',
+            'gambar.required'=>'Gambar wajib diisi',
             'artikel.required'=>'Artikel wajib diisi',
 
         ];
@@ -92,7 +92,7 @@ class ArtikelController extends Controller
             $artikel->artikel=$filename;
         }
         $artikel->save();
-        return response()->json(['success'=>'Data added successfully','artikel'=>$artikel]);
+        return redirect()->route('artikel.index');
 
     }
 
@@ -115,7 +115,8 @@ class ArtikelController extends Controller
      */
     public function edit($id)
     {
-        
+        $artikel=Artikel::find($id);
+        return view('admin.artikel.edit',compact('artikel'));
     }
 
     /**
@@ -158,7 +159,7 @@ class ArtikelController extends Controller
         }
         $artikel->save();
 
-        return response()->json(['success'=>'Data added successfully','artikel'=>$artikel]);
+        return redirect()->route('artikel.index');
        
     }
 

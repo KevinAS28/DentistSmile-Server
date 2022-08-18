@@ -24,6 +24,16 @@ class Anak extends Model
     public function kelas(){
         return $this->belongsTo('App\Models\Kelas', 'id_kelas');
     }
+    public function pemeriksaanFisik(){
+        return $this->hasOne('App\Models\PemeriksaanFisik', 'id_anak')->latest();
+    }
+    public function pemeriksaanTelinga(){
+        return $this->hasOne('App\Models\PemeriksaanTelinga', 'id_anak')->latest();
+    }
+    public function pemeriksaanMata(){
+        return $this->hasOne('App\Models\PemeriksaanMata', 'id_anak')->latest();
+    }
+
 }
     
 

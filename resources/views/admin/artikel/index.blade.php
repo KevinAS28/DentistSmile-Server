@@ -11,7 +11,7 @@
 							</div>
             </div>
             <div class="col-2">
-            <button type="button" id="btn-create" class="btn btn-primary">Tambah data</button>
+            <a href="{{route('artikel.create')}}" type="button" id="btn-create"  class="btn btn-primary">Tambah data</a>
             </div>
         </div>
         <hr />
@@ -31,8 +31,7 @@
         </div>
     </div>
 </div>
-@include('admin.artikel.create')
-@include('admin.artikel.edit')
+
 @include('admin.artikel.artikel')
 @endsection
 

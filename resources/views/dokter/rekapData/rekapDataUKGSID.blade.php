@@ -39,13 +39,15 @@
                         @else
                         <td>{{ $pemeriksaanFisik->sekolah->nama}}</td>
                         @endif
-                        <td>{{ $pemeriksaanFisik->anak->tempat_lahir }}, {{ $pemeriksaanFisik->anak->tanggal_lahir }}</td>
                         <?php
                             $now = new DateTime(date('Y-m-d'));
                             $ttl = new DateTime(($pemeriksaanFisik->anak->tanggal_lahir));
+                            $lahir = $ttl->format('d/m/Y');
                             $different = $now->diff($ttl);
                             $year = $different->format('%y Tahun %m Bulan');
                         ?>
+                        <td>{{ $pemeriksaanFisik->anak->tempat_lahir }}, {{ $lahir }}</td>
+
                         <td>{{ $year }} </td>
                     </tr>
                 </table>
