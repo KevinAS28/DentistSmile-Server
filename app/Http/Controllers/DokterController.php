@@ -317,8 +317,8 @@ class DokterController extends Controller
             $kec = Dokter::find($request->kec)->id_kecamatan;
             $otherDokter = Dokter::where('id_kecamatan', $kec)->pluck('id_users')->toArray();
             Notification::whereIn('notifiable_id', $otherDokter)->whereNull('read_at')->update(['read_at' => now()]);
-        } 
-        $data = PemeriksaanGigi::with('anak','resikoKaries')->findOrFail($id);
+        }
+        $data = PemeriksaanGigi::with('anak','resikoKaries','skriningOdontogram','skriningIndeks')->findOrFail($id);
         $aksi = ['belum-erupsi','erupsi-sebagian','karies','non-vital','tambalan-logam','tambalan-non-logam','mahkota-logam','mahkota-non-logam','sisa-akar','gigi-hilang','jembatan','gigi-tiruan-lepas'];
         $odontograms = [
             'b1k1' => ['p18','p17','p16','p15','p14','p13','p12','p11'],
@@ -334,7 +334,7 @@ class DokterController extends Controller
     }
 
     public function pemeriksaan_data_ukgm(Request $request, $id){
-        
+
         if ($request->open == 'notification') {
             // Auth::user()->unreadNotifications->when($request->input('id'), function ($query) use ($request) {
             //     return $query->where('id', $request->input('id'));
@@ -434,7 +434,7 @@ class DokterController extends Controller
                     'rekomendasi' => $request->rekomendasi
                 ]
             );
-            
+
 
 
             return response()->json(['success'=>'Data added successfully']);
@@ -461,7 +461,7 @@ class DokterController extends Controller
         return view('dokter.rekapData.ukgm',[
             'kelurahan' => $kelurahan, 'sekolah '=> $sekolah,
         ]);
-        
+
     }
     public function rekap_detail_ukgs(){
         return view ('dokter.rekapData.rekapDataUKGS');
@@ -510,7 +510,7 @@ class DokterController extends Controller
             }else{
                 $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGS',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
             }
-        
+
 
 
             return $btn;
@@ -597,17 +597,17 @@ class DokterController extends Controller
         ->addColumn('action', function($row){
             $btn = '';
 
-           
+
 
             $btn .= '<a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data" href="'.route('dokter.rekapDetailUKGSID',$row->id_anak).'"><i class="mdi mdi-book-open-page-variant"></i></a> ';
-            
+
             if(empty($row->skriningIndeks)){
                 $btn .= '<a type="button" class="btn btn-danger btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGM',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
             }else{
                 $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGM',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
             }
 
-            
+
             return $btn;
         })
 

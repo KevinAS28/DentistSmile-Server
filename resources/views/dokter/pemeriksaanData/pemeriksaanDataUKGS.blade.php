@@ -153,13 +153,13 @@
                             <div class="row mb-3">
                                 <label for="diagnosa" class="col-sm-2 col-form-label">Diagnosa</label>
                                 <div class="col-sm-10">
-                                    <textarea name="diagnosa" class="form-control w-100" id="" rows="2"></textarea>
+                                <textarea name="diagnosa" class="form-control w-100" id="" rows="2">{{@$data->skriningIndeks->diagnosa}}</textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="rekomendasi" class="col-sm-2 col-form-label">Rekomendasi</label>
                                 <div class="col-sm-10">
-                                    <textarea name="rekomendasi" class="form-control w-100" id="" rows="2"></textarea>
+                                <textarea name="rekomendasi" class="form-control w-100" id="" rows="2">{{@$data->skriningIndeks->rekomendasi}}</textarea>
                                 </div>
                             </div>
                         </section>
