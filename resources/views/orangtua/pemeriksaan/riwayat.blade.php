@@ -31,8 +31,13 @@
         </div>
         <hr />
         <ul class="nav nav-tabs nav-tabs-line" id="lineTab" role="tablist">
+
             <li class="nav-item">
-                <a class="nav-link active" id="home-line-tab" data-bs-toggle="tab" href="#home" role="tab"
+                <a class="nav-link active " id="gigi-line-tab" data-bs-toggle="tab" href="#gigi" role="tab"
+                    aria-controls="gigi" aria-selected="false">Gigi</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " id="home-line-tab" data-bs-toggle="tab" href="#home" role="tab"
                     aria-controls="home" aria-selected="true">Fisik</a>
             </li>
             <li class="nav-item">
@@ -43,13 +48,31 @@
                 <a class="nav-link" id="contact-line-tab" data-bs-toggle="tab" href="#contact" role="tab"
                     aria-controls="contact" aria-selected="false">Telinga</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link " id="gigi-line-tab" data-bs-toggle="tab" href="#gigi" role="tab"
-                    aria-controls="gigi" aria-selected="false">Gigi</a>
-            </li>
+
         </ul>
         <div class="tab-content mt-3" id="lineTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-line-tab">
+        <div class="tab-pane fade show active" id="gigi" role="tabpanel" >
+                <div class="">
+                    <table id="table-gigi" class="table  table-striped table-bordered " style="width:100%">
+                        <thead>
+                            <tr class="col-lg-12">
+                                <th>id</th>
+                                <th >no</th>
+                                <th>Tanggal</th>
+                                <th>Waktu</th>
+                                <th  >Gambar </th>
+                                <th  >Diagnosa</th>
+                                <th>Rekomendasi</th>
+
+                            </tr>
+                        </thead>
+                        <tbody class="col-lg-12">
+                         
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-line-tab">
                 <div class="">
                     <table id="table-fisik" class="table table-striped table-bordered " style="width:100%">
                         <thead>
@@ -102,25 +125,7 @@
                     </table>
                 </div>
             </div>
-            <div class="tab-pane fade" id="gigi" role="tabpanel" aria-labelledby="disabled-line-tab">
-                <div class="">
-                    <table id="table-gigi" class="table table-striped table-bordered " style="width:100%">
-                        <thead>
-                            <tr class="col-lg-12">
-                                <th>id</th>
-                                <th style="width: 1px;">no</th>
-                                <th>Tanggal</th>
-                                <th>Waktu</th>
-                                <th >Gambar </th>
-                                <th>Diagnosa</th>
-                                <th>Rekomendasi</th>
 
-                            </tr>
-                        </thead>
-                        <tbody class="col-lg-12"></tbody>
-                    </table>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -266,7 +271,8 @@
                     searchPlaceholder: "Cari",
                     processing: `<div class="spinner-border text-primary" role="status">
                              <span class="visually-hidden">Loading...</span>
-                            </div>`
+                            </div>`,
+   
                 },
                 "searching": true,
                 "bPaginate": true,
@@ -375,6 +381,8 @@
                 },
                 processing: true,
                 serverSide: true,
+                
+                "scrollX": true,
 
                 language: {
                     search: "_INPUT_",
@@ -394,6 +402,8 @@
                         anak: anak
                     }
                 },
+
+                
                 columns: [{
                         data: 'id',
                         name: 'id',
@@ -418,22 +428,39 @@
                     {
                         data: 'gambar',
                         name: 'gambar',
-                        visible: true
+                        visible: true,
+                        
 
                     },
                     {
                         data:'diagnosa',
                         name:'diagnosa',
-                        visible:true
+                        visible:true,
+                        
                     },
                     {
                         data:'rekomendasi',
                         name:'rekomendasi',
-                        visible:true
+                        visible:true,
+                        
                     }
 
 
                 ],
+                columnDefs: [
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap width-300'>" + data + "</div>";
+                    },
+                    targets: [5,6]
+                },
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap width-400'>" + data + "</div>";
+                    },
+                    targets: [4]
+                },
+             ]
 
             });
         }

@@ -201,6 +201,7 @@ class DokterController extends Controller
             'nik' => $request->nik,
             'nama' => $request->nama,
             'jenis_kelamin' => $request->jenis_kelamin,
+            'id_kecamatan'=> $request->wilayah,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
             'no_telp' => $request->no_telp,

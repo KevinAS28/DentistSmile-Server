@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/demo1/style.css')}}">
     <!-- End layout styles -->
 
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" />
+    <link rel="shortcut icon" href="{{asset('assets/images/logo-senyumin.png')}}" />
 </head>
 <style>
         @media only screen and (max-width: 767px) {

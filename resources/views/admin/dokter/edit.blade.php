@@ -47,7 +47,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Wilayah</label>
-                        <select class="js-example-basic-single form-select" name="kecamatan" data-width="100%">
+                        <select class="js-example-basic-single form-select" name="wilayah" data-width="100%">
                             <option selected disabled class="mb-2" value=" ">Pilih Kecamatan</option>
                             @foreach(\App\Models\Kecamatan::orderBy('nama','asc')->get() as $value => $key)
                             <option class="mb-2" value="{{$key->id}}"

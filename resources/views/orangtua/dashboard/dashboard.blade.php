@@ -109,14 +109,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <!-- <div class="col-md-3">
                                 <div class="card text-white bg-info">
                                     <div class="card-body">
                                         <h5 class="card-title">Ideal</h5>
                                         <p class="card-text">07/12/2021</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

@@ -353,7 +353,7 @@ class PemeriksaanFisikController extends Controller
             ->addColumn('diagnosa',function($pemeriksaanGigi){
                 $diagnosa = '';
                 if(!empty($pemeriksaanGigi->skriningIndeks)){
-                    $diagnosa .= '<span class="badge bg-success">'.$pemeriksaanGigi->skriningIndeks->diagnosa.'</span>';
+                    $diagnosa .= '<td>'.$pemeriksaanGigi->skriningIndeks->diagnosa.'</td>';
                 }else{
                     $diagnosa .= '<span class="badge bg-danger">Menunggu hasil dari dokter</span>';
                 }
@@ -362,7 +362,7 @@ class PemeriksaanFisikController extends Controller
             ->addColumn('rekomendasi',function($pemeriksaanGigi){
                 $rekomendasi = '';
                 if(!empty($pemeriksaanGigi->skriningIndeks->rekomendasi)){
-                    $rekomendasi .= '<span class="badge bg-success">'.$pemeriksaanGigi->skriningIndeks->rekomendasi.'</span>';
+                    $rekomendasi .= '<td>'.$pemeriksaanGigi->skriningIndeks->rekomendasi.'</td>';
                 }else{
                     $rekomendasi .= '<span class="badge bg-danger">Menunggu hasil dari dokter</span>';
                 }
