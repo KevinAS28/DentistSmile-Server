@@ -82,7 +82,7 @@
                             <h6 class="card-title">KONDISI KESEHATAN ANAK</h6>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="card text-white bg-info">
                                     <div class="card-body">
                                         <h5 class="card-title ">Status Gizi</h5>
@@ -91,7 +91,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="card text-white bg-info">
                                     <div class="card-body">
                                         <h5 class="card-title ">Mata</h5>
@@ -100,7 +100,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="card text-white bg-info">
                                     <div class="card-body">
                                         <h5 class="card-title">Telinga</h5>
