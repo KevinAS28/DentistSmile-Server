@@ -22,22 +22,31 @@
                     </div>
                     <div class="p-1">
                         @if(Auth::user()->role == 'dokter')
-                        @foreach($notifications as $i => $notification)
-                        @if(@$notification->data['pemeriksaan']['sekolah']['type'] == 'posyandu')
-                        <a href="{{route('dokter.pemeriksaanDataUKGM',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 item-notification {{$i >= 1 ? 'd-none':'' }}">
-                        @elseif(@$notification->data['pemeriksaan']['sekolah']['type'] == 'sekolah')
-                        <a href="{{route('dokter.pemeriksaanDataUKGS',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 item-notification {{$i >= 1 ? 'd-none':'' }}">
-                        @endif
-                            <div
-                                class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                <i class="icon-sm text-white" data-feather="gift"></i>
-                            </div>
-                            <div class="flex-grow-1 me-2">
-                                <p>{{$notification->data['pemeriksaan']['anak']['nama'] . ' Melakukan Pemeriksaan Gigi'}}</p>
-                                <p class="tx-12 text-muted">{{$notification->created_at->diffForHumans()}}</p>
-                            </div>
-                        </a>
-                        @endforeach 
+                            @foreach($notifications as $i => $notification)
+                                @if(@$notification->data['pemeriksaan']['sekolah']['type'] == 'posyandu')
+                                <a href="{{route('dokter.pemeriksaanDataUKGM',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 item-notification {{$i >= 1 ? 'd-none':'' }}">
+                                    <div
+                                        class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                        <i class="icon-sm text-white" data-feather="gift"></i>
+                                    </div>
+                                    <div class="flex-grow-1 me-2">
+                                        <p>{{$notification->data['pemeriksaan']['anak']['nama'] . ' Melakukan Pemeriksaan Gigi'}}</p>
+                                        <p class="tx-12 text-muted">{{$notification->created_at->diffForHumans()}}</p>
+                                    </div>
+                                </a>
+                                @elseif(@$notification->data['pemeriksaan']['sekolah']['type'] == 'sekolah')
+                                <a href="{{route('dokter.pemeriksaanDataUKGS',$notification->data['pemeriksaan']['id'])}}{{'?open=notification&id='.$notification->id.'&kec='.$notification->notifiable_id}}" class="dropdown-item d-flex align-items-center py-2 item-notification {{$i >= 1 ? 'd-none':'' }}">
+                                    <div
+                                        class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                        <i class="icon-sm text-white" data-feather="gift"></i>
+                                    </div>
+                                    <div class="flex-grow-1 me-2">
+                                        <p>{{$notification->data['pemeriksaan']['anak']['nama'] . ' Melakukan Pemeriksaan Gigi'}}</p>
+                                        <p class="tx-12 text-muted">{{$notification->created_at->diffForHumans()}}</p>
+                                    </div>
+                                </a>
+                                @endif
+                            @endforeach
                         @endif
                     </div>
                     <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
