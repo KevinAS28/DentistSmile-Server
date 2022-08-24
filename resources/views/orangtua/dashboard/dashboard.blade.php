@@ -37,7 +37,11 @@
                                                         data-tl="{{$anak->tanggal_lahir->translatedFormat('j F Y')}}"
                                                         data-age="{{$anak->tanggal_lahir->diffInYears(\Carbon\Carbon::now())}}"
                                                         data-jk="{{ucwords($anak->jenis_kelamin)}}"
-
+                                                        data-fs="{{@$anak->pemeriksaanFisik->imt}}"
+                                                        data-wfs="{{@$anak->pemeriksaanFisik->waktu_pemeriksaan}}"
+                                                        data-ms="{{@$anak->pemeriksaanMata->msoal6}}"
+                                                        data-ts7="{{@$anak->pemeriksaanTelinga->tsoal7}}"
+                                                        data-ts8="{{@$anak->pemeriksaanTelinga->tsoal8}}"
 
                                                         value="{{$anak->id}}">{{$anak->nama}}</option>
                                                     @endforeach
@@ -69,7 +73,7 @@
             </div>
         </div>
     </div>
-    <!-- <div class="col-12 col-xl-12 stretch-card">
+    <div class="col-12 col-xl-12 stretch-card">
         <div class="row flex-grow-1">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
@@ -105,13 +109,20 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <!-- <div class="col-md-3">
+                                <div class="card text-white bg-info">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Ideal</h5>
+                                        <p class="card-text">07/12/2021</p>
+                                    </div>
+                                </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <div class="row">
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
@@ -210,45 +221,45 @@
             var ttl = $(this).find(':selected').data('t') + ', ' + $(this).find(':selected').data('tl');
             var jk = $(this).find(':selected').data('jk');
             var age = $(this).find(':selected').data('age');
-            // var imt = $(this).find(':selected').data('fs');
-            // var wfs = $(this).find(':selected').data('wfs');
-            // var ms = $(this).find(':selected').data('ms');
-            // var ts7 = $(this).find(':selected').data('ts7');
-            // var ts8 = $(this).find(':selected').data('ts8');
+            var imt = $(this).find(':selected').data('fs');
+            var wfs = $(this).find(':selected').data('wfs');
+            var ms = $(this).find(':selected').data('ms');
+            var ts7 = $(this).find(':selected').data('ts7');
+            var ts8 = $(this).find(':selected').data('ts8');
             
-        //     wfs = wfs.split(' ')[0]
-        //     var date = wfs.split('-').reverse().join('/')
-        //     var hasil;
+            wfs = wfs.split(' ')[0]
+            var date = wfs.split('-').reverse().join('/')
+            var hasil;
             
-        //    if(imt>27){
-        //     hasil = "Obesitas"
-        //    }else if(imt<27 && imt>=25.1){
-        //     hasil = "Gemuk"
-        //    }else if(imt<25.1 && imt>=18.5){
-        //     hasil = "Normal"
-        //    }else if(imt<18.5 && imt>=17){
-        //     hasil = "Kurus"
-        //    }else{
-        //     hasil =" Sangat Kurus"
-        //    }
+           if(imt>27){
+            hasil = "Obesitas"
+           }else if(imt<27 && imt>=25.1){
+            hasil = "Gemuk"
+           }else if(imt<25.1 && imt>=18.5){
+            hasil = "Normal"
+           }else if(imt<18.5 && imt>=17){
+            hasil = "Kurus"
+           }else{
+            hasil =" Sangat Kurus"
+           }
 
-        //    if(ms==="minus"){
-        //     mata = "Mata Minus"
-        //    }else if(ms==="normal"){
-        //     mata = "Mata Normal"
-        //    }else{
-        //     mata = "Buta Warna"
-        //    }
+           if(ms==="minus"){
+            mata = "Mata Minus"
+           }else if(ms==="normal"){
+            mata = "Mata Normal"
+           }else{
+            mata = "Buta Warna"
+           }
 
-        //    if(ts7==="ya" && ts8==="ya"){
-        //     telinga= "Serumen 2"
-        //    }else if(ts7==="ya" && ts8==="tidak"){
-        //     telinga= "Serumen Kanan"
-        //    }else if(ts7==="tidak" && ts8==="ya"){
-        //     telinga="Serumen Kiri"
-        //    }else{
-        //     telinga = "Serumen Tidak Ada"
-        //    }
+           if(ts7==="ya" && ts8==="ya"){
+            telinga= "Serumen 2"
+           }else if(ts7==="ya" && ts8==="tidak"){
+            telinga= "Serumen Kanan"
+           }else if(ts7==="tidak" && ts8==="ya"){
+            telinga="Serumen Kiri"
+           }else{
+            telinga = "Serumen Tidak Ada"
+           }
  
            
             
@@ -256,14 +267,14 @@
             $('#row-data-anak').find('td').eq(1).html(jk);
             $('#row-data-anak').find('td').eq(2).html(ttl);
             $('#row-data-anak').find('td').eq(3).html(age + ' Tahun');
-            // $('#hasil-fisik').empty()
-            // $('#hasil-fisik').append(hasil)
-            // $('#hasil-mata').empty()
-            // $('#hasil-mata').append(mata)
-            // $('#hasil-telinga').empty()
-            // $('#hasil-telinga').append(telinga)
-            // $('.waktu-pemeriksaan').empty()
-            // $('.waktu-pemeriksaan').append(date)
+            $('#hasil-fisik').empty()
+            $('#hasil-fisik').append(hasil)
+            $('#hasil-mata').empty()
+            $('#hasil-mata').append(mata)
+            $('#hasil-telinga').empty()
+            $('#hasil-telinga').append(telinga)
+            $('.waktu-pemeriksaan').empty()
+            $('.waktu-pemeriksaan').append(date)
             chart(chartTb,'tb');
             chart(chartBb,'bb');
         });
