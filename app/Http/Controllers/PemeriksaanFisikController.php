@@ -133,9 +133,10 @@ class PemeriksaanFisikController extends Controller
        
         DB::commit();
 
-        return redirect()->route('pemeriksaangigi.create')->with('success','Sukses mengisi data pemeriksaan fisik');
+        return redirect()->route('periksa-gigi.create')->with('success','Sukses mengisi data pemeriksaan fisik');
     }catch(\Exception $e){
         DB::rollback();
+        
         return redirect()->route('pemeriksaanfisik.create')->with('error','Terjadi kesalahan, silahkan coba lagi');
     }
 
