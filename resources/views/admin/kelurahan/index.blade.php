@@ -139,11 +139,7 @@ $(document).ready(function () {
         });
       });
 
-      $('#kecamatan').select2({
-        allowClear: true,
-        placeholder: "Pilih kecamatan...",
-        theme: 'bootstrap4',
-    });
+
 })
 </script>
 @endpush

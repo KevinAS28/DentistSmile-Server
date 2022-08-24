@@ -107,6 +107,7 @@ $(document).ready(function () {
           $('input[name=judul_edit]').val(data['judul']);
           
           
+          
         });
 
         $('#table-video tbody').on( 'click', '#btn-delete', function () {

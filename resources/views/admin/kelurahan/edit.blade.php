@@ -13,11 +13,11 @@
 
             <div class="mb-3">
                 <label class="form-label">Kecamatan</label>
-                <select class="js-example-basic-single form-select" name="kecamatan_edit" data-width="100%">
-                    @foreach(\App\Models\Kecamatan::get() as $value => $key)
-              
-                    <option value="{{$key->id}}">{{$key->nama}}</option>
-                @endforeach
+                <select class="js-example-basic-single form-select" name="kecamatan_edit" id="kecamatan_edit" data-width="100%">
+                <option class="mb-2" value=" ">---Pilih Kecamatan---</option>
+                    @foreach(\App\Models\Kecamatan::orderBy('nama','asc')->get() as $value => $key)
+                    <option class="mb-2" value="{{$key->id}}">{{$key->nama}}</option>
+                    @endforeach
                 </select>
             </div>
                 <div class="form-group">
@@ -70,6 +70,9 @@
 
         });
     });
+
+    
+
     });
 
 </script>

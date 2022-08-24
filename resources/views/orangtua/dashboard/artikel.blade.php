@@ -6,6 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
       </div>
       <div class="modal-body">
+        
         <embed id="artikel-in-modal" src="" height="720" width="1080">
       </div>
       <div class="modal-footer">

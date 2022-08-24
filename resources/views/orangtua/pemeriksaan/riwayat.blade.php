@@ -216,6 +216,7 @@
                 },
                 "searching": true,
                 "bPaginate": true,
+                
                 serverSide: true,
                 stateSave: true,
                 ajax: {

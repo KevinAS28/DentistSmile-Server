@@ -546,6 +546,14 @@
                 $('#labelchk').text('Belum Sekolah');
             }
         });
+        
+        $("#berat_badan,#tinggi_badan").keypress(function (e){
+            var charCode = (e.which) ? e.which : event.keyCode    
+    
+                if (String.fromCharCode(charCode).match(/[^0-9]/g))    
+    
+                return false; 
+        })
 
         $(" #berat_badan,#tinggi_badan").keyup(function () {
             var bb = $("#berat_badan").val();

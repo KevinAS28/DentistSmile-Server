@@ -75,6 +75,7 @@ class VideoController extends Controller
         $video->judul = $request->judul;
         $video->link = $request->link;
         
+        
         $video->save();
         return response()->json(['success'=>'Data added successfully','video'=>$video]);
     }
@@ -121,7 +122,10 @@ class VideoController extends Controller
 
         $video=Video::find($id);
         $video->judul=$request->judul_edit;
-        $video->link=$request->link_edit;
+        if(!empty($request->link_edit)){
+            $video->link=$request->link_edit;
+        }
+        
         
         $video->save();
 
