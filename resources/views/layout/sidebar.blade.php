@@ -26,7 +26,12 @@
                 </a>
             </li>
 
-
+            <li class="nav-item">
+                <a href="{{route('admin.index')}}" class="nav-link">
+                    <i class="link-icon" data-feather="user"></i>
+                    <span class="link-title">Data Admin</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="{{route('dokter.index')}}" class="nav-link">
                     <i class="link-icon" data-feather="user"></i>

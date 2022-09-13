@@ -13,6 +13,7 @@ use App\Http\Controllers\PemeriksaanGigiController;
 use App\Http\Controllers\PosyanduController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\AdminController;
 
 
 
@@ -69,6 +70,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('posyandu', PosyanduController::class)->except('destroy');
     Route::resource('artikel', ArtikelController::class)->except('destroy');
     Route::resource('video', VideoController::class)->except('destroy');
+    Route::resource('admin', AdminController::class)->except('destroy');
     Route::get('/dashboard',function(){return view('admin.dashboard.dashboard');
     });
     Route::get('/kelas/{id}',[App\Http\Controllers\SekolahController::class,'viewKelas'])->name('viewKelas');
@@ -111,6 +113,7 @@ Route::group(['prefix' => 'admin/table'], function () {
     Route::get('/data-artikel',[ArtikelController::class,'data'])->name('artikel.table');
     Route::get('/data-kelas/{id}',[KelasController::class,'data'])->name('kelas.table');
     Route::get('/data-video',[VideoController::class,'data'])->name('video.table');
+    Route::get('/data-admin',[AdminController::class,'data'])->name('admin.table');
     
     
 
@@ -132,6 +135,7 @@ Route::group(['prefix' => 'delete'], function () {
   Route::get('/posyandu/{id}', [PosyanduController::class, 'destroy'])->name('posyandu.destroy');
   Route::get('/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
   Route::get('/video/{id}', [VideoController::class, 'destroy'])->name('video.destroy');
+  Route::get('admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 
 });
 
