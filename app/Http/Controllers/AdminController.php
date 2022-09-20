@@ -115,7 +115,7 @@ class AdminController extends Controller
         $messages = [
 
             'email.required' => 'Email wajib diisi.',
-            'email.unique' => 'Email sudah terpakai.',
+            
 
 
 
@@ -123,9 +123,8 @@ class AdminController extends Controller
         $validator = $request->validate([
 
             'email' => ['required', 'email',
-                        Rule::unique('users', 'email')],
+                        Rule::unique('users', 'email')->ignore($id)],
            
-
 
         ], $messages);
         $admin= User::find($id);
