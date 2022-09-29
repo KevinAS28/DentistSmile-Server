@@ -524,7 +524,7 @@ class DokterController extends Controller
             return $waktu = date('H:i', strtotime($pemeriksaanfisik->waktu_pemeriksaan));
         })
         ->addColumn('nama', function($pemeriksaanfisik){
-            return $pemeriksaanfisik->anak->nama;
+            return $pemeriksaanfisik->anak->nama ?? " ";
         })
         ->addColumn('kelas', function($pemeriksaanfisik){
             return $pemeriksaanfisik->kelas->kelas;
@@ -533,7 +533,7 @@ class DokterController extends Controller
             return $pemeriksaanfisik->kelas->sekolah->nama;
         })
         ->addColumn('jenis_kelamin', function($pemeriksaanfisik){
-            return $pemeriksaanfisik->anak->jenis_kelamin;
+            return $pemeriksaanfisik->anak->jenis_kelamin ?? " ";
         })
         ->addIndexColumn()
        ->make(true);
