@@ -53,7 +53,7 @@ Route::get('/list-sekolah/{id_kelurahan}', [App\Http\Controllers\SekolahControll
     ->name('list-anakdokter-rekap');
     Route::get('list-anak/{anak}', [App\Http\Controllers\PemeriksaanFisikController::class, 'listAnak'])
     ->name('list-anak');
-    
+
 // Route::post('/dokter',[DokterController::class,'store']);
 Route::get('/home',function(){
     return view('home');
@@ -114,8 +114,8 @@ Route::group(['prefix' => 'admin/table'], function () {
     Route::get('/data-kelas/{id}',[KelasController::class,'data'])->name('kelas.table');
     Route::get('/data-video',[VideoController::class,'data'])->name('video.table');
     Route::get('/data-admin',[AdminController::class,'data'])->name('admin.table');
-    
-    
+
+
 
     });
 Route::group(['prefix' => 'orangtua/table'], function () {
@@ -160,6 +160,7 @@ Route::group(['prefix' => 'dokter'], function () {
     Route::get('/rekap-ukgs/rekap-datail-ukgs/{id}',[DokterController::class, 'rekap_detail_ukgs_id'])->name('dokter.rekapDetailUKGSID');
     Route::get('/rekap-ukgm/rekap-data-ukgm',[DokterController::class, 'rekap_detail_ukgm'])->name('dokter.rekapDetailUKGM');
     Route::get('/hasil-gambar/{id}/{filename}',[DokterController::class, 'lihat_gambar'])->name('dokter.lihat_gambar');
+    Route::get('re-check-ai',[App\Http\Controllers\PemeriksaanGigiController::class,'rePemeriksaanAi']);
     });
   });
 
@@ -167,8 +168,6 @@ Route::group(['prefix' => 'dokter'], function () {
     Route::resource('artikel', ArtikelController::class)->except('destroy');
     Route::resource('video', VideoController::class)->except('destroy');
   });
-
-
 
 
 

@@ -499,14 +499,14 @@ class DokterController extends Controller
 
     // function untuk menampilkan list anak yang telah melakukan pemeriksaanfisik berdasarkan id kelas
     public function listAnak(Request $request){
-        $pemeriksaanfisik = PemeriksaanGigi::with('anak')->where('id_kelas',$request->id_kelas)->orderBy('id', 'DESC')->latest();
+        $pemeriksaanfisik = PemeriksaanGigi::with('anak','skriningOdontogram')->where('id_kelas',$request->id_kelas)->orderBy('id', 'DESC')->latest();
 
         return datatables()->of($pemeriksaanfisik)
         ->addColumn('action', function($row){
             $btn = '';
             $btn .= '<a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data " href="'.route('dokter.rekapDetailUKGSID',$row->id_anak).'"><i class="mdi mdi-book-open-page-variant"></i></a> ';
 
-            if(empty($row->skriningIndeks)){
+            if($row->skriningOdontogram->isEmpty()){
                 $btn .= '<a type="button" class="btn btn-danger btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGS',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
             }else{
                 $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGS',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
@@ -592,7 +592,7 @@ class DokterController extends Controller
     public function listAnakUkgm(Request $request){
 
 
-        $pemeriksaanGigi = PemeriksaanGigi::with('anak')->where('id_sekolah',$request->id_sekolah)->orderBy('id', 'DESC')-> latest();
+        $pemeriksaanGigi = PemeriksaanGigi::with('anak','skriningOdontogram')->where('id_sekolah',$request->id_sekolah)->orderBy('id', 'DESC')-> latest();
 
         return datatables()->of($pemeriksaanGigi)
         ->addColumn('action', function($row){
@@ -602,7 +602,7 @@ class DokterController extends Controller
 
             $btn .= '<a type="button" class="btn btn-primary btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Rekap Data" href="'.route('dokter.rekapDetailUKGSID',$row->id_anak).'"><i class="mdi mdi-book-open-page-variant"></i></a> ';
 
-            if(empty($row->skriningIndeks)){
+            if($row->skriningOdontogram->isEmpty()){
                 $btn .= '<a type="button" class="btn btn-danger btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGM',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';
             }else{
                 $btn .= '<a type="button" class="btn btn-info btn-xs text-white" data-bs-toggle="tooltip" data-bs-placement="top" title="Periksa" href="'.route('dokter.pemeriksaanDataUKGM',$row->id).'">Periksa  <i class="mdi mdi-tooth"></i></a>';

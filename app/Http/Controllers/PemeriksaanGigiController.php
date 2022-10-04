@@ -172,13 +172,16 @@ class PemeriksaanGigiController extends Controller
             $rekomendasi = '';
             $arrayRekomendasi = ['GigiBerlubang'=>'Pasien bisa ke dokter gigi di puskesmas untuk dilakukan penambalan gigi',
                                 'SisaAkar'=>'Pasien bisa ke dokter gigi di puskesmas untuk dilakukan pencabutan sisa akar',
-                                'GigiHilang'=>'Pasien silahkan ke dokter gigi untuk pembuatan gigi palus'];
+                                'GigiHilang'=>'Pasien silahkan ke dokter gigi untuk pembuatan gigi palsu'];
             foreach ($response['data'] as $key => $value) {
                 $diagnosa .= $key . ' sebanyak ' . $value;
                 $rekomendasi .= 'untuk ' . $key . ' ' . $arrayRekomendasi[$key];
                 if (last($response['data']) != $value) {
-                    $diagnosa .= ', ';
-                    $rekomendasi .= ', ';
+                    $diagnosa .= ';';
+                    $rekomendasi .= ';';
+                } else {
+                    $diagnosa .= ';';
+                    $rekomendasi .= ';';
                 }
             }
             SkriningIndeks::updateOrCreate(
@@ -240,5 +243,69 @@ class PemeriksaanGigiController extends Controller
     public function destroy(PemeriksaanGigi $pemeriksaanGigi)
     {
         //
+    }
+
+    public function rePemeriksaanAi()
+    {
+        $pemeriksaanGigi = PemeriksaanGigi::doesntHave('skriningIndeks')->select('id','gambar1','gambar2','gambar3','gambar4','gambar5')->get();
+        foreach ($pemeriksaanGigi as $key => $value) {
+            $response = Http::withBasicAuth('senyumin', 'asekasekjosh');
+            $imageArray = array();
+            if (!empty($value->gambar1)) {
+                $imageArray[0] = ['gambar' => Storage::disk('local')->get('public/gigi/'.$value->gambar1), 'filename' => $value->gambar1];
+            }
+            if (!empty($value->gambar2)) {
+                $imageArray[1] = ['gambar' => Storage::disk('local')->get('public/gigi/'.$value->gambar2), 'filename' => $value->gambar2];
+            }
+            if (!empty($value->gambar3)) {
+                $imageArray[2] = ['gambar' => Storage::disk('local')->get('public/gigi/'.$value->gambar3), 'filename' => $value->gambar3];
+            }
+            if (!empty($value->gambar4)) {
+                $imageArray[3] = ['gambar' => Storage::disk('local')->get('public/gigi/'.$value->gambar4), 'filename' => $value->gambar4];
+            }
+            if (!empty($value->gambar5)) {
+                $imageArray[4] = ['gambar' => Storage::disk('local')->get('public/gigi/'.$value->gambar5), 'filename' => $value->gambar5];
+            }
+            foreach ($imageArray as $j => $img) {
+                $response = $response->attach(
+                    'image[]', $img['gambar'], $img['filename']
+                );
+            }
+            $response = $response->post(config('app.ai_url').'/api/ai/senyumin',[
+                'id' => $value->id,
+            ])
+            ->throw()
+            ->json();
+
+            $d = array_key_exists('GigiBerlubang', $response['data']) ? $response['data']['GigiBerlubang'] : 0;
+            $e = (array_key_exists('GigiHilang', $response['data']) ? $response['data']['GigiHilang'] : 0) + (array_key_exists('SisaAkar', $response['data']) ? $response['data']['SisaAkar'] : 0);
+            $f = 0;
+
+            if ($d == 0 && $e == 0 && $f == 0) {
+                $diagnosa = '';
+            } else {
+                $diagnosa = 'Terdapat ';
+            }
+            $rekomendasi = '';
+            $arrayRekomendasi = ['GigiBerlubang'=>'Pasien bisa ke dokter gigi di puskesmas untuk dilakukan penambalan gigi',
+                                'SisaAkar'=>'Pasien bisa ke dokter gigi di puskesmas untuk dilakukan pencabutan sisa akar',
+                                'GigiHilang'=>'Pasien silahkan ke dokter gigi untuk pembuatan gigi palsu'];
+            foreach ($response['data'] as $key => $res) {
+                $diagnosa .= $key . ' sebanyak ' . $res;
+                $rekomendasi .= 'untuk ' . $key . ' ' . $arrayRekomendasi[$key];
+                if (last($response['data']) != $res) {
+                    $diagnosa .= ';';
+                    $rekomendasi .= ';';
+                } else {
+                    $diagnosa .= ';';
+                    $rekomendasi .= ';';
+                }
+            }
+            SkriningIndeks::updateOrCreate(
+                ['id_pemeriksaan' => $value->id],
+                ['def_d' => $d,'def_e' => $e,'def_f' => $f,'dmf_d' => $d,'dmf_e' => $e,'dmf_f' => $f,'diagnosa' => $diagnosa,'rekomendasi' => $rekomendasi]
+            );
+        }
+        return 'done';
     }
 }
