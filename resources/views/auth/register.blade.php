@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
     <!-- End fonts -->
 
     <!-- core:css -->
@@ -44,36 +45,61 @@
 
     <link rel="shortcut icon" href="{{asset('assets/images/logo-senyumin.png')}}" />
 </head>
-    <style>
-        @media only screen and (max-width: 720px) {
-            #logo {
-            display: none;
-        }
-        }
-    </style>
+<style>
+    .page-content {
+        background-image: url('{{ asset('assets/images/bg-senyumin.jpeg')}}')
+    }
+    .btn-register{
+      background: #56CFE1;
+
+    }
+    .auth-page{
+      width: 75%
+    }
+    .form-control{
+        border-radius: 50px;
+        border: 2px solid #0000;
+    }
+
+    @media only screen and (max-width: 767px) {
+      .auth-page{
+        width: 100%
+      }
+
+    }
+    @media only screen and (min-device-width:767px) and (max-device-width:960px){
+      .auth-page{
+        width: 100%
+      }
+    }
+
+</style>
 
 <body>
     <div class="main-wrapper">
         <div class="page-wrapper full-page">
             <div class="page-content d-flex align-items-center justify-content-center">
-                <div class="row w-100 mx-0 auth-page">
-                    <div class="col-md-8 col-xl-6 mx-auto">
+                <div class="row  mx-0 auth-page">
+                    <div class="col-md-6 col-xl-6 mx-auto">
                         <div class="card">
                             <div class="row">
-                                @if(session()->has('error'))
-                                <div class="alert alert-danger">
-                                    {{ session()->get('error') }}
-                                </div>
-                                @endif
                                 <div class="col-md-12 ps-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
-                                    <img class="img-fluid mb-2" src="{{asset('assets/images/logo-senyumin.png')}}" alt="" srcset="">
-                                        <h5 class="text-muted fw-normal mb-4">Buat akun</h5>
-                                        <form class="forms-sample" action="{{route('registeruser')}}" method="POST" enctype="multipart/form-data" files=true>
+                                        <div class="text-center">
+                                            <img class="w-25 mb-3" src="{{asset('assets/images/logo-baru.png')}}"
+                                                alt="" srcset="">
+                                            @if(Session::has('error'))
+                                            <div class="alert alert-warning">{{Session::get('error')}}</div>
+                                            @endif
+                                            <h4 class="text-secondary fw-normal mb-1">Daftar</h4>
+                                            
+                                        </div>
+                                        <form class="forms-sample" action="{{route('registeruser')}}" method="POST"
+                                            enctype="multipart/form-data" files=true>
                                             @csrf
                                             <div class="mb-3">
-                                                <label for="userEmail" class="form-label">Email address</label>
-                                                <input type="email" class="form-control" id="userEmail" name="email"
+                                                <label for="userEmail" class="form-label">Email address <span class="text-danger">*</span></label>
+                                                <input type="email" class="form-control form-css" id="userEmail" name="email"
                                                     placeholder="Masukkan Email" required>
                                                 @error('email')
                                                 <div class="badge bg-danger mt-2 ">{{ $message }}</div>
@@ -81,38 +107,37 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="userPassword" class="form-label">Password</label>
-                                                <input type="password" class="form-control" id="userPassword"
-                                                    name="password" autocomplete="current-password"
-                                                    placeholder="Masukkan Password" required>
-                                            </div>
-                                            <div class="form-check mb-3">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                <label class="form-check-label" for="exampleCheck1">
-                                                    Tampilkan Password
-                                                </label>
-                                            </div>
+                                                <label for="userPassword" class="form-label">Password <span class="text-danger">*</span></label>
+                                                <div class="input-group mb-2 ">
+                                                    <input type="password"
+                                                        class="form-control @error('password') is-invalid @enderror"
+                                                        name="password" id="password" placeholder="masukkan password">
+                                                    <div style="background: transparent" class="input-group-prepend ml-2">
+                                                        <div style="padding:10px"class="input-group-text"><i style="width: 100%" class="fas fa-eye-slash "
+                                                                id="eye"></i></div>
+                                                    </div>
+                                                </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputUsername1" class="form-label">Nama</label>
+                                                <label for="exampleInputUsername1" class="form-label">Nama <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" autocomplete="Name"
                                                     placeholder="Masukkan nama" name="nama" id="name"
                                                     value="{{old('nama')}}" required>
 
                                             </div>
                                             <div class="row col-md-12">
-                                                <div class="col-md-5">
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputPassword1" class="form-label">Tempat
-                                                            Lahir</label>
-                                                        <input type="text" class="form-control" id="tempat_lahir"
-                                                            name="tempat_lahir" autocomplete="off"
-                                                            placeholder="Tempat Lahir" required> 
-                                                    </div>
-                                                </div>
                                                 <div class="col-md-7">
                                                     <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">Tempat
+                                                            Lahir <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="tempat_lahir"
+                                                            name="tempat_lahir" autocomplete="off"
+                                                            placeholder="Tempat Lahir" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="mb-3">
                                                         <label for="exampleInputPassword1" class="form-label">Tanggal
-                                                            Lahir</label>
+                                                            Lahir <span class="text-danger">*</span></label>
                                                         <input type="date" class="form-control" id="tanggal_lahir"
                                                             name="tanggal_lahir" autocomplete="off"
                                                             placeholder="masukkan tanggal lahir">
@@ -120,7 +145,7 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label">Kecamatan</label>
+                                                <label class="form-label">Kecamatan <span class="text-danger">*</span></label>
                                                 <select class="form-select" name="id_kecamatan" id="id_kecamatan"
                                                     data-width="100%">
                                                     <option class="mb-2" value=" ">---Pilih Kecamatan---</option>
@@ -132,19 +157,19 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label">Kelurahan</label>
+                                                <label class="form-label">Kelurahan <span class="text-danger">*</span></label>
                                                 <select class="form-select" name="id_kelurahan" data-width="100%"
                                                     id="id_desa">
 
                                                 </select>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputUsername2" class="form-label">alamat</label>
+                                                <label for="exampleInputUsername2" class="form-label">alamat <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" autocomplete="alamat"
                                                     placeholder="Alamat" name="alamat" required>
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label">Pendidikan</label>
+                                                <label class="form-label">Pendidikan <span class="text-danger">*</span></label>
                                                 <select class="form-select" name="pendidikan" id="pendidikan"
                                                     data-width="100%" required>
                                                     <option selected disabled>Pilih Pendidikan</option>
@@ -165,7 +190,8 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="exampleInputPassword1" class="form-label">Foto Gigi Orangtua</label>
+                                                <label for="exampleInputPassword1" class="form-label">Foto Gigi
+                                                    Orangtua</label>
                                                 <input type="file" class="form-control dropify" name="foto"
                                                     placeholder="masukkan gambar">
                                                 @error('foto')
@@ -174,7 +200,7 @@
                                             </div>
                                             <div>
                                                 <button type="submit"
-                                                    class="btn btn-primary text-white me-2 mb-2 mb-md-0">
+                                                    class="btn btn-register w-100 text-white me-2 mb-2 mb-md-0">
                                                     Sign up
                                                 </button>
                                             </div>
@@ -204,13 +230,25 @@
             var password = $('#userPassword');
             var name = $('#name');
 
-            $('#exampleCheck1').click(function () {
-                if ($(this).is(':checked')) {
-                    $('#userPassword').attr('type', 'text');
+            $('#eye').click(function () {
+
+                if ($(this).hasClass('fa-eye-slash')) {
+
+                    $(this).removeClass('fa-eye-slash');
+
+                    $(this).addClass('fa-eye');
+
+                    $('#password').attr('type', 'text');
+
                 } else {
-                    $('#userPassword').attr('type', 'password');
+
+                    $(this).removeClass('fa-eye');
+
+                    $(this).addClass('fa-eye-slash');
+
+                    $('#password').attr('type', 'password');
                 }
-            });
+                });
 
             $('#id_kecamatan').change(function () {
                 let kecamatan = $("#id_kecamatan").val()
@@ -234,19 +272,18 @@
                 }
             });
             $('.dropify').dropify({
-    messages: {
-        'default': 'Drag and drop a file here or click',
-        'replace': 'Drag and drop or click to replace',
-        'remove':  'Hapus',
-        'error':   'Ooops, something wrong happended.'
-    }
-});
+                messages: {
+                    'default': 'Drag and drop a file here or click',
+                    'replace': 'Drag and drop or click to replace',
+                    'remove': 'Hapus',
+                    'error': 'Ooops, something wrong happended.'
+                }
+            });
 
-    $('#id_kecamatan').select2()
-    $('#id_desa , #pendidikan').select2()
-    
+            $('#id_kecamatan').select2()
+            $('#id_desa , #pendidikan').select2()
+
         });
-        
 
     </script>
 

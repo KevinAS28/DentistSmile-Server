@@ -19,14 +19,14 @@ class AdminController extends Controller
         $admin = User::where('role','admin')->get();
         return datatables()->of($admin)
         ->addColumn('action', function($row){
-            $btn = '<div class="btn-group btn-group-sm">';
-            $btn .= '<a href="'.route('admin.edit',$row->id).'" type="button" id="btn-edit" class="btn btn-warning btn-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+            
+            $btn = '<a href="'.route('admin.edit',$row->id).'" type="button" id="btn-edit" class="btn btn-warning "><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a>';
             if(Auth::user()->id != $row->id){
-                $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="fa fa-trash " ></i></button>';
+                $btn = $btn .' <button title="Delete" id="btn-delete" class="delete-modal btn btn-danger "><i class="fa fa-trash " ></i>Hapus</button>';
             }
             
 
-            $btn .= '</div>';
+            
             return $btn;
         })
         ->rawColumns(['action'])->addIndexColumn()->make(true);

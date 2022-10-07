@@ -15,76 +15,106 @@
             <span></span>
         </div>
     </div>
+    
     <div class="sidebar-body">
-        <ul class="nav">
+        <ul class="nav w-100\">
             @if (Auth::user()->role=='admin')
-            <li class="nav-item nav-category">Main</li>
+            <p class="text-center fs-4 font-weight-bold">Admin</p>
+            <li class="nav-item nav-category ">Main</li>
             <li class="nav-item">
                 <a href="/admin/dashboard" class="nav-link">
                     <i class="link-icon" data-feather="airplay"></i>
                     <span class="link-title">Dashboard</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#data-pengguna" role="button" aria-expanded="false"
+                    aria-controls="data-pengguna">
+                    <i class="link-icon" data-feather="user"></i>
+                    <span class="link-title">Data Pengguna</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="data-pengguna">
+                    <ul class="nav sub-menu ">
+                        <li class="nav-item">
+                            <a href="{{route('admin.index')}}" class="nav-link">
+                                Admin
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('dokter.index')}}" class="nav-link">
+                                Dokter
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('orangtua.index')}}" class="nav-link">
+                                Orangtua
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('anak.index')}}" class="nav-link">
+                                Anak
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
 
             <li class="nav-item">
-                <a href="{{route('admin.index')}}" class="nav-link">
-                    <i class="link-icon" data-feather="user"></i>
-                    <span class="link-title">Data Admin</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('dokter.index')}}" class="nav-link">
-                    <i class="link-icon" data-feather="user"></i>
-                    <span class="link-title">Data Dokter</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('orangtua.index')}}" class="nav-link">
-                    <i class="link-icon" data-feather="user"></i>
-                    <span class="link-title">Data Orangtua</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('anak.index')}}" class="nav-link">
-                    <i class="link-icon" data-feather="users"></i>
-                    <span class="link-title">Data Anak</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('kecamatan.index')}}" class="nav-link">
+                <a class="nav-link" data-bs-toggle="collapse" href="#data-lokasi" role="button" aria-expanded="false"
+                    aria-controls="data-lokasi">
                     <i class="link-icon" data-feather="map-pin"></i>
-                    <span class="link-title">Data Kecamatan</span>
+                    <span class="link-title">Data Lokasi</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
+                <div class="collapse" id="data-lokasi">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{route('kecamatan.index')}}" class="nav-link">
+                                Kecamatan
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('kelurahan.index')}}" class="nav-link">
+                                Kelurahan
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('sekolah.index')}}" class="nav-link">
+                                Sekolah
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('posyandu.index')}}" class="nav-link">
+                                Posyandu
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
+
+
             <li class="nav-item">
-                <a href="{{route('kelurahan.index')}}" class="nav-link">
-                    <i class="link-icon" data-feather="map-pin"></i>
-                    <span class="link-title">Data Kelurahan</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('sekolah.index')}}" class="nav-link">
-                    <i class="link-icon" data-feather="map-pin"></i>
-                    <span class="link-title">Data Sekolah</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('posyandu.index')}}" class="nav-link">
-                    <i class="link-icon" data-feather="map-pin"></i>
-                    <span class="link-title">Data Posyandu</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('artikel.index')}}" class="nav-link">
+                <a class="nav-link" data-bs-toggle="collapse" href="#data-edukasi" role="button" aria-expanded="false"
+                    aria-controls="data-edukasi">
                     <i class="link-icon" data-feather="book"></i>
-                    <span class="link-title">Data Artikel</span>
+                    <span class="link-title">Data Edukasi</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{route('video.index')}}" class="nav-link">
-                    <i class="link-icon" data-feather="film"></i>
-                    <span class="link-title">Data Video</span>
-                </a>
+                <div class="collapse" id="data-edukasi">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="{{route('artikel.index')}}" class="nav-link">
+                                Artikel
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('video.index')}}" class="nav-link">
+                                Video
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             <li class="nav-item nav-category">Lainnya</li>
             <li class="nav-item">
@@ -99,6 +129,7 @@
             </li>
 
             @elseif (Auth::user()->role=='orangtua')
+            <p class="text-center fs-4 font-weight-bold">Orang tua</p>
             <li class="nav-item nav-category">Main</li>
             <li class="nav-item">
                 <a href="/orangtua/dashboard" class="nav-link">
@@ -153,6 +184,7 @@
             </li>
 
             @elseif (Auth::user()->role=='dokter')
+            <p class="text-center fs-4 font-weight-bold">Dokter</p>
             <li class="nav-item nav-category">Main</li>
             <li class="nav-item">
                 <a href="/dokter/dashboard" class="nav-link">

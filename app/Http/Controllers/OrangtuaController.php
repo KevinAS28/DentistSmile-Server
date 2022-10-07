@@ -31,11 +31,11 @@ class OrangtuaController extends Controller
         $orangtua = Orangtua::all();
         return datatables()->of($orangtua)
         ->addColumn('action', function($row){
-            $btn = '<div class="btn-group btn-group-sm">';
-            $btn .= '<a href="'.route('orangtua.edit',$row->id).'" type="button" id="btn-edit" class="btn btn-warning btn-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
-            $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="fa fa-trash " ></i></button>';
+  
+            $btn = '<a href="'.route('orangtua.edit',$row->id).'" type="button" id="btn-edit" class="btn btn-warning btn-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
+            $btn = $btn.' <button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="fa fa-trash " ></i></button>';
 
-            $btn .= '</div>';
+           
             return $btn;
         })->addColumn('email',function($row){
             return $row->user->email;

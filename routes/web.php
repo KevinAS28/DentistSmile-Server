@@ -70,7 +70,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('posyandu', PosyanduController::class)->except('destroy');
     Route::resource('artikel', ArtikelController::class)->except('destroy');
     Route::resource('video', VideoController::class)->except('destroy');
-    Route::resource('admin', AdminController::class)->except('destroy');
+    Route::resource('admin', AdminController::class)->except('destroy','index');
+    Route::get('/data-admin',[AdminController::class,'index'])->name('admin.index');
     Route::get('/dashboard',function(){return view('admin.dashboard.dashboard');
     });
     Route::get('/kelas/{id}',[App\Http\Controllers\SekolahController::class,'viewKelas'])->name('viewKelas');

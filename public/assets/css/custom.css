@@ -1,0 +1,21 @@
+.btn-custom{
+    background-color: #68D4EA;
+}
+.sidebar .sidebar-body .nav.sub-menu .nav-item .nav-link.active {
+    background-color: #68D4EA;
+    color: white;
+}
+.sidebar .sidebar-body .nav .nav-item.active .nav-link {
+   color: black; 
+}
+.sidebar .sidebar-body .nav .nav-item.active .nav-link {
+    color:black
+}
+
+.table thead th {
+    border-top: 0;
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #6571ff;
+}

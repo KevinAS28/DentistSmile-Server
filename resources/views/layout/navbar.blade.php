@@ -3,7 +3,7 @@
         <i data-feather="menu"></i>
     </a>
     <div class="navbar-content">
-
+        <h2 class="mt-2">@yield('navbar-title')</h2>
         <ul class="navbar-nav">
             @php $notifications = Auth::user()->unreadNotifications; @endphp
             <li class="nav-item dropdown">

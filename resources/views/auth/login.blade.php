@@ -1,9 +1,7 @@
-
-
 <!DOCTYPE html>
 
 <html lang="en">
-     
+
 
 <head>
     <meta charset="UTF-8">
@@ -19,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
     <!-- End fonts -->
 
     <!-- core:css -->
@@ -43,102 +42,165 @@
     <link rel="shortcut icon" href="{{asset('assets/images/logo-senyumin.png')}}" />
 </head>
 <style>
-        @media only screen and (max-width: 767px) {
-            #logo {
-            display: none;
-        }
-        }
-    </style>
+    .page-content {
+        background-image: url('{{ asset('assets/images/bg-senyumin.jpeg')}}')
+    }
+
+    .btn-login {
+        background: #56CFE1;
+
+    }
+
+    .form-control {
+        border-radius: 50px;
+        border: 2px solid #0000;
+    }
+
+    .auth-page {
+        width: 65%
+    }
+
+
+
+    @media only screen and (max-width: 767px) {
+      .auth-page{
+        width: 100%
+      }
+
+    }
+
+    @media only screen and (min-device-width:767px) and (max-device-width:960px){
+      .auth-page{
+        width: 100%
+      }
+    }
+
+</style>
+
 <body>
-	<div class="main-wrapper">
-		<div class="page-wrapper full-page">
-			<div class="page-content d-flex align-items-center justify-content-center">
+    <div class="main-wrapper">
+        <div class="page-wrapper full-page">
+            <div class="page-content d-flex align-items-center justify-content-center">
 
-				<div class="row w-100 mx-0 auth-page">
-					<div class="col-md-8 col-xl-6 mx-auto">
-						<div class="card">
-							<div class="row">
-                <div class="col-md-4 pe-md-0">
-                  <div class="">
-                    <img id="logo" class="img-fluid" src="{{asset('assets/images/login-bg.png')}}" alt="">
-                  </div>
+                <div class="row  mx-0 auth-page  ">
+                    <div class="col-md-6 col-xl-6 mx-auto">
+                        <div class="card shadow p-3 mb-5 bg-body rounded">
+                            <div class="row ">
+                                <div class="col-md-12 ps-md-0">
+                                    <div class="auth-form-wrapper px-4 py-3">
+                                        <div class="text-center">
+                                            <img class="w-50 mb-3" src="{{asset('assets/images/logo-baru.png')}}" alt=""
+                                                srcset="">
+                                  
+                                            <h4 class="text-muted fw-normal mb-1">Selamat datang!</h4>
+                                            <h5 style="color:#32838F" class=" fw-normal mb-4">silahkan masuk untuk
+                                                melanjutkan</h6>
+                                                @if(Session::has('error'))
+                                                <div class="alert alert-warning">{{Session::get('error')}}</div>
+                                                @endif
+                                        </div>
+                                        <form class="forms-sample" action="{{route('login')}}" method="POST">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label for="userEmail" class="form-label">Email</label>
+                                                <input type="email"
+                                                    class="form-control @error('email') is-invalid @enderror"
+                                                    name="email" value="{{old('email')}}" id="userEmail"
+                                                    placeholder="masukkan email">
+                                                @error('email')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            {{-- <div class="mb-3">
+                                                <label for="userPassword" class="form-label">Password</label>
+                                                <input type="password"
+                                                    class="form-control @error('password') is-invalid @enderror"
+                                                    name="password" id="userPassword" autocomplete="current-password"
+                                                    placeholder="masukkan password">
+
+                                                @error('password')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">
+                                                    Tampilkan Password
+                                                </label>
+                                            </div> --}}
+                                            <label for="password" class="form-label">Kata sandi</label>
+                                            <div class="input-group mb-2 ">
+                                                
+                                                <input type="password"
+                                                    class="form-control @error('password') is-invalid @enderror"
+                                                    name="password" id="password" placeholder="masukkan password">
+                                                <div style="background: transparent" class="input-group-prepend ml-2">
+                                                    <div style="padding:10px"class="input-group-text"><i style="width: 100%" class="fas fa-eye-slash "
+                                                            id="eye"></i></div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="text-center">
+                                                <button type="submit"
+                                                    class="btn btn-login w-100 me-2 mb-2 mb-md-0 text-white">
+                                                    Masuk
+                                                </button>
+                                            </div>
+                                            <a href="/register" class="d-block mt-3 text-muted">Belum punya akun?
+                                                Daftar</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-8 ps-md-0">
-                  <div class="auth-form-wrapper px-4 py-3">
-                    <img class="img-fluid mb-2" src="{{asset('assets/images/logo-senyumin.png')}}" alt="" srcset="">
-                    @if(Session::has('error'))
-                        <div class="alert alert-warning">{{Session::get('error')}}</div>
-                    @endif 
-                    <h5 class="text-muted fw-normal mb-4">Selamat datang! silahkan masuk.</h5>
-                    <form class="forms-sample" action="{{route('login')}}" method="POST"> 
-                        @csrf
-                      <div class="mb-3">
-                        <label for="userEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" id="userEmail" placeholder="masukkan email">
-                        @error('email')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                      </div>
-                      <div class="mb-3">
-                        <label for="userPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="userPassword" autocomplete="current-password" placeholder="masukkan password">
-                        @error('password')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                      </div>
-                      <div class="form-check mb-2">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">
-                          Tampilkan Password
-                        </label>
-                      </div>
-                      <br>
-                      <div>
-                        <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0 text-white">
-                          Masuk
-                        </button>
-                      </div>
-                      <a href="/register" class="d-block mt-3 text-muted">Belum punya akun? 
-                        Daftar</a>
-                    </form>
-                  </div>
-                </div>
-              </div>
-						</div>
-					</div>
-				</div>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 
-	<!-- core:js -->
-	<script src="{{asset('assets/vendors/core/core.js')}}"></script>
-	<!-- endinject -->
+    <!-- core:js -->
+    <script src="{{asset('assets/vendors/core/core.js')}}"></script>
+    <!-- endinject -->
 
-	<!-- Plugin js for this page -->
-	<!-- End plugin js for this page -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
 
-	<!-- inject:js -->
-	<script src="{{asset('assets/vendors/feather-icons/feather.min.js')}}"></script>
-	<script src="{{asset('assets/js/template.js')}}"></script>
-	<!-- endinject -->
+    <!-- inject:js -->
+    <script src="{{asset('assets/vendors/feather-icons/feather.min.js')}}"></script>
+    <script src="{{asset('assets/js/template.js')}}"></script>
+    <!-- endinject -->
 
-	<!-- Custom js for this page -->
-	<!-- End custom js for this page -->
-  <script type="text/javascript"> 
-  	$(document).ready(function(){		
-		$('#exampleCheck1').click(function(){
-			if($(this).is(':checked')){
-				$('#userPassword').attr('type','text');
-			}else{
-				$('#userPassword').attr('type','password');
-			}
-		});
-  
-    
-	});
-  </script>
+    <!-- Custom js for this page -->
+    <!-- End custom js for this page -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#eye').click(function () {
+
+                if ($(this).hasClass('fa-eye-slash')) {
+
+                    $(this).removeClass('fa-eye-slash');
+
+                    $(this).addClass('fa-eye');
+
+                    $('#password').attr('type', 'text');
+
+                } else {
+
+                    $(this).removeClass('fa-eye');
+
+                    $(this).addClass('fa-eye-slash');
+
+                    $('#password').attr('type', 'password');
+                }
+            });
+
+
+        });
+
+    </script>
 
 </body>
+
 </html>

@@ -39,6 +39,7 @@ License: For each use you must have a valid license purchased only from above li
     <link rel="stylesheet" href="{{asset('assets/fonts/feather-font/css/iconfont.css')}}">
     <link rel="stylesheet" href="{{asset('assets/fonts/feather-font/css/iconfont.css')}}">
 	<link rel="stylesheet" href="{{asset('assets/vendors/flag-icon-css/css/flag-icon.min.css')}}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
 
     <link rel="stylesheet" href="{{asset('assets/vendors/prismjs/themes/prism.css')}}">
 
@@ -62,6 +63,7 @@ License: For each use you must have a valid license purchased only from above li
     <link rel="stylesheet" href="{{asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{asset('assets/css/demo1/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
     <!-- End layout styles -->
 
     <link rel="shortcut icon" href="{{asset('assets/images/logo-senyumin.png')}}" />
@@ -75,6 +77,9 @@ License: For each use you must have a valid license purchased only from above li
         .page-content{
             background-image: url('{{ asset('assets/images/bg-senyumin.jpeg')}}')
         }
+        .form-control{
+          
+    }
     </style>
 
 <body>

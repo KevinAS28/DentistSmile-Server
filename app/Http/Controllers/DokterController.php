@@ -39,11 +39,9 @@ class DokterController extends Controller
         $dokter = Dokter::all();
         return datatables()->of($dokter)
         ->addColumn('action', function($row){
-            $btn = '<div class="btn-group btn-group-sm">';
-            $btn .= '<a href="'.route('dokter.edit',$row->id).'" type="button" id="btn-edit" class="btn btn-warning btn-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
-            $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="fa fa-trash " ></i></button>';
+            $btn = '<a href="'.route('dokter.edit',$row->id).'"  id="btn-edit" class=" btn btn-warning "><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a>';
+            $btn = $btn.' <button title="Delete" id="btn-delete" class="delete-modal mr-3 btn btn-danger "><i class="fa fa-trash " ></i>Hapus</button>';
 
-            $btn .= '</div>';
             return $btn;
         })
         ->rawColumns(['action'])->addIndexColumn()->make(true);

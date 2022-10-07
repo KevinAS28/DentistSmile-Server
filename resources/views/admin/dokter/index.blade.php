@@ -1,5 +1,9 @@
 @extends('layout.master')
 
+
+@section('navbar-title')
+Dokter
+@endsection
 @section('content')
 
 <div class="card">
@@ -11,7 +15,7 @@
 							</div>
             </div>
             <div class="col-2">
-            <a href="{{route('dokter.create')}}" type="button" id="btn-create" class="btn btn-primary">Tambah data</a>
+            <a href="{{route('dokter.create')}}" type="button" id="btn-create" style="background-color: #68D4E4" class="btn text-white">Tambah data</a>
             </div>
         </div>
         <hr />
@@ -19,12 +23,12 @@
             <table id="table-dokter" class="table " style="width:100%" >
                 <thead>
                     <tr>
-						<th>id</th>
-                        <th style="width: 1px;">no</th>
-                        <th>nik</th>
-                        <th>nama</th>
-                        <th>jenis kelamin</th>
-                        <th>action</th>
+						<th class="text-primary">id</th>
+                        <th class="text-primary" style="width: 1px;">no</th>
+                        <th class="text-primary">nik</th>
+                        <th class="text-primary">nama</th>
+                        <th class="text-primary">jenis kelamin</th>
+                        <th class="text-primary">action</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -46,8 +50,14 @@ $(document).ready(function () {
 			serverSide: true,
             responsive: true,
             language: {
+                "lengthMenu": "Tampilkan _MENU_ entri",
+                "paginate":{
+                    "next":"Selanjutnya",
+                    "previous":"Sebelumnya"
+                },
                 search: "_INPUT_",
                 searchPlaceholder: "Cari"
+                
             },
 			"searching": true,
             "bPaginate": true,
