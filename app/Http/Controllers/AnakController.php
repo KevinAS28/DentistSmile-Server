@@ -17,11 +17,11 @@ class AnakController extends Controller
         $anak = Anak::all();
         return datatables()->of($anak)
         ->addColumn('action', function($row){
-            $btn = '<div class="btn-group btn-group-sm">';
-            $btn .= '<a href="'.route('anak.edit',$row->id).'" class="btn btn-warning btn-icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
-            $btn .= '<button title="Delete" id="btn-delete" class="delete-modal btn btn-danger btn-icon"><i class="fa fa-trash " ></i></button>';
+
+            $btn = '<a href="'.route('anak.edit',$row->id).'" class="btn btn-warning "><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a>';
+            $btn = $btn. ' <button title="Delete" id="btn-delete" class="delete-modal btn btn-danger "><i class="fa fa-trash " ></i> Hapus</button>';
             
-            $btn .= '</div>';
+           
             return $btn;
         })
         ->addColumn('orangtua',function($row){

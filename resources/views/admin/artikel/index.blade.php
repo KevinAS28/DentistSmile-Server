@@ -11,7 +11,7 @@
 							</div>
             </div>
             <div class="col-2">
-            <a href="{{route('artikel.create')}}" type="button" id="btn-create"  class="btn btn-primary">Tambah data</a>
+            <a href="{{route('artikel.create')}}" type="button" id="btn-create"  class="btn btn-custom text-white">Tambah data</a>
             </div>
         </div>
         <hr />
@@ -62,6 +62,11 @@ $(document).ready(function () {
 			serverSide: true,
             responsive: true,
             language: {
+                "lengthMenu": "Tampilkan _MENU_ entri",
+                "paginate":{
+                    "next":"Selanjutnya",
+                    "previous":"Sebelumnya"
+                },
                 search: "_INPUT_",
                 searchPlaceholder: "Cari"
             },

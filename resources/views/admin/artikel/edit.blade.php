@@ -7,7 +7,7 @@
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h6 class="card-title">Edit Artikel</h6>
+                <h6 class="text-center h3">Edit Artikel</h6>
                 <form action="{{ route('artikel.update',$artikel->id) }}" class="forms-sample" method="post" enctype="multipart/form-data" files=true >
                    
                     @csrf
@@ -27,9 +27,10 @@
                         <input type="file"  class="form-control " name="artikel_edit" placeholder="masukkan gambar">
                     </div>
                     
-
-                    <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <a href="{{URL::previous()}}" type="button" class="btn btn-secondary">Cancel</a>
+                    <div style="float: right">
+                    <button type="submit" class="btn btn-primary me-2">Simpan</button>
+                    <a href="{{URL::previous()}}" type="button" class="btn btn-secondary">Batal</a>
+                    </div>
                 </form>
             </div>
         </div>

@@ -18,11 +18,11 @@ class PosyanduController extends Controller
         $sekolah = Sekolah::where('type','posyandu')->get();
         return datatables()->of($sekolah)
         ->addColumn('action', function($row){
-            $btn = '<div class="btn-group btn-group-sm">';
-            $btn .= '<button type="button" id="btn-edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
-            $btn .= '<button type="button" id="btn-delete" class="btn btn-danger"><i class="fa fa-trash " ></i></button>';
+           
+            $btn = '<button type="button" id="btn-edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</button>';
+            $btn = $btn. ' <button type="button" id="btn-delete" class="btn btn-danger"><i class="fa fa-trash" ></i>Hapus</button>';
             
-            $btn .= '</div>';
+            
 
            return $btn;
        })

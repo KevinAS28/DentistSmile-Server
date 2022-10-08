@@ -7,7 +7,7 @@
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h6 class="card-title">Tambah Artikel</h6>
+                <h6 class="text-center h3">Tambah Artikel</h6>
                 <form action="{{ route('artikel.store') }}" class="forms-sample"  method="post"
                 enctype="multipart/form-data" files=true>
                     @csrf
@@ -26,9 +26,10 @@
                         <input type="file"  class="form-control " name="artikel" placeholder="masukkan artikel">
 
                     </div>
-
-                    <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <button class="btn btn-secondary">Cancel</button>
+                    <div style="float: right">
+                    <button type="submit" class="btn btn-primary me-2">Tambah</button>
+                    <button class="btn btn-secondary">Batal</button>
+                    </div>
                 </form>
             </div>
         </div>

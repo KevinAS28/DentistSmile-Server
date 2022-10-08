@@ -18,10 +18,10 @@ class VideoController extends Controller
         $video = Video::orderBy('judul','desc')->get();
         return datatables()->of($video)
         ->addColumn('action', function($row){
-            $btn = '';
+            
           
-            $btn .= '<a type="button" id="btn-edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
-            $btn .= '<a type="button" id="btn-delete" class="btn btn-danger"> <i class="fa fa-trash " ></i></a>';
+            $btn =  '<a type="button" id="btn-edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>';
+            $btn = $btn. ' <a type="button" id="btn-delete" class="btn btn-danger"> <i class="fa fa-trash " ></i>Hapus</a>';
             
        
            return $btn;

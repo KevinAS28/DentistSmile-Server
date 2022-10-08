@@ -1,19 +1,21 @@
 @extends('layout.master')
-
+@section('navbar-title')
+Orangtua
+@endsection
 @section('content')
 
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h6 class="card-title">Tambah Orangtua</h6>
+                <h6 class="text-center h3">Ubah Orangtua</h6>
                 <form action="{{ route('orangtua.update', $orangtua->id) }}" class="forms-sample" id="orangtua-store"
                     method="post" nctype="multipart/form-data" files=true>
                     <input type="hidden" id="id" value="{{$orangtua->id}}">
                     @csrf
                     @method('PUT')
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <label for="exampleInputEmail1" class="form-label">Email <span class="text-danger">*</span></label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email"
                             value="{{$orangtua->user->email}}">
                     </div>
@@ -37,7 +39,7 @@
 
 
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Nama</label>
+                        <label for="exampleInputPassword1" class="form-label">Nama <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="nama" name="nama" autocomplete="off"
                             placeholder="Nama" value="{{$orangtua->nama}}">
                     </div>
@@ -45,7 +47,7 @@
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Tempat
-                                    Lahir</label>
+                                    Lahir <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
                                     autocomplete="off" placeholder="Tempat Lahir" value="{{$orangtua->tempat_lahir}}">
                             </div>
@@ -53,14 +55,14 @@
                         <div class="col-md-7">
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Tanggal
-                                    Lahir</label>
+                                    Lahir <span class="text-danger">*</span></label>
                                 <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
                                     autocomplete="off" placeholder="masukkan tanggal lahir" value="{{$orangtua->tanggal_lahir}}">
                             </div>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Kecamatan</label>
+                        <label class="form-label">Kecamatan <span class="text-danger">*</span></label>
                         <select class="form-select" name="id_kecamatan" id="id_kecamatan" data-width="100%">
                             <option class="mb-2" value=" ">---Pilih Kecamatan---</option>
                             @foreach(\App\Models\Kecamatan::orderBy('nama','asc')->get() as
@@ -73,7 +75,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Kelurahan</label>
+                        <label class="form-label">Kelurahan <span class="text-danger">*</span></label>
                         <select class="form-select" name="id_kelurahan" id="kelurahan" data-width="100%">
                             <option class="mb-2" value=" ">---Pilih Kelurahan---</option>
                             @foreach(\App\Models\Kelurahan::orderBy('nama','asc')->get() as
@@ -86,12 +88,12 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Alamat</label>
+                        <label for="exampleInputPassword1" class="form-label">Alamat <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="alamat" name="alamat" autocomplete="off"
                             placeholder="alamat" value="{{$orangtua->alamat}}">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Pendidikan</label>
+                        <label class="form-label">Pendidikan <span class="text-danger">*</span></label>
                         <select class="form-select" name="pendidikan" id="pendidikan" data-width="100%" required>
                             <option selected disabled>Pilih Pendidikan</option>
                             <option value="SD" {{$orangtua->pendidikan=="SD" ? 'selected' : ''}}>SD</option>
@@ -107,9 +109,10 @@
                         </select>
                     </div>
 
-
-                    <button type="submit" class="btn btn-primary me-2">Submit</button>
-                    <a href="{{URL::previous()}}" type="button" class="btn btn-secondary">Cancel</a>
+                    <div style="float: right">
+                    <button type="submit" class="btn btn-primary me-2">Ubah</button>
+                    <a href="{{URL::previous()}}" type="button" class="btn btn-secondary">Batal</a>
+                    </div>
                 </form>
             </div>
         </div>

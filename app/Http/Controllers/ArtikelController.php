@@ -19,10 +19,10 @@ class ArtikelController extends Controller
         $artikel = Artikel::orderBy('judul','desc')->get();
         return datatables()->of($artikel)
         ->addColumn('action', function($row){
-            $btn = '';
-            $btn .= '<a type="button" id="btn-pdf" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i></a>';
-            $btn .= '<a href="'.route('artikel.edit',$row->id).'" type="button" id="btn-edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>';
-            $btn .= '<a type="button" id="btn-delete" class="btn btn-danger"> <i class="fa fa-trash " ></i></a>';
+            
+            $btn = '<a type="button" id="btn-pdf" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> Lihat</a>';
+            $btn = $btn. ' <a href="'.route('artikel.edit',$row->id).'" type="button" id="btn-edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>';
+            $btn = $btn.  ' <a type="button" id="btn-delete" class="btn btn-danger"> <i class="fa fa-trash " ></i> Hapus</a>';
             
        
 

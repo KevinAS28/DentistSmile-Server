@@ -1,6 +1,6 @@
 @extends('layout.master')
-@section('title')
-Admin
+@section('navbar-title')
+Anak
 @endsection
 @section('content')
 
@@ -9,11 +9,11 @@ Admin
         <div class="row">
             <div class="col-10">
                	<div class="card-title">
-								<h4 class="mb-0">Orangtua</h4>
+								<h4 class="mb-0">Anak</h4>
 							</div>
             </div>
             <div class="col-2">
-            <a href="{{route('anak.create')}}" type="button" id="btn-create"  class="btn btn-primary">Tambah data</a>
+            <a href="{{route('anak.create')}}" type="button" id="btn-create"  class="btn btn-custom text-white">Tambah data</a>
             </div>
         </div>
         <hr />
@@ -47,6 +47,11 @@ $(document).ready(function () {
 			serverSide: true,
             responsive: true,
             language: {
+                "lengthMenu": "Tampilkan _MENU_ entri",
+                "paginate":{
+                    "next":"Selanjutnya",
+                    "previous":"Sebelumnya"
+                },
                 search: "_INPUT_",
                 searchPlaceholder: "Cari"
             },
