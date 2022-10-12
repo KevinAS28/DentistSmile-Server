@@ -327,8 +327,6 @@ class PemeriksaanFisikController extends Controller
                     <img src="'.$url2.'"  width="50" class="img-fluid" align="center" />
                     <img src="'.$url3.'"  width="50" class="img-fluid" align="center" />
                     <img src="'.$url4.'"  width="50" class="img-fluid" align="center" />
-                    
-                        
                     ';
                 }else if(($pemeriksaanGigi->gambar4==NULL) && ($pemeriksaanGigi->gambar5==NULL)){
                     $gambar= '<img src="'.$url1.'"  width="50" class="img-fluid" align="center" />
@@ -343,12 +341,9 @@ class PemeriksaanFisikController extends Controller
                     <img src="'.$url3.'"  width="50" class="img-fluid" align="center" />
                     <img src="'.$url4.'"  width="50" class="img-fluid" align="center" />
                     <img src="'.$url5.'"  width="50" class="img-fluid" align="center" />
-                    
                         
                     ';
                 }
-                
-                
                 return $gambar;
             })
             ->addColumn('diagnosa',function($pemeriksaanGigi){

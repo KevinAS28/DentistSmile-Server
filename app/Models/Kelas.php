@@ -11,10 +11,10 @@ class Kelas extends Model
     
     protected $table = 'kelas';
     protected $guarded = ['created_at', 'updated_at'];
-    protected $fillable=[
+   protected $fillable=[
         'id_sekolah',
         'kelas',
-    ];
+    ]; 
 
     public function kecamatan(){
         return $this->belongsTo('App\Models\Kecamatan', 'id_kecamatan');
