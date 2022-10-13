@@ -23,7 +23,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => ['auth:api']], function () {
+    Route::get('orangtua',[App\Http\Controllers\API\OrangtuaController::class,'index']);
     Route::post('orangtua',[App\Http\Controllers\API\OrangtuaController::class,'store']);
+    Route::put('orangtua/{id}',[App\Http\Controllers\API\OrangtuaController::class,'update']);
     Route::post('anak',[App\Http\Controllers\API\OrangtuaController::class,'tambahAnak']);
     Route::get('anak',[App\Http\Controllers\API\OrangtuaController::class,'dataAnak']);
     Route::get('anak/{id}',[App\Http\Controllers\API\OrangtuaController::class,'anak']);
@@ -33,6 +35,9 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('kecamatan',[App\Http\Controllers\API\SekolahController::class,'getKecamatan']);
     Route::get('kelurahan/{id}',[App\Http\Controllers\API\SekolahController::class,'getKelurahan']);
     Route::get('sekolah/{id}',[App\Http\Controllers\API\SekolahController::class,'listSekolah']);
+    Route::get('riwayat-fisik/{id}',[App\Http\Controllers\API\PemeriksaanFisikController::class,'riwayatfisik']);
+    Route::get('riwayat-mata/{id}',[App\Http\Controllers\API\PemeriksaanFisikController::class,'riwayatmata']);
+    Route::get('riwayat-telinga/{id}',[App\Http\Controllers\API\PemeriksaanFisikController::class,'riwayattelinga']);
     
 
 });

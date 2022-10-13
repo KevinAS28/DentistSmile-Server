@@ -160,4 +160,51 @@ class PemeriksaanFisikController extends Controller
     {
         //
     }
+
+    public function riwayatfisik($id){
+        // MENAMPILKAN DATA PEMERIKSAAN FISIK
+        $user = Auth::user();
+        $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');  // MENDAPATKAN ID ORANGTUA
+        $anak = Anak::Where('id_orangtua',$orangtua)->get(); // MENDAPATKAN LIST ANAK BERDAS;ARKAN ID ORANGTUA 
+        $pemeriksaanFisik = PemeriksaanFisik::Where('id_anak',$id)->get();
+        
+        
+        
+        // MENDAPATKAN LIST PEMERIKSAAN FISIK BERDASARKAN ID ANAK
+        return response()->json([
+            'messages'=> 'Success',
+            'data'=> $pemeriksaanFisik,
+            
+        ]);
+        
+       
+    }
+
+    public function riwayatmata($id){
+        // MENAMPILKAN DATA PEMERIKSAAN FISIK
+        $user = Auth::user();
+        $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');  // MENDAPATKAN ID ORANGTUA
+        $anak = Anak::Where('id_orangtua',$orangtua)->get(); // MENDAPATKAN LIST ANAK BERDAS;ARKAN ID ORANGTUA 
+        $pemeriksaanMata = PemeriksaanMata::Where('id_anak',$id)->get();
+        // MENDAPATKAN LIST PEMERIKSAAN FISIK BERDASARKAN ID ANAK
+        return response()->json([
+            'messages'=> 'Success',
+            'data'=> $pemeriksaanMata,
+            
+        ]);
+    }
+
+    public function riwayattelinga($id){
+        // MENAMPILKAN DATA PEMERIKSAAN FISIK
+        $user = Auth::user();
+        $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');  // MENDAPATKAN ID ORANGTUA
+        $anak = Anak::Where('id_orangtua',$orangtua)->get(); // MENDAPATKAN LIST ANAK BERDAS;ARKAN ID ORANGTUA 
+        $pemeriksaanTelinga = PemeriksaanTelinga::Where('id_anak',$id)->get();
+        // MENDAPATKAN LIST PEMERIKSAAN FISIK BERDASARKAN ID ANAK
+        return response()->json([
+            'messages'=> 'Success',
+            'data'=> $pemeriksaanTelinga,
+            
+        ]);
+    }
 }

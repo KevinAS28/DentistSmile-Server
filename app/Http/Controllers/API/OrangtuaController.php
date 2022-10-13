@@ -6,8 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Orangtua;
 use App\Models\Anak;
+use App\Models\User;
 use Auth;
 use Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
+use File;
 
 class OrangtuaController extends BaseContoller
 {
@@ -18,7 +23,14 @@ class OrangtuaController extends BaseContoller
      */
     public function index()
     {
-        
+        $user=Auth::user();
+        $orangtua = Orangtua::Where('id_users', Auth::user()->id)->get();
+
+        return response()->json([
+            'messages' => 'success',
+            'data' => $orangtua
+        ]);
+
     }
 
     /**
@@ -90,7 +102,31 @@ class OrangtuaController extends BaseContoller
      */
     public function update(Request $request, $id)
     {
-        
+     
+        $user=User::find(Auth::user()->id);
+
+        $user->profilorangtua->nama =$request->nama;
+        $user->profilorangtua->tempat_lahir=$request->tempat_lahir;
+        $user->profilorangtua->tanggal_lahir=$request->tanggal_lahir;
+        $user->profilorangtua->pendidikan = $request->pendidikan;
+        $user->profilorangtua->alamat= $request->alamat;
+        if(!empty($request->foto)){
+
+            $file = $request->file('foto');
+            $extension = strtolower($file->getClientOriginalExtension());
+            $filename = uniqid() . '.' . $extension;
+            Storage::delete('/public/orangtua/'.$user->profilorangtua->foto);
+            Storage::put('public/orangtua/' . $filename, File::get($file));
+            $user->profilorangtua->foto=$filename;
+       }
+
+
+        $user->profilorangtua->save();
+        return response()->json([
+            'message'=>'success',
+            'data' => $user
+        ]);
+
     }
 
     /**
