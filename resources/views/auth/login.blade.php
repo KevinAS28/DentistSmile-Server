@@ -11,7 +11,7 @@
     <meta name="keywords"
         content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-    <title>Senyumin - Login </title>
+    <title>DentistSmile - Login </title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/demo1/style.css')}}">
     <!-- End layout styles -->
 
-    <link rel="shortcut icon" href="{{asset('assets/images/logo-senyumin.png')}}" />
+    <link rel="shortcut icon" href="{{asset('assets/images/logo-gemastik2.png')}}" />
 </head>
 <style>
     .page-content {
@@ -89,7 +89,7 @@
                                 <div class="col-md-12 ps-md-0">
                                     <div class="auth-form-wrapper px-4 py-3">
                                         <div class="text-center">
-                                            <img class="w-50 mb-3" src="{{asset('assets/images/logo-baru.png')}}" alt=""
+                                            <img class="w-50 mb-3" src="{{asset('assets/images/logo-gemastik.png')}}" alt=""
                                                 srcset="">
                                   
                                             <h4 class="text-muted fw-normal mb-1">Selamat datang!</h4>

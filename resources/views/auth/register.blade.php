@@ -10,7 +10,7 @@
     <meta name="keywords"
         content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-    <title>Senyumin - Register</title>
+    <title>DentistSmile - Register</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/demo1/style.css')}}">
     <!-- End layout styles -->
 
-    <link rel="shortcut icon" href="{{asset('assets/images/logo-senyumin.png')}}" />
+    <link rel="shortcut icon" href="{{asset('assets/images/logo-gemastik2.png')}}" />
 </head>
 <style>
     .page-content {
@@ -86,7 +86,7 @@
                                 <div class="col-md-12 ps-md-0">
                                     <div class="auth-form-wrapper px-4 py-5">
                                         <div class="text-center">
-                                            <img class="w-25 mb-3" src="{{asset('assets/images/logo-baru.png')}}"
+                                            <img class="w-25 mb-3" src="{{asset('assets/images/logo-gemastik.png')}}"
                                                 alt="" srcset="">
                                             @if(Session::has('error'))
                                             <div class="alert alert-warning">{{Session::get('error')}}</div>

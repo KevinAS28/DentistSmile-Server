@@ -167,9 +167,7 @@ class PemeriksaanFisikController extends Controller
         $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');  // MENDAPATKAN ID ORANGTUA
         $anak = Anak::Where('id_orangtua',$orangtua)->get(); // MENDAPATKAN LIST ANAK BERDAS;ARKAN ID ORANGTUA 
         $pemeriksaanFisik = PemeriksaanFisik::Where('id_anak',$id)->get();
-        
-        
-        
+
         // MENDAPATKAN LIST PEMERIKSAAN FISIK BERDASARKAN ID ANAK
         return response()->json([
             'messages'=> 'Success',
@@ -177,7 +175,6 @@ class PemeriksaanFisikController extends Controller
             
         ]);
         
-       
     }
 
     public function riwayatmata($id){
@@ -203,8 +200,10 @@ class PemeriksaanFisikController extends Controller
         // MENDAPATKAN LIST PEMERIKSAAN FISIK BERDASARKAN ID ANAK
         return response()->json([
             'messages'=> 'Success',
-            'data'=> $pemeriksaanTelinga,
-            
+            'data'=> $pemeriksaanTelinga, 
         ]);
     }
+
+
+
 }

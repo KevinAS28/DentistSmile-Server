@@ -38,6 +38,5 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('riwayat-fisik/{id}',[App\Http\Controllers\API\PemeriksaanFisikController::class,'riwayatfisik']);
     Route::get('riwayat-mata/{id}',[App\Http\Controllers\API\PemeriksaanFisikController::class,'riwayatmata']);
     Route::get('riwayat-telinga/{id}',[App\Http\Controllers\API\PemeriksaanFisikController::class,'riwayattelinga']);
-    
 
 });
