@@ -19,7 +19,7 @@
             @csrf
             <div class="card col-md-12">
                 <div class="card-body">
-                    <h6 class="card-title">Data Anak</h6>
+                    <h6 class="h4 text-center mb-3">Data Anak</h6>
                     <div class="mb-3">
                         <label class="form-label">Nama Anak <span class="text-danger">*</span></label>
                         <select class=" form-select" name="anak" id="anak" data-width="100%">
@@ -85,7 +85,7 @@
             </div>
             <div class="card col-md-12 mt-2">
                 <div class="card-body">
-                    <h6 class="card-title">Pemeriksaan fisik</h6>
+                    <h6 class="h4 text-center mb-3 ">Pemeriksaan Fisik</h6>
 
 
 
@@ -110,33 +110,23 @@
                                 id="imt" readonly="">
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">sistole (mmHG)</label>
-                        <input type="number" class="form-control" id="sistole" name="sistole" autocomplete="off"
-                            placeholder="Kosongkan bila tidak mengetahui">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">diastole (mmHG)</label>
-                        <input type="number" class="form-control" id="diastole" name="diastole" autocomplete="off"
-                            placeholder="Kosongkan bila tidak mengetahui">
-                    </div>
                 </div>
             </div>
 
             <div class="card col-md-12 mt-2">
                 <div class="card-body">
-                    <h6 class="card-title">Pemeriksaan Mata</h6>
+                    <h6 class="h4 text-center mb-3">Pemeriksaan Mata</h6>
 
                     <p style="font-size:12px" class="card-text text-secondary mb-3 w-100">Pilih ya atau tidak dari
                         pertanyaan
                         gejala sakit mata </p>
 
-                    <div class="mb-3">
+                    <div class="mb-3 ">
                         <div class="row ">
                             <div class="col-lg-12">
                                 <label class="col-md-12 col-sm-12 mb-2">Mata perih / merah dan bengkak <span class="text-danger">*</span> </label>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div class="col-md-12 col-sm-12 col-lg-12 pilih">
                                 <div class="form-check form-check-inline ">
                                     <input type="radio" class="form-check-input" value="ya" name="msoal1"
                                         id="radioInline" require>
@@ -157,7 +147,7 @@
                     <div class="mb-3">
                         <div class="row">
                             <label class="col-md-12 mb-2"> Tidak dapat melihat / membaca dengan jelas <span class="text-danger">*</span></label>
-                            <div class="col-md-12 col-sm-12">
+                            <div class="col-md-12 col-sm-12 pilih">
                                 <div class="form-check form-check-inline">
                                     <input type="radio" class="form-check-input" value="ya" name="msoal2"
                                         id="radioInline">
@@ -179,7 +169,7 @@
                     <div class="mb-3">
                         <div class="row">
                             <label class="col-md-12 mb-2"> Menggunakan kacamata <span class="text-danger">*</span></label>
-                            <div class="col-md-12 col-sm-12">
+                            <div class="col-md-12 col-sm-12 pilih">
                                 <div class="form-check form-check-inline">
                                     <input type="radio" class="form-check-input" value="ya" name="msoal3"
                                         id="radioInline">
@@ -205,7 +195,7 @@
                             <div class="col-lg-12">
                                 <label class="col-md-12 col-sm-12 mb-2">Mata juling  <span class="text-danger">*</span></label>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div class="col-md-12 col-sm-12 col-lg-12 pilih">
                                 <div class="form-check form-check-inline ">
                                     <input type="radio" class="form-check-input" value="ya" name="msoal4"
                                         id="radioInline" require>
@@ -229,7 +219,7 @@
                             <div class="col-lg-12">
                                 <label class="col-md-12 col-sm-12 mb-2">Tidak dapat membedakan warna dengan baik <span class="text-danger">*</span></label>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div class="col-md-12 col-sm-12 col-lg-12 pilih">
                                 <div class="form-check form-check-inline ">
                                     <input type="radio" class="form-check-input" value="ya" name="msoal5"
                                         id="radioInline" require>
@@ -253,7 +243,7 @@
                             <div class="col-md-12 col-sm-12">
                                 <label class="col-md-12 mb-2"> Bagaimana kondisi kesehatan mata anak <span class="text-danger">*</span></label>
                             </div>
-                            <div class="col-md-12 col-sm-12">
+                            <div class="col-md-12 col-sm-12 pilih">
                                 <div class="form-check form-check-inline">
                                     <input type="radio" class="form-check-input" value="normal" name="msoal6"
                                         id="radioInline">
@@ -289,16 +279,16 @@
 
             <div class="card col-md-12 mt-2">
                 <div class="card-body">
-                    <h6 class="card-title">Pemeriksaan Telinga</h6>
+                    <h6 class="h4 text-center mb-3">Pemeriksaan Telinga</h6>
                     <p style="font-size:12px" class="card-text text-secondary mb-3">Pilih ya atau tidak dari pertanyaan
                         gejala pendengaran </p>
 
                     <div class="mb-3">
                         <div class="row ">
                             <div class="col-lg-12">
-                                <label class="col-md-12 col-sm-12 mb-2">Tidak merespon bila ada suara keras <span class="text-danger">*</span></label>
+                                <label class="col-md-12 col-sm-12 mb-2 ">Tidak merespon bila ada suara keras <span class="text-danger">*</span></label>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div class="col-md-12 col-sm-12 col-lg-12 pilih">
                                 <div class="form-check form-check-inline ">
                                     <input type="radio" class="form-check-input" value="ya" name="tsoal1"
                                         id="radioInline" require>
@@ -321,7 +311,7 @@
                             <div class="col-lg-12">
                                 <label class="col-md-12 col-sm-12 mb-2">Tidak mendengar bila dipanggil <span class="text-danger">*</span></label>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div class="col-md-12 col-sm-12 col-lg-12 pilih">
                                 <div class="form-check form-check-inline ">
                                     <input type="radio" class="form-check-input" value="ya" name="tsoal2"
                                         id="radioInline" require>
@@ -345,7 +335,7 @@
                             <div class="col-lg-12">
                                 <label class="col-md-12 col-sm-12 mb-2">Tidak mendengar dengan jelas <span class="text-danger">*</span></label>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div class="col-md-12 col-sm-12 col-lg-12 pilih">
                                 <div class="form-check form-check-inline ">
                                     <input type="radio" class="form-check-input" value="ya" name="tsoal3"
                                         id="radioInline" require>
@@ -371,7 +361,7 @@
                             <div class="col-lg-12">
                                 <label class="col-md-12 col-sm-12 mb-2">Keluar cairan dari telinga <span class="text-danger">*</span></label>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div class="col-md-12 col-sm-12 col-lg-12 pilih">
                                 <div class="form-check form-check-inline ">
                                     <input type="radio" class="form-check-input" value="ya" name="tsoal4"
                                         id="radioInline" require>
@@ -395,7 +385,7 @@
                             <div class="col-lg-12">
                                 <label class="col-md-12 col-sm-12 mb-2">Telinga terasa tertutup atau tersumbat <span class="text-danger">*</span></label>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div class="col-md-12 col-sm-12 col-lg-12 pilih">
                                 <div class="form-check form-check-inline ">
                                     <input type="radio" class="form-check-input" value="ya" name="tsoal5"
                                         id="radioInline" require>
@@ -419,7 +409,7 @@
                             <div class="col-lg-12">
                                 <label class="col-md-12 col-sm-12 mb-2">Nyeri Telinga <span class="text-danger">*</span></label>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div class="col-md-12 col-sm-12 col-lg-12 pilih">
                                 <div class="form-check form-check-inline ">
                                     <input type="radio" class="form-check-input" value="ya" name="tsoal6"
                                         id="radioInline" require>
@@ -443,7 +433,7 @@
                                 <label class="col-md-12 col-sm-12 mb-2">Terdapat serumen pada bagian telinga kanan
                                     anak <span class="text-danger">*</span></label>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div class="col-md-12 col-sm-12 col-lg-12 pilih">
                                 <div class="form-check form-check-inline ">
                                     <input type="radio" class="form-check-input" value="ya" name="tsoal7"
                                         id="radioInline" require>
@@ -467,7 +457,7 @@
                                 <label class="col-md-12 col-sm-12 mb-2">Terdapat serumen pada bagian telinga kiri
                                     anak <span class="text-danger">*</span></label>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
+                            <div class="col-md-12 col-sm-12 col-lg-12 pilih">
                                 <div class="form-check form-check-inline ">
                                     <input type="radio" class="form-check-input" value="ya" name="tsoal8"
                                         id="radioInline" require>
@@ -491,6 +481,7 @@
 
                         <label class="col-md-12 mb-2"> Volume saat menonton TV atau mendengar
                             radio </label>
+                            <div class="pilih">
                         <div class="form-check form-check-inline">
                             <input type="radio" class="form-check-input" value="kecil" name="tsoal9" id="radioInline">
                             <label class="form-check-label" for="radioInline">
@@ -509,13 +500,18 @@
                                 Besar
                             </label>
                         </div>
+                            </div>
                     </div>
                 </div>
-                <div class="mt-1 mb-3  ">
-                <button type="submit" class="btn btn-primary m-2">Submit</button>
-                <button class="btn btn-secondary">Cancel</button>
+                <div class="mt-1 mb-3   ">   
+                    <div style="float: right;margin-right:20px" >         
+                    <button type="submit" class="btn btn-primary m-2">Simpan</button>
+                    <button class="btn btn-secondary">Batal</button>
+                    </div>
+                </div>
+
             </div>
-            </div>
+   
 
 
         </form>
@@ -695,6 +691,74 @@
                     },
                 });
             }
+        });
+        $("#pisik-store").validate({
+            rules: {
+                anak: "required",  
+                kelurahan:"required",
+                kelas:"required",
+                tinggi_badan:"required",
+                berat_badan:"required",
+                msoal1:"required",
+                msoal2:"required",
+                msoal3:"required",
+                msoal4:"required",
+                msoal5:"required",
+                msoal6:"required",
+                msoal7 : "required",
+                tsoal1: "required",
+                tsoal2: "required",
+                tsoal3: "required",
+                tsoal4: "required",
+                tsoal5: "required",
+                tsoal6: "required",
+                tsoal7: "required",
+                tsoal8: "required",
+                tsoal9: "required"
+
+             
+            },
+            messages: {
+                anak: "Data anak wajib diisi", 
+                kelurahan: "kelurahan wajib diisi",
+                kelas : "wajib diisi",
+                tinggi_badan:"Tinggi badan wajib diisi",
+                berat_badan:"Berat badan wajib diisi",
+                msoal1 : "wajib dipilih",
+                msoal2 : "wajib dipilih",
+                msoal3 : "wajib dipilih",
+                msoal4 : "wajib dipilih",
+                msoal5 : "wajib dipilih",
+                msoal6 : "wajib dipilih",
+                msoal7 : "wajib diisi",
+                tsoal1 : "wajib dipilih",
+                tsoal2 : "wajib dipilih",
+                tsoal3 : "wajib dipilih",
+                tsoal4 : "wajib dipilih",
+                tsoal5 : "wajib dipilih",
+                tsoal6 : "wajib dipilih",
+                tsoal7 : "wajib dipilih",
+                tsoal8: "wajib dipilih",
+                tsoal9 : "wajib dipilih",
+
+
+             
+            },
+             errorPlacement: function(error, element) 
+        {
+        if ( element.is(":radio") ) 
+        {
+            error.appendTo( element.parents('.pilih') );
+        }
+        else 
+        { // This is the default behavior 
+            error.insertAfter( element );
+        }
+     },
+            submitHandler: function(form) {
+                form.submit();
+            }
+            
         });
     });
 

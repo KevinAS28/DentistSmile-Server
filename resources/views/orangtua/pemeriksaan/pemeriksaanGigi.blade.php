@@ -10,12 +10,12 @@
 </div>
 @endif
 <div class="row">
-    <div class="col-md-12 grid-margin stretch-card">
+    <div class="col-md-12 col-xl-12 ">
         <form action="{{ route('pemeriksaangigi.store') }}" class="col-md-12" id="pisik-store" method="post"
             enctype="multipart/form-data" files=true>
             @csrf
 
-            <div class="card col-md-12">
+            <div class="card col-md-12 col-xl-12">
                 <div class="card-body">
                     <h6 class="card-title">Data Anak</h6>
                     <div class="mb-3">
@@ -152,13 +152,15 @@
                     @include('orangtua.pemeriksaan.resikoKaries')
                     </div>
                 </div>
+                <div class="mt-3 pb-3 float-right">
+                    <div style="float: right; margin-right:20px">
+                    <button type="submit" class="btn btn-primary me-2">Simpan</button>
+                    <button class="btn btn-secondary">Batal</button>
+                    </div>
+                </div>
             </div>
 
 
-            <div class="mt-3 float-right">
-                <button type="submit" class="btn btn-primary me-2">Submit</button>
-                <button class="btn btn-secondary">Cancel</button>
-            </div>
 
         </form>
     </div>
@@ -303,6 +305,43 @@
                     },
                 });
             }
+        });
+        $("#pisik-store").validate({
+            rules: {
+                anak: "required",  
+                kelurahan:"required",
+                kelas:"required",
+                gsoal1:"required",
+                gsoal2:"required",
+               
+
+             
+            },
+            messages: {
+                anak: "Data anak wajib diisi", 
+                kelurahan: "kelurahan wajib diisi",
+                kelas : "wajib diisi",
+                gsoal1:"wajib diisi",
+                gsoal2:"wajib diisi",
+               
+
+             
+            },
+             errorPlacement: function(error, element) 
+        {
+        if ( element.is(":radio") ) 
+        {
+            error.appendTo( element.parents('.pilih') );
+        }
+        else 
+        { // This is the default behavior 
+            error.insertAfter( element );
+        }
+     },
+            submitHandler: function(form) {
+                form.submit();
+            }
+            
         });
     });
 

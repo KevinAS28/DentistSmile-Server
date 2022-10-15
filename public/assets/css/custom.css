@@ -44,3 +44,27 @@
     background-color: #239BDA;
     border-color: #239BDA;
 }
+.pilih-anak-ortu{
+    margin-left:50% ;
+  }
+@media only screen and (max-device-width: 480px) {
+   .card-dashboard-ortu{
+    width: fit-content;
+   }
+   .anak-ttl , .anak-jk{
+    display: none;
+   }
+   .table-ortu-dashboard{
+    width: fit-content;
+   }
+  .pilih-anak-ortu{
+    margin-top:40px;
+    margin-left:-150px;
+  }
+  .pilih-anak{
+    width: 100px;
+  }
+
+  
+
+ }

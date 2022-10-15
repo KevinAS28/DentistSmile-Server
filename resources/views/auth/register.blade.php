@@ -46,6 +46,9 @@
     <link rel="shortcut icon" href="{{asset('assets/images/logo-gemastik2.png')}}" />
 </head>
 <style>
+        .error{
+        color: red;
+    }
     .page-content {
         background-image: url('{{ asset('assets/images/bg-senyumin.jpeg')}}')
     }
@@ -95,7 +98,7 @@
                                             
                                         </div>
                                         <form class="forms-sample" action="{{route('registeruser')}}" method="POST"
-                                            enctype="multipart/form-data" files=true>
+                                            enctype="multipart/form-data" id="form-register" files=true>
                                             @csrf
                                             <div class="mb-3">
                                                 <label for="userEmail" class="form-label">Email address <span class="text-danger">*</span></label>
@@ -140,7 +143,7 @@
                                                             Lahir <span class="text-danger">*</span></label>
                                                         <input type="date" class="form-control" id="tanggal_lahir"
                                                             name="tanggal_lahir" autocomplete="off"
-                                                            placeholder="masukkan tanggal lahir">
+                                                            placeholder="masukkan tanggal lahir" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -222,6 +225,7 @@
     <script src="{{asset('assets/vendors/dropify/dist/dropify.min.js')}}"></script>
     <script src="{{asset('assets/vendors/js/dropify.js')}}"></script>
     <script src="{{asset('select2/dist/js/select2.min.js')}}"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -283,6 +287,48 @@
             $('#id_kecamatan').select2()
             $('#id_desa , #pendidikan').select2()
 
+            $("#form-register").validate({
+                rules: {
+                    email: "required",                    
+                    password: {
+                        required: true,
+                        
+                    },
+                  
+                 
+                },
+                messages: {
+                    email: "Email tidak boleh kosong",                   
+                    password: {
+                        required: "Password tidak boleh kosong",
+                        
+                    },
+                    nama:"Nama tidak boleh kosong",
+                    tempat_lahir:"Tempat lahir tidak boleh kosong",
+                    tanggal_lahir:"Tanggal lahir tidak boleh kosong",
+                    pendidikan:"pendidikan tidak boleh kosong",
+                    alamat:"Alamat tidak boleh kosong", 
+
+                 
+                },
+                 errorPlacement: function(error, element) 
+            {
+
+            
+            if ( element.is(":radio") ) 
+            {
+                error.appendTo( element.parents('.form-group') );
+            }
+            else 
+            { // This is the default behavior 
+                error.insertAfter( element );
+            }
+         },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+                
+            });
         });
 
     </script>

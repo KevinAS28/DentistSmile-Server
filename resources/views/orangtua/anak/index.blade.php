@@ -6,12 +6,12 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-10">
+            <div class="col-md-10 col-sm-6">
                	<div class="text-center">
 								<h4 class="mb-0">Data Anak</h4>
 							</div>
             </div>
-            <div class="col-2">
+            <div class="col-md-2 col-sm-6">
             <a href="{{route('view-anak.create')}}" type="button" id="btn-create"  class="btn btn-custom text-white">Tambah data</a>
             </div>
         </div>

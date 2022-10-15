@@ -5,7 +5,7 @@
     <div class="col-12 col-xl-12 stretch-card">
         <div class="row flex-grow-1">
             <div class="col-md-12 grid-margin stretch-card">
-                <div class="card">
+                <div class="card card-dashboard-ortu">
                     <div class="card-body">
                         <!-- <div class="d-flex justify-content-between align-items-baseline">
                             <h3> Selamat Datang, Bu Julia </h3>
@@ -20,15 +20,15 @@
                             </div>
                         </div> -->
 
-                        <table class="table table-borderless table-sm">
+                        <table class="table table-borderless table-sm table-ortu-dashboard">
                             <thead>
                                 <tr style="color: black; line-height: 14px;">
-                                    <td colspan="5">
-                                        <div class="d-flex justify-content-between w-100">
+                                    <td colspan="4">
+                                        <div class="d-flex w-100">
                                             <div>
                                                 <h3><b>Selamat Datang, {{$user->nama}}</b></h3>
                                             </div>
-                                            <div class="w-25">
+                                            <div class="w-50 pilih-anak-ortu">
                                                 <select name="anak" class="form-control" id="pilih-anak"
                                                     data-width="100%">
                                                     <option selected disabled>Pilih Anak</option>
@@ -42,7 +42,6 @@
                                                         data-ms="{{@$anak->pemeriksaanMata->msoal6}}"
                                                         data-ts7="{{@$anak->pemeriksaanTelinga->tsoal7}}"
                                                         data-ts8="{{@$anak->pemeriksaanTelinga->tsoal8}}"
-
                                                         value="{{$anak->id}}">{{$anak->nama}}</option>
                                                     @endforeach
                                                 </select>
@@ -54,16 +53,14 @@
                             <tbody>
                                 <tr style="color: black; line-height: 5px; font-size:small">
                                     <td>Nama anak</td>
-                                    <td>Jenis kelamin</td>
-                                    <!-- <td>Nama posyandu</td> -->
-                                    <td>TTL</td>
+                                    <td class="anak-jk">Jenis kelamin</td>  
+                                    <td class="anak-ttl w-25 ">TTL</td>
                                     <td>Usia anak</td>
                                 </tr>
-                                <tr style="color: black; line-height: 10px; font-size:larger;" id="row-data-anak">
+                                <tr style="color: black; line-height: 10px; font-size:small;" id="row-data-anak">
                                     <td>-</td>
-                                    <td>-</td>
-                                    <!-- <td>Seruni</td> -->
-                                    <td>-</td>
+                                    <td class="anak-jk">-</td>
+                                    <td class="anak-ttl">-</td>
                                     <td>-</td>
                                 </tr>
                             </tbody>

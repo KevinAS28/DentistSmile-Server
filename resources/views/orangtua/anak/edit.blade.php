@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-body">
                 <h6 class="text-center h3">Edit Anak</h6>
-                <form action="{{ route('orangtua-anak.update',$anak->id) }}" class="forms-sample" method="post" nctype="multipart/form-data" files=true >
+                <form action="{{ route('orangtua-anak.update',$anak->id) }}" id="form-anak" class="forms-sample" method="post" nctype="multipart/form-data" files=true >
                     <input type="hidden" id="id" value="{{$anak->id}}">
                     @csrf
                     @method('PUT')
@@ -89,8 +89,6 @@
                 tanggal_lahir:"required", 
                 jenis_kelamin:"required",   
 
-
-              
              
             },
             messages: {

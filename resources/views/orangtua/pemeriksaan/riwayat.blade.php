@@ -13,12 +13,12 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-10">
+            <div class="col-md-10 col-sm-6">
                 <div class="card-title">
                     <h4 class="mb-0">Riwayat Pemeriksaan </h4>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-md-2 col-sm-6">
                 <select class=" form-select" id="anak" name="anak" data-width="100%">
                     <option value="clear">Pilih Anak</option>
                     @foreach($anak as $anak)
@@ -59,7 +59,7 @@
                                 <th>id</th>
                                 <th >no</th>
                                 <th>Tanggal</th>
-                                <th>Waktu</th>
+                                <th >Waktu</th>
                                 <th  >Gambar </th>
                                 <th  >Diagnosa</th>
                                 <th>Rekomendasi</th>
@@ -206,6 +206,7 @@
                 },
                 processing: true,
                 serverSide: true,
+                "scrollX": true,
 
                 language: {
                     "lengthMenu": "Tampilkan _MENU_ entri",
@@ -219,7 +220,7 @@
                              <span class="visually-hidden">Loading...</span>
                             </div>`
                 },
-                "searching": true,
+                "searching": false,
                 "bPaginate": true,
                 
                 serverSide: true,
@@ -271,6 +272,7 @@
                 },
                 processing: true,
                 serverSide: true,
+                "scrollX": true,
 
                 language: {
                     "lengthMenu": "Tampilkan _MENU_ entri",
@@ -285,7 +287,7 @@
                             </div>`,
    
                 },
-                "searching": true,
+                "searching": false,
                 "bPaginate": true,
                 serverSide: true,
                 stateSave: true,
@@ -334,6 +336,7 @@
                 },
                 processing: true,
                 serverSide: true,
+                "scrollX": true,
 
                 language: {
                     "lengthMenu": "Tampilkan _MENU_ entri",
@@ -347,7 +350,7 @@
                              <span class="visually-hidden">Loading...</span>
                             </div>`
                 },
-                "searching": true,
+                "searching": false,
                 "bPaginate": true,
                 serverSide: true,
                 stateSave: true,
@@ -412,7 +415,7 @@
                              <span class="visually-hidden">Loading...</span>
                             </div>`
                 },
-                "searching": true,
+                "searching": false,
                 "bPaginate": true,
                 serverSide: true,
                 stateSave: true,
