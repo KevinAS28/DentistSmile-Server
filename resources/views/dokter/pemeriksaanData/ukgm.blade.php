@@ -1,13 +1,16 @@
 @extends('layout.master')
 
+@section('navbar-title')
+Pemeriksaan Gigi / UKGM
+@endsection
 @section('content')
 
 
 <div class="container-fluid">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Pemeriksaan Gigi</a></li>
-            <li class="breadcrumb-item active" aria-current="page">UKGM</li>
+            <li class="breadcrumb-item"><a class="text-white" href="#">Pemeriksaan Gigi</a></li>
+            <li class="breadcrumb-item text-white active" aria-current="page">UKGM</li>
         </ol>
     </nav>
 
@@ -16,7 +19,7 @@
         <div class="card">
             <div class="card-body">
                 <h6 class="mb-1">DATA PASIEN PER WILAYAH</h6>
-                <span class="h9 text-facebook">Masukan wilayah yang ingin ditampilkan datanya</span>
+                <span class="h9 text-primary">Masukan wilayah yang ingin ditampilkan datanya</span>
 
                 <form class="forms-sample mt-3">
                     <div class="row mb-3">
@@ -51,7 +54,7 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <span class="h9 text-facebook">Berikut merupakan tabel pasien gigi di Pulo</span>
+                
                 <div class="table-responsive mt-2">
                     <table id="table-ukgm" class="table">
                         <thead>

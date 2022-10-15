@@ -7,12 +7,12 @@
     <div class="card-body">
         <div class="row">
             <div class="col-10">
-               	<div class="card-title">
-								<h4 class="mb-0">Orangtua</h4>
+               	<div class="text-center">
+								<h4 class="mb-0">Data Anak</h4>
 							</div>
             </div>
             <div class="col-2">
-            <a href="{{route('view-anak.create')}}" type="button" id="btn-create"  class="btn btn-primary">Tambah data</a>
+            <a href="{{route('view-anak.create')}}" type="button" id="btn-create"  class="btn btn-custom text-white">Tambah data</a>
             </div>
         </div>
         <hr />
@@ -47,6 +47,11 @@ $(document).ready(function () {
 			serverSide: true,
             responsive: true,
             language: {
+                "lengthMenu": "Tampilkan _MENU_ entri",
+                "paginate":{
+                    "next":"Selanjutnya",
+                    "previous":"Sebelumnya"
+                },
                 search: "_INPUT_",
                 searchPlaceholder: "Cari"
             },

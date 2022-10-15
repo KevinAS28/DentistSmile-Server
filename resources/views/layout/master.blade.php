@@ -74,6 +74,9 @@ License: For each use you must have a valid license purchased only from above li
 </head>
 
     <style>
+        .error{
+            color: red;
+        }
         .page-content{
             background-image: url('{{ asset('assets/images/bg-senyumin.jpeg')}}')
         }
@@ -119,6 +122,7 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{asset('assets/vendors/jquery.flot/jquery.flot.resize.js')}}"></script>
     <script src="{{asset('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
     <script src="{{asset('assets/vendors/apexcharts/apexcharts.min.js')}}"></script>
+    
     <!-- End plugin js for this page -->
 
     <script src="{{asset('assets/vendors/datatables.net/jquery.dataTables.js')}}"></script>
@@ -146,6 +150,9 @@ License: For each use you must have a valid license purchased only from above li
     <!-- Grafik -->
     <script src="{{asset('assets/vendors/datatables.net/jquery.dataTables.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js"></script>
+    
     @stack('after-style')
 
 

@@ -8,6 +8,7 @@
         height: 100px;
         left: 24px;
         top: 179px;
+        
     }
 
     .text-p {
@@ -38,24 +39,26 @@
                                 <img src="{{ asset('dokter/header/'.$dokter->header) }}" class="rounded-top" alt="profile cover" width="1560px" height="370px" onerror="this.onerror=null;this.src='https\://via.placeholder.com/1560x370';">
                             </figure>
                             <div
-                                class="d-flex justify-content-between align-items-center position-absolute top-90 w-100 px-2 px-md-4 mt-n4">
+                                class="d-flex justify-content-center align-items-center position-absolute top-90 w-100 px-2 px-md-4 mt-n4">
                                 <div class="profil-photo">
-                                    <img class="wd-100 mt-3 rounded-square" src="{{ asset('dokter/avatar/'.$dokter->avatar) }}"
+                                    <img class="wd-100 mt-3  rounded-circle" src="{{ asset('dokter/avatar/'.$dokter->avatar) }}"
                                         alt="profile" width="100px" height="100px" onerror="this.onerror=null;this.src='https\://via.placeholder.com/100x100';">
                                 </div>
-                                <div>
-                                    <button class="btn btn-primary btn-icon-text" type="submit">
-                                        <i data-feather="edit" class="btn-icon-prepend"></i> Edit Profil
-                                    </button>
-                                </div>
+
                             </div>
                         </div>
 
                         {{-- Tag nama --}}
-                        <div class="text-p">
+                        <div class="text-center pt-5 mt-5">
                             <span class="h4 text-dark">drg. {{$dokter -> nama }}</span>
                             <br>
                             <span class="h9 text-facebook">{{ $dokter -> no_str }}</span>
+                        </div>
+
+                        <div style="float: right"> 
+                            <button class="btn btn-primary btn-icon-text" type="submit">
+                                <i data-feather="edit" class="btn-icon-prepend"></i> Edit Profil
+                            </button>
                         </div>
 
                         {{-- form profil --}}

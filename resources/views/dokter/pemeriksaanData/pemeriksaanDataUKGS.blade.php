@@ -6,8 +6,8 @@
 <div class="container-fluid">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{route('dokter.periksaUKGS')}}">Pemeriksaan Gigi UKGS</a></li>
-            <li class="breadcrumb-item active" aria-current="page">
+            <li class="breadcrumb-item "><a class ="text-white" href="{{route('dokter.periksaUKGS')}}">Pemeriksaan Gigi UKGS</a></li>
+            <li class="breadcrumb-item text-white active" aria-current="page">
                 {{ucwords($data->anak->nama)}}
             </li>
         </ol>

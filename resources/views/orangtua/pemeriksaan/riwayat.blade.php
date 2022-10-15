@@ -208,6 +208,11 @@
                 serverSide: true,
 
                 language: {
+                    "lengthMenu": "Tampilkan _MENU_ entri",
+                    "paginate":{
+                    "next":"Selanjutnya",
+                    "previous":"Sebelumnya"
+                },
                     search: "_INPUT_",
                     searchPlaceholder: "Cari",
                     processing: `<div class="spinner-border text-primary" role="status">
@@ -268,6 +273,11 @@
                 serverSide: true,
 
                 language: {
+                    "lengthMenu": "Tampilkan _MENU_ entri",
+                "paginate":{
+                    "next":"Selanjutnya",
+                    "previous":"Sebelumnya"
+                },
                     search: "_INPUT_",
                     searchPlaceholder: "Cari",
                     processing: `<div class="spinner-border text-primary" role="status">
@@ -326,6 +336,11 @@
                 serverSide: true,
 
                 language: {
+                    "lengthMenu": "Tampilkan _MENU_ entri",
+                    "paginate":{
+                    "next":"Selanjutnya",
+                    "previous":"Sebelumnya"
+                },
                     search: "_INPUT_",
                     searchPlaceholder: "Cari",
                     processing: `<div class="spinner-border text-primary" role="status">
@@ -386,6 +401,11 @@
                 "scrollX": true,
 
                 language: {
+                    "lengthMenu": "Tampilkan _MENU_ entri",
+                    "paginate":{
+                    "next":"Selanjutnya",
+                    "previous":"Sebelumnya"
+                },
                     search: "_INPUT_",
                     searchPlaceholder: "Cari",
                     processing: `<div class="spinner-border text-primary" role="status">

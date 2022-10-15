@@ -51,7 +51,7 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <span class="h9 text-facebook">Berikut merupakan tabel pasien gigi di Pulo</span>
+                
                 <div class="table-responsive mt-2">
                     <table id="table-ukgm" class="table">
                         <thead>

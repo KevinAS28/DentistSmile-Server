@@ -16,7 +16,7 @@
         <div class="card">
             <div class="card-body">
                 <h6 class="mb-1">DATA PASIEN PER WILAYAH</h6>
-                <span class="h9 text-facebook">Masukan wilayah yang ingin ditampilkan datanya</span>
+                
                 
                 <form class="forms-sample mt-3">
                 

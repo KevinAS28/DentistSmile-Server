@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Validator;
 use Auth;
 use App\Models\User;
-
+use App\Models\Orangtua;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends BaseContoller
 {
@@ -45,27 +46,38 @@ class UserController extends BaseContoller
         if($validator->fails()){
             return $this->responseError('Register failed', 422, $validator->errors());
         }
-
-        $params = [
-            'email'=>$request->email,
-            'password'=> bcrypt($request->password),
-            'role' => 'orangtua',
-
-        ];
-        if ($user = User::create($params)){
-            $token = $user->createToken('MyToken')->accessToken;
+        DB::beginTransaction();
+        try{
+        $user = New User();
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role ="orangtua";
+        
+        $user->save();
+        $token = $user->createToken('MyToken')->accessToken;
+        $orangtua = new Orangtua();
+        $orangtua->id_users=$user->id;
+        $orangtua->nama = $request->nama;
+        $orangtua->alamat = $request->alamat;
+        $orangtua->id_kecamatan = $request->id_kecamatan;
+        $orangtua->id_kelurahan = $request->id_kelurahan;
+        $orangtua->pendidikan= $request->pendidikan;
+        $orangtua->save();
+         return response()->json([
+            "message"=>"success",
+            "user"=>$user,
+            "orangtua"=>$orangtua,
+             "token" =>$token
+             ]);
             
-            $response = [
-                'user' => $user,
-                'token' => $token,
-            ];
-
-           return $this->responseOk($response);
-        }else{
-            return $this->responseError('Registration failed', 400);
+        }catch(\Exception $e){
+            DB::rollback();
+            return $this->responseError('Registratation failed',422);
+            }
+            
         }
 
-    }
+    
 
     public function logout(Request $request)
     {

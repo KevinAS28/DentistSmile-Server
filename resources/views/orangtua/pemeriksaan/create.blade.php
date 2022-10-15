@@ -21,7 +21,7 @@
                 <div class="card-body">
                     <h6 class="card-title">Data Anak</h6>
                     <div class="mb-3">
-                        <label class="form-label">Nama Anak</label>
+                        <label class="form-label">Nama Anak <span class="text-danger">*</span></label>
                         <select class=" form-select" name="anak" id="anak" data-width="100%">
                             <option selected disabled>Pilih Anak</option>
                             @foreach($anak as $anak)
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class=" mb-3">
-                        <label for="exampleInputUsername2" class="form-label">Wilayah Kelurahan</label>
+                        <label for="exampleInputUsername2" class="form-label">Wilayah Kelurahan <span class="text-danger">*</span></label>
                         <div class="">
                             <select name="kelurahan" id="id_desa" class="js-example-basic-single form-select"
                                 data-width="100%" placeholder="Pilih wilayah">
@@ -53,7 +53,7 @@
 
                     <div id="data-sekolah">
                         <div class="mb-3">
-                            <label for="exampleInputEmail2" class="form-label">Sekolah</label>
+                            <label for="exampleInputEmail2" class="form-label">Sekolah <span class="text-danger">*</span></label>
                             <div class="">
                                 <select name="sekolah" id="id_sekolah" class="js-example-basic-single form-select "
                                     data-width="100%" placeholder="Pilih wilayah">
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class=" mb-3">
-                            <label for="exampleInputMobile" class="form-label">Kelas</label>
+                            <label for="exampleInputMobile" class="form-label">Kelas <span class="text-danger">*</span></label>
                             <div class="">
                                 <select name="kelas" id="id_kelas" class="js-example-basic-single form-select"
                                     data-width="100%" placeholder="Pilih Kelas">
@@ -74,7 +74,7 @@
                     </div>
                     <div id="data-posyandu">
                         <div class="mb-3">
-                            <label class="form-label">Posyandu</label>
+                            <label class="form-label">Posyandu <span class="text-danger">*</span></label>
                             <select class="js-example-basic-single form-select" data-width="100%" name="id_sekolah"
                                 id="id_posyandu">
                             </select>
@@ -91,7 +91,7 @@
 
                     <div class="hasilimt">
                     <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">tinggi badan (cm)</label>
+                            <label for="exampleInputPassword1" class="form-label">tinggi badan (cm) <span class="text-danger">*</span></label>
                             <input type="text" min="0" class="form-control" id="tinggi_badan" name="tinggi_badan"
                                 autocomplete="off" placeholder="Masukkan Tinggi Badan" value="">
                             @error('tinggi_badan')
@@ -99,7 +99,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Berat badan (kg)</label>
+                            <label for="exampleInputPassword1" class="form-label">Berat badan (kg) <span class="text-danger">*</span></label>
                             <input type="text" min="0" class="form-control" id="berat_badan" name="berat_badan"
                                 autocomplete="off" placeholder="masukkan berat badan" value="">
                         </div>
@@ -134,7 +134,7 @@
                     <div class="mb-3">
                         <div class="row ">
                             <div class="col-lg-12">
-                                <label class="col-md-12 col-sm-12 mb-2">Mata perih / merah dan bengkak </label>
+                                <label class="col-md-12 col-sm-12 mb-2">Mata perih / merah dan bengkak <span class="text-danger">*</span> </label>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <div class="form-check form-check-inline ">
@@ -156,7 +156,7 @@
                     </div>
                     <div class="mb-3">
                         <div class="row">
-                            <label class="col-md-12 mb-2"> Tidak dapat melihat / membaca dengan jelas </label>
+                            <label class="col-md-12 mb-2"> Tidak dapat melihat / membaca dengan jelas <span class="text-danger">*</span></label>
                             <div class="col-md-12 col-sm-12">
                                 <div class="form-check form-check-inline">
                                     <input type="radio" class="form-check-input" value="ya" name="msoal2"
@@ -178,7 +178,7 @@
 
                     <div class="mb-3">
                         <div class="row">
-                            <label class="col-md-12 mb-2"> Menggunakan kacamata </label>
+                            <label class="col-md-12 mb-2"> Menggunakan kacamata <span class="text-danger">*</span></label>
                             <div class="col-md-12 col-sm-12">
                                 <div class="form-check form-check-inline">
                                     <input type="radio" class="form-check-input" value="ya" name="msoal3"
@@ -203,7 +203,7 @@
                     <div class="mb-3">
                         <div class="row ">
                             <div class="col-lg-12">
-                                <label class="col-md-12 col-sm-12 mb-2">Mata juling</label>
+                                <label class="col-md-12 col-sm-12 mb-2">Mata juling  <span class="text-danger">*</span></label>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <div class="form-check form-check-inline ">
@@ -227,7 +227,7 @@
                     <div class="mb-3">
                         <div class="row ">
                             <div class="col-lg-12">
-                                <label class="col-md-12 col-sm-12 mb-2">Tidak dapat membedakan warna dengan baik</label>
+                                <label class="col-md-12 col-sm-12 mb-2">Tidak dapat membedakan warna dengan baik <span class="text-danger">*</span></label>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <div class="form-check form-check-inline ">
@@ -251,7 +251,7 @@
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-md-12 col-sm-12">
-                                <label class="col-md-12 mb-2"> Bagaimana kondisi kesehatan mata anak</label>
+                                <label class="col-md-12 mb-2"> Bagaimana kondisi kesehatan mata anak <span class="text-danger">*</span></label>
                             </div>
                             <div class="col-md-12 col-sm-12">
                                 <div class="form-check form-check-inline">
@@ -280,7 +280,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Berapa lama waktu menonton TV + melihat
-                            gadget seperti HP/tablet + melihat layar komputer dalam 1 hari (Jam) </label>
+                            gadget seperti HP/tablet + melihat layar komputer dalam 1 hari (Jam)<span class="text-danger">*</span> </label>
                         <input type="number" class="form-control" name="msoal7" autocomplete="off" placeholder="0">
                     </div>
 
@@ -296,7 +296,7 @@
                     <div class="mb-3">
                         <div class="row ">
                             <div class="col-lg-12">
-                                <label class="col-md-12 col-sm-12 mb-2">Tidak merespon bila ada suara keras</label>
+                                <label class="col-md-12 col-sm-12 mb-2">Tidak merespon bila ada suara keras <span class="text-danger">*</span></label>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <div class="form-check form-check-inline ">
@@ -319,7 +319,7 @@
                     <div class="mb-3">
                         <div class="row ">
                             <div class="col-lg-12">
-                                <label class="col-md-12 col-sm-12 mb-2">Tidak mendengar bila dipanggil</label>
+                                <label class="col-md-12 col-sm-12 mb-2">Tidak mendengar bila dipanggil <span class="text-danger">*</span></label>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <div class="form-check form-check-inline ">
@@ -343,7 +343,7 @@
                     <div class="mb-3">
                         <div class="row ">
                             <div class="col-lg-12">
-                                <label class="col-md-12 col-sm-12 mb-2">Tidak mendengar dengan jelas</label>
+                                <label class="col-md-12 col-sm-12 mb-2">Tidak mendengar dengan jelas <span class="text-danger">*</span></label>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <div class="form-check form-check-inline ">
@@ -369,7 +369,7 @@
                     <div class="mb-3">
                         <div class="row ">
                             <div class="col-lg-12">
-                                <label class="col-md-12 col-sm-12 mb-2">Keluar cairan dari telinga</label>
+                                <label class="col-md-12 col-sm-12 mb-2">Keluar cairan dari telinga <span class="text-danger">*</span></label>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <div class="form-check form-check-inline ">
@@ -393,7 +393,7 @@
                     <div class="mb-3">
                         <div class="row ">
                             <div class="col-lg-12">
-                                <label class="col-md-12 col-sm-12 mb-2">Telinga terasa tertutup atau tersumbat</label>
+                                <label class="col-md-12 col-sm-12 mb-2">Telinga terasa tertutup atau tersumbat <span class="text-danger">*</span></label>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <div class="form-check form-check-inline ">
@@ -417,7 +417,7 @@
                     <div class="mb-3">
                         <div class="row ">
                             <div class="col-lg-12">
-                                <label class="col-md-12 col-sm-12 mb-2">Nyeri Telinga</label>
+                                <label class="col-md-12 col-sm-12 mb-2">Nyeri Telinga <span class="text-danger">*</span></label>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <div class="form-check form-check-inline ">
@@ -441,7 +441,7 @@
                         <div class="row ">
                             <div class="col-lg-12">
                                 <label class="col-md-12 col-sm-12 mb-2">Terdapat serumen pada bagian telinga kanan
-                                    anak</label>
+                                    anak <span class="text-danger">*</span></label>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <div class="form-check form-check-inline ">
@@ -465,7 +465,7 @@
                         <div class="row ">
                             <div class="col-lg-12">
                                 <label class="col-md-12 col-sm-12 mb-2">Terdapat serumen pada bagian telinga kiri
-                                    anak</label>
+                                    anak <span class="text-danger">*</span></label>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-12">
                                 <div class="form-check form-check-inline ">
@@ -487,7 +487,7 @@
                     </div>
                     <div class="mb-3">
                         <p class="text-muted tx-13 mb-3 mb-md-0"> Jawab pertanyaan terkait kebiasaan volume menonton TV
-                            dan saat dipanggil orangtua</p>
+                            dan saat dipanggil orangtua <span class="text-danger">*</span></p>
 
                         <label class="col-md-12 mb-2"> Volume saat menonton TV atau mendengar
                             radio </label>

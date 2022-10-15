@@ -22,7 +22,7 @@ class CreateOrangtuaTable extends Migration
             $table->date('tanggal_lahir')->nullable();
             $table->string('nama')->nullable();
             $table->string('alamat')->nullable();
-            $table->string('pendidikan')->nullale();
+            $table->string('pendidikan')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

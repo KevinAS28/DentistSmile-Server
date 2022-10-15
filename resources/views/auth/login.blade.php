@@ -42,6 +42,10 @@
     <link rel="shortcut icon" href="{{asset('assets/images/logo-gemastik2.png')}}" />
 </head>
 <style>
+
+    .error{
+        color: red;
+    }
     .page-content {
         background-image: url('{{ asset('assets/images/bg-senyumin.jpeg')}}')
     }
@@ -99,7 +103,7 @@
                                                 <div class="alert alert-warning">{{Session::get('error')}}</div>
                                                 @endif
                                         </div>
-                                        <form class="forms-sample" action="{{route('login')}}" method="POST">
+                                        <form class="forms-sample" action="{{route('login')}}" id="form-login" method="POST">
                                             @csrf
                                             <div class="mb-3">
                                                 <label for="userEmail" class="form-label">Email</label>
@@ -107,6 +111,7 @@
                                                     class="form-control @error('email') is-invalid @enderror"
                                                     name="email" value="{{old('email')}}" id="userEmail"
                                                     placeholder="masukkan email">
+                                                    
                                                 @error('email')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -130,7 +135,6 @@
                                             </div> --}}
                                             <label for="password" class="form-label">Kata sandi</label>
                                             <div class="input-group mb-2 ">
-                                                
                                                 <input type="password"
                                                     class="form-control @error('password') is-invalid @enderror"
                                                     name="password" id="password" placeholder="masukkan password">
@@ -139,6 +143,9 @@
                                                             id="eye"></i></div>
                                                 </div>
                                             </div>
+                                            @error('password')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             <br>
                                             <div class="text-center">
                                                 <button type="submit"
@@ -146,8 +153,8 @@
                                                     Masuk
                                                 </button>
                                             </div>
-                                            <a href="/register" class="d-block mt-3 text-muted">Belum punya akun?
-                                                Daftar</a>
+                                            {{-- <a href="/register" class="d-block mt-3 text-muted">Belum punya akun?
+                                                Daftar</a> --}}
                                         </form>
                                     </div>
                                 </div>
@@ -170,6 +177,7 @@
     <!-- inject:js -->
     <script src="{{asset('assets/vendors/feather-icons/feather.min.js')}}"></script>
     <script src="{{asset('assets/js/template.js')}}"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.js"></script>
     <!-- endinject -->
 
     <!-- Custom js for this page -->
@@ -194,8 +202,44 @@
 
                     $('#password').attr('type', 'password');
                 }
-            });
+            }); 
 
+            $("#form-login").validate({
+                rules: {
+                    email: "required",                    
+                    password: {
+                        required: true,
+                        
+                    },
+                  
+                 
+                },
+                messages: {
+                    email: "Email tidak boleh kosong",                   
+                    password: {
+                        required: "Password tidak boleh kosong",
+                        
+                    },
+                 
+                },
+                 errorPlacement: function(error, element) 
+            {
+
+            
+            if ( element.is(":radio") ) 
+            {
+                error.appendTo( element.parents('.form-group') );
+            }
+            else 
+            { // This is the default behavior 
+                error.insertAfter( element );
+            }
+         },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+                
+            });
 
         });
 
