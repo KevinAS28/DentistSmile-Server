@@ -96,6 +96,7 @@ Route::group(['prefix' => 'orangtua'], function () {
     Route::get('/profil',[OrangtuaController::class,'profil'])->name('orangtua.profil');
     Route::post('/updateprofil',[OrangtuaController::class,'updateProfil'])->name('orangtua.updateprofil');
     Route::get('periksa-gigi',[PemeriksaanGigiController::class,'create'])->name('periksa-gigi.create');
+    Route::get('/reservasi/{id}',[OrangtuaController::class,'reservasi'])->name('reservasi');
     });
   });
 

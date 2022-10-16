@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title') pemeriksaan gigi @endsection
+@section('navbar-title') pemeriksaan gigi @endsection
 @section('content')
 
 @if(session()->has('success'))

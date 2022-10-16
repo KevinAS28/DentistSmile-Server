@@ -17,6 +17,7 @@ class SkriningIndeks extends Model
         'dmf_e',
         'dmf_f',
         'diagnosa',
-        'rekomendasi'
+        'rekomendasi',
+        'reservasi'
     ];
 }

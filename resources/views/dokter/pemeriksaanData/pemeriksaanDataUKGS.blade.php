@@ -162,6 +162,28 @@
                                 <textarea name="rekomendasi" class="form-control w-100" id="" rows="2">{{@$data->skriningIndeks->rekomendasi}}</textarea>
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <label for="rekomendasi" class="col-sm-2 col-form-label">Tindakan Lanjut?</label>
+                                <div class="col-sm-10">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" value="ya" name="reservasi" 
+                                            id="radioInline" {{ (@$data->skriningIndeks->reservasi=="ya")? "checked" : "" }} >
+                                        <label class="form-check-label" for="radioInline">
+                                            Ya
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" value="tidak" class="form-check-input" name="reservasi"
+                                            id="radioInline1" {{ (@$data->skriningIndeks->reservasi=="tidak")? "checked" : "" }}>
+                                        <label class="form-check-label" for="radioInline1">
+                                            Tidak
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            </div>
                         </section>
                     </div>
                 </div>

@@ -187,6 +187,8 @@ class PemeriksaanGigiController extends Controller
             SkriningIndeks::updateOrCreate(
                 ['id_pemeriksaan' => $pgigi->id],
                 ['def_d' => $d,'def_e' => $e,'def_f' => $f,'dmf_d' => $d,'dmf_e' => $e,'dmf_f' => $f,'diagnosa' => $diagnosa,'rekomendasi' => $rekomendasi]
+                
+
             );
 
         } catch (\Throwable $th) {

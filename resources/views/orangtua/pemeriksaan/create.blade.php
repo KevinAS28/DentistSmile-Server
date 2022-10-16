@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title') pemeriksaan fisik @endsection
+@section('navbar-title') pemeriksaan fisik @endsection
 @section('content')
 
 <div class="row">

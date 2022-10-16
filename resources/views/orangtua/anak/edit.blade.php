@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title') Edit Anak @endsection
+@section('navbar-title') Data Anak @endsection
 @section('content')
 
 <div class="row">
@@ -58,7 +58,7 @@
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Tanggal Lahir <span class="text-danger">*</span></label>
                                 <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror" id="tanggal_lahir" name="tanggal_lahir"
-                                    autocomplete="off" placeholder="masukkan tanggal lahir" value="{{$anak->tanggal_lahir->format('dd/mm/yyyy')}}">
+                                    autocomplete="off" placeholder="masukkan tanggal lahir" value="{{$anak->tanggal_lahir->format('d/m/Y')}}">
                                     @error('tempat_lahir')
                                <div class="invalid-feedback">{{ $message }}</div>
                                  @enderror

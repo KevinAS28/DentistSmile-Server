@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title') Data Anak @endsection
+@section('navbar-title') Data Anak @endsection
 @section('content')
 
 <div class="card">

@@ -10,6 +10,7 @@ use App\Models\Kelurahan;
 use App\Models\PemeriksaanFisik;
 use App\Models\Artikel;
 use App\Models\Video;
+use App\Models\SkriningIndeks;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -419,5 +420,10 @@ class OrangtuaController extends Controller
 
     }
 
+    public function reservasi($id){
+
+        $reservasi=SkriningIndeks::find($id);
+        dd($reservasi);
+    }
 
 }

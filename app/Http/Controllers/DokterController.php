@@ -380,7 +380,8 @@ class DokterController extends Controller
                     'dmf_e' => $request->dmf_e,
                     'dmf_f' => $request->dmf_f,
                     'diagnosa' => $request->diagnosa,
-                    'rekomendasi' => $request->rekomendasi
+                    'rekomendasi' => $request->rekomendasi,
+                    'reservasi' => $request->reservasi
                 ]
             );
             ResikoKaries::updateOrCreate(
@@ -430,7 +431,8 @@ class DokterController extends Controller
                     'dmf_e' => $request->dmf_e,
                     'dmf_f' => $request->dmf_f,
                     'diagnosa' => $request->diagnosa,
-                    'rekomendasi' => $request->rekomendasi
+                    'rekomendasi' => $request->rekomendasi,
+                    'reservasi' => $request->reservasi
                 ]
             );
 

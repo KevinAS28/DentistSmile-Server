@@ -296,6 +296,7 @@ class PemeriksaanFisikController extends Controller
         $anak = Anak::Where('id_orangtua',$orangtua)->get();
         if(!empty($request->anak)){
             $pemeriksaanGigi = PemeriksaanGigi::Where('id_anak',$request->anak)->get();
+            
            }else{
             $pemeriksaanGigi = PemeriksaanGigi::all();
             }
@@ -348,6 +349,7 @@ class PemeriksaanFisikController extends Controller
             })
             ->addColumn('diagnosa',function($pemeriksaanGigi){
                 $diagnosa = '';
+                
                 if(!empty($pemeriksaanGigi->skriningIndeks)){
                     $diagnosa .= '<td>'.$pemeriksaanGigi->skriningIndeks->diagnosa.'</td>';
                 }else{
@@ -357,8 +359,16 @@ class PemeriksaanFisikController extends Controller
             })
             ->addColumn('rekomendasi',function($pemeriksaanGigi){
                 $rekomendasi = '';
+                
+                
                 if(!empty($pemeriksaanGigi->skriningIndeks->rekomendasi)){
-                    $rekomendasi .= '<td>'.$pemeriksaanGigi->skriningIndeks->rekomendasi.'</td>';
+                    if($pemeriksaanGigi->skriningIndeks->reservasi=="ya"){
+                    
+                    $rekomendasi = '<td>'.$pemeriksaanGigi->skriningIndeks->rekomendasi.'</td>'.'<br>';
+                    $rekomendasi .= '<a href="'.route("reservasi",$pemeriksaanGigi->skriningIndeks->id).'" class="btn btn-primary">reservasi</a>';
+                    }else{
+                        $rekomendasi = '<td>'.$pemeriksaanGigi->skriningIndeks->rekomendasi.'</td>';
+                    }
                 }else{
                     $rekomendasi .= '<span class="badge bg-danger">Menunggu hasil dari dokter</span>';
                 }
