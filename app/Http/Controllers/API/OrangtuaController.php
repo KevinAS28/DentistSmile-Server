@@ -100,7 +100,7 @@ class OrangtuaController extends BaseContoller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
      
         $user=User::find(Auth::user()->id);
@@ -223,7 +223,24 @@ class OrangtuaController extends BaseContoller
             'data' => $anak
         ]);
     }
+    public function updateProfil(Request $request){
+        $user=User::find(Auth::user()->id);
 
+        $user->profilorangtua->nama =$request->nama;
+        $user->profilorangtua->tempat_lahir=$request->tempat_lahir;
+        $user->profilorangtua->tanggal_lahir=$request->tanggal_lahir;
+        $user->profilorangtua->pendidikan = $request->pendidikan;
+        $user->profilorangtua->alamat= $request->alamat;
+
+
+        $user->profilorangtua->save();
+
+        return response()->json([
+            'message'=>'success',
+            'data' => $user
+        ]);
+
+    }
     
 
 
