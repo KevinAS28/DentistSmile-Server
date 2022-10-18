@@ -57,11 +57,7 @@ class UserController extends BaseContoller
         $token = $user->createToken('MyToken')->accessToken;
         $orangtua = new Orangtua();
         $orangtua->id_users=$user->id;
-        $orangtua->nama = $request->nama;
-        $orangtua->alamat = $request->alamat;
-        $orangtua->id_kecamatan = $request->id_kecamatan;
-        $orangtua->id_kelurahan = $request->id_kelurahan;
-        $orangtua->pendidikan= $request->pendidikan;
+
         $orangtua->save();
          return response()->json([
             "message"=>"success",
@@ -69,7 +65,7 @@ class UserController extends BaseContoller
             "orangtua"=>$orangtua,
              "token" =>$token
              ]);
-            
+             DB::commit();
         }catch(\Exception $e){
             DB::rollback();
             return $this->responseError('Registratation failed',422);

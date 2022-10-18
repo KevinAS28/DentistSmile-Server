@@ -8,6 +8,7 @@ use App\Models\Orangtua;
 use App\Models\Anak;
 use App\Models\Kelurahan;
 use App\Models\PemeriksaanFisik;
+use App\Models\PemeriksaanGigi;
 use App\Models\Artikel;
 use App\Models\Video;
 use App\Models\SkriningIndeks;
@@ -423,7 +424,9 @@ class OrangtuaController extends Controller
     public function reservasi($id){
 
         $reservasi=SkriningIndeks::find($id);
-        dd($reservasi);
+        $pgigi= PemeriksaanGigi::where('id',$reservasi->id_pemeriksaan)->first();
+        $anak = Anak::where('id',$pgigi->id_anak)->first();
+        dd($anak,$pgigi);
     }
 
 }
