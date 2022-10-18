@@ -59,13 +59,14 @@ class UserController extends BaseContoller
         $orangtua->id_users=$user->id;
 
         $orangtua->save();
+        DB::commit();
          return response()->json([
             "message"=>"success",
             "user"=>$user,
             "orangtua"=>$orangtua,
              "token" =>$token
              ]);
-             DB::commit();
+             
         }catch(\Exception $e){
             DB::rollback();
             return $this->responseError('Registratation failed',422);
