@@ -40,6 +40,14 @@ class SekolahController extends Controller
             ]);
     }
 
+    public function listKelas($id)
+    {
+        $kelas = Kelas::where('id_sekolah', $id)->get();
+        return response()->json([
+            'messsages' => 'Success',
+            'data' => $kelas
+        ]);
+    }
 
     
 }

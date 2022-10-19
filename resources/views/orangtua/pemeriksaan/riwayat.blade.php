@@ -63,6 +63,7 @@
                                 <th  >Gambar </th>
                                 <th  >Diagnosa</th>
                                 <th>Rekomendasi</th>
+                                <th>Validasi Dokter</th>
 
                             </tr>
                         </thead>
@@ -101,6 +102,7 @@
                                 <th>Tanggal</th>
                                 <th>Waktu</th>
                                 <th>Hasil Pemeriksaan</th>
+                                
 
                             </tr>
                         </thead>
@@ -206,7 +208,7 @@
                 },
                 processing: true,
                 serverSide: true,
-                "scrollX": true,
+                
 
                 language: {
                     "lengthMenu": "Tampilkan _MENU_ entri",
@@ -272,7 +274,7 @@
                 },
                 processing: true,
                 serverSide: true,
-                "scrollX": true,
+                
 
                 language: {
                     "lengthMenu": "Tampilkan _MENU_ entri",
@@ -336,7 +338,7 @@
                 },
                 processing: true,
                 serverSide: true,
-                "scrollX": true,
+                
 
                 language: {
                     "lengthMenu": "Tampilkan _MENU_ entri",
@@ -465,6 +467,12 @@
                     {
                         data:'rekomendasi',
                         name:'rekomendasi',
+                        visible:true,
+                        
+                    },
+                    {
+                        data:'validasi',
+                        name:'validasi',
                         visible:true,
                         
                     }

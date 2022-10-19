@@ -375,8 +375,18 @@ class PemeriksaanFisikController extends Controller
                 return $rekomendasi;
                 
             })
+            ->addColumn('validasi',function($pemeriksaanGigi){
+
+                if(($pemeriksaanGigi->skriningOdontogram->isEmpty()) Or ($pemeriksaanGigi->skriningIndeks->reservasi==NULL)){
+                    $validasi = '<button class="btn btn-danger">Belum divalidasi </button>';
+                }else{
+                    $validasi = '<button class="btn btn-success">Sudah divalidasi</button>';
+
+                }
+                return $validasi;
+            })
             
-            ->rawColumns(['gambar','diagnosa','rekomendasi'])
+            ->rawColumns(['gambar','diagnosa','rekomendasi','validasi'])
             ->addIndexColumn()
             ->make(true);
         

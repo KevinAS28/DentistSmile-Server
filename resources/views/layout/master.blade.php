@@ -78,7 +78,7 @@ License: For each use you must have a valid license purchased only from above li
             color: red;
         }
         .page-content{
-            background-image: url('{{ asset('assets/images/bg-senyumin.jpeg')}}')
+            background-image: url('{{ asset('assets/images/bg-app.jpeg')}}')
         }
         .form-control{
           

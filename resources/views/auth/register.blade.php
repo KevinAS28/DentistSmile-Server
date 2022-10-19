@@ -50,7 +50,7 @@
         color: red;
     }
     .page-content {
-        background-image: url('{{ asset('assets/images/bg-senyumin.jpeg')}}')
+        background-image: url('{{ asset('assets/images/bg-app.jpeg')}}')
     }
     .btn-register{
       background: #56CFE1;
