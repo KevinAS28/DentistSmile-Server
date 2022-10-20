@@ -52,7 +52,7 @@
         </ul>
         <div class="tab-content mt-3" id="lineTabContent">
         <div class="tab-pane fade show active" id="gigi" role="tabpanel" >
-                <div class="">
+                <div class="table-responsive">
                     <table id="table-gigi" class="table  table-striped table-bordered " style="width:100%">
                         <thead>
                             <tr class="col-lg-12">
@@ -60,7 +60,7 @@
                                 <th >no</th>
                                 <th>Tanggal</th>
                                 <th >Waktu</th>
-                                <th  >Gambar </th>
+                              
                                 <th  >Diagnosa</th>
                                 <th>Rekomendasi</th>
                                 <th>Validasi Dokter</th>
@@ -132,6 +132,7 @@
     </div>
 </div>
 
+@include('orangtua.pemeriksaan.foto')
 @endsection
 
 @push('after-script')
@@ -452,13 +453,6 @@
                         visible: true
                     },
                     {
-                        data: 'gambar',
-                        name: 'gambar',
-                        visible: true,
-                        
-
-                    },
-                    {
                         data:'diagnosa',
                         name:'diagnosa',
                         visible:true,
@@ -495,6 +489,41 @@
              ]
 
             });
+
+            $("#table-gigi tbody").on('click','#show-foto', function(){
+                $('.fileinput-remove-button').click();
+          
+                $('#modal-foto').modal('show');
+          
+                var data = tableDataGigi.row( $(this).parents('tr') ).data();
+
+                $('#gigi1').empty();
+                $('#gigi2').empty();
+                $('#gigi3').empty();
+                $('#gigi4').empty();
+                $('#gigi5').empty();
+                var img1 = $('<img id="img-gigi" class="mb-1 img-fluid mx-auto d-block" src="/storage/gigi/'+data['gambar1']+'" alt="" title="" width="200">');
+                var img2 = $('<img id="img-gigi" class="mb-1 img-fluid mx-auto d-block" src="/storage/gigi/'+data['gambar2']+'" alt="" title="" width="200">');
+                var img3 = $('<img id="img-gigi" class="mb-1 img-fluid mx-auto d-block" src="/storage/gigi/'+data['gambar3']+'" alt="" title="" width="200">');
+                var img4 = $('<img id="img-gigi" class="mb-1 img-fluid mx-auto d-block" src="/storage/gigi/'+data['gambar4']+'" alt="" title="" width="200">');
+                var img5 = $('<img id="img-gigi" class="mb-1 img-fluid mx-auto d-block" src="/storage/gigi/'+data['gambar5']+'" alt="" title="" width="200">');
+                
+                 $('#gigi1').append(img1);
+                 $('#gigi2').append(img2);
+                 $('#gigi3').append(img3);
+                 $('#gigi4').append(img4);
+                 $('#gigi5').append(img5);
+
+                 
+                 if(data['gambar4']===null){
+                    $('#title4').hide()
+                }
+                if(data['gambar5']===null){
+                    $('#title5').hide()
+                }
+        
+
+        });
         }
 
         $('#anak').change(function () {
