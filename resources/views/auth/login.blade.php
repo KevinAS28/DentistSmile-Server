@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/demo1/style.css')}}">
     <!-- End layout styles -->
 
-    <link rel="shortcut icon" href="{{asset('assets/images/logo-gemastik2.png')}}" />
+    <link rel="shortcut icon" href="{{asset('assets/images/logo-baru.png')}}" />
 </head>
 <style>
 
@@ -184,6 +184,7 @@
     <!-- End custom js for this page -->
     <script type="text/javascript">
         $(document).ready(function () {
+           
             $('#eye').click(function () {
 
                 if ($(this).hasClass('fa-eye-slash')) {

@@ -10,7 +10,7 @@
     <meta name="keywords"
         content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-    <title>DentistSmile - Register</title>
+    <title>Senyumin - Register</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/demo1/style.css')}}">
     <!-- End layout styles -->
 
-    <link rel="shortcut icon" href="{{asset('assets/images/logo-gemastik2.png')}}" />
+    <link rel="shortcut icon" href="{{asset('assets/images/logo-baru.png')}}" />
 </head>
 <style>
         .error{
