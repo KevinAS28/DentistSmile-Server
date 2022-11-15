@@ -184,7 +184,7 @@
     <!-- End custom js for this page -->
     <script type="text/javascript">
         $(document).ready(function () {
-           
+          alert("AKUN ADMIN \n Email : admin@admin.com \n Password : admin1234 \n AKUN DOKTER \n Email : dokgi1@dokgi.com  \n Password : dokter1234"  );
             $('#eye').click(function () {
 
                 if ($(this).hasClass('fa-eye-slash')) {

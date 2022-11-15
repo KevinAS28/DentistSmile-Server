@@ -7,7 +7,7 @@
 <nav class="sidebar">
     <div class="sidebar-header">
         <a href="/" class="sidebar-brand">
-        <img class="img-fluid w-75" src="{{asset('assets/images/logo-baru.png')}}" alt="" >
+        <img class="img-fluid w-75" src="{{asset('assets/images/logo-gemastik.png')}}" alt="" >
         </a>
         <div class="sidebar-toggler not-active">
             <span></span>
