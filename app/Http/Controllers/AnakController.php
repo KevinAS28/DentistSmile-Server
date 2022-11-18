@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Anak;
 
@@ -20,8 +21,8 @@ class AnakController extends Controller
 
             $btn = '<a href="'.route('anak.edit',$row->id).'" class="btn btn-warning "><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a>';
             $btn = $btn. ' <button title="Delete" id="btn-delete" class="delete-modal btn btn-danger "><i class="fa fa-trash " ></i> Hapus</button>';
-            
-           
+
+
             return $btn;
         })
         ->addColumn('orangtua',function($row){
@@ -54,8 +55,8 @@ class AnakController extends Controller
      */
     public function store(Request $request)
     {
-       
-     
+
+
         $messages = [
 
             'nama.required' => 'Nama wajib diisi.',
@@ -71,8 +72,8 @@ class AnakController extends Controller
             'jenis_kelamin' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
-          
-           
+
+
         ], $messages);
 
             $anak = new Anak();
@@ -84,10 +85,10 @@ class AnakController extends Controller
 
 
             $anak->save();
-            
+
             return redirect()->route('anak.index');
-            
-        
+
+
     }
 
     /**
@@ -130,7 +131,7 @@ class AnakController extends Controller
         $anak->jenis_kelamin = $request->jenis_kelamin;
         $anak->tempat_lahir = $request->tempat_lahir;
         $anak->tanggal_lahir = $request->tanggal_lahir;
-     
+
 
         $anak->save();
         return redirect()->route('anak.index');
@@ -147,5 +148,9 @@ class AnakController extends Controller
         //
     }
 
-    // Orangtua
+    public function listAnakByOrangtua($id)
+    {
+        $anak = Anak::Where('id_orangtua',$id)->get();
+        return response()->json($anak);
+    }
 }

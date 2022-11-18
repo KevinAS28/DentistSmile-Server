@@ -14,6 +14,7 @@ use App\Http\Controllers\PosyanduController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReminderController;
 
 
 
@@ -53,6 +54,9 @@ Route::get('/list-sekolah/{id_kelurahan}', [App\Http\Controllers\SekolahControll
     ->name('list-anakdokter-rekap');
     Route::get('list-anak/{anak}', [App\Http\Controllers\PemeriksaanFisikController::class, 'listAnak'])
     ->name('list-anak');
+   Route::get('data-anak/{id}', [App\Http\Controllers\AnakController::class, 'listAnakByOrangtua'])
+    ->name('listAnakByOrangtua');
+
 
 // Route::post('/dokter',[DokterController::class,'store']);
 Route::get('/home',function(){
@@ -73,7 +77,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('admin', AdminController::class)->except('destroy','index');
     Route::get('/data-admin',[AdminController::class,'index'])->name('admin.index');
     Route::get('/dashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
-  
+
     Route::get('/kelas/{id}',[App\Http\Controllers\SekolahController::class,'viewKelas'])->name('viewKelas');
   });
 });
@@ -116,6 +120,7 @@ Route::group(['prefix' => 'admin/table'], function () {
     Route::get('/data-kelas/{id}',[KelasController::class,'data'])->name('kelas.table');
     Route::get('/data-video',[VideoController::class,'data'])->name('video.table');
     Route::get('/data-admin',[AdminController::class,'data'])->name('admin.table');
+    Route::get('/data-reminder',[ReminderController::class,'data'])->name('reminder.table');
 
 
 
@@ -163,6 +168,7 @@ Route::group(['prefix' => 'dokter'], function () {
     Route::get('/rekap-ukgm/rekap-data-ukgm',[DokterController::class, 'rekap_detail_ukgm'])->name('dokter.rekapDetailUKGM');
     Route::get('/hasil-gambar/{id}/{filename}',[DokterController::class, 'lihat_gambar'])->name('dokter.lihat_gambar');
     Route::get('re-check-ai',[App\Http\Controllers\PemeriksaanGigiController::class,'rePemeriksaanAi']);
+    Route::resource('reminder', ReminderController::class)->except('destroy');
     });
   });
 

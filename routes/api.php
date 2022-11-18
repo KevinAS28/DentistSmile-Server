@@ -40,5 +40,6 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('riwayat-telinga/{id}',[App\Http\Controllers\API\PemeriksaanFisikController::class,'riwayattelinga']);
     Route::post('updateprofil',[App\Http\Controllers\API\OrangtuaController::class,'updateProfil']);
     Route::get('/list-kelas/{id}', [App\Http\Controllers\API\SekolahController::class, 'listKelas']);
+    Route::get ('reminder',[App\Http\Controllers\API\ReminderController::class,'getReminder']);
 
 });
