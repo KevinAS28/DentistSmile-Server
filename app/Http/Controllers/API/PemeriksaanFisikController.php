@@ -171,9 +171,35 @@ class PemeriksaanFisikController extends Controller
 
 
         // MENDAPATKAN LIST PEMERIKSAAN FISIK BERDASARKAN ID ANAK
+        $data=[];
+        foreach ($pemeriksaanFisik as $key => $value){
+
+            if($value->imt < 18.5){
+                $hasil= 'Kurus';
+            }else if($value->imt >= 18.5 && $value->imt <= 25.0){
+                $hasil = 'Ideal';
+            }else if($value->imt >= 25.1 && $value->imt <= 29.9){
+                $hasil = 'Gemuk';
+            }else{
+                $hasil = 'Obesitas';
+            }
+
+            if($value->created_at){
+                $waktu_pemeriksaan = date('d-m-Y', strtotime($value->created_at));
+            }
+
+            $data [] = [
+                'id'=> $value->id,
+                'id_anak'=> $value->id_anak,
+                'hasil'=> $hasil,
+                'waktu_pemeriksaan'=> $waktu_pemeriksaan
+            ];
+
+        }
         return response()->json([
             'messages'=> 'Success',
-            'data'=> $pemeriksaanFisik,
+            'data' => $data
+
 
         ]);
 
@@ -185,10 +211,36 @@ class PemeriksaanFisikController extends Controller
         $orangtua = Orangtua::Where('id_users', Auth::user()->id)->value('id');  // MENDAPATKAN ID ORANGTUA
         $anak = Anak::Where('id_orangtua',$orangtua)->get(); // MENDAPATKAN LIST ANAK BERDAS;ARKAN ID ORANGTUA
         $pemeriksaanMata = PemeriksaanMata::Where('id_anak',$id)->get();
+
+
         // MENDAPATKAN LIST PEMERIKSAAN FISIK BERDASARKAN ID ANAK
+        $data=[];
+        foreach ($pemeriksaanMata as $key => $value){
+
+            if($value->msoal6=='normal'){
+                $hasil = 'Mata Normal';
+            }else if($value->msoal6=='minus'){
+                $hasil = 'Mata Minus';
+            }else{
+                $hasil = 'Mata Buta Warna';
+            }
+
+            if($value->created_at){
+                $waktu_pemeriksaan = date('d-m-Y', strtotime($value->created_at));
+            }
+
+            $data [] = [
+                'id'=> $value->id,
+                'id_anak'=> $value->id_anak,
+                'hasil'=> $hasil,
+                'waktu_pemeriksaan'=> $waktu_pemeriksaan
+            ];
+
+        }
         return response()->json([
             'messages'=> 'Success',
-            'data'=> $pemeriksaanMata,
+            'data' => $data
+
 
         ]);
     }
