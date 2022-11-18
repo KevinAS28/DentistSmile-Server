@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/demo1/style.css')}}">
     <!-- End layout styles -->
 
-    <link rel="shortcut icon" href="{{asset('assets/images/logo-baru.png')}}" />
+    <link rel="shortcut icon" href="{{asset('assets/images/logo-gemastik2.png')}}" />
 </head>
 <style>
 
@@ -95,7 +95,7 @@
                                         <div class="text-center">
                                             <img class="w-50 mb-3" src="{{asset('assets/images/logo-gemastik.png')}}" alt=""
                                                 srcset="">
-                                  
+
                                             <h4 class="text-muted fw-normal mb-1">Selamat datang!</h4>
                                             <h5 style="color:#32838F" class=" fw-normal mb-4">silahkan masuk untuk
                                                 melanjutkan</h6>
@@ -111,7 +111,7 @@
                                                     class="form-control @error('email') is-invalid @enderror"
                                                     name="email" value="{{old('email')}}" id="userEmail"
                                                     placeholder="masukkan email">
-                                                    
+
                                                 @error('email')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -203,43 +203,43 @@
 
                     $('#password').attr('type', 'password');
                 }
-            }); 
+            });
 
             $("#form-login").validate({
                 rules: {
-                    email: "required",                    
+                    email: "required",
                     password: {
                         required: true,
-                        
+
                     },
-                  
-                 
+
+
                 },
                 messages: {
-                    email: "Email tidak boleh kosong",                   
+                    email: "Email tidak boleh kosong",
                     password: {
                         required: "Password tidak boleh kosong",
-                        
+
                     },
-                 
+
                 },
-                 errorPlacement: function(error, element) 
+                 errorPlacement: function(error, element)
             {
 
-            
-            if ( element.is(":radio") ) 
+
+            if ( element.is(":radio") )
             {
                 error.appendTo( element.parents('.form-group') );
             }
-            else 
-            { // This is the default behavior 
+            else
+            { // This is the default behavior
                 error.insertAfter( element );
             }
          },
                 submitHandler: function(form) {
                     form.submit();
                 }
-                
+
             });
 
         });
