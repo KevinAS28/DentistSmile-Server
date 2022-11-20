@@ -205,6 +205,7 @@ class PemeriksaanFisikController extends Controller
 
     }
 
+
     public function riwayatmata($id){
         // MENAMPILKAN DATA PEMERIKSAAN FISIK
         $user = Auth::user();

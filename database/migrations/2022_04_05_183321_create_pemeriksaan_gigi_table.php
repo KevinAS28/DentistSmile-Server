@@ -23,8 +23,6 @@ class CreatePemeriksaanGigiTable extends Migration
             $table->string('gambar3')->nullable();
             $table->string('gambar4')->nullable();
             $table->string('gambar5')->nullable();
-            $table->string('gsoal1')->nullable();
-            $table->string('gsoal2')->nullable();
             $table->datetime('waktu_pemeriksaan')->nullable();
             $table->timestamps();
 

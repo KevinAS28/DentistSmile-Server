@@ -40,16 +40,28 @@
                                         </div>
                                         <div class="w-100 mb-1 d-flex list-image-pemeriksaan">
                                             @for($i=1; $i<=5; $i++)
-                                            @php $img = 'gambar'.$i;  @endphp
-                                            <div>
-                                                @if(!empty($data[$img]))
-                                                <img src='{{route("dokter.lihat_gambar",["id"=>$data->id,"filename"=>$data[$img]])}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
-                                                @else
-                                                <img src='{{@asset("assets/images/others/placeholder.jpg")}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
-                                                @endif
-                                            </div>
+                                                @php $img = 'gambarai'.$i;  @endphp
+                                                <div>
+                                                    @if(!empty($data[$img]))
+                                                        <img src='{{@asset("storage/gigi/$data[$img]")}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
+                                                    @else
+                                                        <img src='{{@asset("assets/images/others/placeholder.jpg")}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">
+                                                    @endif
+                                                </div>
                                             @endfor
                                         </div>
+{{--                                        <div class="w-100 mb-1 d-flex list-image-pemeriksaan">--}}
+{{--                                            @for($i=1; $i<=5; $i++)--}}
+{{--                                            @php $img = 'gambar'.$i;  @endphp--}}
+{{--                                            <div>--}}
+{{--                                                @if(!empty($data[$img]))--}}
+{{--                                                <img src='{{route("dokter.lihat_gambar",["id"=>$data->id,"filename"=>$data[$img]])}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">--}}
+{{--                                                @else--}}
+{{--                                                <img src='{{@asset("assets/images/others/placeholder.jpg")}}' data-bs-toggle="modal" data-bs-target="#modal-image" style="width:300px" class="rounded img-thumbnail h-100" alt="...">--}}
+{{--                                                @endif--}}
+{{--                                            </div>--}}
+{{--                                            @endfor--}}
+{{--                                        </div>--}}
                                     </div>
                                     <!-- <div class="border border-light m-1 h-75"> -->
                                         <div class="border border-light h-100 w-100 text-center" style="line-height: 0;">
@@ -166,7 +178,7 @@
                                 <label for="rekomendasi" class="col-sm-2 col-form-label">Tindakan Lanjut?</label>
                                 <div class="col-sm-10">
                                     <div class="form-check form-check-inline">
-                                        <input type="radio" class="form-check-input" value="ya" name="reservasi" 
+                                        <input type="radio" class="form-check-input" value="ya" name="reservasi"
                                             id="radioInline" {{ (@$data->skriningIndeks->reservasi=="ya")? "checked" : "" }} >
                                         <label class="form-check-label" for="radioInline">
                                             Ya
@@ -182,7 +194,7 @@
                                 </div>
                             </div>
 
-                            
+
                             </div>
                         </section>
                     </div>

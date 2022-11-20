@@ -44,7 +44,7 @@ class PemeriksaanGigiController extends Controller
      */
     public function store(Request $request)
     {
-        
+
             $waktu_pemeriksaan = Carbon::now();
             $imageArray = array();
             $pgigi = new PemeriksaanGigi();
@@ -97,9 +97,57 @@ class PemeriksaanGigiController extends Controller
                 Storage::put('public/gigi/' . $filename5, File::get($file));
                 $pgigi->gambar5=$filename5;
             }
+        if(!empty($request->gambarai1)){
+            $file = $request->file('gambarai1');
+            $extension = strtolower($file->getClientOriginalExtension());
+            $filenameai1 = uniqid() . '.' . $extension;
+            $imageArray[0] = ['gambar' => $file, 'filename' => $filenameai1];
+
+            Storage::put('public/gigi/' . $filenameai1, File::get($file));
+            $pgigi->gambarai1=$filenameai1;
+        }
+        if(!empty($request->gambarai2)){
+            $file = $request->file('gambarai2');
+            $extension = strtolower($file->getClientOriginalExtension());
+            $filenameai2 = uniqid() . '.' . $extension;
+            $imageArray[1] = ['gambar' => $file, 'filename' => $filenameai2];
+
+            Storage::put('public/gigi/' . $filenameai2, File::get($file));
+            $pgigi->gambarai2=$filenameai2;
+        }
+        if(!empty($request->gambarai3)){
+            $file = $request->file('gambarai3');
+            $extension = strtolower($file->getClientOriginalExtension());
+            $filenameai3 = uniqid() . '.' . $extension;
+            $imageArray[2] = ['gambar' => $file, 'filename' => $filenameai3];
+
+            Storage::put('public/gigi/' . $filenameai3, File::get($file));
+            $pgigi->gambarai3=$filenameai3;
+        }
+        if(!empty($request->gambarai4)){
+            $file = $request->file('gambarai4');
+            $extension = strtolower($file->getClientOriginalExtension());
+            $filenameai4 = uniqid() . '.' . $extension;
+            $imageArray[3] = ['gambar' => $file, 'filename' => $filenameai4];
+
+            Storage::put('public/gigi/' . $filenameai4, File::get($file));
+            $pgigi->gambarai4=$filenameai4;
+        }
+        if(!empty($request->gambaraai5)){
+            $file = $request->file('gambarai5');
+            $extension = strtolower($file->getClientOriginalExtension());
+            $filenameai5 = uniqid() . '.' . $extension;
+            $imageArray[4] = ['gambar' => $file, 'filename' => $filenameai5];
+
+            Storage::put('public/gigi/' . $filenameai5, File::get($file));
+            $pgigi->gambarai5=$filenameai5;
+        }
+
 
             $pgigi->gsoal1= $request->gsoal1;
             $pgigi->gsoal2= $request->gsoal2;
+            $pgigi->ghasil_atas = $request->ghasil_atas;
+            $pgigi->ghasil_bawah= $request->ghasil_bawah;
 
             $pgigi->save();
 
@@ -107,7 +155,7 @@ class PemeriksaanGigiController extends Controller
                 'messages'=>'success',
                 'data'=> $pgigi
             ]);
-        
+
     }
 
     /**
