@@ -133,7 +133,7 @@ class PemeriksaanGigiController extends Controller
             Storage::put('public/gigi/' . $filenameai4, File::get($file));
             $pgigi->gambarai4=$filenameai4;
         }
-        if(!empty($request->gambaraai5)){
+        if(!empty($request->gambarai5)){
             $file = $request->file('gambarai5');
             $extension = strtolower($file->getClientOriginalExtension());
             $filenameai5 = uniqid() . '.' . $extension;
